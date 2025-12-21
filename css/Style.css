@@ -592,3 +592,135 @@ footer p {
         grid-template-columns: 1fr 1fr;
     }
 }
+/* =========================================== */
+/* تحسينات الترجمة العربية فقط */
+/* =========================================== */
+
+/* 1. تحسين الهيدر مع العلم (بدون تغيير التصميم الأساسي) */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Palestine.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-title {
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
+}
+
+.hero-subtitle {
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* 2. تحسين قسم الحديث */
+.quote {
+    font-size: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(16, 185, 129, 0.15);
+    border-left: 4px solid var(--secondary);
+    border-right: 4px solid var(--secondary);
+}
+
+/* 3. تحسين نص قسم فلسطين (إزالة التداخل) */
+.palestine-section h3,
+.palestine-section .dua {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    position: relative;
+    z-index: 10;
+}
+
+.palestine-section p:not(.dua) {
+    color: #333;
+    font-weight: 600;
+    position: relative;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+/* 4. إضافة "صدق رسول الله" */
+.attestation {
+    color: var(--secondary);
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+}
+
+/* 5. تحسينات للنسخة العربية */
+html[dir="rtl"] {
+    text-align: right;
+}
+
+html[dir="rtl"] .container {
+    direction: rtl;
+}
+
+html[dir="rtl"] .feature-card,
+html[dir="rtl"] .about-card,
+html[dir="rtl"] .command-card {
+    text-align: right;
+}
+
+html[dir="rtl"] .steps {
+    direction: rtl;
+}
+
+html[dir="rtl"] .step {
+    text-align: right;
+}
+
+/* 6. زر اللغة ثابت في الأعلى */
+.lang-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+#langBtn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+#langBtn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* 7. تحسين للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .quote {
+        font-size: 1.3rem;
+        padding: 1rem;
+    }
+    
+    .palestine-section p:not(.dua) {
+        font-size: 0.95rem;
+        padding: 0.8rem;
+    }
+    
+    .lang-toggle {
+        top: 10px;
+        right: 10px;
+    }
+    
+    #langBtn {
+        padding: 8px 20px;
+        font-size: 1rem;
+    }
+}
