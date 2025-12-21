@@ -145,6 +145,7 @@ body[dir="rtl"] {
 .opening-message {
     padding: var(--spacing-lg) 0;
     background: var(--bg-light);
+    text-align: center;
 }
 
 .message-box {
@@ -152,98 +153,145 @@ body[dir="rtl"] {
     padding: var(--spacing-md);
     border-radius: 16px;
     box-shadow: var(--shadow-lg);
-    border-left: 6px solid var(--secondary);
 }
 
-.message-box h2 {
-    font-size: 2rem;
-    margin-bottom: var(--spacing-md);
-    color: var(--secondary);
-}
-
-.quote {
-    font-size: 1.3rem;
-    font-style: italic;
-    margin: var(--spacing-md) 0;
-    padding: var(--spacing-sm);
-    background: rgba(16, 185, 129, 0.1);
-    border-radius: 8px;
-    border-left: 4px solid var(--secondary);
-}
-
-.source {
-    text-align: right;
-    color: var(--text-gray);
-    font-weight: 600;
-    margin-bottom: var(--spacing-md);
-}
-
-.palestine-section {
-    margin-top: var(--spacing-md);
-    padding: 80px var(--spacing-md) var(--spacing-md) 140px;
-    background: 
-        linear-gradient(to bottom, 
-            var(--palestine-black) 0%, 
-            var(--palestine-black) 33.33%,
-            #ffffff 33.33%,
-            #ffffff 66.66%,
-            var(--palestine-green) 66.66%,
-            var(--palestine-green) 100%
-        );
-    border-radius: 12px;
+/* ============ حديث النبي ﷺ ============ */
+.hadith-container {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    padding: var(--spacing-md);
+    border-radius: 16px;
+    margin-bottom: var(--spacing-lg);
+    border: 3px solid var(--secondary);
     position: relative;
-    box-shadow: var(--shadow-lg);
     overflow: hidden;
-    min-height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
-.palestine-section::before {
+.hadith-container::before {
     content: '';
     position: absolute;
+    top: 0;
     left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border-top: 150px solid transparent;
-    border-bottom: 150px solid transparent;
-    border-left: 120px solid var(--palestine-red);
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--palestine-black), var(--palestine-green), var(--palestine-red));
 }
 
-.palestine-section h3 {
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-    margin-bottom: var(--spacing-sm);
-    position: relative;
-    z-index: 2;
-}
-
-.palestine-section p {
-    color: #000;
-    text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+.bismillah {
+    font-size: 2.5rem;
+    color: var(--secondary);
+    margin-bottom: var(--spacing-md);
     font-weight: 600;
+}
+
+.hadith-arabic {
+    font-size: 3.5rem;
+    color: var(--text-light);
+    font-weight: 700;
+    line-height: 1.4;
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border-left: 6px solid var(--accent);
+    border-right: 6px solid var(--accent);
+    font-family: 'Traditional Arabic', 'Scheherazade', 'Cairo', serif;
     position: relative;
-    z-index: 2;
+    quotes: "«" "»";
+}
+
+.hadith-arabic::before {
+    content: open-quote;
+    font-size: 4rem;
+    color: var(--accent);
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    opacity: 0.7;
+}
+
+.hadith-arabic::after {
+    content: close-quote;
+    font-size: 4rem;
+    color: var(--accent);
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    opacity: 0.7;
+}
+
+.hadith-translation {
+    font-size: 1.8rem;
+    color: var(--text-gray);
+    margin: var(--spacing-sm) 0 var(--spacing-md);
+    font-style: italic;
+}
+
+.hadith-source {
+    font-size: 1.5rem;
+    color: var(--secondary);
+    margin: var(--spacing-sm) 0;
+    font-weight: 600;
+}
+
+.hadith-attestation {
+    font-size: 1.3rem;
+    color: var(--accent);
+    margin-top: var(--spacing-sm);
+    padding: 10px 20px;
+    background: rgba(245, 158, 11, 0.1);
+    border-radius: 8px;
+    display: inline-block;
+    font-weight: 600;
+}
+
+.hadith-symbol {
+    font-family: 'Segoe UI Symbol', 'Arial', sans-serif;
+    color: var(--secondary);
+    margin-left: 5px;
+}
+
+/* ============ قسم فلسطين (بدون علم) ============ */
+.palestine-section {
+    background: linear-gradient(135deg, 
+        var(--palestine-black) 0%, 
+        rgba(0, 0, 0, 0.9) 50%, 
+        var(--palestine-green) 100%);
+    color: white;
+    padding: var(--spacing-md);
+    border-radius: 16px;
+    margin-top: var(--spacing-md);
+    box-shadow: var(--shadow-lg);
+    border-left: 5px solid var(--palestine-red);
+    border-right: 5px solid var(--palestine-red);
+}
+
+.palestine-title {
+    font-size: 2.2rem;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 800;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.palestine-text {
+    font-size: 1.2rem;
     line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .dua {
-    margin-top: 40px;
+    font-size: 1.4rem;
+    font-style: italic;
+    margin-top: var(--spacing-sm);
     padding: var(--spacing-sm);
-    background: rgba(0,0,0,0.3);
-    border-radius: 8px;
-    font-size: 1.3rem;
-    color: #fff;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-    font-weight: 200;
-    position: relative;
-    z-index: 2;
- }
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
 
-/*============ Sections ============ */
+/* ============ Sections ============ */
 section {
     padding: var(--spacing-lg) 0;
 }
@@ -536,6 +584,34 @@ footer p {
     margin-top: var(--spacing-sm);
 }
 
+/* ============ تحسينات النسخة العربية ============ */
+html[dir="rtl"] {
+    text-align: right;
+}
+
+html[dir="rtl"] .container {
+    direction: rtl;
+}
+
+html[dir="rtl"] .feature-card,
+html[dir="rtl"] .about-card,
+html[dir="rtl"] .command-card {
+    text-align: right;
+}
+
+html[dir="rtl"] .steps {
+    direction: rtl;
+}
+
+html[dir="rtl"] .step {
+    text-align: right;
+}
+
+html[dir="rtl"] .hadith-arabic {
+    font-family: 'Traditional Arabic', 'Scheherazade', 'Cairo', 'Amiri', serif;
+    font-size: 3.2rem;
+}
+
 /* ============ Animations ============ */
 @keyframes fadeInDown {
     from {
@@ -581,6 +657,27 @@ footer p {
         top: 10px;
         right: 10px;
     }
+    
+    .hadith-arabic {
+        font-size: 2.5rem;
+        padding: var(--spacing-sm);
+    }
+    
+    .bismillah {
+        font-size: 2rem;
+    }
+    
+    .hadith-translation {
+        font-size: 1.4rem;
+    }
+    
+    .palestine-title {
+        font-size: 1.8rem;
+    }
+    
+    .palestine-text {
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -591,136 +688,12 @@ footer p {
     .commands-grid {
         grid-template-columns: 1fr 1fr;
     }
-}
-/* =========================================== */
-/* تحسينات الترجمة العربية فقط */
-/* =========================================== */
-
-/* 1. تحسين الهيدر مع العلم (بدون تغيير التصميم الأساسي) */
-.hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                url('https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Palestine.svg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.hero-title {
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
-}
-
-.hero-subtitle {
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
-}
-
-/* 2. تحسين قسم الحديث */
-.quote {
-    font-size: 1.5rem;
-    padding: 1.5rem;
-    background: rgba(16, 185, 129, 0.15);
-    border-left: 4px solid var(--secondary);
-    border-right: 4px solid var(--secondary);
-}
-
-/* 3. تحسين نص قسم فلسطين (إزالة التداخل) */
-.palestine-section h3,
-.palestine-section .dua {
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-    position: relative;
-    z-index: 10;
-}
-
-.palestine-section p:not(.dua) {
-    color: #333;
-    font-weight: 600;
-    position: relative;
-    z-index: 10;
-    background: rgba(255, 255, 255, 0.7);
-    padding: 1rem;
-    border-radius: 8px;
-    margin: 1rem 0;
-}
-
-/* 4. إضافة "صدق رسول الله" */
-.attestation {
-    color: var(--secondary);
-    font-weight: bold;
-    text-align: center;
-    margin-top: 0.5rem;
-    font-size: 1.1rem;
-}
-
-/* 5. تحسينات للنسخة العربية */
-html[dir="rtl"] {
-    text-align: right;
-}
-
-html[dir="rtl"] .container {
-    direction: rtl;
-}
-
-html[dir="rtl"] .feature-card,
-html[dir="rtl"] .about-card,
-html[dir="rtl"] .command-card {
-    text-align: right;
-}
-
-html[dir="rtl"] .steps {
-    direction: rtl;
-}
-
-html[dir="rtl"] .step {
-    text-align: right;
-}
-
-/* 6. زر اللغة ثابت في الأعلى */
-.lang-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-}
-
-#langBtn {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-md);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-#langBtn:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
-
-/* 7. تحسين للشاشات الصغيرة */
-@media (max-width: 768px) {
-    .quote {
-        font-size: 1.3rem;
-        padding: 1rem;
+    
+    .hadith-arabic {
+        font-size: 1.8rem;
     }
     
-    .palestine-section p:not(.dua) {
-        font-size: 0.95rem;
-        padding: 0.8rem;
-    }
-    
-    .lang-toggle {
-        top: 10px;
-        right: 10px;
-    }
-    
-    #langBtn {
-        padding: 8px 20px;
-        font-size: 1rem;
+    .bismillah {
+        font-size: 1.5rem;
     }
 }
