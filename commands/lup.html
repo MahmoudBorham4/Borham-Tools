@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUP Command - Level Update | Borham Tools</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/command-page.css">
+</head>
+<body>
+    <div class="back-button">
+        <a href="../index.html">← Back to Home</a>
+    </div>
+    <header class="command-header">
+        <div class="container">
+            <div class="command-badge">V15 Ultra</div>
+            <h1 class="command-name">LUP</h1>
+            <p class="command-title">Level Update</p>
+        </div>
+    </header>
+    <section class="command-content">
+        <div class="container">
+            <div class="content-section">
+                <h2>📋 Description</h2>
+                <p>Updates point elevations from nearest text/mtext content using grid-based spatial indexing and pre-parsed caches.</p>
+            </div>
+            <div class="content-section highlight-box">
+                <h2>⚡ Optimizations</h2>
+                <ul>
+                    <li>Grid spatial index for O(1) nearest neighbor search</li>
+                    <li>Pre-parsed text cache (parse once)</li>
+                    <li>Batch point updates</li>
+                    <li>Failed points isolation to Wrong_LVL layer</li>
+                </ul>
+            </div>
+            <div class="content-section">
+                <h2>🔧 Algorithm Phases</h2>
+                <ol>
+                    <li>Separate points and texts</li>
+                    <li>Build parsed text cache</li>
+                    <li>Create spatial grid</li>
+                    <li>Batch process points</li>
+                    <li>Apply all updates</li>
+                    <li>Isolate failures</li>
+                </ol>
+            </div>
+            <div class="content-section">
+                <h2>🚀 Speed Improvements</h2>
+                <ul>
+                    <li><strong>50x faster</strong> than original</li>
+                    <li>10,000 points in under 2 seconds</li>
+                    <li>Adaptive grid sizing</li>
+                    <li>Progress reporting</li>
+                </ul>
+            </div>
+            <div class="content-section highlight-box">
+                <h2>✨ Features</h2>
+                <ul>
+                    <li>Deep MText formatting cleanup</li>
+                    <li>Smart number extraction</li>
+                    <li>Wrong_LVL layer for failed points</li>
+                    <li>Detailed timing and statistics</li>
+                </ul>
+            </div>
+            <div class="content-section usage-box">
+                <h2>💡 How to Use</h2>
+                <ol class="steps-list">
+                    <li>Type <code>LUP</code> and press <kbd>Enter</kbd></li>
+                    <li>Select points and text labels</li>
+                    <li>Watch real-time progress</li>
+                    <li>Points updated with nearest text values</li>
+                    <li>Failed points moved to Wrong_LVL layer</li>
+                </ol>
+            </div>
+            <div class="content-section performance-box">
+                <h2>📊 Performance</h2>
+                <p class="performance-stat"><strong>10,000 points</strong> in under 2 seconds</p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
+            <p class="back-link"><a href="../index.html">← Back to All Commands</a></p>
+        </div>
+    </footer>
+</body>
+</html>

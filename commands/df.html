@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DF Command - Elevation Difference | Borham Tools</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/command-page.css">
+</head>
+<body>
+    <div class="back-button">
+        <a href="../index.html">← Back to Home</a>
+    </div>
+    <header class="command-header">
+        <div class="container">
+            <div class="command-badge">Updated</div>
+            <h1 class="command-name">DF</h1>
+            <p class="command-title">Elevation Difference</p>
+        </div>
+    </header>
+    <section class="command-content">
+        <div class="container">
+            <div class="content-section">
+                <h2>📋 Description</h2>
+                <p>Creates text showing elevation difference from reference level.</p>
+            </div>
+            <div class="content-section highlight-box">
+                <h2>✨ Features</h2>
+                <ul>
+                    <li>Calculates: Point_Z - Reference_Elevation</li>
+                    <li>Positive differences: 'Levels Positive' layer (Color: Red)</li>
+                    <li>Negative differences: 'Levels Negative' layer (Color: Green)</li>
+                    <li>Shows +/- signs automatically</li>
+                    <li>Text height: 0.2 units</li>
+                    <li>Places text at point location (Z=0)</li>
+                    <li>Automatic sign detection</li>
+                    <li>Color-coded results</li>
+                    <li>Preserves SNAP settings</li>
+                    <li>Opens locked/hidden layers automatically</li>
+                </ul>
+            </div>
+            <div class="content-section">
+                <h2>📊 Example</h2>
+                <p><strong>Reference Elevation:</strong> 50.000</p>
+                <ul>
+                    <li>Point Z: 52.500 → Text: <span style="color:#e74c3c;">+2.500 (Red)</span></li>
+                    <li>Point Z: 48.200 → Text: <span style="color:#27ae60;">-1.800 (Green)</span></li>
+                </ul>
+            </div>
+            <div class="content-section usage-box">
+                <h2>💡 How to Use</h2>
+                <ol class="steps-list">
+                    <li>Type <code>DF</code> and press <kbd>Enter</kbd></li>
+                    <li>Select points to create level difference text</li>
+                    <li>Enter reference elevation (e.g., 0.0 or 50.0)</li>
+                    <li>Level texts will be created automatically showing the difference</li>
+                </ol>
+            </div>
+            <div class="content-section">
+                <h2>💡 Tips</h2>
+                <ul>
+                    <li>Positive differences shown in red on 'Levels Positive' layer</li>
+                    <li>Negative differences shown in green on 'Levels Negative' layer</li>
+                    <li>Text is placed at the point's X,Y coordinates with Z=0</li>
+                    <li>Useful for showing cut/fill levels in civil engineering</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
+            <p class="back-link"><a href="../index.html">← Back to All Commands</a></p>
+        </div>
+    </footer>
+</body>
+</html>

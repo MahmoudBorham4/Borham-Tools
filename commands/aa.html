@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AA Command - Area & Hatch | Borham Tools</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/command-page.css">
+</head>
+<body>
+    <div class="back-button">
+        <a href="../index.html">← Back to Home</a>
+    </div>
+    <header class="command-header">
+        <div class="container">
+            <div class="command-badge">Simple</div>
+            <h1 class="command-name">AA</h1>
+            <p class="command-title">Area & Hatch</p>
+        </div>
+    </header>
+    <section class="command-content">
+        <div class="container">
+            <div class="content-section">
+                <h2>📋 Description</h2>
+                <p>Calculates total area of selected closed shapes and creates a visual hatch.</p>
+            </div>
+            <div class="content-section">
+                <h2>✅ Supported Objects</h2>
+                <ul>
+                    <li>LWPOLYLINE (closed)</li>
+                    <li>POLYLINE (closed)</li>
+                    <li>CIRCLE</li>
+                    <li>ELLIPSE</li>
+                    <li>SPLINE (closed)</li>
+                    <li>REGION</li>
+                </ul>
+            </div>
+            <div class="content-section highlight-box">
+                <h2>✨ Features</h2>
+                <ul>
+                    <li>Calculates total area in square meters</li>
+                    <li>Creates a SOLID green hatch for each measured area</li>
+                    <li>New hatches are placed on 'All_area' layer</li>
+                    <li>Prevents duplicate area calculation</li>
+                    <li>Displays results in alert box and command line</li>
+                    <li>Preserves SNAP settings</li>
+                    <li>Opens locked/hidden layers automatically</li>
+                </ul>
+            </div>
+            <div class="content-section usage-box">
+                <h2>💡 How to Use</h2>
+                <ol class="steps-list">
+                    <li>Type <code>AA</code> and press <kbd>Enter</kbd></li>
+                    <li>Select the closed shapes you want to measure</li>
+                    <li>The tool will calculate total area and create green hatch</li>
+                </ol>
+            </div>
+            <div class="content-section">
+                <h2>💡 Tips</h2>
+                <ul>
+                    <li>Only works with closed objects</li>
+                    <li>Visual hatch makes it easy to verify which areas were included</li>
+                    <li>'All_area' layer can be frozen or turned off to hide hatches</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
+            <p class="back-link"><a href="../index.html">← Back to All Commands</a></p>
+        </div>
+    </footer>
+</body>
+</html>

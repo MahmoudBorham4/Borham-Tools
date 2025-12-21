@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T - Coordinate Table | Borham Tools</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/command.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+</head>
+<body>
+    <!-- Back Button -->
+    <div class="back-button">
+        <a href="../index.html">← Back to Home</a>
+    </div>
+
+    <!-- Command Header -->
+    <section class="command-header">
+        <div class="container">
+            <span class="command-badge">New Column Feature</span>
+            <h1 class="command-name">T</h1>
+            <p class="command-title">Professional Coordinate Table with Automatic Code Detection</p>
+        </div>
+    </section>
+
+    <!-- Command Content -->
+    <section class="command-content">
+        <div class="container">
+            <!-- Overview Section -->
+            <div class="content-section highlight-box">
+                <h2>📖 Command Overview</h2>
+                <p>The <code>T</code> command creates a professional coordinate table with <strong>automatic code detection</strong> from nearby text labels, perfect for survey reports and point documentation.</p>
+                
+                <h3>NEW: Code Column Feature</h3>
+                <ul>
+                    <li><strong>Automatic code extraction</strong> from nearest text labels</li>
+                    <li><strong>Smart search radius</strong> (within 5 units)</li>
+                    <li><strong>Supports TEXT and MTEXT</strong> objects</li>
+                    <li><strong>Displays "N/A"</strong> if no text found</li>
+                    <li><strong>Perfect for labeled points</strong> (BM-01, TP-05, etc.)</li>
+                </ul>
+            </div>
+
+            <!-- Table Structure -->
+            <div class="content-section">
+                <h2>📊 Table Structure</h2>
+                
+                <div style="background: var(--bg-dark); padding: 20px; border-radius: 8px; margin: 15px 0; overflow-x: auto;">
+                    <table style="width:100%; border-collapse: collapse; min-width: 500px;">
+                        <tr style="background: var(--primary); color: white;">
+                            <th style="padding: 12px; border: 1px solid var(--border); text-align: center;">Column</th>
+                            <th style="padding: 12px; border: 1px solid var(--border); text-align: center;">Description</th>
+                            <th style="padding: 12px; border: 1px solid var(--border); text-align: center;">Example</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;"><strong>NO.</strong></td>
+                            <td style="padding: 10px; border: 1px solid var(--border);">Sequential point number</td>
+                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;">1, 2, 3...</td>
+                        </tr>
+                        <tr style="background: var(--bg-card);">
+                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;"><strong>X</strong></td>
+                            <td style="padding: 10px; border: 1px solid var(--border);">Easting coordinate</td>
+                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;">12345.678</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;"><strong>Y</strong></td>
+                            <td style="padding: 10px; border: 1px solid var(--border);">Northing coordinate</td>
+                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;">98765.432</td>
+                        </tr>
+                        <tr style="background: var(--bg-card);">
+                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;"><strong>Z</strong></td>
+                            <td style="padding: 10px; border: 1px solid var(--border);">Elevation coordinate</td>
+                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;">100.500</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;"><strong>CODE</strong></td>
+                            <td style="padding: 10px; border: 1px solid var(--border);"><strong>NEW:</strong> Nearest text label</td>
+                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;">BM-01, TP-05, N/A</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Workflow Options -->
+            <div class="content-section usage-box">
+                <h2>🚀 Three Workflow Options</h2>
+                
+                <div class="command-tips">
+                    <div class="tip-card">
+                        <h4>1️⃣ PRE-SELECT & RUN (Fastest)</h4>
+                        <p><strong>Steps:</strong></p>
+                        <ol style="padding-left: 20px; margin: 10px 0;">
+                            <li>Select points first</li>
+                            <li>Type <code>T</code> and press Enter</li>
+                            <li>System searches for nearby text labels</li>
+                            <li>Enter text height</li>
+                            <li>Click table insertion point</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h4>2️⃣ REGULAR METHOD</h4>
+                        <p><strong>Steps:</strong></p>
+                        <ol style="padding-left: 20px; margin: 10px 0;">
+                            <li>Type <code>T</code> and press Enter</li>
+                            <li>Select points</li>
+                            <li>System searches for nearby text labels</li>
+                            <li>Enter text height</li>
+                            <li>Click table insertion point</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h4>3️⃣ MANUAL MODE</h4>
+                        <p><strong>Steps:</strong></p>
+                        <ol style="padding-left: 20px; margin: 10px 0;">
+                            <li>Type <code>T</code> and press Enter</li>
+                            <li>Type <code>M</code> for manual mode</li>
+                            <li>Click points one by one</li>
+                            <li>Red points drawn for reference</li>
+                            <li>System searches for nearby text labels</li>
+                            <li>Enter text height</li>
+                            <li>Click table insertion point</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Detection -->
+            <div class="content-section">
+                <h2>🔍 Smart Code Detection</h2>
+                
+                <h3>How It Works:</h3>
+                <ol>
+                    <li>For each selected point, searches within <strong>5-unit radius</strong></li>
+                    <li>Looks for <strong>TEXT and MTEXT</strong> objects</li>
+                    <li>Uses <strong>nearest text content</strong> as code</li>
+                    <li>If no text found → Shows <strong>"N/A"</strong></li>
+                    <li>Perfect for survey points with labels like:
+                        <ul>
+                            <li><code>BM-01</code> (Benchmark)</li>
+                            <li><code>TP-05</code> (Turning Point)</li>
+                            <li><code>COL-A</code> (Column)</li>
+                            <li><code>MH-12</code> (Manhole)</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <h3>Search Parameters:</h3>
+                <ul>
+                    <li><strong>Search Radius:</strong> 5 drawing units</li>
+                    <li><strong>Text Types:</strong> TEXT, MTEXT</li>
+                    <li><strong>Priority:</strong> Nearest text first</li>
+                    <li><strong>Fallback:</strong> "N/A" if no text found</li>
+                </ul>
+            </div>
+
+            <!-- Layer Management -->
+            <div class="content-section">
+                <h2>🎨 Layer Management</h2>
+                
+                <div style="background: var(--bg-dark); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4 style="color: var(--secondary); margin-bottom: 10px;">Automatic Layer Creation:</h4>
+                    <ul>
+                        <li><strong>Coordinates-Table:</strong> Gray layer for the table</li>
+                        <li><strong>Point-Names:</strong> Orange layer for point labels</li>
+                        <li><strong>Manual-Points:</strong> Red layer (used in manual mode)</li>
+                    </ul>
+                </div>
+                
+                <h3>Text Height Memory:</h3>
+                <p>The command remembers the last used text height between sessions for consistent formatting.</p>
+            </div>
+
+            <!-- Command Example -->
+            <div class="content-section">
+                <h2>💻 Command Line Example</h2>
+                <pre><code>Command: T
+Select points or type M for manual mode: [select points]
+Searching for text labels near points...
+Found codes for 8 out of 10 points
+Enter text height for labels <0.20>: 0.25
+Click table insertion point: [click location]
+Table created with 10 points
+Layers created: Coordinates-Table, Point-Names</code></pre>
+            </div>
+
+            <!-- Applications -->
+            <div class="content-section">
+                <h2>🎯 Professional Applications</h2>
+                <ul>
+                    <li><strong>Survey Reports:</strong> Create coordinate schedules with point codes</li>
+                    <li><strong>As-built Documentation:</strong> Document existing conditions with labels</li>
+                    <li><strong>Quality Control:</strong> Verify point coordinates and labels</li>
+                    <li><strong>Construction Layout:</strong> Generate setting-out sheets with codes</li>
+                    <li><strong>Infrastructure Projects:</strong> Document manholes, valves, benchmarks</li>
+                    <li><strong>BIM Coordination:</strong> Create equipment coordinate schedules</li>
+                </ul>
+            </div>
+
+            <!-- Performance -->
+            <div class="content-section performance-box">
+                <h2>⚡ Time Savings</h2>
+                <p class="performance-stat"><strong>80% Faster</strong> than manual table creation</p>
+                <p>Automates the entire process of table creation with intelligent code detection.</p>
+            </div>
+
+            <!-- Related Commands -->
+            <div class="related-commands">
+                <h3>Related Commands</h3>
+                <div class="related-grid">
+                    <a href="en.html" class="related-command">EN</a>
+                    <a href="enl.html" class="related-command">ENL</a>
+                    <a href="pe.html" class="related-command">PE</a>
+                    <a href="../index.html" class="related-command">All Commands</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Borham Tools v78.2 - Free AutoCAD LISP Tools</p>
+            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
+            <div class="back-link">
+                <a href="../index.html">← Return to Main Page</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

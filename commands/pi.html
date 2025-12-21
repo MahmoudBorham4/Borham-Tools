@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PI Command - Point Import | Borham Tools</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/command-page.css">
+</head>
+<body>
+    <div class="back-button">
+        <a href="../index.html">← Back to Home</a>
+    </div>
+    <header class="command-header">
+        <div class="container">
+            <div class="command-badge">Multi-Format V11</div>
+            <h1 class="command-name">PI</h1>
+            <p class="command-title">Point Import</p>
+        </div>
+    </header>
+    <section class="command-content">
+        <div class="container">
+            <div class="content-section">
+                <h2>📋 Description</h2>
+                <p>Imports points from TXT, CSV, or PNT files with support for multiple coordinate formats. Features a professional dialog box for complete control over import options.</p>
+            </div>
+            <div class="content-section highlight-box">
+                <h2>📊 Supported File Formats</h2>
+                <ul>
+                    <li><strong>Format 1:</strong> P X Y Z C (Point Name, X, Y, Z, Code)</li>
+                    <li><strong>Format 2:</strong> P Y X Z C (Point Name, Y, X, Z, Code)</li>
+                    <li><strong>Format 3:</strong> X Y Z C (Auto-numbered points)</li>
+                    <li><strong>Format 4:</strong> Y X Z C (Auto-numbered points)</li>
+                </ul>
+                <p><strong>Supports:</strong> Comma-separated (CSV) or Space-separated (TXT) files</p>
+            </div>
+            <div class="content-section highlight-box">
+                <h2>✨ Import Options</h2>
+                <ul>
+                    <li><strong>Import Points:</strong> Create point entities (2D or 3D)</li>
+                    <li><strong>Import Names:</strong> Add point name labels</li>
+                    <li><strong>Import Codes:</strong> Add point code labels</li>
+                    <li><strong>Import Elevation:</strong> Add elevation text</li>
+                    <li><strong>Connect Polyline:</strong> Connect points with 2D or 3D polyline</li>
+                </ul>
+            </div>
+            <div class="content-section">
+                <h2>⚙️ Point Types</h2>
+                <ul>
+                    <li><strong>2D Points (Z=0):</strong> All points placed at Z=0</li>
+                    <li><strong>3D Points (Elevated):</strong> Points placed at their actual Z elevation</li>
+                </ul>
+            </div>
+            <div class="content-section">
+                <h2>🔗 Polyline Types</h2>
+                <ul>
+                    <li><strong>2D Polyline:</strong> Connects points in XY plane (Z=0)</li>
+                    <li><strong>3D Polyline:</strong> Connects points with their Z elevations</li>
+                </ul>
+            </div>
+            <div class="content-section highlight-box">
+                <h2>🎨 Layer Management</h2>
+                <ul>
+                    <li><strong>As-built:</strong> Point entities (Color: Red)</li>
+                    <li><strong>As-Built-Point-Name:</strong> Point name labels (Color: Yellow)</li>
+                    <li><strong>As-built-Codes:</strong> Point codes (Color: Green)</li>
+                    <li><strong>As-built-Elevation:</strong> Elevation text (Color: Cyan)</li>
+                    <li><strong>As-built-Polyline:</strong> Connected polyline (Color: Magenta)</li>
+                </ul>
+            </div>
+            <div class="content-section">
+                <h2>📝 Text Settings</h2>
+                <ul>
+                    <li><strong>Text Height:</strong> Configurable (default: 0.2)</li>
+                    <li><strong>Text Rotation:</strong> Adjustable in degrees (default: 0)</li>
+                    <li><strong>Smart Positioning:</strong> Labels placed around points automatically</li>
+                </ul>
+            </div>
+            <div class="content-section usage-box">
+                <h2>💡 How to Use</h2>
+                <ol class="steps-list">
+                    <li>Type <code>PI</code> and press <kbd>Enter</kbd></li>
+                    <li>Configure import options in the dialog box:
+                        <ul style="margin-top: 10px;">
+                            <li>Select what to import (Points, Names, Codes, Elevation)</li>
+                            <li>Choose point type (2D or 3D)</li>
+                            <li>Select coordinate format</li>
+                            <li>Set text height and rotation</li>
+                            <li>Enable polyline connection if needed</li>
+                        </ul>
+                    </li>
+                    <li>Click <kbd>OK</kbd></li>
+                    <li>Browse and select your points file (TXT/CSV/PNT)</li>
+                    <li>Points and labels will be imported automatically</li>
+                    <li>View zooms to fit all imported points</li>
+                </ol>
+            </div>
+            <div class="content-section">
+                <h2>📄 File Format Examples</h2>
+                <div style="background: var(--bg-dark); padding: 15px; border-radius: 8px; margin-top: 10px;">
+                    <p style="color: var(--secondary); margin-bottom: 10px;"><strong>Format 1 (P X Y Z C):</strong></p>
+                    <code style="display:block; margin-bottom: 15px;">
+BM-01, 1000.500, 2000.750, 50.000, Benchmark<br>
+TP-05, 1050.250, 2100.300, 51.200, Turning Point
+                    </code>
+                    
+                    <p style="color: var(--secondary); margin-bottom: 10px;"><strong>Format 3 (X Y Z C):</strong></p>
+                    <code style="display:block;">
+1000.500 2000.750 50.000 Foundation<br>
+1050.250 2100.300 51.200 Column
+                    </code>
+                </div>
+            </div>
+            <div class="content-section highlight-box">
+                <h2>🚀 Features</h2>
+                <ul>
+                    <li>Professional dialog box interface</li>
+                    <li>Multiple coordinate format support</li>
+                    <li>Automatic layer creation with color coding</li>
+                    <li>Smart text positioning around points</li>
+                    <li>Auto-zoom to imported points</li>
+                    <li>Performance statistics display</li>
+                    <li>Supports thousands of points</li>
+                    <li>Handles CSV and space-delimited files</li>
+                    <li>Memory of last-used settings</li>
+                    <li>Optional polyline connection</li>
+                </ul>
+            </div>
+            <div class="content-section">
+                <h2>💡 Tips</h2>
+                <ul>
+                    <li>Choose 2D points for plan views, 3D points for terrain models</li>
+                    <li>Use 3D polylines for accurate profiles and sections</li>
+                    <li>Text rotation useful for angled layouts</li>
+                    <li>Import codes to preserve survey point classifications</li>
+                    <li>Settings are remembered between sessions</li>
+                    <li>Layers can be turned off individually for clean views</li>
+                    <li>Perfect for importing total station data</li>
+                    <li>Works with any coordinate system</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
+            <p class="back-link"><a href="../index.html">← Back to All Commands</a></p>
+        </div>
+    </footer>
+</body>
+</html>

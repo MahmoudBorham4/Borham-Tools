@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENL - XYZ Coordinates | Borham Tools</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/command.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+</head>
+<body>
+    <!-- Back Button -->
+    <div class="back-button">
+        <a href="../index.html">← Back to Home</a>
+    </div>
+
+    <!-- Command Header -->
+    <section class="command-header">
+        <div class="container">
+            <span class="command-badge">3D MLeader</span>
+            <h1 class="command-name">ENL</h1>
+            <p class="command-title">Complete XYZ Coordinate Annotation with Elevation</p>
+        </div>
+    </section>
+
+    <!-- Command Content -->
+    <section class="command-content">
+        <div class="container">
+            <!-- Overview Section -->
+            <div class="content-section highlight-box">
+                <h2>📖 Command Overview</h2>
+                <p>The <code>ENL</code> command creates comprehensive MLeader annotations displaying full X, Y, and Z coordinates, perfect for 3D modeling and terrain analysis.</p>
+                
+                <h3>Key Features:</h3>
+                <ul>
+                    <li><strong>Complete 3D coordinates</strong> (X, Y, Z)</li>
+                    <li><strong>Shared settings</strong> with EN command</li>
+                    <li><strong>Automatic Z-coordinate detection</strong></li>
+                    <li><strong>Professional multi-line MLeader format</strong></li>
+                    <li><strong>Handles 2D points</strong> (Z = 0.0)</li>
+                    <li><strong>Interactive scale/angle adjustment</strong></li>
+                </ul>
+            </div>
+
+            <!-- Usage Section -->
+            <div class="content-section usage-box">
+                <h2>🚀 How to Use</h2>
+                <p>To annotate 3D coordinates in AutoCAD:</p>
+                
+                <ol class="steps-list">
+                    <li>Type <code>ENL</code> in the command line and press Enter</li>
+                    <li>Click on the 3D point you want to annotate</li>
+                    <li>Click again to place the MLeader at desired location</li>
+                    <li>Repeat for multiple points or press Enter to exit</li>
+                </ol>
+                
+                <h3>Interactive Options During Command:</h3>
+                <ul>
+                    <li>Type <code>S</code> → Change scale (default: 0.20)</li>
+                    <li>Type <code>A</code> → Change angle (default: 0.0)</li>
+                </ul>
+                
+                <h3>Command Line Example:</h3>
+                <pre><code>Command: ENL
+Current scale: 0.20, Current angle: 0.0
+Type S to change scale, A to change angle
+Select 3D point: [click point]
+Place leader: [click location]
+Coordinates: 12345.678, 98765.432, 100.500</code></pre>
+            </div>
+
+            <!-- Configuration -->
+            <div class="content-section">
+                <h2>⚙️ Shared Configuration</h2>
+                
+                <h3>Global Variables (Shared with EN):</h3>
+                <ul>
+                    <li><code>en_scale</code>: Text scale (default: 0.20) - <em>Shared with EN</em></li>
+                    <li><code>en_angle</code>: Text angle in degrees (default: 0.0) - <em>Shared with EN</em></li>
+                </ul>
+                
+                <h3>Layer Management:</h3>
+                <p>Uses the same layer as EN command: <strong>"COORDINATES"</strong></p>
+                <ul>
+                    <li><strong>Color:</strong> Red (Index 1)</li>
+                    <li><strong>Consistency:</strong> Same layer for both 2D and 3D coordinates</li>
+                    <li><strong>Auto-unlock:</strong> Opens if locked or hidden</li>
+                </ul>
+            </div>
+
+            <!-- Z-Coordinate Handling -->
+            <div class="content-section">
+                <h2>📐 Z-Coordinate Detection</h2>
+                
+                <div class="command-tips">
+                    <div class="tip-card">
+                        <h4>🔍 Automatic Detection</h4>
+                        <p>Automatically extracts Z-coordinate from selected point.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>📏 2D Point Support</h4>
+                        <p>If point has no Z value, automatically uses <code>0.0</code>.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>🎯 Precision Formatting</h4>
+                        <p>All coordinates displayed with 3 decimal places.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>🔄 Real-time Adjustment</h4>
+                        <p>Change scale and angle during annotation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Format Example -->
+            <div class="content-section">
+                <h2>📋 3D Output Format</h2>
+                <p>MLeader displays complete 3D coordinates in this professional format:</p>
+                <div style="background: var(--bg-dark); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    <code style="font-size: 1.1rem; color: var(--secondary);">
+                        E: 12345.678<br>
+                        N: 98765.432<br>
+                        Z: 100.500
+                    </code>
+                </div>
+                <p><strong>Angle Application:</strong> Angle is applied to entire MLeader for perfect alignment.</p>
+            </div>
+
+            <!-- Applications -->
+            <div class="content-section">
+                <h2>🎯 3D Applications</h2>
+                <ul>
+                    <li><strong>Terrain Modeling:</strong> Annotate elevation points in topographic surveys</li>
+                    <li><strong>3D Structures:</strong> Mark column heights and beam elevations</li>
+                    <li><strong>Mining & Geology:</strong> Document borehole coordinates and depths</li>
+                    <li><strong>Hydrology:</strong> Mark water level elevations and pipe inverts</li>
+                    <li><strong>Construction:</strong> Annotate floor levels and foundation depths</li>
+                    <li><strong>BIM Coordination:</strong> Mark MEP equipment elevations</li>
+                </ul>
+            </div>
+
+            <!-- Comparison -->
+            <div class="content-section">
+                <h2>🔄 EN vs ENL Comparison</h2>
+                <table style="width:100%; border-collapse: collapse; margin: 20px 0;">
+                    <tr style="background: var(--bg-card);">
+                        <th style="padding: 12px; border: 1px solid var(--border);">Feature</th>
+                        <th style="padding: 12px; border: 1px solid var(--border);">EN Command</th>
+                        <th style="padding: 12px; border: 1px solid var(--border);">ENL Command</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid var(--border);">Coordinates</td>
+                        <td style="padding: 10px; border: 1px solid var(--border);">X, Y only</td>
+                        <td style="padding: 10px; border: 1px solid var(--border);">X, Y, Z</td>
+                    </tr>
+                    <tr style="background: var(--bg-card);">
+                        <td style="padding: 10px; border: 1px solid var(--border);">Format</td>
+                        <td style="padding: 10px; border: 1px solid var(--border);">2-line MLeader</td>
+                        <td style="padding: 10px; border: 1px solid var(--border);">3-line MLeader</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid var(--border);">Settings</td>
+                        <td colspan="2" style="padding: 10px; border: 1px solid var(--border); text-align:center;"><strong>Shared (en_scale, en_angle)</strong></td>
+                    </tr>
+                    <tr style="background: var(--bg-card);">
+                        <td style="padding: 10px; border: 1px solid var(--border);">Layer</td>
+                        <td colspan="2" style="padding: 10px; border: 1px solid var(--border); text-align:center;"><strong>"COORDINATES" (Red)</strong></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Performance -->
+            <div class="content-section performance-box">
+                <h2>⚡ Workflow Efficiency</h2>
+                <p class="performance-stat"><strong>95% Faster</strong> than manual 3D coordinate annotation</p>
+                <p>Complete automation of 3D point annotation with professional formatting.</p>
+            </div>
+
+            <!-- Related Commands -->
+            <div class="related-commands">
+                <h3>Related Commands</h3>
+                <div class="related-grid">
+                    <a href="en.html" class="related-command">EN</a>
+                    <a href="t.html" class="related-command">T</a>
+                    <a href="lv.html" class="related-command">LV</a>
+                    <a href="../index.html" class="related-command">All Commands</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Borham Tools v78.2 - Free AutoCAD LISP Tools</p>
+            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
+            <div class="back-link">
+                <a href="../index.html">← Return to Main Page</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

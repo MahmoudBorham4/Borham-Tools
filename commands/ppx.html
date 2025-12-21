@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPX Command - Intersection Points | Borham Tools</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/command-page.css">
+</head>
+<body>
+    <div class="back-button">
+        <a href="../index.html">← Back to Home</a>
+    </div>
+
+    <header class="command-header">
+        <div class="container">
+            <div class="command-badge">Optimized V7</div>
+            <h1 class="command-name">PPX</h1>
+            <p class="command-title">Intersection Points</p>
+        </div>
+    </header>
+
+    <section class="command-content">
+        <div class="container">
+            
+            <div class="content-section">
+                <h2>📋 Description</h2>
+                <p>Finds and creates points at intersections between selected LINES using pairwise checking with spatial hashing.</p>
+            </div>
+
+            <div class="content-section highlight-box">
+                <h2>⚡ Optimizations</h2>
+                <ul>
+                    <li>Pairwise intersection checking</li>
+                    <li>Spatial hash for instant duplicate detection</li>
+                    <li>Silent operation mode</li>
+                    <li>Automatic layer management</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2>🔧 Algorithm</h2>
+                <ol>
+                    <li>Build line list from selection</li>
+                    <li>Check all unique pairs (n*(n-1)/2)</li>
+                    <li>Use IntersectWith method</li>
+                    <li>Hash-based duplicate prevention</li>
+                    <li>Batch creation</li>
+                </ol>
+            </div>
+
+            <div class="content-section">
+                <h2>🚀 Speed Improvements</h2>
+                <ul>
+                    <li><strong>15x faster</strong> for large selections</li>
+                    <li>O(1) duplicate checking</li>
+                    <li>Minimal command echoing</li>
+                    <li>Efficient memory usage</li>
+                </ul>
+            </div>
+
+            <div class="content-section usage-box">
+                <h2>💡 How to Use</h2>
+                <ol class="steps-list">
+                    <li>Type <code>PPX</code> and press <kbd>Enter</kbd></li>
+                    <li>Select multiple LINES</li>
+                    <li>All intersections created instantly</li>
+                    <li>Get detailed timing report</li>
+                </ol>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
+            <p class="back-link"><a href="../index.html">← Back to All Commands</a></p>
+        </div>
+    </footer>
+</body>
+</html>

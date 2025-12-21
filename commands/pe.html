@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PE Command - Points Export and Label | Borham Tools</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/command-page.css">
+</head>
+<body>
+    <div class="back-button">
+        <a href="../index.html">← Back to Home</a>
+    </div>
+    <header class="command-header">
+        <div class="container">
+            <div class="command-badge">New</div>
+            <h1 class="command-name">PE</h1>
+            <p class="command-title">Export & Label Points</p>
+        </div>
+    </header>
+    <section class="command-content">
+        <div class="container">
+            <div class="content-section">
+                <h2>📋 Description</h2>
+                <p>Exports selected points to CSV file and labels them with text.</p>
+            </div>
+            <div class="content-section highlight-box">
+                <h2>✨ Features</h2>
+                <ul>
+                    <li>Exports to CSV format (Name,X,Y,Z)</li>
+                    <li>Creates sequential text labels</li>
+                    <li>Configurable text height</li>
+                    <li>Uses 'PointNames' layer (Color: Red)</li>
+                    <li>Sorts points by handle for consistent numbering</li>
+                    <li>Default save location: Desktop\output.csv</li>
+                    <li>Creates both CSV file and drawing labels</li>
+                    <li>Preserves SNAP settings</li>
+                    <li>Opens locked/hidden layers automatically</li>
+                </ul>
+            </div>
+            <div class="content-section">
+                <h2>📄 CSV Format</h2>
+                <p>Point Number, X-Coordinate, Y-Coordinate, Z-Coordinate</p>
+                <code style="display:block; margin-top:10px; padding:15px;">
+1,100.500,200.750,50.000<br>
+2,150.250,180.300,51.200
+                </code>
+            </div>
+            <div class="content-section usage-box">
+                <h2>💡 How to Use</h2>
+                <ol class="steps-list">
+                    <li>Type <code>PE</code> and press <kbd>Enter</kbd></li>
+                    <li>Enter text height for point labels</li>
+                    <li>Choose save location for CSV file (default: Desktop\output.csv)</li>
+                    <li>Select points to export and label</li>
+                    <li>The tool will create CSV file and add text labels</li>
+                </ol>
+            </div>
+            <div class="content-section">
+                <h2>💡 Tips</h2>
+                <ul>
+                    <li>Text labels are placed on 'PointNames' layer</li>
+                    <li>Points are sorted by handle for consistent numbering</li>
+                    <li>CSV file can be opened in Excel</li>
+                    <li>Useful for survey points and coordinate data management</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
+            <p class="back-link"><a href="../index.html">← Back to All Commands</a></p>
+        </div>
+    </footer>
+</body>
+</html>

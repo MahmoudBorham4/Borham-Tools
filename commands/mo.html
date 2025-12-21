@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MO - Multi-Offset | Borham Tools</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/command.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+</head>
+<body>
+    <!-- Back Button -->
+    <div class="back-button">
+        <a href="../index.html">← Back to Home</a>
+    </div>
+
+    <!-- Command Header -->
+    <section class="command-header">
+        <div class="container">
+            <span class="command-badge">V16 Ultra</span>
+            <h1 class="command-name">MO</h1>
+            <p class="command-title">Multi-Offset with Intelligent Duplicate Prevention</p>
+        </div>
+    </section>
+
+    <!-- Command Content -->
+    <section class="command-content">
+        <div class="container">
+            <!-- Overview Section -->
+            <div class="content-section highlight-box">
+                <h2>📖 Command Overview</h2>
+                <p>The <code>MO</code> command (Optimized V16) creates offset copies of objects with <strong>intelligent duplicate prevention</strong> using advanced object signature caching technology.</p>
+                
+                <h3>V16 Optimizations:</h3>
+                <ul>
+                    <li><strong>Object signature caching</strong> (build once, use many)</li>
+                    <li><strong>5x faster duplicate checking</strong></li>
+                    <li><strong>Smart direction detection</strong></li>
+                    <li><strong>Batch offset creation</strong></li>
+                    <li><strong>Detailed statistics display</strong></li>
+                </ul>
+            </div>
+
+            <!-- How It Works -->
+            <div class="content-section">
+                <h2>⚙️ How MO V16 Works</h2>
+                
+                <div class="command-tips">
+                    <div class="tip-card">
+                        <h4>1️⃣ Signature Creation</h4>
+                        <p>Creates unique signatures for each object type once.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h4>2️⃣ Fast Comparison</h4>
+                        <p>Compares signatures instead of full geometry.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h4>3️⃣ Duplicate Prevention</h4>
+                        <p>Skips duplicates and shows count.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h4>4️⃣ Batch Processing</h4>
+                        <p>Creates all offsets in optimized batches.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Object Signatures -->
+            <div class="content-section">
+                <h2>🎯 Object Signature Types</h2>
+                
+                <div style="background: var(--bg-dark); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    <table style="width:100%; border-collapse: collapse;">
+                        <tr style="background: var(--primary); color: white;">
+                            <th style="padding: 10px; border: 1px solid var(--border);">Object Type</th>
+                            <th style="padding: 10px; border: 1px solid var(--border);">Signature Components</th>
+                            <th style="padding: 10px; border: 1px solid var(--border);">Optimization</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid var(--border);"><strong>Lines</strong></td>
+                            <td style="padding: 8px; border: 1px solid var(--border);">Start & End points</td>
+                            <td style="padding: 8px; border: 1px solid var(--border);">Point comparison</td>
+                        </tr>
+                        <tr style="background: var(--bg-card);">
+                            <td style="padding: 8px; border: 1px solid var(--border);"><strong>Polylines</strong></td>
+                            <td style="padding: 8px; border: 1px solid var(--border);">All vertex coordinates</td>
+                            <td style="padding: 8px; border: 1px solid var(--border);">Coordinate hash</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid var(--border);"><strong>Circles</strong></td>
+                            <td style="padding: 8px; border: 1px solid var(--border);">Center & Radius</td>
+                            <td style="padding: 8px; border: 1px solid var(--border);">Radius check</td>
+                        </tr>
+                        <tr style="background: var(--bg-card);">
+                            <td style="padding: 8px; border: 1px solid var(--border);"><strong>Arcs</strong></td>
+                            <td style="padding: 8px; border: 1px solid var(--border);">Center, Radius, Start/End angles</td>
+                            <td style="padding: 8px; border: 1px solid var(--border);">Angle range</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid var(--border);"><strong>Other Objects</strong></td>
+                            <td style="padding: 8px; border: 1px solid var(--border);">Bounding box</td>
+                            <td style="padding: 8px; border: 1px solid var(--border);">Box dimensions</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Usage Section -->
+            <div class="content-section usage-box">
+                <h2>🚀 How to Use</h2>
+                
+                <ol class="steps-list">
+                    <li>Type <code>MO</code> in the command line and press Enter</li>
+                    <li>Enter the offset distance</li>
+                    <li>Choose offset direction:
+                        <ul>
+                            <li><strong>Outward</strong> (creates on "OFFSET-OUT" layer - Red)</li>
+                            <li><strong>Inward</strong> (creates on "OFFSET-IN" layer - Orange)</li>
+                            <li><strong>Both</strong> (creates both outward and inward)</li>
+                        </ul>
+                    </li>
+                    <li>Select objects to offset</li>
+                    <li>View instant results with duplicate count</li>
+                </ol>
+                
+                <h3>Command Line Example:</h3>
+                <pre><code>Command: MO
+Enter offset distance: 2.5
+Choose direction (Outward/Inward/Both): Both
+Select objects: [select objects]
+Creating object signatures...
+Processing 15 objects...
+Created: 28 offsets (Out: 15, In: 13)
+Skipped: 2 duplicates
+Total time: 0.45s</code></pre>
+            </div>
+
+            <!-- Direction Options -->
+            <div class="content-section">
+                <h2>🎨 Direction Options & Layers</h2>
+                
+                <div class="command-tips">
+                    <div class="tip-card" style="border-left: 4px solid #e4312b;">
+                        <h4 style="color: #e4312b;">OUTWARD OFFSET</h4>
+                        <p><strong>Layer:</strong> OFFSET-OUT</p>
+                        <p><strong>Color:</strong> Red</p>
+                        <p><strong>Use Case:</strong> Expanding boundaries</p>
+                    </div>
+                    
+                    <div class="tip-card" style="border-left: 4px solid #f59e0b;">
+                        <h4 style="color: #f59e0b;">INWARD OFFSET</h4>
+                        <p><strong>Layer:</strong> OFFSET-IN</p>
+                        <p><strong>Color:</strong> Orange</p>
+                        <p><strong>Use Case:</strong> Creating setbacks</p>
+                    </div>
+                    
+                    <div class="tip-card" style="border-left: 4px solid #10b981;">
+                        <h4 style="color: #10b981;">BOTH DIRECTIONS</h4>
+                        <p><strong>Layers:</strong> Both created</p>
+                        <p><strong>Colors:</strong> Red & Orange</p>
+                        <p><strong>Use Case:</strong> Parallel lines</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance -->
+            <div class="content-section performance-box">
+                <h2>⚡ V16 Performance Improvements</h2>
+                <p class="performance-stat"><strong>5x Faster</strong> duplicate checking</p>
+                
+                <div style="margin-top: 20px;">
+                    <h3>Optimization Techniques:</h3>
+                    <ul>
+                        <li><strong>Single Cache Build:</strong> Signatures built once, reused multiple times</li>
+                        <li><strong>Batch Processing:</strong> Multiple offsets created in single operation</li>
+                        <li><strong>Smart Filtering:</strong> Early duplicate detection</li>
+                        <li><strong>Layer Auto-Unlock:</strong> Automatic layer management</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="content-section">
+                <h2>⭐ Advanced Features</h2>
+                
+                <ul>
+                    <li><strong>Duplicate Skipping:</strong> Automatically skips identical offsets</li>
+                    <li><strong>Detailed Statistics:</strong> Shows created/skipped counts</li>
+                    <li><strong>Error Handling:</strong> Silent error handling - no interruptions</li>
+                    <li><strong>Layer Management:</strong> Auto-unlocks and turns on layers</li>
+                    <li><strong>SNAP Preservation:</strong> SNAP settings remain unchanged</li>
+                    <li><strong>Performance Timing:</strong> Shows operation time</li>
+                </ul>
+            </div>
+
+            <!-- Applications -->
+            <div class="content-section">
+                <h2>🎯 Practical Applications</h2>
+                
+                <div class="command-tips">
+                    <div class="tip-card">
+                        <h4>🏗️ Construction</h4>
+                        <p>Create setback lines for building permits</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h4>🛣️ Road Design</h4>
+                        <p>Generate parallel road edges and curbs</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h4>📐 Architecture</h4>
+                        <p>Create wall thicknesses and finishes</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h4>🏭 Manufacturing</h4>
+                        <p>Generate tool paths and clearance zones</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Command Output -->
+            <div class="content-section">
+                <h2>📊 Typical Command Output</h2>
+                <div style="background: var(--bg-dark); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    <code style="display: block; line-height: 1.8;">
+<span style="color: var(--accent);">Command: MO</span>
+<span style="color: var(--text-gray);">Enter offset distance:</span> <span style="color: var(--success);">5.0</span>
+<span style="color: var(--text-gray);">Choose direction (Outward/Inward/Both):</span> <span style="color: var(--success);">Both</span>
+<span style="color: var(--text-gray);">Select objects:</span> <span style="color: var(--success);">[12 objects selected]</span>
+<span style="color: var(--accent);">Building object signatures... Done (0.12s)</span>
+<span style="color: var(--accent);">Creating offsets... Processing</span>
+<span style="color: var(--success);">✓ Created: 22 offsets (Outward: 12, Inward: 10)</span>
+<span style="color: var(--warning);">⚠ Skipped: 3 duplicate offsets</span>
+<span style="color: var(--accent);">⏱ Total processing time: 0.85 seconds</span>
+<span style="color: var(--success);">✅ Operation completed successfully!</span>
+                    </code>
+                </div>
+            </div>
+
+            <!-- Related Commands -->
+            <div class="related-commands">
+                <h3>Related Commands</h3>
+                <div class="related-grid">
+                    <a href="aa.html" class="related-command">AA</a>
+                    <a href="pp.html" class="related-command">PP</a>
+                    <a href="ppc.html" class="related-command">PPC</a>
+                    <a href="../index.html" class="related-command">All Commands</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Borham Tools v78.2 - Free AutoCAD LISP Tools</p>
+            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
+            <div class="back-link">
+                <a href="../index.html">← Return to Main Page</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2C Command - Polyline to Circle | Borham Tools</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/command-page.css">
+</head>
+<body>
+    <div class="back-button">
+        <a href="../index.html">← Back to Home</a>
+    </div>
+    <header class="command-header">
+        <div class="container">
+            <div class="command-badge">Fast</div>
+            <h1 class="command-name">P2C</h1>
+            <p class="command-title">Polyline to Circle</p>
+        </div>
+    </header>
+    <section class="command-content">
+        <div class="container">
+            <div class="content-section">
+                <h2>📋 Description</h2>
+                <p>Converts closed polylines and arcs to circles.</p>
+            </div>
+            <div class="content-section">
+                <h2>✅ Supported Objects</h2>
+                <ul>
+                    <li><strong>Closed LWPOLYLINE:</strong> Creates circle from bounding box center</li>
+                    <li><strong>Closed POLYLINE:</strong> Creates circle from bounding box center</li>
+                    <li><strong>ARC:</strong> Creates circle with same center and radius</li>
+                </ul>
+            </div>
+            <div class="content-section highlight-box">
+                <h2>✨ Features</h2>
+                <ul>
+                    <li>Uses 'P2C' layer (Color: Red)</li>
+                    <li>Prevents duplicate circles</li>
+                    <li>Maintains geometric properties</li>
+                    <li>Handles both closed shapes and arcs</li>
+                    <li>Automatic closed polyline detection</li>
+                    <li>Bounding box calculation for polylines</li>
+                    <li>Preserves SNAP settings</li>
+                    <li>Opens locked/hidden layers automatically</li>
+                </ul>
+            </div>
+            <div class="content-section usage-box">
+                <h2>💡 How to Use</h2>
+                <ol class="steps-list">
+                    <li>Type <code>P2C</code> and press <kbd>Enter</kbd></li>
+                    <li>Select closed polylines and arcs to process</li>
+                    <li>Circles will be created automatically</li>
+                </ol>
+            </div>
+            <div class="content-section">
+                <h2>💡 Tips</h2>
+                <ul>
+                    <li>Only works with closed polylines and arcs</li>
+                    <li>New circles are placed on 'P2C' layer</li>
+                    <li>Original objects remain unchanged</li>
+                    <li>Useful for converting shapes to circles for machining or analysis</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
+            <p class="back-link"><a href="../index.html">← Back to All Commands</a></p>
+        </div>
+    </footer>
+</body>
+</html>

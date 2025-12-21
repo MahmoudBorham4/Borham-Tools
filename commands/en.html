@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EN - Easting & Northing | Borham Tools</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/command.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+</head>
+<body>
+    <!-- Back Button -->
+    <div class="back-button">
+        <a href="../index.html">← Back to Home</a>
+    </div>
+
+    <!-- Command Header -->
+    <section class="command-header">
+        <div class="container">
+            <span class="command-badge">MLeader Format</span>
+            <h1 class="command-name">EN</h1>
+            <p class="command-title">Easting (X) and Northing (Y) Coordinate Annotation</p>
+        </div>
+    </section>
+
+    <!-- Command Content -->
+    <section class="command-content">
+        <div class="container">
+            <!-- Overview Section -->
+            <div class="content-section highlight-box">
+                <h2>📖 Command Overview</h2>
+                <p>The <code>EN</code> command creates professional MLeader annotations displaying Easting (X) and Northing (Y) coordinates with configurable scale and angle settings.</p>
+                
+                <h3>Key Features:</h3>
+                <ul>
+                    <li><strong>Professional MLeader</strong> formatting</li>
+                    <li><strong>Configurable scale</strong> (global variable: <code>en_scale</code>)</li>
+                    <li><strong>Adjustable angle</strong> (global variable: <code>en_angle</code>)</li>
+                    <li><strong>Automatic layer creation</strong> ("COORDINATES" - Color: Red)</li>
+                    <li><strong>Continuous operation</strong> mode</li>
+                    <li><strong>Interactive adjustments</strong> during command</li>
+                </ul>
+            </div>
+
+            <!-- Usage Section -->
+            <div class="content-section usage-box">
+                <h2>🚀 How to Use</h2>
+                <p>To annotate coordinates in AutoCAD:</p>
+                
+                <ol class="steps-list">
+                    <li>Type <code>EN</code> in the command line and press Enter</li>
+                    <li>Click on the point you want to annotate</li>
+                    <li>Click again to place the MLeader at desired location</li>
+                    <li>Repeat for multiple points or press Enter to exit</li>
+                </ol>
+                
+                <h3>Interactive Options During Command:</h3>
+                <ul>
+                    <li>Type <code>S</code> → Change scale (default: 0.20)</li>
+                    <li>Type <code>A</code> → Change angle (default: 0.0)</li>
+                </ul>
+                
+                <h3>Command Line Example:</h3>
+                <pre><code>Command: EN
+Current scale: 0.20, Current angle: 0.0
+Type S to change scale, A to change angle
+Select point: [click point]
+Place leader: [click location]
+Coordinates: 12345.678, 98765.432</code></pre>
+            </div>
+
+            <!-- Configuration -->
+            <div class="content-section">
+                <h2>⚙️ Configuration & Settings</h2>
+                
+                <h3>Global Variables:</h3>
+                <ul>
+                    <li><code>en_scale</code>: Text scale (default: 0.20)</li>
+                    <li><code>en_angle</code>: Text angle in degrees (default: 0.0)</li>
+                </ul>
+                
+                <h3>Layer Management:</h3>
+                <p>Automatically creates and uses layer: <strong>"COORDINATES"</strong></p>
+                <ul>
+                    <li><strong>Color:</strong> Red (Index 1)</li>
+                    <li><strong>Auto-unlock:</strong> Opens if locked or hidden</li>
+                    <li><strong>Preservation:</strong> SNAP settings remain unchanged</li>
+                </ul>
+            </div>
+
+            <!-- Features -->
+            <div class="content-section">
+                <h2>⭐ Professional Features</h2>
+                <div class="command-tips">
+                    <div class="tip-card">
+                        <h4>📐 Precision Formatting</h4>
+                        <p>Coordinates displayed with 3 decimal places for survey-grade accuracy.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>🔄 Continuous Mode</h4>
+                        <p>Annotate multiple points without restarting the command.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>🎨 MLeader Format</h4>
+                        <p>Uses AutoCAD MLeader for professional, editable annotations.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>⚡ Real-time Adjustment</h4>
+                        <p>Change scale and angle on-the-fly during annotation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Format Example -->
+            <div class="content-section">
+                <h2>📋 Output Format</h2>
+                <p>MLeader displays coordinates in this professional format:</p>
+                <div style="background: var(--bg-dark); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    <code style="font-size: 1.1rem; color: var(--secondary);">
+                        E: 12345.678<br>
+                        N: 98765.432
+                    </code>
+                </div>
+                <p><strong>Angle Application:</strong> Angle is applied to MLeader text after creation for perfect alignment.</p>
+            </div>
+
+            <!-- Applications -->
+            <div class="content-section">
+                <h2>🎯 Practical Applications</h2>
+                <ul>
+                    <li><strong>Survey Marking:</strong> Perfect for coordinate annotation in survey drawings</li>
+                    <li><strong>Site Layout:</strong> Mark control points and benchmarks</li>
+                    <li><strong>Civil Engineering:</strong> Annotate road centerlines and property corners</li>
+                    <li><strong>Quality Control:</strong> Verify coordinates in as-built drawings</li>
+                    <li><strong>Construction:</strong> Mark column centers and grid intersections</li>
+                </ul>
+            </div>
+
+            <!-- Performance -->
+            <div class="content-section performance-box">
+                <h2>⚡ Efficiency Benefits</h2>
+                <p class="performance-stat"><strong>90% Faster</strong> than manual coordinate annotation</p>
+                <p>Automates the entire coordinate marking workflow with professional formatting.</p>
+            </div>
+
+            <!-- Related Commands -->
+            <div class="related-commands">
+                <h3>Related Commands</h3>
+                <div class="related-grid">
+                    <a href="enl.html" class="related-command">ENL</a>
+                    <a href="t.html" class="related-command">T</a>
+                    <a href="pp.html" class="related-command">PP</a>
+                    <a href="../index.html" class="related-command">All Commands</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Borham Tools v78.2 - Free AutoCAD LISP Tools</p>
+            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
+            <div class="back-link">
+                <a href="../index.html">← Return to Main Page</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

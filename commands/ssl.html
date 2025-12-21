@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSL - Select Similar | Borham Tools</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/command.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+</head>
+<body>
+    <!-- Back Button -->
+    <div class="back-button">
+        <a href="../index.html">← Back to Home</a>
+    </div>
+
+    <!-- Command Header -->
+    <section class="command-header">
+        <div class="container">
+            <span class="command-badge">Smart Selection</span>
+            <h1 class="command-name">SSL</h1>
+            <p class="command-title">Select Similar Objects with Intelligent Property Matching</p>
+        </div>
+    </section>
+
+    <!-- Command Content -->
+    <section class="command-content">
+        <div class="container">
+            <!-- Overview Section -->
+            <div class="content-section highlight-box">
+                <h2>📖 Command Overview</h2>
+                <p>The <code>SSL</code> command intelligently selects objects similar to reference objects throughout the entire drawing using advanced property matching algorithms.</p>
+                
+                <h3>Key Capabilities:</h3>
+                <ul>
+                    <li><strong>Multi-criteria matching</strong> by object type</li>
+                    <li><strong>Multiple reference object</strong> support</li>
+                    <li><strong>Smart property caching</strong> for lightning speed</li>
+                    <li><strong>Automatic layer management</strong> (unlocks/frozen layers)</li>
+                    <li><strong>Performance timing</strong> display</li>
+                    <li><strong>Duplicate property filtering</strong></li>
+                </ul>
+            </div>
+
+            <!-- Matching Criteria -->
+            <div class="content-section">
+                <h2>🎯 Matching Criteria by Object Type</h2>
+                <ul>
+                    <li><strong>LINES / POLYLINES / ARCS / SPLINES / ELLIPSES:</strong> Length</li>
+                    <li><strong>CIRCLES:</strong> Radius</li>
+                    <li><strong>HATCH:</strong> Pattern</li>
+                    <li><strong>TEXT / MTEXT:</strong> Style & Height</li>
+                    <li><strong>INSERTS (Blocks):</strong> Block Name & Scale</li>
+                    <li><strong>DIMENSIONS:</strong> Dimension Style</li>
+                    <li><strong>OTHER OBJECTS:</strong> Type, Layer & Color</li>
+                </ul>
+            </div>
+
+            <!-- Usage Section -->
+            <div class="content-section usage-box">
+                <h2>🚀 How to Use</h2>
+                <p>To select similar objects in AutoCAD:</p>
+                
+                <ol class="steps-list">
+                    <li>Type <code>SSL</code> in the command line and press Enter</li>
+                    <li>Select one or more reference objects</li>
+                    <li>Press Enter to confirm selection</li>
+                    <li>Watch as similar objects are selected automatically throughout the drawing</li>
+                    <li>Use standard AutoCAD commands to modify the selected objects</li>
+                </ol>
+                
+                <h3>Command Line Example:</h3>
+                <pre><code>Command: SSL
+Select reference objects: [select objects]
+Found 24 similar objects. Time: 0.15s
+Objects selected successfully!</code></pre>
+            </div>
+
+            <!-- Features -->
+            <div class="content-section">
+                <h2>⭐ Advanced Features</h2>
+                <div class="command-tips">
+                    <div class="tip-card">
+                        <h4>⚡ Fast Filtering</h4>
+                        <p>Uses <code>ssget "_X"</code> for rapid drawing-wide selection with intelligent property caching.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>🔓 Auto Layer Management</h4>
+                        <p>Automatically opens locked and hidden layers to ensure complete selection.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>📊 Performance Display</h4>
+                        <p>Shows selection time and object count for performance monitoring.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>🎨 Smart Highlighting</h4>
+                        <p>Automatically highlights selected objects for visual confirmation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance -->
+            <div class="content-section performance-box">
+                <h2>⚡ Performance Benefits</h2>
+                <p class="performance-stat">Up to <strong>10x Faster</strong> than standard selection methods</p>
+                <p>Using smart property caching and optimized filtering algorithms.</p>
+            </div>
+
+            <!-- Tips & Tricks -->
+            <div class="content-section">
+                <h2>💡 Professional Tips</h2>
+                <ul>
+                    <li><strong>Batch Selection:</strong> Select multiple reference objects for combined criteria matching</li>
+                    <li><strong>Quality Control:</strong> Perfect for finding inconsistent objects in large drawings</li>
+                    <li><strong>Layer Preservation:</strong> SNAP settings remain unchanged during operation</li>
+                    <li><strong>Silent Operation:</strong> No annoying error messages - clean execution</li>
+                    <li><strong>Large Drawings:</strong> Efficient even with thousands of objects</li>
+                </ul>
+            </div>
+
+            <!-- Related Commands -->
+            <div class="related-commands">
+                <h3>Related Commands</h3>
+                <div class="related-grid">
+                    <a href="pp.html" class="related-command">PP</a>
+                    <a href="ppc.html" class="related-command">PPC</a>
+                    <a href="ppx.html" class="related-command">PPX</a>
+                    <a href="../index.html" class="related-command">All Commands</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Borham Tools v78.2 - Free AutoCAD LISP Tools</p>
+            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
+            <div class="back-link">
+                <a href="../index.html">← Return to Main Page</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add any specific JavaScript for this page if needed
+    </script>
+</body>
+</html>

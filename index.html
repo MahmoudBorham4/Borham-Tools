@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borham Tools v80.7 - Free AutoCAD LISP Tools</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+        <button onclick="toggleLanguage()" id="langBtn">العربية</button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <h1 class="hero-title">Borham Tools v80.7</h1>
+            <p class="hero-subtitle">Free AutoCAD LISP Tools for Everyone</p>
+            <p class="version-badge">v80.7 - Ultra Optimized - 16 Commands - Free Forever</p>
+        </div>
+    </header>
+
+    <!-- Opening Message Section -->
+    <section class="opening-message">
+        <div class="container">
+            <div class="message-box">
+                <h2>🤲 In the Name of Allah, Most Gracious, Most Merciful</h2>
+                <p class="quote">"The Best Of People Are Those Who Are Most Beneficial To People"</p>
+                <p class="source">— Prophet Muhammad ﷺ (Peace be Upon Him)</p>
+                
+                <div class="palestine-section">
+                    <h3>🇵🇸 Stand with the Oppressed - Free Palestine</h3>
+                    <p>These tools are created and shared completely FREE for the sake of Allah, to benefit engineers, surveyors, and professionals worldwide. We stand in solidarity with all oppressed people, especially our brothers and sisters in Palestine.</p>
+                    <p class="dua"><em>"O Allah, grant victory to the oppressed, ease their suffering, and bring justice to their cause. Ameen."</em></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <h2>About Borham Tools</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>❓ Why Free?</h3>
+                    <p>This software is created purely for the sake of Allah (لوجه الله), to help professionals and make their work easier. No payment, no subscriptions, no hidden costs - just a gift to humanity.</p>
+                </div>
+                <div class="about-card">
+                    <h3>🎯 The Purpose</h3>
+                    <p>To provide powerful, optimized AutoCAD LISP tools that save time, increase productivity, and are accessible to everyone - from students to professional engineers.</p>
+                </div>
+                <div class="about-card">
+                    <h3>👨‍💻 Developer</h3>
+                    <p>Created by Mahmoud Borham, a civil engineer dedicated to helping the engineering community through free, high-quality tools.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="overview">
+        <div class="container">
+            <h2>What is Borham Tools?</h2>
+            <p class="overview-desc">Borham Tools is a collection of 16 ultra-optimized AutoCAD LISP commands designed specifically for civil engineers, surveyors, and CAD professionals. These tools use advanced spatial hashing and grid-based indexing to deliver exceptional performance.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="icon">⚡</span>
+                    <h3>Ultra Fast</h3>
+                    <p>Spatial hashing enables 10x-50x faster performance</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🎯</span>
+                    <h3>16 Commands</h3>
+                    <p>Complete toolkit for points, levels, coordinates & more</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🆓</span>
+                    <h3>100% Free</h3>
+                    <p>No payment, no activation, no restrictions</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">📊</span>
+                    <h3>Smart Progress</h3>
+                    <p>Real-time progress display for long operations</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🔒</span>
+                    <h3>Layer Management</h3>
+                    <p>Auto-unlocks and manages layers intelligently</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">✅</span>
+                    <h3>No Errors</h3>
+                    <p>Silent error handling - no annoying messages</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section class="quick-start">
+        <div class="container">
+            <h2>Quick Start Guide</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Download</h3>
+                    <p>Click the download button to get the BorhamTools.lsp file</p>
+                    <a href="files/Borham Tools v80.7.fas" download class="btn-primary">Download Now</a>
+                    <p id="versionInfo" style="margin-top: 10px; color: var(--text-gray); font-size: 0.9rem;"></p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Install</h3>
+                    <p>In AutoCAD, type <code>APPLOAD</code> and select the downloaded file</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Start Using</h3>
+                    <p>Type <code>I</code> for interactive help, or use any of the 16 commands directly</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commands List Section -->
+    <section class="commands">
+        <div class="container">
+            <h2>Available Commands (16)</h2>
+            <p class="section-desc">Click on any command to see detailed documentation</p>
+            
+            <div class="commands-grid">
+                <a href="commands/pp.html" class="command-card">
+                    <h3>PP</h3>
+                    <p>Points on Objects</p>
+                    <span class="badge">Optimized V6</span>
+                </a>
+                <a href="commands/ppc.html" class="command-card">
+                    <h3>PPC</h3>
+                    <p>Line Center Points</p>
+                    <span class="badge">Optimized V6</span>
+                </a>
+                <a href="commands/ppx.html" class="command-card">
+                    <h3>PPX</h3>
+                    <p>Intersection Points</p>
+                    <span class="badge">Optimized V7</span>
+                </a>
+                <a href="commands/pe.html" class="command-card">
+                    <h3>PE</h3>
+                    <p>Export & Label Points</p>
+                    <span class="badge">New</span>
+                </a>
+                <a href="commands/pi.html" class="command-card">
+                    <h3>PI</h3>
+                    <p>Point Import</p>
+                    <span class="badge">Multi-Format V11</span>
+                </a>
+                <a href="commands/p2c.html" class="command-card">
+                    <h3>P2C</h3>
+                    <p>Polyline to Circle</p>
+                    <span class="badge">Fast</span>
+                </a>
+                <a href="commands/df.html" class="command-card">
+                    <h3>DF</h3>
+                    <p>Elevation Difference</p>
+                    <span class="badge">Updated</span>
+                </a>
+                <a href="commands/lv.html" class="command-card">
+                    <h3>LV</h3>
+                    <p>Absolute Level Text</p>
+                    <span class="badge">Updated</span>
+                </a>
+                <a href="commands/aa.html" class="command-card">
+                    <h3>AA</h3>
+                    <p>Area & Hatch</p>
+                    <span class="badge">Simple</span>
+                </a>
+                <a href="commands/lup.html" class="command-card">
+                    <h3>LUP</h3>
+                    <p>Level Update</p>
+                    <span class="badge">V15 Ultra</span>
+                </a>
+                <a href="commands/ssl.html" class="command-card">
+                    <h3>SSL</h3>
+                    <p>Select Similar</p>
+                    <span class="badge">Smart</span>
+                </a>
+                <a href="commands/mo.html" class="command-card">
+                    <h3>MO</h3>
+                    <p>Multi-Offset</p>
+                    <span class="badge">V16</span>
+                </a>
+                <a href="commands/en.html" class="command-card">
+                    <h3>EN</h3>
+                    <p>E & N Coordinates</p>
+                    <span class="badge">MLeader</span>
+                </a>
+                <a href="commands/enl.html" class="command-card">
+                    <h3>ENL</h3>
+                    <p>3D Coordinates</p>
+                    <span class="badge">MLeader</span>
+                </a>
+                <a href="commands/t.html" class="command-card">
+                    <h3>T</h3>
+                    <p>Table with Codes</p>
+                    <span class="badge">New Column</span>
+                </a>
+                <a href="commands/i.html" class="command-card">
+                    <h3>I</h3>
+                    <p>Interactive Help</p>
+                    <span class="badge">System</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2>Contact & Support</h2>
+            <p>For questions, suggestions, or updates:</p>
+            <a href="mailto:MahmoudBorham.codes@gmail.com" class="email-btn">MahmoudBorham.codes@gmail.com</a>
+            
+            <div class="social-note">
+                <p>🎥 Video tutorials coming soon on YouTube</p>
+                <p>📢 Check back for updates and new features</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
+            <p>🇵🇸 Free Palestine - Stand with the Oppressed</p>
+            <p class="hadith">"The Best Of People Are Those Who Are Most Beneficial To People" - Prophet Muhammad ﷺ</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleLanguage() {
+            // Language toggle functionality - will be implemented
+            alert('Arabic version coming soon!\nالنسخة العربية قريباً!');
+        }
+
+        // Auto-detect latest Borham Tools file
+        function downloadLatest() {
+            // List of possible file extensions
+            const extensions = ['.fas', '.lsp', '.vlx'];
+            
+            // Try to find any Borham Tools file
+            let found = false;
+            
+            // Check for files with different versions (v78-v99)
+            for (let version = 99; version >= 78; version--) {
+                for (let subversion = 9; subversion >= 0; subversion--) {
+                    for (const ext of extensions) {
+                        const filename = `Borham Tools v${version}.${subversion}${ext}`;
+                        const link = `files/${filename}`;
+                        
+                        // Try to download
+                        const a = document.createElement('a');
+                        a.href = link;
+                        a.download = filename;
+                        
+                        // Set version info
+                        document.getElementById('versionInfo').textContent = 
+                            `Latest Version: v${version}.${subversion}`;
+                        
+                        a.click();
+                        found = true;
+                        return;
+                    }
+                }
+            }
+            
+            if (!found) {
+                alert('No Borham Tools file found in files folder.\nPlease add your .fas or .lsp file to the files folder.');
+            }
+        }
+
+        // On page load, show current version
+        window.onload = function() {
+            // You can manually set the version here
+            const currentVersion = "v80.7"; // Update this manually
+            document.getElementById('versionInfo').textContent = 
+                `Current Version: ${currentVersion}`;
+        };
+    </script>
+</body>
+</html>
