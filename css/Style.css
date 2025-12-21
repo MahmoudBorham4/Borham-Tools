@@ -699,7 +699,6 @@ html[dir="rtl"] .hadith-arabic {
     .bismillah-text {
         font-size: 1.8rem;
     }
-}
 /* تحسينات النسخة الإنجليزية */
 html[dir="ltr"] .hadith-arabic {
     font-size: 3.2rem;
@@ -715,3 +714,4 @@ html[dir="ltr"] .palestine-text {
     font-size: 1.1rem;
     line-height: 1.6;
 }
+
