@@ -1,319 +1,594 @@
-/* =========================================== */
-/* تحسينات للنسخة العربية */
-/* =========================================== */
+/* ========================================
+   Borham Tools v78.2 - Main Stylesheet
+   Created by: Mahmoud Borham
+   Free for Everyone - لوجه الله
+   ======================================== */
 
-/* عندما تكون الصفحة باللغة العربية */
-html[dir="rtl"] {
-    text-align: right;
+/* ============ CSS Variables ============ */
+:root {
+    /* Colors */
+    --primary: #2563eb;
+    --primary-dark: #1e40af;
+    --secondary: #10b981;
+    --accent: #f59e0b;
+    --bg-dark: #0f172a;
+    --bg-light: #1e293b;
+    --bg-card: #334155;
+    --text-light: #f1f5f9;
+    --text-gray: #cbd5e1;
+    --border: #475569;
+    --success: #22c55e;
+    --warning: #eab308;
+    
+    /* Palestine colors */
+    --palestine-red: #e4312b;
+    --palestine-green: #149954;
+    --palestine-black: #000000;
+    
+    /* Spacing */
+    --container-width: 1200px;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    
+    /* Effects */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.5);
+    --transition: all 0.3s ease;
 }
 
-html[dir="rtl"] .container {
-    direction: rtl;
+/* ============ Reset & Base ============ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* =========================================== */
-/* الهيدر مع العلم الفلسطيني */
-/* =========================================== */
-.hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                url('https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Palestine.svg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: white;
-    text-align: center;
-    padding: 4rem 1rem;
-    position: relative;
-    min-height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #1a2332 100%);
+    color: var(--text-light);
+    line-height: 1.6;
+    min-height: 100vh;
 }
 
-.hero .container {
-    position: relative;
-    z-index: 2;
+/* Support for Arabic */
+body[dir="rtl"] {
+    font-family: 'Segoe UI', 'Cairo', 'Arial', sans-serif;
 }
 
-.hero-title {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-    font-weight: 800;
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8),
-                 0 0 20px rgba(0, 0, 0, 0.5);
-    color: #ffffff;
-    letter-spacing: 1px;
-}
-
-.hero-subtitle {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7),
-                 0 0 15px rgba(0, 0, 0, 0.4);
-    color: #f8f8f8;
-    font-weight: 500;
-}
-
-.version-badge {
-    background: rgba(0, 122, 61, 0.85); /* أخضر العلم */
-    color: white;
-    padding: 0.8rem 2rem;
-    border-radius: 50px;
-    display: inline-block;
-    font-weight: bold;
-    font-size: 1.2rem;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* =========================================== */
-/* قسم الحديث النبوي الشريف */
-/* =========================================== */
-.hadith-section {
-    background: linear-gradient(135deg, #f9f5f0 0%, #f0e6d6 100%);
-    padding: 4rem 1rem;
-    text-align: center;
-    border-bottom: 3px solid #d4a762;
-    border-top: 3px solid #d4a762;
-    margin: 2rem 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.hadith-section::before {
-    content: "ﷺ";
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 5rem;
-    color: rgba(212, 167, 98, 0.15);
-    font-family: "Segoe UI Symbol", "Arial", sans-serif;
-    z-index: 1;
-}
-
-.hadith-section::after {
-    content: "ﷺ";
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    font-size: 5rem;
-    color: rgba(212, 167, 98, 0.15);
-    font-family: "Segoe UI Symbol", "Arial", sans-serif;
-    z-index: 1;
-}
-
-.hadith-section .container {
-    position: relative;
-    z-index: 2;
-    max-width: 900px;
-}
-
-.hadith-title {
-    font-size: 2.2rem;
-    color: #5d4037;
-    margin-bottom: 2rem;
-    font-weight: 600;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.hadith-quote {
-    font-size: 3.2rem;
-    color: #3e2723;
-    font-weight: 700;
-    line-height: 1.4;
-    margin: 2rem 0;
-    padding: 2.5rem;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    border-right: 8px solid #d4a762;
-    border-left: 8px solid #d4a762;
-    position: relative;
-    quotes: "“" "”" "‘" "’";
-}
-
-.hadith-quote::before {
-    content: open-quote;
-    font-size: 5rem;
-    color: #d4a762;
-    position: absolute;
-    top: 10px;
-    right: 25px;
-    font-family: Georgia, serif;
-}
-
-.hadith-quote::after {
-    content: close-quote;
-    font-size: 5rem;
-    color: #d4a762;
-    position: absolute;
-    bottom: -15px;
-    left: 25px;
-    font-family: Georgia, serif;
-}
-
-.hadith-source {
-    font-size: 1.8rem;
-    color: #6d4c41;
-    margin: 1.5rem 0;
-    font-style: italic;
-    font-weight: 500;
-}
-
-.hadith-attestation {
-    font-size: 1.6rem;
-    color: #388e3c;
-    font-weight: bold;
-    margin-top: 1rem;
-    padding: 1rem 2rem;
-    background: rgba(56, 142, 60, 0.1);
-    border-radius: 50px;
-    display: inline-block;
-    border: 2px solid #388e3c;
-}
-
-/* =========================================== */
-/* قسم فلسطين */
-/* =========================================== */
-.palestine-section {
-    background: linear-gradient(135deg, #009639 0%, #007a3d 100%);
-    color: white;
-    padding: 3.5rem 1rem;
-    text-align: center;
-    margin: 2rem 0;
-    border-radius: 10px;
-    box-shadow: 0 6px 20px rgba(0, 122, 61, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-.palestine-section::before {
-    content: "🇵🇸";
-    position: absolute;
-    font-size: 8rem;
-    opacity: 0.15;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-}
-
-.palestine-section .container {
-    position: relative;
-    z-index: 2;
-}
-
-.palestine-title {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    font-weight: 800;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.palestine-text {
-    font-size: 1.3rem;
-    line-height: 1.8;
-    max-width: 900px;
-    margin: 0 auto 2rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.palestine-dua {
-    font-size: 1.5rem;
-    font-style: italic;
-    background: rgba(255, 255, 255, 0.15);
-    padding: 1.5rem;
-    border-radius: 10px;
-    display: inline-block;
-    margin-top: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-/* =========================================== */
-/* تحسينات عامة للنسخة العربية */
-/* =========================================== */
-html[dir="rtl"] .hadith-quote {
-    border-right: 8px solid #d4a762;
-    border-left: 8px solid #d4a762;
-    font-family: 'Amiri', 'Scheherazade', 'Traditional Arabic', serif;
-}
-
-html[dir="rtl"] .feature-card,
-html[dir="rtl"] .about-card,
-html[dir="rtl"] .command-card {
-    text-align: right;
-}
-
-html[dir="rtl"] .steps {
-    direction: rtl;
-}
-
-html[dir="rtl"] .step {
-    text-align: right;
-}
-
-/* زر تبديل اللغة */
+/* ============ Language Toggle ============ */
 .lang-toggle {
-    position: absolute;
+    position: fixed;
     top: 20px;
     right: 20px;
     z-index: 1000;
 }
 
-#langBtn {
-    background: rgba(0, 122, 61, 0.9);
+.lang-toggle button {
+    background: var(--primary);
     color: white;
     border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+}
+
+.lang-toggle button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ============ Container ============ */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* ============ Hero Section ============ */
+.hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    padding: var(--spacing-lg) 0;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M0 0L100 100M100 0L0 100" stroke="rgba(255,255,255,0.05)" stroke-width="2"/></svg>');
+    opacity: 0.3;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: fadeInDown 0.8s ease;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    opacity: 0.95;
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.version-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
     padding: 10px 25px;
     border-radius: 50px;
-    font-weight: bold;
-    cursor: pointer;
+    font-weight: 600;
+    position: relative;
+    backdrop-filter: blur(10px);
+    animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+/* ============ Opening Message Section ============ */
+.opening-message {
+    padding: var(--spacing-lg) 0;
+    background: var(--bg-light);
+}
+
+.message-box {
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-light) 100%);
+    padding: var(--spacing-md);
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    border-left: 6px solid var(--secondary);
+}
+
+.message-box h2 {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--secondary);
+}
+
+.quote {
+    font-size: 1.3rem;
+    font-style: italic;
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-sm);
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid var(--secondary);
+}
+
+.source {
+    text-align: right;
+    color: var(--text-gray);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+}
+
+.palestine-section {
+    margin-top: var(--spacing-md);
+    padding: 80px var(--spacing-md) var(--spacing-md) 140px;
+    background: 
+        linear-gradient(to bottom, 
+            var(--palestine-black) 0%, 
+            var(--palestine-black) 33.33%,
+            #ffffff 33.33%,
+            #ffffff 66.66%,
+            var(--palestine-green) 66.66%,
+            var(--palestine-green) 100%
+        );
+    border-radius: 12px;
+    position: relative;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.palestine-section::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 150px solid transparent;
+    border-bottom: 150px solid transparent;
+    border-left: 120px solid var(--palestine-red);
+}
+
+.palestine-section h3 {
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    z-index: 2;
+}
+
+.palestine-section p {
+    color: #000;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
+    line-height: 1.8;
+}
+
+.dua {
+    margin-top: 40px;
+    padding: var(--spacing-sm);
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    font-size: 1.3rem;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    font-weight: 200;
+    position: relative;
+    z-index: 2;
+ }
+
+/*============ Sections ============ */
+section {
+    padding: var(--spacing-lg) 0;
+}
+
+section h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-light);
+}
+
+.section-desc {
+    text-align: center;
+    color: var(--text-gray);
     font-size: 1.1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    margin-bottom: var(--spacing-md);
 }
 
-#langBtn:hover {
-    background: rgba(0, 150, 75, 1);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+/* ============ About Section ============ */
+.about {
+    background: var(--bg-dark);
 }
 
-/* =========================================== */
-/* تحسينات للشاشات الصغيرة */
-/* =========================================== */
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.about-card {
+    background: var(--bg-card);
+    padding: var(--spacing-md);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    border-top: 4px solid var(--primary);
+}
+
+.about-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-top-color: var(--secondary);
+}
+
+.about-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--secondary);
+}
+
+/* ============ Overview Section ============ */
+.overview {
+    background: var(--bg-light);
+}
+
+.overview-desc {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    margin-bottom: var(--spacing-md);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.feature-card {
+    background: var(--bg-card);
+    padding: var(--spacing-md);
+    border-radius: 12px;
+    text-align: center;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--primary-dark) 100%);
+}
+
+.feature-card .icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: var(--spacing-sm);
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--secondary);
+}
+
+/* ============ Quick Start Section ============ */
+.quick-start {
+    background: var(--bg-dark);
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.step {
+    background: var(--bg-card);
+    padding: var(--spacing-md);
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.step:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+.step-number {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    box-shadow: var(--shadow-md);
+}
+
+.step h3 {
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+    color: var(--secondary);
+    font-size: 1.5rem;
+}
+
+.step code {
+    background: var(--bg-dark);
+    padding: 4px 12px;
+    border-radius: 6px;
+    color: var(--accent);
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+}
+
+/* ============ Buttons ============ */
+.btn-primary {
+    display: inline-block;
+    background: var(--secondary);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: var(--spacing-sm);
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+    background: #059669;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ============ Commands Section ============ */
+.commands {
+    background: var(--bg-light);
+}
+
+.commands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.command-card {
+    background: var(--bg-card);
+    padding: var(--spacing-md);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-light);
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.command-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+}
+
+.command-card h3 {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--secondary);
+    font-weight: 800;
+}
+
+.command-card p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.badge {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg-dark);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-top: auto;
+}
+
+/* ============ Contact Section ============ */
+.contact {
+    background: var(--bg-dark);
+    text-align: center;
+}
+
+.email-btn {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 15px 40px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: var(--spacing-md) 0;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+}
+
+.email-btn:hover {
+    background: var(--primary-dark);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+.social-note {
+    margin-top: var(--spacing-md);
+    color: var(--text-gray);
+}
+
+.social-note p {
+    margin: var(--spacing-xs) 0;
+    font-size: 1.1rem;
+}
+
+/* ============ Footer ============ */
+footer {
+    background: var(--bg-dark);
+    padding: var(--spacing-md) 0;
+    text-align: center;
+    border-top: 2px solid var(--border);
+}
+
+footer p {
+    margin: var(--spacing-xs) 0;
+    color: var(--text-gray);
+}
+
+.hadith {
+    font-style: italic;
+    color: var(--secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============ Animations ============ */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============ Responsive Design ============ */
 @media (max-width: 768px) {
     .hero-title {
         font-size: 2.5rem;
     }
     
     .hero-subtitle {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
     
-    .hadith-quote {
-        font-size: 2.2rem;
-        padding: 1.5rem;
-    }
-    
-    .hadith-title {
-        font-size: 1.8rem;
-    }
-    
-    .palestine-title {
+    section h2 {
         font-size: 2rem;
     }
     
-    .hadith-quote::before,
-    .hadith-quote::after {
-        font-size: 3rem;
+    .commands-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
     
-    .hadith-section::before,
-    .hadith-section::after {
-        font-size: 3rem;
+    .lang-toggle {
+        top: 10px;
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .commands-grid {
+        grid-template-columns: 1fr 1fr;
     }
 }
