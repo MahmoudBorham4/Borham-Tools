@@ -7,12 +7,19 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Language Toggle -->
+    <!-- زر تبديل اللغة -->
     <div class="lang-toggle">
         <button onclick="toggleLanguage()" id="langBtn">العربية</button>
     </div>
 
-    <!-- Hero Section -->
+    <!-- بسم الله في الأعلى -->
+    <div class="bismillah-header">
+        <div class="container">
+            <div class="bismillah-text" data-key="bismillah.text">In the Name of Allah, Most Gracious, Most Merciful</div>
+        </div>
+    </div>
+
+    <!-- الهيدر مع العلم الفلسطيني -->
     <header class="hero">
         <div class="container">
             <h1 class="hero-title" data-key="hero.title">Borham Tools v80.7</h1>
@@ -21,23 +28,22 @@
         </div>
     </header>
 
-    <!-- Opening Message Section -->
-<section class="opening-message">
-    <div class="container">
-        <div class="message-box">
-            <h2 data-key="opening.title">🤲 In the Name of Allah, Most Gracious, Most Merciful</h2>
-            <p class="quote" data-key="opening.quote">"The Best Of People Are Those Who Are Most Beneficial To People"</p>
-            <p class="source" data-key="opening.source">— Prophet Muhammad ﷺ (Peace be Upon Him)</p>
-            <p class="attestation" data-key="opening.attestation">Truthful is the Messenger of Allah, peace be upon him</p>
-            
+    <!-- حديث النبي ﷺ -->
+    <section class="hadith-section">
+        <div class="container">
+            <div class="hadith-container">
+                <div class="hadith-arabic" data-key="hadith.arabic">«The best of people are those who are most beneficial to people»</div>
+                <div class="hadith-attestation" data-key="hadith.attestation">Truthful is the Messenger of Allah, peace be upon him<span class="hadith-symbol">ﷺ</span></div>
+            </div>
+
+            <!-- قسم فلسطين -->
             <div class="palestine-section">
-                <h3 data-key="palestine.title">🇵🇸 Stand with the Oppressed - Free Palestine</h3>
-                <p data-key="palestine.text">These tools are created and shared completely FREE for the sake of Allah, to benefit engineers, surveyors, and professionals worldwide. We stand in solidarity with all oppressed people, especially our brothers and sisters in Palestine.</p>
-                <p class="dua" data-key="palestine.dua"><em>"O Allah, grant victory to the oppressed, ease their suffering, and bring justice to their cause. Ameen."</em></p>
+                <h3 class="palestine-title" data-key="palestine.title">🇵🇸 Stand with the Oppressed - Free Palestine</h3>
+                <p class="palestine-text" data-key="palestine.text">These tools are created and shared completely FREE for the sake of Allah, to benefit engineers, surveyors, and professionals worldwide. We stand in solidarity with all oppressed people, especially our brothers and sisters in Palestine.</p>
+                <p class="dua" data-key="palestine.dua">«O Allah, grant victory to the oppressed, ease their suffering, and bring justice to their cause. Ameen.»</p>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- About Section -->
     <section class="about">
@@ -237,11 +243,12 @@
         <div class="container">
             <p data-key="footer.credit">Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
             <p data-key="footer.palestine">🇵🇸 Free Palestine - Stand with the Oppressed</p>
-            <p class="hadith" data-key="footer.hadith">"The Best Of People Are Those Who Are Most Beneficial To People" - Prophet Muhammad ﷺ</p>
+            <p class="hadith" data-key="footer.hadith">"The Best Of People Are Those Who Are Most Beneficial To People" — Prophet Muhammad ﷺ</p>
+            <p class="hadith-attestation" data-key="footer.hadith.attestation">Truthful is the Messenger of Allah, peace be upon him<span class="hadith-symbol">ﷺ</span></p>
         </div>
     </footer>
 
-    <!-- إضافة ملفات الترجمة -->
+    <!-- ملفات الترجمة -->
     <script src="js/translations.js"></script>
     <script src="js/language-switcher.js"></script>
     
@@ -294,4 +301,3 @@
     </script>
 </body>
 </html>
-
