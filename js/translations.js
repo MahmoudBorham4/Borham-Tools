@@ -6,10 +6,12 @@ const translations = {
         'hero.subtitle': 'أدوات أوتوكاد LISP مجانية للجميع',
         'hero.badge': 'الإصدار 80.7 - مُحسَّن للغاية - 16 أمرًا - مجاني للأبد',
 
-        // Opening Message
+        // Opening Message - النسخة المصححة
         'opening.title': '🤲 بسم الله الرحمن الرحيم',
         'opening.quote': '"خير الناس أنفعهم للناس"',
         'opening.source': '— رسول الله ﷺ',
+        'opening.attestation': 'صدق رسول الله صلى الله عليه وسلم',
+        
         'palestine.title': '🇵🇸 قف مع المظلومين - فلسطين حرة',
         'palestine.text': 'تم إنشاء هذه الأدوات ومشاركتها مجانًا بالكامل لوجه الله، لإفادة المهندسين ومُسَّاحي الأراضي والمحترفين في جميع أنحاء العالم. نحن نقف تضامنًا مع جميع المظلومين، وخاصة إخواننا وأخواتنا في فلسطين.',
         'palestine.dua': '"اللهم انصر المظلومين، وخفِّف عنهم، وأحق الحق بحقه. آمين."',
@@ -21,11 +23,12 @@ const translations = {
         'purpose.title': '🎯 الهدف',
         'purpose.text': 'توفير أدوات أوتوكاد LISP قوية ومحسَّنة توفر الوقت وتزيد الإنتاجية ومتاحة للجميع - من الطلاب إلى المهندسين المحترفين.',
         'developer.title': '👨‍💻 المطور',
-        'developer.text': 'من إنشاء محمود برهام، مهندس مدني ملتزم بمساعدة مجتمع الهندسة من خلال أدوات مجانية عالية الجودة.',
+        'developer.text': 'من إنشاء محمود برهام، اخصائى مساحة ملتزم بمساعدة مجتمع الهندسة المساحية من خلال أدوات مجانية عالية الجودة.',
 
         // Overview Section
         'overview.title': 'ما هي أدوات برهام؟',
         'overview.desc': 'أدوات برهام هي مجموعة من 16 أمرًا مُحسَّنًا للغاية من أوامر أوتوكاد LISP مصممة خصيصًا للمهندسين المدنيين ومُسَّاحي الأراضي ومحترفي CAD. تستخدم هذه الأدوات التجزئة المكانية المتقدمة والفهرسة القائمة على الشبكة لتقديم أداء استثنائي.',
+        
         'feature1.title': 'سريعة للغاية',
         'feature1.text': 'التجزئة المكانية تتيح أداء أسرع من 10 إلى 50 مرة',
         'feature2.title': '16 أمرًا',
@@ -52,6 +55,24 @@ const translations = {
         // Commands
         'commands.title': 'الأوامر المتاحة (16)',
         'commands.desc': 'انقر على أي أمر لرؤية التوثيق التفصيلي',
+        
+        // شرح الأوامر
+        'command.pp': 'النقاط على الكائنات - وضع نقاط على أي كائن (خط، بوليلاين، إلخ)',
+        'command.ppc': 'نقاط منتصف الخطوط - وضع نقاط في منتصف كل خط',
+        'command.ppx': 'نقاط التقاطع - إيجاد نقاط تقاطع الخطوط',
+        'command.pe': 'تصدير وتوسيم النقاط - تصدير الإحداثيات وإضافة نصوص',
+        'command.pi': 'استيراد النقاط - استيراد النقاط من ملف إكسل أو نصي',
+        'command.p2c': 'تحويل البوليلاين إلى دائرة - تحويل أي بوليلاين مغلق إلى دائرة',
+        'command.df': 'فرق المنسوب - حساب فرق الارتفاع بين نقطتين',
+        'command.lv': 'نص المنسوب المطلق - كتابة منسوب مطلق مع خلفية',
+        'command.aa': 'المساحة والتظليل - حساب المساحة وعمل تظليل تلقائي',
+        'command.lup': 'تحديث المنسوب - تحديث قيم المنسوب في النصوص',
+        'command.ssl': 'تحديد المماثل - تحديد كل الكائنات الشبيهة بكائن معين',
+        'command.mo': 'إزاحة متعددة - عمل إزاحات متعددة مرة واحدة',
+        'command.en': 'إحداثيات E و N - كتابة الإحداثيات الأفقية',
+        'command.enl': 'إحداثيات ثلاثية الأبعاد - كتابة الإحداثيات الكاملة (E, N, Z)',
+        'command.t': 'جدول مع الرموز - إنشاء جدول يحتوي على رموز النقاط',
+        'command.i': 'المساعدة التفاعلية - عرض قائمة تفاعلية بكل الأوامر',
 
         // Contact
         'contact.title': 'الاتصال والدعم',
@@ -62,7 +83,8 @@ const translations = {
         // Footer
         'footer.credit': 'من إنشاء محمود برهام | مجاني للجميع لوجه الله',
         'footer.palestine': '🇵🇸 فلسطين حرة - قف مع المظلومين',
-        'footer.hadith': '"خير الناس أنفعهم للناس" - رسول الله ﷺ',
+        'footer.hadith': '"خير الناس أنفعهم للناس" — رسول الله ﷺ',
+        'footer.hadith.attestation': 'صدق رسول الله صلى الله عليه وسلم',
 
         // Button Text
         'langBtn': 'English'
@@ -77,6 +99,8 @@ const translations = {
         'opening.title': '🤲 In the Name of Allah, Most Gracious, Most Merciful',
         'opening.quote': '"The Best Of People Are Those Who Are Most Beneficial To People"',
         'opening.source': '— Prophet Muhammad ﷺ (Peace be Upon Him)',
+        'opening.attestation': 'Truthful is the Messenger of Allah, peace be upon him',
+        
         'palestine.title': '🇵🇸 Stand with the Oppressed - Free Palestine',
         'palestine.text': 'These tools are created and shared completely FREE for the sake of Allah, to benefit engineers, surveyors, and professionals worldwide. We stand in solidarity with all oppressed people, especially our brothers and sisters in Palestine.',
         'palestine.dua': '"O Allah, grant victory to the oppressed, ease their suffering, and bring justice to their cause. Ameen."',
@@ -93,6 +117,7 @@ const translations = {
         // Overview Section
         'overview.title': 'What is Borham Tools?',
         'overview.desc': 'Borham Tools is a collection of 16 ultra-optimized AutoCAD LISP commands designed specifically for civil engineers, surveyors, and CAD professionals. These tools use advanced spatial hashing and grid-based indexing to deliver exceptional performance.',
+        
         'feature1.title': 'Ultra Fast',
         'feature1.text': 'Spatial hashing enables 10x-50x faster performance',
         'feature2.title': '16 Commands',
@@ -119,6 +144,24 @@ const translations = {
         // Commands
         'commands.title': 'Available Commands (16)',
         'commands.desc': 'Click on any command to see detailed documentation',
+        
+        // Command Descriptions
+        'command.pp': 'Points on Objects - Place points on any object (line, polyline, etc.)',
+        'command.ppc': 'Line Center Points - Place points at the midpoint of each line',
+        'command.ppx': 'Intersection Points - Find intersection points of lines',
+        'command.pe': 'Export & Label Points - Export coordinates and add labels',
+        'command.pi': 'Point Import - Import points from Excel or text files',
+        'command.p2c': 'Polyline to Circle - Convert any closed polyline to a circle',
+        'command.df': 'Elevation Difference - Calculate height difference between two points',
+        'command.lv': 'Absolute Level Text - Write absolute elevation with background',
+        'command.aa': 'Area & Hatch - Calculate area and apply automatic hatching',
+        'command.lup': 'Level Update - Update elevation values in text objects',
+        'command.ssl': 'Select Similar - Select all objects similar to a selected one',
+        'command.mo': 'Multi-Offset - Create multiple offsets at once',
+        'command.en': 'E & N Coordinates - Write horizontal (Easting, Northing) coordinates',
+        'command.enl': '3D Coordinates - Write full coordinates (E, N, Z)',
+        'command.t': 'Table with Codes - Create a table containing point codes',
+        'command.i': 'Interactive Help - Display interactive list of all commands',
 
         // Contact
         'contact.title': 'Contact & Support',
@@ -129,7 +172,8 @@ const translations = {
         // Footer
         'footer.credit': 'Created by Mahmoud Borham | Free for Everyone لوجه الله',
         'footer.palestine': '🇵🇸 Free Palestine - Stand with the Oppressed',
-        'footer.hadith': '"The Best Of People Are Those Who Are Most Beneficial To People" - Prophet Muhammad ﷺ',
+        'footer.hadith': '"The Best Of People Are Those Who Are Most Beneficial To People" — Prophet Muhammad ﷺ',
+        'footer.hadith.attestation': 'Truthful is the Messenger of Allah, peace be upon him',
 
         // Button Text
         'langBtn': 'العربية'
