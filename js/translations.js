@@ -1,7 +1,12 @@
 // js/translations.js
 const translations = {
     ar: {
-        // Hero
+        'ar': {
+    // الجديد: بسم الله والحديث
+    'bismillah.text': 'بسم الله الرحمن الرحيم',
+    'hadith.arabic': '«خير الناس أنفعهم للناس»',
+    'hadith.attestation': 'صدق رسول الله محمد صلى الله عليه وسلم',
+            // Hero
         'hero.title': 'أدوات برهام الإصدار 80.7',
         'hero.subtitle': 'أدوات أوتوكاد LISP مجانية للجميع',
         'hero.badge': 'الإصدار 80.7 - مُحسَّن للغاية - 16 أمرًا - مجاني للأبد',
