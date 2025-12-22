@@ -1,7 +1,6 @@
 // js/translations.js
 
 const translations = {
-    // English Translations
     'en': {
         'langBtn': 'العربية',
         'bismillah.text': 'In the Name of Allah, Most Gracious, Most Merciful',
@@ -43,9 +42,25 @@ const translations = {
         'contact.text': 'For questions, suggestions, or updates:',
         'footer.credit': 'Created by Mahmoud Borham | Free for Everyone لوجه الله',
         'footer.palestine': '🇵🇸 Free Palestine - Stand with the Oppressed',
-        'footer.hadith': '"The Best Of People Are Those Who Are Most Beneficial To People" — Prophet Muhammad ﷺ'
+        'footer.hadith': '"The Best Of People Are Those Who Are Most Beneficial To People" — Prophet Muhammad ﷺ',
+        // Command Descriptions
+        'cmd.pp.desc': 'Points on Objects',
+        'cmd.ppc.desc': 'Line Center Points',
+        'cmd.ppx.desc': 'Intersection Points',
+        'cmd.pe.desc': 'Export & Label Points',
+        'cmd.pi.desc': 'Point Import',
+        'cmd.p2c.desc': 'Polyline to Circle',
+        'cmd.df.desc': 'Elevation Difference',
+        'cmd.lv.desc': 'Absolute Level Text',
+        'cmd.aa.desc': 'Area & Hatch',
+        'cmd.lup.desc': 'Level Update',
+        'cmd.ssl.desc': 'Select Similar',
+        'cmd.mo.desc': 'Multi-Offset',
+        'cmd.en.desc': 'E & N Coordinates',
+        'cmd.enl.desc': '3D Coordinates',
+        'cmd.t.desc': 'Table with Codes',
+        'cmd.i.desc': 'Interactive Help'
     },
-    // Arabic Translations
     'ar': {
         'langBtn': 'English',
         'bismillah.text': 'بسم الله الرحمن الرحيم',
@@ -87,6 +102,23 @@ const translations = {
         'contact.text': 'للأسئلة أو الاقتراحات أو التحديثات:',
         'footer.credit': 'تم إنشاؤها بواسطة محمود برهام | مجانية للجميع لوجه الله',
         'footer.palestine': '🇵🇸 فلسطين حرة - قف مع المظلوم',
-        'footer.hadith': '"خير الناس أنفعهم للناس" - النبي محمد ﷺ'
+        'footer.hadith': '"خير الناس أنفعهم للناس" - النبي محمد ﷺ',
+        // Command Descriptions
+        'cmd.pp.desc': 'نقاط على العناصر',
+        'cmd.ppc.desc': 'نقاط مركز الخطوط',
+        'cmd.ppx.desc': 'نقاط التقاطع',
+        'cmd.pe.desc': 'تصدير وتوصيف النقاط',
+        'cmd.pi.desc': 'استيراد النقاط',
+        'cmd.p2c.desc': 'بوليلاين إلى دوائر',
+        'cmd.df.desc': 'فرق المنسوب',
+        'cmd.lv.desc': 'نص المنسوب المطلق',
+        'cmd.aa.desc': 'المساحة والتهشير',
+        'cmd.lup.desc': 'تحديث المنسوب',
+        'cmd.ssl.desc': 'اختيار المشابه',
+        'cmd.mo.desc': 'أوفست متعدد',
+        'cmd.en.desc': 'إحداثيات شمال وشرق',
+        'cmd.enl.desc': 'إحداثيات ثلاثية الأبعاد',
+        'cmd.t.desc': 'جدول بالأكواد',
+        'cmd.i.desc': 'مساعدة تفاعلية'
     }
 };
