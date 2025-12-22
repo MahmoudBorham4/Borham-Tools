@@ -94,7 +94,7 @@ const translations = {
         'purpose.title': '🎯 The Purpose',
         'purpose.text': 'To provide powerful, optimized AutoCAD LISP tools that save time, increase productivity, and are accessible to everyone - from students to professional engineers.',
         'developer.title': '👨‍💻 Developer',
-        'developer.text': 'Created by Mahmoud Borham, a civil engineer dedicated to helping the engineering community through free, high-quality tools.',
+        'developer.text': 'Created by Mahmoud Borham, a Senior Surveyor dedicated to helping the engineering community through free, high-quality tools.',
 
         // Overview Section
         'overview.title': 'What is Borham Tools?',
