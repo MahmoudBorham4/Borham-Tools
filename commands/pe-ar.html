@@ -1,1 +1,519 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأمر PE - تصدير وتسمية النقاط | Borham Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --bg-dark: #0f172a;
+            --bg-card: #334155;
+            --text-light: #f1f5f9;
+            --text-gray: #cbd5e1;
+            --success: #22c55e;
+            --border: #475569;
+            --container-width: 1000px;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2.5rem;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Cairo', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+        /* الترويسة */
+        .page-header { 
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        .page-header h1 { 
+            font-size: 2.2rem; 
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        .page-header p { 
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* الأقسام */
+        .section { margin-bottom: var(--spacing-lg); }
+        .section-title { 
+            color: var(--secondary);
+            font-size: 1.6rem;
+            margin-bottom: var(--spacing-md);
+            border-right: 4px solid var(--accent);
+            padding-right: 1rem;
+        }
+
+        /* 1. تعريف الأمر */
+        .definition {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border: 1px solid var(--border);
+        }
+        .definition-box {
+            background: rgba(37, 99, 235, 0.1);
+            border-right: 3px solid var(--primary);
+            padding: var(--spacing-md);
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .definition-box h3 {
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 2. المميزات التقنية */
+        .tech-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+        .feature-card h4 {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* 3. طريقة العمل */
+        .how-it-works {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border: 1px solid var(--border);
+        }
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            margin: var(--spacing-md) 0;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+        .work-step {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: var(--spacing-sm);
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            position: relative;
+        }
+        .work-step:not(:last-child):after {
+            content: "→";
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        /* 4. التكامل مع PP */
+        .integration {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(37, 99, 235, 0.1));
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+            border: 1px solid var(--border);
+        }
+
+        /* 5. تنسيق ملف CSV */
+        .csv-format {
+            background: rgba(245, 158, 11, 0.05);
+            border-right: 3px solid var(--accent);
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            margin: var(--spacing-md) 0;
+            overflow-x: auto;
+        }
+        .csv-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+        .csv-table th {
+            background: var(--primary);
+            color: white;
+            padding: 10px;
+            text-align: right;
+            border: 1px solid var(--border);
+        }
+        .csv-table td {
+            padding: 10px;
+            border: 1px solid var(--border);
+            color: var(--text-gray);
+            background: rgba(255,255,255,0.03);
+        }
+
+        /* النتائج */
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        .result-card {
+            text-align: center;
+            padding: var(--spacing-md);
+            background: var(--bg-card);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        .result-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+        .result-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* الأزرار */
+        .back-link {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin: var(--spacing-md) 0;
+            transition: background 0.3s;
+        }
+        .back-link:hover { 
+            background: #1e40af;
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--border);
+            margin-top: var(--spacing-lg);
+        }
+        footer p { 
+            color: var(--text-gray); 
+            margin: 0.5rem 0;
+        }
+
+        /* التجاوب */
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.4rem; }
+            .workflow { flex-direction: column; }
+            .work-step:not(:last-child):after {
+                content: "↓";
+                left: 50%;
+                top: auto;
+                bottom: -20px;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- الترويسة -->
+        <header class="page-header">
+            <h1>الأمر PE</h1>
+            <p>تصدير وتسمية النقاط - أداة ذكية لاستخراج الإحداثيات وتصديرها</p>
+        </header>
+
+        <!-- 1. تعريف الأمر -->
+        <section class="section">
+            <h2 class="section-title">📌 ما هو الأمر PE؟</h2>
+            <div class="definition">
+                <p>الأمر <strong>PE</strong> هو نظام تصدير ذكي في AutoCAD يقوم باستخراج إحداثيات النقاط وحفظها في ملف CSV مع تسمية تلقائية لكل نقطة.</p>
+                
+                <div class="definition-box">
+                    <h3>🎯 المميزات الرئيسية</h3>
+                    <ul style="color: var(--text-gray); padding-right: 1rem;">
+                        <li><strong>تصدير إلى CSV:</strong> حفظ الإحداثيات في ملف Excel/CSV جاهز</li>
+                        <li><strong>ترتيب ذكي:</strong> ترتيب النقاط حسب Handle (الأقدم → الأحدث)</li>
+                        <li><strong>تسمية تلقائية:</strong> أرقام تسلسلية بجانب كل نقطة</li>
+                        <li><strong>إدارة الطبقات:</strong> طبقة PointNames بلون أحمر للوضوح</li>
+                        <li><strong>مسار تلقائي:</strong> حفظ على Desktop باسم output.csv</li>
+                    </ul>
+                </div>
+
+                <div class="definition-box">
+                    <h3>⚙️ متى تستخدمه؟</h3>
+                    <ul style="color: var(--text-gray); padding-right: 1rem;">
+                        <li>بعد استخدام أمر PP لتصدير النقاط للمساح</li>
+                        <li>لإعداد قوائم إحداثيات للعمل الميداني</li>
+                        <li>لحفظ بيانات النقاط لمشاريع مستقبلية</li>
+                        <li>لتبادل البيانات مع برامج أخرى (Excel, GIS, إلخ)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. المميزات التقنية -->
+        <section class="section">
+            <h2 class="section-title">✨ المميزات التقنية الفريدة</h2>
+            <div class="tech-features">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>ترتيب النقاط الذكي</h4>
+                    <p>يستخدم نظام Sorting Fix لترتيب النقاط حسب Handle، مما يضمن ترقيم متسق للأقدم إلى الأحدث</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h4>تصدير تلقائي</h4>
+                    <p>يحفظ الملف تلقائياً على Desktop باسم output.csv بصيغة CSV قابلة للفتح في Excel</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h4>طبقات ملونة</h4>
+                    <p>ينشئ طبقة PointNames بلون أحمر (#1) لتمييز النصوص عن النقاط الأصلية</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h4>سرعة عالية</h4>
+                    <p>معالجة آلاف النقاط في ثوانٍ مع عرض شريط التقدم والنتائج</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. طريقة العمل -->
+        <section class="section">
+            <h2 class="section-title">🚀 كيف يعمل الأمر PE؟</h2>
+            <div class="how-it-works">
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">عملية التصدير تتم في 5 خطوات بسيطة:</p>
+                
+                <div class="workflow">
+                    <div class="work-step">
+                        <strong>الخطوة 1</strong>
+                        <p>ابدأ الأمر PE</p>
+                        <small>اكتب PE ثم Enter</small>
+                    </div>
+                    <div class="work-step">
+                        <strong>الخطوة 2</strong>
+                        <p>أدخل ارتفاع النص</p>
+                        <small>اختر حجم النص للتسمية</small>
+                    </div>
+                    <div class="work-step">
+                        <strong>الخطوة 3</strong>
+                        <p>اختر مسار الحفظ</p>
+                        <small>Desktop/output.csv تلقائياً</small>
+                    </div>
+                    <div class="work-step">
+                        <strong>الخطوة 4</strong>
+                        <p>اختر النقاط</p>
+                        <small>اختر جميع النقاط المراد تصديرها</small>
+                    </div>
+                    <div class="work-step">
+                        <strong>النتيجة</strong>
+                        <p>ملف CSV + تسمية</p>
+                        <small>بيانات جاهزة للمساح</small>
+                    </div>
+                </div>
+
+                <div class="csv-format">
+                    <h3>📋 تنسيق ملف CSV الناتج:</h3>
+                    <table class="csv-table">
+                        <tr>
+                            <th>PointNumber</th>
+                            <th>X</th>
+                            <th>Y</th>
+                            <th>Z</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>125.456</td>
+                            <td>89.123</td>
+                            <td>0.000</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>126.789</td>
+                            <td>90.456</td>
+                            <td>0.000</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>128.123</td>
+                            <td>91.789</td>
+                            <td>0.000</td>
+                        </tr>
+                    </table>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">
+                        💡 <strong>ملاحظة:</strong> الملف يحتوي على رأس واضح وتنسيق دقيق لثلاثة منازل عشرية
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. التكامل مع PP -->
+        <section class="section">
+            <h2 class="section-title">🔄 التكامل الكامل مع أمر PP</h2>
+            <div class="integration">
+                <h3 style="color: var(--secondary); margin-bottom: 1rem;">النظام المتكامل: PP → PE</h3>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); margin: 1rem 0;">
+                    <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-md); border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 0.8rem;">🔧 أمر PP</h4>
+                        <ul style="color: var(--text-gray); padding-right: 1rem; font-size: 0.9rem;">
+                            <li>إنشاء النقاط الهندسية</li>
+                            <li>تحديد المراكز والرؤوس</li>
+                            <li>سرعة: ثوانٍ معدودة</li>
+                            <li>النتيجة: نقاط في الرسم</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: var(--spacing-md); border-radius: 8px;">
+                        <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">📤 أمر PE</h4>
+                        <ul style="color: var(--text-gray); padding-right: 1rem; font-size: 0.9rem;">
+                            <li>تصدير الإحداثيات</li>
+                            <li>تسمية النقاط</li>
+                            <li>سرعة: ثوانٍ معدودة</li>
+                            <li>النتيجة: ملف CSV جاهز</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 1rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
+                    <h4 style="color: var(--accent); margin-bottom: 0.5rem;">🎯 سير العمل المتكامل</h4>
+                    <p style="color: var(--text-light);">
+                        <strong>PP</strong> لإنشاء النقاط → <strong>PE</strong> لتصديرها → <strong>تسليم للمساح</strong> للعمل الميداني
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. النتائج والتوفير -->
+        <section class="section">
+            <h2 class="section-title">💰 النتائج والتوفير في الوقت</h2>
+            <div class="results">
+                <div class="result-card">
+                    <div class="result-value">95-99%</div>
+                    <div class="result-label">توفير في الوقت</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">1000x</div>
+                    <div class="result-label">أسرع من التصدير اليدوي</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">0%</div>
+                    <div class="result-label">أخطاء في الإحداثيات</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">∞</div>
+                    <div class="result-label">قابلية للتوسع</div>
+                </div>
+            </div>
+
+            <div style="background: rgba(34, 197, 94, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
+                <h3 style="color: var(--success); margin-bottom: 1rem;">🏭 سيناريو عملي: مشروع سكني كبير</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+                    <div>
+                        <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">بدون PE:</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem;">
+                            <li>كتابة إحداثيات 500 نقطة يدوياً</li>
+                            <li>مدة: 6-8 ساعات عمل</li>
+                            <li>احتمال أخطاء: مرتفع جداً</li>
+                            <li>جهد: كبير وممل</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">بـ PE:</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem;">
+                            <li>تصدير 500 نقطة تلقائياً</li>
+                            <li>مدة: 30 ثانية فقط</li>
+                            <li>دقة: 100% بدون أخطاء</li>
+                            <li>جهد: ضغطة زر واحدة</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                    ⚡ توفير 7.5 ساعات عمل لكل 500 نقطة!
+                </p>
+            </div>
+        </section>
+
+        <!-- 6. الاستخدامات العملية -->
+        <section class="section">
+            <h2 class="section-title">🏗️ الاستخدامات العملية في الميدان</h2>
+            <div class="tech-features">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">👷</div>
+                    <h4>للمساحين</h4>
+                    <p>ملف CSV جاهز للرفع على أجهزة الـ Total Station للعمل الميداني الدقيق</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h4>للمهندسين</h4>
+                    <p>حفظ وتوثيق إحداثيات المشروع لمتابعة التنفيذ والمقارنة مع المخطط</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <h4>للأرشفة</h4>
+                    <p>إنشاء سجلات رقمية دقيقة للمشاريع للإحتفاظ بها في قاعدة البيانات</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h4>للتنسيق</h4>
+                    <p>تبادل البيانات بين فرق العمل المختلفة (إنشائي، كهرباء، ميكانيكا)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- الفوتر -->
+        <footer>
+            <a href="../index.html" class="back-link">العودة إلى الصفحة الرئيسية</a>
+            <p>📧 للاستفسارات: MahmoudBorham.codes@gmail.com</p>
+            <p>🇵🇸 Free Palestine - لوجه الله تعالى</p>
+            <p style="color: var(--accent); font-size: 0.9rem; margin-top: 1rem;">
+                "أداة تصدير ذكية تحول أيام العمل إلى دقائق"
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
