@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>توثيق أمر PP - أدوات برهام للمساحة</title>
+    <!-- استدعاء ملف التصميم المشترك لصفحات الأوامر -->
+    <link rel="stylesheet" href="../css/command-page.css">
+    <style>
+        /* تحسينات إضافية للغة العربية */
+        .usage ol li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            right: -40px; /* ضبط موقع الرقم ليتناسب مع RTL */
+            left: auto;
+        }
+        .usage ol li {
+            padding-right: 20px; /* إضافة مساحة للرقم */
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- زر للتبديل إلى النسخة الإنجليزية -->
+        <div class="lang-switch">
+            <a href="pp.html">View Documentation in English</a>
+        </div>
+
+        <header>
+            <h1>الأمر: PP</h1>
+            <p class="subtitle">"Points on Polyline" - إنشاء نقاط مساحية بمسافات منتظمة على العناصر الخطية</p>
+        </header>
+
+        <section class="description">
+            <h2>الغرض من الأمر</h2>
+            <p>
+                تم تصميم الأمر <code>PP</code> لتسهيل عملية "توقيع النقاط" أو "تفريد المحطات" (Staking out) على طول المسارات في بيئة الأوتوكاد. يقوم الأمر بتوزيع نقاط (AutoCAD Points) بدقة عالية على أي عنصر خطي، سواء كان مستقيمًا أو منحنيًا، وذلك بناءً على مسافة فاصلة (Interval) يحددها المستخدم.
+            </p>
+            <p>
+                يعتبر هذا الأمر أداة لا غنى عنها للمساحين والمهندسين المدنيين عند التعامل مع تخطيط الطرق، خطوط المرافق (الكهرباء، المياه، الصرف)، أو أي مشروع يتطلب تقسيمًا دقيقًا للمسافات.
+            </p>
+        </section>
+
+        <section class="usage">
+            <h2>آلية التنفيذ (Workflow)</h2>
+            <ol>
+                <li>
+                    <strong>استدعاء الأمر:</strong>
+                    <p>اكتب الاختصار <code>PP</code> في شريط الأوامر (Command Line) ثم اضغط Enter.</p>
+                </li>
+                <li>
+                    <strong>اختيار الكيانات (Select Objects):</strong>
+                    <p>سيظهر لك طلب "Select objects:". قم بتحديد جميع العناصر الخطية التي ترغب في توزيع النقاط عليها. يمكنك اختيار خطوط متعددة ومختلفة في عملية واحدة.</p>
+                </li>
+                <li>
+                    <strong>إدخال المسافة الفاصلة (Interval Distance):</strong>
+                    <p>سيظهر لك طلب "Enter interval distance:". أدخل القيمة الرقمية للمسافة المطلوبة بين كل نقطة والتالية. يتم احتساب المسافة على طول العنصر نفسه (True Length).</p>
+                </li>
+                <li>
+                    <strong>معالجة البيانات:</strong>
+                    <p>يقوم الأمر بمعالجة العناصر المحددة وتوزيع النقاط تلقائيًا. ستظهر النقاط مباشرة على الرسم في طبقة (Layer) مخصصة.</p>
+                </li>
+            </ol>
+        </section>
+
+        <section class="features">
+            <h2>المواصفات الفنية والمميزات</h2>
+            <ul>
+                <li><strong>دعم شامل للعناصر:</strong> يعمل الأمر بكفاءة على الخطوط (Lines)، الخطوط المتعددة (Polylines)، الأقواس (Arcs)، الدوائر (Circles)، والسبلاين (Splines).</li>
+                <li><strong>دقة المنحنيات:</strong> يضمن الأمر توزيع النقاط بشكل صحيح على طول المنحنيات والأقواس، وليس على الأوتار (Chords)، مما يوفر دقة مساحية عالية.</li>
+                <li><strong>معالجة دفعة واحدة (Batch Processing):</strong> يمكنك اختيار عدد لا نهائي من العناصر في نفس الوقت، وسيقوم الأمر بمعالجتها جميعًا في عملية واحدة.</li>
+                <li><strong>كفاءة الأداء:</strong> تم تحسين الخوارزمية لتعمل بسرعة حتى مع الرسومات الكبيرة والمعقدة.</li>
+            </ul>
+        </section>
+
+        <section class="example">
+            <h2>تطبيق عملي (Use Case)</h2>
+            <p>
+                <strong>المشكلة:</strong> لديك مسار خط أنابيب (Pipeline) مرسوم كـ Polyline بطول 2.5 كيلومتر، وتحتاج إلى تحديد مواقع اللحامات (Welding Joints) كل 12 مترًا على طول المسار.
+            </p>
+            <p>
+                <strong>الحل باستخدام <code>PP</code>:</strong>
+            </p>
+            <ol style="list-style-type: disc; padding-right: 20px;">
+                <li>شغل أمر <code>PP</code>.</li>
+                <li>اختر الـ Polyline الذي يمثل خط الأنابيب.</li>
+                <li>عندما يطلب منك المسافة، أدخل <code>12</code>.</li>
+                <li><strong>النتيجة:</strong> سيتم إنشاء نقاط أوتوكاد على طول المسار كل 12 مترًا بالضبط، جاهزة للتصدير إلى جهاز Total Station أو استخدامها في إعداد اللوحات.</li>
+            </ol>
+            <!-- يمكنك إضافة صورة أو GIF هنا لتوضيح المثال -->
+            <!-- <img src="../images/pp-example-ar.gif" alt="مثال متحرك لأمر PP"> -->
+        </section>
+
+        <footer>
+            <a href="../index.html" class="back-link">العودة إلى قائمة الأوامر</a>
+            <p>أدوات برهام - تم تطويرها لخدمة مجتمع المساحة والهندسة</p>
+        </footer>
+    </div>
+</body>
+</html>
