@@ -4,43 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borham Tools v80.7 - Free AutoCAD LISP Tools</title>
-    <link rel="stylesheet" href="css/Style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- زر تبديل اللغة -->
+    <!-- Language Toggle -->
     <div class="lang-toggle">
-        <button onclick="toggleLanguage()" id="langBtn">العربية</button>
+        <button onclick="toggleLanguage()" id="langBtn" data-key="langBtn">العربية</button>
     </div>
 
-    <!-- بسم الله في الأعلى -->
-    <div class="bismillah-header">
-        <div class="container">
-            <div class="bismillah-text" data-key="bismillah.text">In the Name of Allah, Most Gracious, Most Merciful</div>
-        </div>
-    </div>
-
-    <!-- الهيدر مع العلم الفلسطيني -->
+    <!-- Hero Section -->
     <header class="hero">
         <div class="container">
-            <h1 class="hero-title" data-key="hero.title">Borham Tools v80.7</h1>
-            <p class="hero-subtitle" data-key="hero.subtitle">Free AutoCAD LISP Tools for Everyone</p>
-            <p class="version-badge" data-key="hero.badge">v80.7 - Ultra Optimized - 16 Commands - Free Forever</p>
+            <h1 class="hero-title" data-key="hero-title">Borham Tools v80.7</h1>
+            <p class="hero-subtitle" data-key="hero-subtitle">Free AutoCAD LISP Tools for Everyone</p>
+            <p class="version-badge" data-key="version-badge">v80.7 - Ultra Optimized - 16 Commands - Free Forever</p>
         </div>
     </header>
 
-    <!-- حديث النبي ﷺ -->
-    <section class="hadith-section">
+    <!-- Opening Message Section -->
+    <section class="opening-message">
         <div class="container">
-            <div class="hadith-container">
-                <div class="hadith-arabic" data-key="hadith.arabic">«The best of people are those who are most beneficial to people»</div>
-                <div class="hadith-attestation" data-key="hadith.attestation">Truthful is the Messenger of Allah, peace be upon him<span class="hadith-symbol">ﷺ</span></div>
-            </div>
-
-            <!-- قسم فلسطين -->
-            <div class="palestine-section">
-                <h3 class="palestine-title" data-key="palestine.title">🇵🇸 Stand with the Oppressed - Free Palestine</h3>
-                <p class="palestine-text" data-key="palestine.text">These tools are created and shared completely FREE for the sake of Allah, to benefit engineers, surveyors, and professionals worldwide. We stand in solidarity with all oppressed people, especially our brothers and sisters in Palestine.</p>
-                <p class="dua" data-key="palestine.dua">«O Allah, grant victory to the oppressed, ease their suffering, and bring justice to their cause. Ameen.»</p>
+            <div class="message-box">
+                <h2 data-key="opening-title">🤲 In the Name of Allah, Most Gracious, Most Merciful</h2>
+                <p class="quote" data-key="opening-quote">"The Best Of People Are Those Who Are Most Beneficial To People"</p>
+                <p class="source" data-key="opening-source">— Prophet Muhammad ﷺ (Peace be Upon Him)</p>
+                
+                <div class="palestine-section">
+                    <h3 data-key="palestine-title">🇵🇸 Stand with the Oppressed - Free Palestine</h3>
+                    <p data-key="palestine-text">These tools are created and shared completely FREE for the sake of Allah, to benefit engineers, surveyors, and professionals worldwide. We stand in solidarity with all oppressed people, especially our brothers and sisters in Palestine.</p>
+                    <p class="dua" data-key="palestine-dua"><em>"O Allah, grant victory to the oppressed, ease their suffering, and bring justice to their cause. Ameen."</em></p>
+                </div>
             </div>
         </div>
     </section>
@@ -48,19 +41,19 @@
     <!-- About Section -->
     <section class="about">
         <div class="container">
-            <h2 data-key="about.title">About Borham Tools</h2>
+            <h2 data-key="about-title">About Borham Tools</h2>
             <div class="about-grid">
                 <div class="about-card">
-                    <h3 data-key="whyfree.title">❓ Why Free?</h3>
-                    <p data-key="whyfree.text">This software is created purely for the sake of Allah (لوجه الله), to help professionals and make their work easier. No payment, no subscriptions, no hidden costs - just a gift to humanity.</p>
+                    <h3 data-key="why-free-title">❓ Why Free?</h3>
+                    <p data-key="why-free-text">This software is created purely for the sake of Allah (لوجه الله), to help professionals and make their work easier. No payment, no subscriptions, no hidden costs - just a gift to humanity.</p>
                 </div>
                 <div class="about-card">
-                    <h3 data-key="purpose.title">🎯 The Purpose</h3>
-                    <p data-key="purpose.text">To provide powerful, optimized AutoCAD LISP tools that save time, increase productivity, and are accessible to everyone - from students to professional engineers.</p>
+                    <h3 data-key="purpose-title">🎯 The Purpose</h3>
+                    <p data-key="purpose-text">To provide powerful, optimized AutoCAD LISP tools that save time, increase productivity, and are accessible to everyone - from students to professional engineers.</p>
                 </div>
                 <div class="about-card">
-                    <h3 data-key="developer.title">👨‍💻 Developer</h3>
-                    <p data-key="developer.text">Created by Mahmoud Borham, Senior Surveyor dedicated to helping the engineering community through free, high-quality tools.</p>
+                    <h3 data-key="developer-title">👨‍💻 Developer</h3>
+                    <p data-key="developer-text">Created by Mahmoud Borham, a civil engineer dedicated to helping the engineering community through free, high-quality tools.</p>
                 </div>
             </div>
         </div>
@@ -69,39 +62,39 @@
     <!-- Overview Section -->
     <section class="overview">
         <div class="container">
-            <h2 data-key="overview.title">What is Borham Tools?</h2>
-            <p class="overview-desc" data-key="overview.desc">Borham Tools is a collection of 16 ultra-optimized AutoCAD LISP commands designed specifically for civil engineers, surveyors, and CAD professionals. These tools use advanced spatial hashing and grid-based indexing to deliver exceptional performance.</p>
+            <h2 data-key="overview-title">What is Borham Tools?</h2>
+            <p class="overview-desc" data-key="overview-desc">Borham Tools is a collection of 16 ultra-optimized AutoCAD LISP commands designed specifically for civil engineers, surveyors, and CAD professionals. These tools use advanced spatial hashing and grid-based indexing to deliver exceptional performance.</p>
             
             <div class="features-grid">
                 <div class="feature-card">
                     <span class="icon">⚡</span>
-                    <h3 data-key="feature1.title">Ultra Fast</h3>
-                    <p data-key="feature1.text">Spatial hashing enables 10x-50x faster performance</p>
+                    <h3 data-key="feature1-title">Ultra Fast</h3>
+                    <p data-key="feature1-text">Spatial hashing enables 10x-50x faster performance</p>
                 </div>
                 <div class="feature-card">
                     <span class="icon">🎯</span>
-                    <h3 data-key="feature2.title">16 Commands</h3>
-                    <p data-key="feature2.text">Complete toolkit for points, levels, coordinates & more</p>
+                    <h3 data-key="feature2-title">16 Commands</h3>
+                    <p data-key="feature2-text">Complete toolkit for points, levels, coordinates & more</p>
                 </div>
                 <div class="feature-card">
                     <span class="icon">🆓</span>
-                    <h3 data-key="feature3.title">100% Free</h3>
-                    <p data-key="feature3.text">No payment, no activation, no restrictions</p>
+                    <h3 data-key="feature3-title">100% Free</h3>
+                    <p data-key="feature3-text">No payment, no activation, no restrictions</p>
                 </div>
                 <div class="feature-card">
                     <span class="icon">📊</span>
-                    <h3 data-key="feature4.title">Smart Progress</h3>
-                    <p data-key="feature4.text">Real-time progress display for long operations</p>
+                    <h3 data-key="feature4-title">Smart Progress</h3>
+                    <p data-key="feature4-text">Real-time progress display for long operations</p>
                 </div>
                 <div class="feature-card">
                     <span class="icon">🔒</span>
-                    <h3 data-key="feature5.title">Layer Management</h3>
-                    <p data-key="feature5.text">Auto-unlocks and manages layers intelligently</p>
+                    <h3 data-key="feature5-title">Layer Management</h3>
+                    <p data-key="feature5-text">Auto-unlocks and manages layers intelligently</p>
                 </div>
                 <div class="feature-card">
                     <span class="icon">✅</span>
-                    <h3 data-key="feature6.title">No Errors</h3>
-                    <p data-key="feature6.text">Silent error handling - no annoying messages</p>
+                    <h3 data-key="feature6-title">No Errors</h3>
+                    <p data-key="feature6-text">Silent error handling - no annoying messages</p>
                 </div>
             </div>
         </div>
@@ -110,24 +103,24 @@
     <!-- Quick Start Section -->
     <section class="quick-start">
         <div class="container">
-            <h2 data-key="quickstart.title">Quick Start Guide</h2>
+            <h2 data-key="quickstart-title">Quick Start Guide</h2>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3 data-key="step1.title">Download</h3>
-                    <p data-key="step1.text">Click the download button to get the BorhamTools.lsp file</p>
+                    <h3 data-key="step1-title">Download</h3>
+                    <p data-key="step1-text">Click the download button to get the BorhamTools.lsp file</p>
                     <a href="files/Borham Tools v80.7.fas" download class="btn-primary" data-key="download.btn">Download Now</a>
                     <p id="versionInfo" style="margin-top: 10px; color: var(--text-gray); font-size: 0.9rem;"></p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3 data-key="step2.title">Install</h3>
-                    <p data-key="step2.text">In AutoCAD, type <code>APPLOAD</code> and select the downloaded file</p>
+                    <h3 data-key="step2-title">Install</h3>
+                    <p data-key="step2-text">In AutoCAD, type <code>APPLOAD</code> and select the downloaded file</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3 data-key="step3.title">Start Using</h3>
-                    <p data-key="step3.text">Type <code>I</code> for interactive help, or use any of the 16 commands directly</p>
+                    <h3 data-key="step3-title">Start Using</h3>
+                    <p data-key="step3-text">Type <code>I</code> for interactive help, or use any of the 16 commands directly</p>
                 </div>
             </div>
         </div>
@@ -136,89 +129,89 @@
     <!-- Commands List Section -->
     <section class="commands">
         <div class="container">
-            <h2 data-key="commands.title">Available Commands (16)</h2>
-            <p class="section-desc" data-key="commands.desc">Click on any command to see detailed documentation</p>
+            <h2 data-key="commands-title">Available Commands (16)</h2>
+            <p class="section-desc" data-key="commands-desc">Click on any command to see detailed documentation</p>
             
             <div class="commands-grid">
                 <a href="commands/pp.html" class="command-card">
-                    <h3>PP</h3>
-                    <p>Points on Objects</p>
-                    <span class="badge">Optimized V6</span>
+                    <h3 data-key="pp-title">PP</h3>
+                    <p data-key="pp-desc">Points on Objects</p>
+                    <span class="badge" data-key="pp-badge">Optimized V6</span>
                 </a>
                 <a href="commands/ppc.html" class="command-card">
-                    <h3>PPC</h3>
-                    <p>Line Center Points</p>
-                    <span class="badge">Optimized V6</span>
+                    <h3 data-key="ppc-title">PPC</h3>
+                    <p data-key="ppc-desc">Line Center Points</p>
+                    <span class="badge" data-key="ppc-badge">Optimized V6</span>
                 </a>
                 <a href="commands/ppx.html" class="command-card">
-                    <h3>PPX</h3>
-                    <p>Intersection Points</p>
-                    <span class="badge">Optimized V7</span>
+                    <h3 data-key="ppx-title">PPX</h3>
+                    <p data-key="ppx-desc">Intersection Points</p>
+                    <span class="badge" data-key="ppx-badge">Optimized V7</span>
                 </a>
                 <a href="commands/pe.html" class="command-card">
-                    <h3>PE</h3>
-                    <p>Export & Label Points</p>
-                    <span class="badge">New</span>
+                    <h3 data-key="pe-title">PE</h3>
+                    <p data-key="pe-desc">Export & Label Points</p>
+                    <span class="badge" data-key="pe-badge">New</span>
                 </a>
                 <a href="commands/pi.html" class="command-card">
-                    <h3>PI</h3>
-                    <p>Point Import</p>
-                    <span class="badge">Multi-Format V11</span>
+                    <h3 data-key="pi-title">PI</h3>
+                    <p data-key="pi-desc">Point Import</p>
+                    <span class="badge" data-key="pi-badge">Multi-Format V11</span>
                 </a>
                 <a href="commands/p2c.html" class="command-card">
-                    <h3>P2C</h3>
-                    <p>Polyline to Circle</p>
-                    <span class="badge">Fast</span>
+                    <h3 data-key="p2c-title">P2C</h3>
+                    <p data-key="p2c-desc">Polyline to Circle</p>
+                    <span class="badge" data-key="p2c-badge">Fast</span>
                 </a>
                 <a href="commands/df.html" class="command-card">
-                    <h3>DF</h3>
-                    <p>Elevation Difference</p>
-                    <span class="badge">Updated</span>
+                    <h3 data-key="df-title">DF</h3>
+                    <p data-key="df-desc">Elevation Difference</p>
+                    <span class="badge" data-key="df-badge">Updated</span>
                 </a>
                 <a href="commands/lv.html" class="command-card">
-                    <h3>LV</h3>
-                    <p>Absolute Level Text</p>
-                    <span class="badge">Updated</span>
+                    <h3 data-key="lv-title">LV</h3>
+                    <p data-key="lv-desc">Absolute Level Text</p>
+                    <span class="badge" data-key="lv-badge">Updated</span>
                 </a>
                 <a href="commands/aa.html" class="command-card">
-                    <h3>AA</h3>
-                    <p>Area & Hatch</p>
-                    <span class="badge">Simple</span>
+                    <h3 data-key="aa-title">AA</h3>
+                    <p data-key="aa-desc">Area & Hatch</p>
+                    <span class="badge" data-key="aa-badge">Simple</span>
                 </a>
                 <a href="commands/lup.html" class="command-card">
-                    <h3>LUP</h3>
-                    <p>Level Update</p>
-                    <span class="badge">V15 Ultra</span>
+                    <h3 data-key="lup-title">LUP</h3>
+                    <p data-key="lup-desc">Level Update</p>
+                    <span class="badge" data-key="lup-badge">V15 Ultra</span>
                 </a>
                 <a href="commands/ssl.html" class="command-card">
-                    <h3>SSL</h3>
-                    <p>Select Similar</p>
-                    <span class="badge">Smart</span>
+                    <h3 data-key="ssl-title">SSL</h3>
+                    <p data-key="ssl-desc">Select Similar</p>
+                    <span class="badge" data-key="ssl-badge">Smart</span>
                 </a>
                 <a href="commands/mo.html" class="command-card">
-                    <h3>MO</h3>
-                    <p>Multi-Offset</p>
-                    <span class="badge">V16</span>
+                    <h3 data-key="mo-title">MO</h3>
+                    <p data-key="mo-desc">Multi-Offset</p>
+                    <span class="badge" data-key="mo-badge">V16</span>
                 </a>
                 <a href="commands/en.html" class="command-card">
-                    <h3>EN</h3>
-                    <p>E & N Coordinates</p>
-                    <span class="badge">MLeader</span>
+                    <h3 data-key="en-title">EN</h3>
+                    <p data-key="en-desc">E & N Coordinates</p>
+                    <span class="badge" data-key="en-badge">MLeader</span>
                 </a>
                 <a href="commands/enl.html" class="command-card">
-                    <h3>ENL</h3>
-                    <p>3D Coordinates</p>
-                    <span class="badge">MLeader</span>
+                    <h3 data-key="enl-title">ENL</h3>
+                    <p data-key="enl-desc">3D Coordinates</p>
+                    <span class="badge" data-key="enl-badge">MLeader</span>
                 </a>
                 <a href="commands/t.html" class="command-card">
-                    <h3>T</h3>
-                    <p>Table with Codes</p>
-                    <span class="badge">New Column</span>
+                    <h3 data-key="t-title">T</h3>
+                    <p data-key="t-desc">Table with Codes</p>
+                    <span class="badge" data-key="t-badge">New Column</span>
                 </a>
                 <a href="commands/i.html" class="command-card">
-                    <h3>I</h3>
-                    <p>Interactive Help</p>
-                    <span class="badge">System</span>
+                    <h3 data-key="i-title">I</h3>
+                    <p data-key="i-desc">Interactive Help</p>
+                    <span class="badge" data-key="i-badge">System</span>
                 </a>
             </div>
         </div>
@@ -227,13 +220,13 @@
     <!-- Contact Section -->
     <section class="contact">
         <div class="container">
-            <h2 data-key="contact.title">Contact & Support</h2>
-            <p data-key="contact.text">For questions, suggestions, or updates:</p>
+            <h2 data-key="contact-title">Contact & Support</h2>
+            <p data-key="contact-text">For questions, suggestions, or updates:</p>
             <a href="mailto:MahmoudBorham.codes@gmail.com" class="email-btn">MahmoudBorham.codes@gmail.com</a>
             
             <div class="social-note">
-                <p data-key="social.note1">🎥 Video tutorials coming soon on YouTube</p>
-                <p data-key="social.note2">📢 Check back for updates and new features</p>
+                <p data-key="social-note1">🎥 Video tutorials coming soon on YouTube</p>
+                <p data-key="social-note2">📢 Check back for updates and new features</p>
             </div>
         </div>
     </section>
@@ -241,19 +234,27 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p data-key="footer.credit">Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
-            <p data-key="footer.palestine">🇵🇸 Free Palestine - Stand with the Oppressed</p>
-            <p class="hadith" data-key="footer.hadith">"The Best Of People Are Those Who Are Most Beneficial To People" — Prophet Muhammad ﷺ</p>
-            <p class="hadith-attestation" data-key="footer.hadith.attestation">Truthful is the Messenger of Allah, peace be upon him<span class="hadith-symbol">ﷺ</span></p>
+            <p data-key="footer1">Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
+            <p data-key="footer2">🇵🇸 Free Palestine - Stand with the Oppressed</p>
+            <p class="hadith" data-key="footer-hadith">"The Best Of People Are Those Who Are Most Beneficial To People" - Prophet Muhammad ﷺ</p>
         </div>
     </footer>
 
-    <!-- ملفات الترجمة -->
-    <script src="js/translations.js"></script>
+    <!-- JavaScript Files -->
     <script src="js/language-switcher.js"></script>
+    <script src="js/translations.js"></script>
     
-    <!-- الدوال الأصلية للموقع -->
     <script>
+        function toggleLanguage() {
+            // This function is now in language-switcher.js
+            // But we keep it here for backward compatibility
+            if (typeof window.toggleLanguage === 'function') {
+                window.toggleLanguage();
+            } else {
+                alert('Language system is loading...');
+            }
+        }
+
         // Auto-detect latest Borham Tools file
         function downloadLatest() {
             // List of possible file extensions
@@ -276,7 +277,7 @@
                         
                         // Set version info
                         document.getElementById('versionInfo').textContent = 
-                            currentLang === 'en' ? `Current Version: v${version}.${subversion}` : `الإصدار الحالي: v${version}.${subversion}`;
+                            `Latest Version: v${version}.${subversion}`;
                         
                         a.click();
                         found = true;
@@ -286,20 +287,19 @@
             }
             
             if (!found) {
-                alert(currentLang === 'en' 
-                    ? 'No Borham Tools file found in files folder.\nPlease add your .fas or .lsp file to the files folder.'
-                    : 'لم يتم العثور على ملف أدوات برهام في مجلد الملفات.\nالرجاء إضافة ملف .fas أو .lsp الخاص بك إلى مجلد الملفات.');
+                alert('No Borham Tools file found in files folder.\nPlease add your .fas or .lsp file to the files folder.');
             }
         }
 
-        // On page load
+        // On page load, show current version
         window.onload = function() {
-            const currentVersion = "v80.7";
-            document.getElementById('versionInfo').textContent = 
-                currentLang === 'en' ? `Current Version: ${currentVersion}` : `الإصدار الحالي: ${currentVersion}`;
+            // You can manually set the version here
+            const currentVersion = "v80.7"; // Update this manually
+            const versionInfo = document.getElementById('versionInfo');
+            if (versionInfo) {
+                versionInfo.textContent = `Current Version: ${currentVersion}`;
+            }
         };
     </script>
 </body>
 </html>
-
-
