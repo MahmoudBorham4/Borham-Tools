@@ -1,247 +1,80 @@
 /* ========================================
-   Command Page Styles
-   Borham Tools v78.2
+   Borham Tools - تصميم صفحات الأوامر (نسخة مصححة)
    ======================================== */
-
-/* Back Button */
-.back-button {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1000;
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    line-height: 1.7;
+    margin: 0;
+    padding: 2rem;
 }
-
-.back-button a {
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 2rem;
+}
+.lang-switch, footer {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.lang-switch a, .back-link {
     display: inline-block;
-    background: var(--primary);
-    color: white;
-    padding: 12px 24px;
+    background-color: #21262d;
+    color: #58a6ff;
+    padding: 10px 20px;
     border-radius: 8px;
     text-decoration: none;
-    font-weight: 600;
-    transition: var(--transition);
-    box-shadow: var(--shadow-md);
+    border: 1px solid #30363d;
+    transition: all 0.2s ease-in-out;
 }
-
-.back-button a:hover {
-    background: var(--primary-dark);
-    transform: translateX(-5px);
-    box-shadow: var(--shadow-lg);
+.lang-switch a:hover, .back-link:hover {
+    background-color: #30363d;
+    border-color: #58a6ff;
 }
-
-/* Command Header */
-.command-header {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    padding: 80px 0 60px;
+header {
     text-align: center;
-    position: relative;
-    overflow: hidden;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 }
-
-.command-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M0 0L100 100M100 0L0 100" stroke="rgba(255,255,255,0.05)" stroke-width="2"/></svg>');
-    opacity: 0.3;
-}
-
-.command-badge {
-    display: inline-block;
-    background: var(--accent);
-    color: var(--bg-dark);
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    margin-bottom: 16px;
-    position: relative;
-}
-
-.command-name {
-    font-size: 5rem;
-    font-weight: 900;
-    margin: 16px 0;
-    position: relative;
-    text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-    letter-spacing: 4px;
-}
-
-.command-title {
-    font-size: 1.8rem;
-    opacity: 0.95;
-    position: relative;
-    margin-top: 8px;
-}
-
-/* Command Content */
-.command-content {
-    padding: 60px 0;
-    background: var(--bg-light);
-}
-
-.content-section {
-    background: var(--bg-card);
-    padding: 32px;
-    border-radius: 12px;
-    margin-bottom: 32px;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition);
-}
-
-.content-section:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
-}
-
-.content-section h2 {
-    font-size: 1.8rem;
-    color: var(--secondary);
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.content-section p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--text-gray);
-}
-
-.content-section ul,
-.content-section ol {
-    margin: 16px 0;
-    padding-left: 24px;
-}
-
-.content-section li {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: var(--text-gray);
-    margin-bottom: 12px;
-}
-
-.content-section strong {
-    color: var(--accent);
-    font-weight: 700;
-}
-
-/* Highlight Boxes */
-.highlight-box {
-    border-left: 6px solid var(--secondary);
-    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(16, 185, 129, 0.05) 100%);
-}
-
-.usage-box {
-    border-left: 6px solid var(--accent);
-    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(245, 158, 11, 0.05) 100%);
-}
-
-.performance-box {
-    border-left: 6px solid var(--primary);
-    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(37, 99, 235, 0.05) 100%);
-    text-align: center;
-}
-
-/* Code and Keyboard */
-code {
-    background: var(--bg-dark);
-    color: var(--accent);
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-family: 'Courier New', monospace;
-    font-weight: 700;
-    font-size: 1.05em;
-}
-
-kbd {
-    background: var(--bg-dark);
-    color: var(--success);
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-family: 'Courier New', monospace;
-    font-weight: 700;
-    font-size: 0.95em;
-    border: 2px solid var(--border);
-}
-
-/* Steps List */
-.steps-list {
-    counter-reset: step-counter;
-    list-style: none;
-    padding-left: 0;
-}
-
-.steps-list li {
-    counter-increment: step-counter;
-    position: relative;
-    padding-left: 50px;
-    margin-bottom: 24px;
-}
-
-.steps-list li::before {
-    content: counter(step-counter);
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 36px;
-    height: 36px;
-    background: var(--primary);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 1.1rem;
-}
-
-/* Performance Stat */
-.performance-stat {
-    font-size: 1.5rem;
-    color: var(--text-light);
+header h1 {
+    font-size: 2.8rem;
+    color: #58a6ff;
     margin: 0;
 }
-
-.performance-stat strong {
+header .subtitle {
+    font-size: 1.2rem;
+    color: #8b949e;
+    margin-top: 0.5rem;
+}
+h2 {
     font-size: 2rem;
-    color: var(--primary);
+    color: #c9d1d9;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 0.5rem;
+    margin-top: 2.5rem;
 }
-
-/* Footer Back Link */
-footer .back-link {
-    margin-top: 16px;
+code {
+    background-color: rgba(110, 118, 129, 0.2);
+    color: #c9d1d9;
+    padding: .2em .4em;
+    border-radius: 6px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
-
-footer .back-link a {
-    color: var(--secondary);
-    text-decoration: none;
-    font-weight: 600;
-    transition: var(--transition);
+ul, ol {
+    padding-right: 20px;
 }
-
-footer .back-link a:hover {
-    color: var(--accent);
+li {
+    margin-bottom: 1rem;
 }
-
-/* Responsive */
-@media (max-width: 768px) {
-    .command-name {
-        font-size: 3.5rem;
-    }
-    
-    .command-title {
-        font-size: 1.3rem;
-    }
-    
-    .content-section {
-        padding: 24px;
-    }
-    
-    .back-button {
-        top: 10px;
-        left: 10px;
-    }
+footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #30363d;
+    font-size: 0.9rem;
+    color: #8b949e;
 }
