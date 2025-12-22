@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التوثيق الفني لأمر PPC - أدوات برهام</title>
+    <link rel="stylesheet" href="command-page.css">
+    <!-- أيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- شريط التنقل العلوي -->
+        <div class="page-nav">
+            <a href="../index.html" class="nav-link"><i class="fa-solid fa-arrow-left"></i> العودة للقائمة</a>
+            <!-- سيتم إضافة رابط النسخة الإنجليزية لاحقاً -->
+            <a href="#" class="nav-link" style="opacity: 0.5; pointer-events: none;">View in English <i class="fa-solid fa-language"></i></a>
+        </div>
+
+        <header>
+            <h1>الأمر: <span>PPC</span></h1>
+            <p class="subtitle">"Polyline Point Center" - إنشاء نقاط في مراكز الكيانات الخطية</p>
+        </header>
+
+        <!-- بطاقة: الغرض من الأمر -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon"><i class="fa-solid fa-crosshairs"></i></span>
+                <h2>الغرض الأساسي</h2>
+            </div>
+            <p>تم تصميم الأمر <code>PPC</code> لتحديد المراكز الهندسية الدقيقة لمجموعة من الكيانات الخطية (Lines, Polylines, Arcs ) بضغطة زر واحدة. بدلاً من حساب المنتصف يدويًا لكل عنصر، يقوم هذا الأمر بوضع نقطة (AutoCAD Point) في منتصف كل كيان يتم اختياره، مما يسرع بشكل هائل من أعمال التخطيط والتحليل.</p>
+        </div>
+
+        <!-- بطاقة: المواصفات الفنية المتقدمة -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon"><i class="fa-solid fa-cogs"></i></span>
+                <h2>المواصفات الفنية المتقدمة</h2>
+            </div>
+            <ul>
+                <li>
+                    <strong>سرعة فائقة في المعالجة (Batch Processing):</strong>
+                    <p>يمكنك اختيار مئات أو آلاف الكيانات الخطية في عملية اختيار واحدة. يقوم الأمر بمعالجتها جميعًا في جزء من الثانية، مما يوفر وقتًا ثمينًا في المشاريع الكبيرة والمعقدة.</p>
+                </li>
+                <li>
+                    <strong>دقة حسابية مضمونة:</strong>
+                    <p>يستخدم الأمر خوارزميات دقيقة لحساب نقطة المنتصف الحقيقية لكل كيان. بالنسبة للأقواس (Arcs)، يتم حساب النقطة على طول مسار القوس الفعلي، وليس على وتره، مما يضمن دقة مساحية عالية.</p>
+                </li>
+                <li>
+                    <strong>سهولة الاستخدام والتكامل:</strong>
+                    <p>الأمر بسيط ومباشر. كل ما عليك هو تشغيل الأمر واختيار العناصر. لا توجد خطوات أو إعدادات معقدة، مما يجعله أداة مثالية للاستخدام اليومي السريع.</p>
+                </li>
+                <li>
+                    <strong>توافق واسع مع الكيانات:</strong>
+                    <p>يعمل الأمر بكفاءة مع الكيانات الخطية الأكثر شيوعًا في الرسومات الهندسية والمساحية:</p>
+                    <ul class="sub-list">
+                        <li><strong>Line:</strong> يضع نقطة في منتصف الخط المستقيم.</li>
+                        <li><strong>Polyline (2D/3D):</strong> يضع نقطة في منتصف الطول الإجمالي للبوليلاين.</li>
+                        <li><strong>Arc:</strong> يضع نقطة في منتصف القوس على مساره المنحني.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- بطاقة: أمثلة عملية من الواقع -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon"><i class="fa-solid fa-vial-circle-check"></i></span>
+                <h2>أمثلة عملية من الواقع</h2>
+            </div>
+            <ol>
+                <li>
+                    <strong>تحديد مراكز الطرق في المخططات:</strong>
+                    <p><strong>الموقف:</strong> لديك مخطط تقسيم أراضي يحتوي على عشرات الشوارع مرسومة كخطوط (Lines)، وتحتاج إلى تحديد نقاط المنتصف لكل شارع لوضع علامات خدماتية.  
+
+                    <strong>الحل بـ PPC:</strong> شغل الأمر <code>PPC</code>، اختر جميع خطوط الشوارع مرة واحدة. في لحظة، سيتم وضع نقطة في منتصف كل شارع.</p>
+                </li>
+                <li>
+                    <strong>حساب منتصف الجدران في الرسومات المعمارية:</strong>
+                    <p><strong>الموقف:</strong> تعمل على مخطط معماري وتحتاج إلى إيجاد مراكز الجدران (المرسومة كـ Polylines) لتحديد أماكن تركيب وحدات الإضاءة أو أجهزة الكشف عن الحرائق.  
+
+                    <strong>الحل بـ PPC:</strong> اختر جميع الـ Polylines التي تمثل الجدران. سيقوم الأمر بوضع نقطة في منتصف كل جدار، مما يسهل عملية التوزيع.</p>
+                </li>
+                <li>
+                    <strong>أعمال تنسيق المواقع (Landscaping):</strong>
+                    <p><strong>الموقف:</strong> لديك مسارات منحنية (Arcs) في حديقة، وتريد وضع عمود إنارة في منتصف كل مسار.  
+
+                    <strong>الحل بـ PPC:</strong> اختر جميع الأقواس. سيقوم الأمر بحساب نقطة المنتصف الدقيقة على طول كل قوس ووضع نقطة هناك.</p>
+                </li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
 
