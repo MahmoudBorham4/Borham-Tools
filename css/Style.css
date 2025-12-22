@@ -137,7 +137,7 @@ section { /* كل قسم في الصفحة */
 
 /* --- قسم الهيرو الرئيسي (العلم) --- */
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://i.imgur.com/0i29G47.png' ); /* صورة علم فلسطين كخلفية */
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../flag.png'); /* صورة علم فلسطين كخلفية */
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* تأثير parallax */
@@ -558,3 +558,4 @@ footer .hadith {
         gap: var(--spacing-sm);
     }
 }
+
