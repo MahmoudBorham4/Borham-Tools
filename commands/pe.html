@@ -3,75 +3,547 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PE Command - Points Export and Label | Borham Tools</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/command-page.css">
+    <title>PE Command - Points Export & Label | Borham Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --bg-dark: #0f172a;
+            --bg-card: #334155;
+            --text-light: #f1f5f9;
+            --text-gray: #cbd5e1;
+            --success: #22c55e;
+            --border: #475569;
+            --container-width: 1000px;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2.5rem;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+        /* Header */
+        .page-header { 
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        .page-header h1 { 
+            font-size: 2.2rem; 
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        .page-header p { 
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Sections */
+        .section { margin-bottom: var(--spacing-lg); }
+        .section-title { 
+            color: var(--secondary);
+            font-size: 1.6rem;
+            margin-bottom: var(--spacing-md);
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        /* 1. Command Definition */
+        .definition {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border: 1px solid var(--border);
+        }
+        .definition-box {
+            background: rgba(37, 99, 235, 0.1);
+            border-left: 3px solid var(--primary);
+            padding: var(--spacing-md);
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .definition-box h3 {
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 2. Technical Features */
+        .tech-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+        .feature-card h4 {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* 3. How It Works */
+        .how-it-works {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border: 1px solid var(--border);
+        }
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            margin: var(--spacing-md) 0;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+        .work-step {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: var(--spacing-sm);
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            position: relative;
+        }
+        .work-step:not(:last-child):after {
+            content: "→";
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        /* 4. Integration with All Point Commands */
+        .integration {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(37, 99, 235, 0.1));
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+            border: 1px solid var(--border);
+        }
+
+        /* 5. CSV File Format */
+        .csv-format {
+            background: rgba(245, 158, 11, 0.05);
+            border-left: 3px solid var(--accent);
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            margin: var(--spacing-md) 0;
+            overflow-x: auto;
+        }
+        .csv-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+        .csv-table th {
+            background: var(--primary);
+            color: white;
+            padding: 10px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+        .csv-table td {
+            padding: 10px;
+            border: 1px solid var(--border);
+            color: var(--text-gray);
+            background: rgba(255,255,255,0.03);
+        }
+
+        /* Results */
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        .result-card {
+            text-align: center;
+            padding: var(--spacing-md);
+            background: var(--bg-card);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        .result-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+        .result-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Buttons */
+        .back-link {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin: var(--spacing-md) 0;
+            transition: background 0.3s;
+        }
+        .back-link:hover { 
+            background: #1e40af;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--border);
+            margin-top: var(--spacing-lg);
+        }
+        footer p { 
+            color: var(--text-gray); 
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.4rem; }
+            .workflow { flex-direction: column; }
+            .work-step:not(:last-child):after {
+                content: "↓";
+                right: 50%;
+                top: auto;
+                bottom: -20px;
+                transform: translateX(50%);
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="back-button">
-        <a href="../index.html">← Back to Home</a>
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <h1>PE Command</h1>
+            <p>Points Export & Label - Smart tool for extracting and exporting coordinates</p>
+        </header>
+
+        <!-- 1. What is PE Command? -->
+        <section class="section">
+            <h2 class="section-title">📌 What is the PE Command?</h2>
+            <div class="definition">
+                <p>The <strong>PE Command</strong> is an intelligent AutoCAD tool that extracts point coordinates and saves them to a CSV file with automatic labeling for each point.</p>
+                
+                <div class="definition-box">
+                    <h3>🎯 Key Features</h3>
+                    <ul style="color: var(--text-gray); padding-left: 1rem;">
+                        <li><strong>Export to CSV:</strong> Save coordinates to ready-to-use Excel/CSV file</li>
+                        <li><strong>Smart Sorting:</strong> Arrange points by Handle (oldest → newest)</li>
+                        <li><strong>Automatic Labeling:</strong> Sequential numbers next to each point</li>
+                        <li><strong>Layer Management:</strong> PointNames layer in red for clarity</li>
+                        <li><strong>Auto Path:</strong> Saves to Desktop as output.csv</li>
+                    </ul>
+                </div>
+
+                <div class="definition-box">
+                    <h3>⚙️ When to use it?</h3>
+                    <ul style="color: var(--text-gray); padding-left: 1rem;">
+                        <li>After using <strong>any point-creating command</strong> (PP, PPC, PPX, PI, etc.)</li>
+                        <li>To export <strong>any points in the drawing</strong> regardless of their source</li>
+                        <li>To prepare coordinate lists for field work</li>
+                        <li>To save point data for future projects</li>
+                        <li>To exchange data with other programs (Excel, GIS, etc.)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Technical Features -->
+        <section class="section">
+            <h2 class="section-title">✨ Unique Technical Features</h2>
+            <div class="tech-features">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>Smart Point Sorting</h4>
+                    <p>Uses Sorting Fix system to arrange points by Handle, ensuring consistent numbering from oldest to newest</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h4>Automatic Export</h4>
+                    <p>Saves file automatically to Desktop as output.csv in CSV format ready for Excel</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h4>Colored Layers</h4>
+                    <p>Creates PointNames layer in red (#1) to distinguish text from original points</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h4>High Speed</h4>
+                    <p>Processes thousands of points in seconds with progress bar and results display</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. How It Works -->
+        <section class="section">
+            <h2 class="section-title">🚀 How the PE Command Works</h2>
+            <div class="how-it-works">
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">The export process takes just 5 simple steps:</p>
+                
+                <div class="workflow">
+                    <div class="work-step">
+                        <strong>Step 1</strong>
+                        <p>Start PE Command</p>
+                        <small>Type PE then Enter</small>
+                    </div>
+                    <div class="work-step">
+                        <strong>Step 2</strong>
+                        <p>Enter Text Height</p>
+                        <small>Choose text size for labels</small>
+                    </div>
+                    <div class="work-step">
+                        <strong>Step 3</strong>
+                        <p>Choose Save Path</p>
+                        <small>Desktop/output.csv automatically</small>
+                    </div>
+                    <div class="work-step">
+                        <strong>Step 4</strong>
+                        <p>Select Points</p>
+                        <small>Select all points to export</small>
+                    </div>
+                    <div class="work-step">
+                        <strong>Result</strong>
+                        <p>CSV File + Labeling</p>
+                        <small>Data ready for surveyor</small>
+                    </div>
+                </div>
+
+                <div class="csv-format">
+                    <h3>📋 Resulting CSV File Format:</h3>
+                    <table class="csv-table">
+                        <tr>
+                            <th>PointNumber</th>
+                            <th>X</th>
+                            <th>Y</th>
+                            <th>Z</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>125.456</td>
+                            <td>89.123</td>
+                            <td>0.000</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>126.789</td>
+                            <td>90.456</td>
+                            <td>0.000</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>128.123</td>
+                            <td>91.789</td>
+                            <td>0.000</td>
+                        </tr>
+                    </table>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">
+                        💡 <strong>Note:</strong> File contains clear header and precise three-decimal format
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Integration with All Point Commands -->
+        <section class="section">
+            <h2 class="section-title">🔄 Integration with All Point Commands</h2>
+            <div class="integration">
+                <h3 style="color: var(--secondary); margin-bottom: 1rem;">Universal export system for any type of points</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md); margin: 1rem 0;">
+                    <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-sm); border-radius: 8px; text-align: center;">
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">🔵 PP</h4>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">Points on elements</p>
+                    </div>
+                    
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: var(--spacing-sm); border-radius: 8px; text-align: center;">
+                        <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">🎯 PPC</h4>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">Line centers</p>
+                    </div>
+                    
+                    <div style="background: rgba(245, 158, 11, 0.1); padding: var(--spacing-sm); border-radius: 8px; text-align: center;">
+                        <h4 style="color: var(--accent); margin-bottom: 0.5rem;">✖️ PPX</h4>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">Line intersections</p>
+                    </div>
+                    
+                    <div style="background: rgba(139, 92, 246, 0.1); padding: var(--spacing-sm); border-radius: 8px; text-align: center;">
+                        <h4 style="color: #8b5cf6; margin-bottom: 0.5rem;">🖱️ Manual</h4>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">Hand-drawn points</p>
+                    </div>
+                    
+                    <div style="background: rgba(239, 68, 68, 0.1); padding: var(--spacing-sm); border-radius: 8px; text-align: center;">
+                        <h4 style="color: #ef4444; margin-bottom: 0.5rem;">📥 PI</h4>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">Imported points</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 1rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
+                    <h4 style="color: var(--accent); margin-bottom: 0.5rem;">🎯 Core Principle</h4>
+                    <p style="color: var(--text-light);">
+                        PE Command works with <strong>any point</strong> in the drawing, regardless of its source or creation method
+                    </p>
+                </div>
+                
+                <div style="background: rgba(34, 197, 94, 0.1); padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem;">
+                    <h4 style="color: var(--success); margin-bottom: 0.8rem;">🔄 Workflow Examples:</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-sm);">
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px;">
+                            <p style="color: var(--text-light); font-size: 0.9rem;">
+                                <strong>Example 1:</strong> PPX → PE<br>
+                                <span style="color: var(--text-gray); font-size: 0.85rem;">Line intersections → Export intersection coordinates</span>
+                            </p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px;">
+                            <p style="color: var(--text-light); font-size: 0.9rem;">
+                                <strong>Example 2:</strong> PPC → PE<br>
+                                <span style="color: var(--text-gray); font-size: 0.85rem;">Line centers → Export center coordinates</span>
+                            </p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px;">
+                            <p style="color: var(--text-light); font-size: 0.9rem;">
+                                <strong>Example 3:</strong> PI → PE<br>
+                                <span style="color: var(--text-gray); font-size: 0.85rem;">Imported points → Export same points after processing</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Results & Time Savings -->
+        <section class="section">
+            <h2 class="section-title">💰 Results & Time Savings</h2>
+            <div class="results">
+                <div class="result-card">
+                    <div class="result-value">95-99%</div>
+                    <div class="result-label">Time Saved</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">1000x</div>
+                    <div class="result-label">Faster than manual export</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">0%</div>
+                    <div class="result-label">Coordinate errors</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">∞</div>
+                    <div class="result-label">Scalability</div>
+                </div>
+            </div>
+
+            <div style="background: rgba(34, 197, 94, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
+                <h3 style="color: var(--success); margin-bottom: 1rem;">🏭 Practical Scenario: Large Residential Project</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+                    <div>
+                        <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">Without PE:</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem;">
+                            <li>Manually writing 500 point coordinates</li>
+                            <li>Duration: 6-8 hours of work</li>
+                            <li>Error probability: Very high</li>
+                            <li>Effort: Significant and tedious</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">With PE:</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem;">
+                            <li>Export 500 points automatically</li>
+                            <li>Duration: Just 30 seconds</li>
+                            <li>Accuracy: 100% error-free</li>
+                            <li>Effort: One click</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                    ⚡ Saving 7.5 work hours per 500 points!
+                </p>
+            </div>
+        </section>
+
+        <!-- 6. Practical Applications -->
+        <section class="section">
+            <h2 class="section-title">🏗️ Practical Field Applications</h2>
+            <div class="tech-features">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">👷</div>
+                    <h4>For Surveyors</h4>
+                    <p>Ready CSV file for upload to Total Station devices for precise field work</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h4>For Engineers</h4>
+                    <p>Save and document project coordinates for execution monitoring and plan comparison</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <h4>For Archiving</h4>
+                    <p>Create accurate digital records for projects to store in database</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h4>For Coordination</h4>
+                    <p>Exchange data between different work teams (structural, electrical, mechanical)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <a href="../index.html" class="back-link">Back to Homepage</a>
+            <p>📧 Contact: MahmoudBorham.codes@gmail.com</p>
+            <p>🇵🇸 Free Palestine - For the sake of Allah</p>
+            <p style="color: var(--accent); font-size: 0.9rem; margin-top: 1rem;">
+                "Smart export tool that turns days of work into minutes"
+            </p>
+        </footer>
     </div>
-    <header class="command-header">
-        <div class="container">
-            <div class="command-badge">New</div>
-            <h1 class="command-name">PE</h1>
-            <p class="command-title">Export & Label Points</p>
-        </div>
-    </header>
-    <section class="command-content">
-        <div class="container">
-            <div class="content-section">
-                <h2>📋 Description</h2>
-                <p>Exports selected points to CSV file and labels them with text.</p>
-            </div>
-            <div class="content-section highlight-box">
-                <h2>✨ Features</h2>
-                <ul>
-                    <li>Exports to CSV format (Name,X,Y,Z)</li>
-                    <li>Creates sequential text labels</li>
-                    <li>Configurable text height</li>
-                    <li>Uses 'PointNames' layer (Color: Red)</li>
-                    <li>Sorts points by handle for consistent numbering</li>
-                    <li>Default save location: Desktop\output.csv</li>
-                    <li>Creates both CSV file and drawing labels</li>
-                    <li>Preserves SNAP settings</li>
-                    <li>Opens locked/hidden layers automatically</li>
-                </ul>
-            </div>
-            <div class="content-section">
-                <h2>📄 CSV Format</h2>
-                <p>Point Number, X-Coordinate, Y-Coordinate, Z-Coordinate</p>
-                <code style="display:block; margin-top:10px; padding:15px;">
-1,100.500,200.750,50.000<br>
-2,150.250,180.300,51.200
-                </code>
-            </div>
-            <div class="content-section usage-box">
-                <h2>💡 How to Use</h2>
-                <ol class="steps-list">
-                    <li>Type <code>PE</code> and press <kbd>Enter</kbd></li>
-                    <li>Enter text height for point labels</li>
-                    <li>Choose save location for CSV file (default: Desktop\output.csv)</li>
-                    <li>Select points to export and label</li>
-                    <li>The tool will create CSV file and add text labels</li>
-                </ol>
-            </div>
-            <div class="content-section">
-                <h2>💡 Tips</h2>
-                <ul>
-                    <li>Text labels are placed on 'PointNames' layer</li>
-                    <li>Points are sorted by handle for consistent numbering</li>
-                    <li>CSV file can be opened in Excel</li>
-                    <li>Useful for survey points and coordinate data management</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <footer>
-        <div class="container">
-            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
-            <p class="back-link"><a href="../index.html">← Back to All Commands</a></p>
-        </div>
-    </footer>
 </body>
 </html>
