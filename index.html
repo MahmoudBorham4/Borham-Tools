@@ -4,29 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borham Tools - Free AutoCAD LISP Tools for Surveyors</title>
-    
-    <!-- ربط ملف التصميم مع إضافة إصدار لمنع مشاكل الكاش -->
-    <link rel="stylesheet" href="css/Style.css?v=1.2">
-    
-    <!-- إضافة خطوط جوجل لتحسين الخط العربي -->
+    <link rel="stylesheet" href="css/Style.css?v=1.3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- زر تبديل اللغة -->
     <div class="lang-toggle">
         <button onclick="toggleLanguage( )" id="langBtn">العربية</button>
     </div>
-
-    <!-- بسم الله في الأعلى -->
     <div class="bismillah-header">
         <div class="container">
             <div class="bismillah-text" data-key="bismillah.text">In the Name of Allah, Most Gracious, Most Merciful</div>
         </div>
     </div>
-
-    <!-- الهيدر الرئيسي -->
     <header class="hero">
         <div class="container">
             <h1 class="hero-title" data-key="hero.title">Borham Tools</h1>
@@ -34,16 +25,12 @@
             <p class="version-badge" data-key="hero.badge">Free Forever - For the sake of Allah</p>
         </div>
     </header>
-
-    <!-- حديث النبي ﷺ -->
     <section class="hadith-section">
         <div class="container">
             <div class="hadith-container">
                 <div class="hadith-arabic" data-key="hadith.arabic">«The best of people are those who are most beneficial to people»</div>
                 <div class="hadith-attestation" data-key="hadith.attestation">Truthful is the Messenger of Allah, peace be upon him<span class="hadith-symbol">ﷺ</span></div>
             </div>
-
-            <!-- قسم فلسطين -->
             <div class="palestine-section">
                 <h3 class="palestine-title" data-key="palestine.title">🇵🇸 Stand with the Oppressed - Free Palestine</h3>
                 <p class="palestine-text" data-key="palestine.text">These tools are created and shared completely FREE for the sake of Allah, to benefit surveyors and engineers worldwide. We stand in solidarity with all oppressed people, especially our brothers and sisters in Palestine.</p>
@@ -51,8 +38,6 @@
             </div>
         </div>
     </section>
-
-    <!-- قسم "عن الأدوات" -->
     <section class="about">
         <div class="container">
             <h2 data-key="about.title">About Borham Tools</h2>
@@ -67,19 +52,15 @@
                 </div>
                 <div class="about-card">
                     <h3 data-key="developer.title">👨‍💻 The Developer</h3>
-                    <!-- === تم التصحيح هنا === -->
                     <p data-key="developer.text">Created by Mahmoud Borham, a Senior Surveyor dedicated to helping the surveying community through free, high-quality tools.</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- قسم المميزات -->
     <section class="overview">
         <div class="container">
             <h2 data-key="overview.title">What is Borham Tools?</h2>
             <p class="overview-desc" data-key="overview.desc">Borham Tools is a collection of ultra-optimized AutoCAD LISP commands designed specifically for surveyors, civil engineers, and CAD professionals. These tools use advanced algorithms to deliver exceptional performance.</p>
-            
             <div class="features-grid">
                 <div class="feature-card"><span class="icon">⚡</span><h3 data-key="feature1.title">Ultra Fast</h3><p data-key="feature1.text">Advanced algorithms for 10x-50x faster performance</p></div>
                 <div class="feature-card"><span class="icon">🎯</span><h3 data-key="feature2.title">Specialized</h3><p data-key="feature2.text">A complete toolkit for points, levels, coordinates & more</p></div>
@@ -88,8 +69,6 @@
             </div>
         </div>
     </section>
-
-    <!-- قسم دليل البدء السريع -->
     <section class="quick-start">
         <div class="container">
             <h2 data-key="quickstart.title">Quick Start Guide</h2>
@@ -114,33 +93,30 @@
             </div>
         </div>
     </section>
-
-    <!-- قسم الأوامر -->
     <section class="commands">
         <div class="container">
             <h2 data-key="commands.title">Available Commands</h2>
             <div class="commands-grid">
-                <div class="command-card"><h3>PP</h3><p>Points on Objects</p><span class="badge">Optimized</span></div>
-                <div class="command-card"><h3>PPC</h3><p>Line Center Points</p><span class="badge">Optimized</span></div>
-                <div class="command-card"><h3>PPX</h3><p>Intersection Points</p><span class="badge">Optimized</span></div>
-                <div class="command-card"><h3>PE</h3><p>Export & Label Points</p><span class="badge">New</span></div>
-                <div class="command-card"><h3>PI</h3><p>Point Import</p><span class="badge">Multi-Format</span></div>
-                <div class="command-card"><h3>P2C</h3><p>Polyline to Circle</p><span class="badge">Fast</span></div>
-                <div class="command-card"><h3>DF</h3><p>Elevation Difference</p><span class="badge">Updated</span></div>
-                <div class="command-card"><h3>LV</h3><p>Absolute Level Text</p><span class="badge">Updated</span></div>
-                <div class="command-card"><h3>AA</h3><p>Area & Hatch</p><span class="badge">Simple</span></div>
-                <div class="command-card"><h3>LUP</h3><p>Level Update</p><span class="badge">Ultra</span></div>
-                <div class="command-card"><h3>SSL</h3><p>Select Similar</p><span class="badge">Smart</span></div>
-                <div class="command-card"><h3>MO</h3><p>Multi-Offset</p><span class="badge">New</span></div>
-                <div class="command-card"><h3>EN</h3><p>E & N Coordinates</p><span class="badge">MLeader</span></div>
-                <div class="command-card"><h3>ENL</h3><p>3D Coordinates</p><span class="badge">MLeader</span></div>
-                <div class="command-card"><h3>T</h3><p>Table with Codes</p><span class="badge">New</span></div>
-                <div class="command-card"><h3>I</h3><p>Interactive Help</p><span class="badge">System</span></div>
+                <!-- === تم تعديل البطاقات هنا === -->
+                <a href="commands/pp.html" class="command-card" data-command-link="pp"><h3>PP</h3><p data-key="cmd.pp.desc">Points on Objects</p><span class="badge">Optimized</span></a>
+                <a href="commands/ppc.html" class="command-card" data-command-link="ppc"><h3>PPC</h3><p data-key="cmd.ppc.desc">Line Center Points</p><span class="badge">Optimized</span></a>
+                <a href="commands/ppx.html" class="command-card" data-command-link="ppx"><h3>PPX</h3><p data-key="cmd.ppx.desc">Intersection Points</p><span class="badge">Optimized</span></a>
+                <a href="commands/pe.html" class="command-card" data-command-link="pe"><h3>PE</h3><p data-key="cmd.pe.desc">Export & Label Points</p><span class="badge">New</span></a>
+                <a href="commands/pi.html" class="command-card" data-command-link="pi"><h3>PI</h3><p data-key="cmd.pi.desc">Point Import</p><span class="badge">Multi-Format</span></a>
+                <a href="commands/p2c.html" class="command-card" data-command-link="p2c"><h3>P2C</h3><p data-key="cmd.p2c.desc">Polyline to Circle</p><span class="badge">Fast</span></a>
+                <a href="commands/df.html" class="command-card" data-command-link="df"><h3>DF</h3><p data-key="cmd.df.desc">Elevation Difference</p><span class="badge">Updated</span></a>
+                <a href="commands/lv.html" class="command-card" data-command-link="lv"><h3>LV</h3><p data-key="cmd.lv.desc">Absolute Level Text</p><span class="badge">Updated</span></a>
+                <a href="commands/aa.html" class="command-card" data-command-link="aa"><h3>AA</h3><p data-key="cmd.aa.desc">Area & Hatch</p><span class="badge">Simple</span></a>
+                <a href="commands/lup.html" class="command-card" data-command-link="lup"><h3>LUP</h3><p data-key="cmd.lup.desc">Level Update</p><span class="badge">Ultra</span></a>
+                <a href="commands/ssl.html" class="command-card" data-command-link="ssl"><h3>SSL</h3><p data-key="cmd.ssl.desc">Select Similar</p><span class="badge">Smart</span></a>
+                <a href="commands/mo.html" class="command-card" data-command-link="mo"><h3>MO</h3><p data-key="cmd.mo.desc">Multi-Offset</p><span class="badge">New</span></a>
+                <a href="commands/en.html" class="command-card" data-command-link="en"><h3>EN</h3><p data-key="cmd.en.desc">E & N Coordinates</p><span class="badge">MLeader</span></a>
+                <a href="commands/enl.html" class="command-card" data-command-link="enl"><h3>ENL</h3><p data-key="cmd.enl.desc">3D Coordinates</p><span class="badge">MLeader</span></a>
+                <a href="commands/t.html" class="command-card" data-command-link="t"><h3>T</h3><p data-key="cmd.t.desc">Table with Codes</p><span class="badge">New</span></a>
+                <a href="commands/i.html" class="command-card" data-command-link="i"><h3>I</h3><p data-key="cmd.i.desc">Interactive Help</p><span class="badge">System</span></a>
             </div>
         </div>
     </section>
-
-    <!-- قسم التواصل -->
     <section class="contact">
         <div class="container">
             <h2 data-key="contact.title">Contact & Support</h2>
@@ -148,8 +124,6 @@
             <a href="mailto:MahmoudBorham.codes@gmail.com" class="email-btn">MahmoudBorham.codes@gmail.com</a>
         </div>
     </section>
-
-    <!-- الفوتر -->
     <footer>
         <div class="container">
             <p data-key="footer.credit">Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
@@ -157,8 +131,6 @@
             <p class="hadith" data-key="footer.hadith">"The Best Of People Are Those Who Are Most Beneficial To People" — Prophet Muhammad ﷺ</p>
         </div>
     </footer>
-
-    <!-- ملفات الجافاسكريبت للترجمة -->
     <script src="js/translations.js"></script>
     <script src="js/language-switcher.js"></script>
 </body>
