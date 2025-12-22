@@ -3,94 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>توثيق أمر PP - أدوات برهام للمساحة</title>
-    <!-- استدعاء ملف التصميم المشترك لصفحات الأوامر -->
+    <title>التوثيق الفني المفصل لأمر PP - أدوات برهام</title>
     <link rel="stylesheet" href="command-page.css">
     <style>
-        /* تحسينات إضافية للغة العربية */
-        .usage ol li::before {
-            content: counter(step-counter);
-            counter-increment: step-counter;
-            position: absolute;
-            right: -40px; /* ضبط موقع الرقم ليتناسب مع RTL */
-            left: auto;
-        }
-        .usage ol li {
-            padding-right: 20px; /* إضافة مساحة للرقم */
-            padding-left: 0;
-        }
+        .usage ol li::before { content: counter(step-counter); counter-increment: step-counter; position: absolute; right: -40px; left: auto; }
+        .usage ol li { padding-right: 20px; padding-left: 0; }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- زر للتبديل إلى النسخة الإنجليزية -->
-        <div class="lang-switch">
-            <a href="pp.html">View Documentation in English</a>
-        </div>
-
+        <div class="lang-switch"><a href="pp.html">View Documentation in English</a></div>
         <header>
             <h1>الأمر: PP</h1>
-            <p class="subtitle">"Points on Polyline" - إنشاء نقاط مساحية بمسافات منتظمة على العناصر الخطية</p>
+            <p class="subtitle">"Points on Polyline" - إنشاء نقاط مساحية بمسافات منتظمة على الكيانات الخطية</p>
         </header>
 
         <section class="description">
             <h2>الغرض من الأمر</h2>
-            <p>
-                تم تصميم الأمر <code>PP</code> لتسهيل عملية "توقيع النقاط" أو "تفريد المحطات" (Staking out) على طول المسارات في بيئة الأوتوكاد. يقوم الأمر بتوزيع نقاط (AutoCAD Points) بدقة عالية على أي عنصر خطي، سواء كان مستقيمًا أو منحنيًا، وذلك بناءً على مسافة فاصلة (Interval) يحددها المستخدم.
-            </p>
-            <p>
-                يعتبر هذا الأمر أداة لا غنى عنها للمساحين والمهندسين المدنيين عند التعامل مع تخطيط الطرق، خطوط المرافق (الكهرباء، المياه، الصرف)، أو أي مشروع يتطلب تقسيمًا دقيقًا للمسافات.
-            </p>
+            <p>تم تصميم الأمر <code>PP</code> ليكون الأداة الأكثر دقة وكفاءة لعملية "تفريد النقاط" (Staking out) على طول المسارات في بيئة الأوتوكاد. يقوم الأمر بتوزيع نقاط (AutoCAD Points) بدقة عالية على أي كيان خطي، سواء كان مستقيمًا، منحنيًا، أو مغلقًا، وذلك بناءً على مسافة فاصلة (Interval) يحددها المستخدم.</p>
         </section>
 
         <section class="usage">
             <h2>آلية التنفيذ (Workflow)</h2>
             <ol>
-                <li>
-                    <strong>استدعاء الأمر:</strong>
-                    <p>اكتب الاختصار <code>PP</code> في شريط الأوامر (Command Line) ثم اضغط Enter.</p>
-                </li>
-                <li>
-                    <strong>اختيار الكيانات (Select Objects):</strong>
-                    <p>سيظهر لك طلب "Select objects:". قم بتحديد جميع العناصر الخطية التي ترغب في توزيع النقاط عليها. يمكنك اختيار خطوط متعددة ومختلفة في عملية واحدة.</p>
-                </li>
-                <li>
-                    <strong>إدخال المسافة الفاصلة (Interval Distance):</strong>
-                    <p>سيظهر لك طلب "Enter interval distance:". أدخل القيمة الرقمية للمسافة المطلوبة بين كل نقطة والتالية. يتم احتساب المسافة على طول العنصر نفسه (True Length).</p>
-                </li>
-                <li>
-                    <strong>معالجة البيانات:</strong>
-                    <p>يقوم الأمر بمعالجة العناصر المحددة وتوزيع النقاط تلقائيًا. ستظهر النقاط مباشرة على الرسم في طبقة (Layer) مخصصة.</p>
-                </li>
+                <li><strong>استدعاء الأمر:</strong> اكتب الاختصار <code>PP</code> في شريط الأوامر واضغط Enter.</li>
+                <li><strong>اختيار الكيانات (Select Objects):</strong> سيطلب منك "Select objects:". قم بتحديد جميع الكيانات التي ترغب في توزيع النقاط عليها.</li>
+                <li><strong>إدخال المسافة الفاصلة (Interval Distance):</strong> سيطلب منك "Enter interval distance:". أدخل القيمة الرقمية للمسافة المطلوبة بين كل نقطة والتالية.</li>
+                <li><strong>معالجة البيانات:</strong> يقوم الأمر بمعالجة الكيانات وتوزيع النقاط تلقائيًا.</li>
             </ol>
         </section>
 
         <section class="features">
-            <h2>المواصفات الفنية والمميزات</h2>
+            <h2>المواصفات الفنية المتقدمة</h2>
+            <p>يتميز هذا الأمر بعدة قدرات تقنية متقدمة تضمن الدقة والكفاءة في بيئة العمل الحقيقية:</p>
             <ul>
-                <li><strong>دعم شامل للعناصر:</strong> يعمل الأمر بكفاءة على الخطوط (Lines)، الخطوط المتعددة (Polylines)، الأقواس (Arcs)، الدوائر (Circles)، والسبلاين (Splines).</li>
-                <li><strong>دقة المنحنيات:</strong> يضمن الأمر توزيع النقاط بشكل صحيح على طول المنحنيات والأقواس، وليس على الأوتار (Chords)، مما يوفر دقة مساحية عالية.</li>
-                <li><strong>معالجة دفعة واحدة (Batch Processing):</strong> يمكنك اختيار عدد لا نهائي من العناصر في نفس الوقت، وسيقوم الأمر بمعالجتها جميعًا في عملية واحدة.</li>
-                <li><strong>كفاءة الأداء:</strong> تم تحسين الخوارزمية لتعمل بسرعة حتى مع الرسومات الكبيرة والمعقدة.</li>
+                <li>
+                    <strong>منع تكرار النقاط (No Duplicates):</strong>
+                    <p>من أهم مميزات الأمر، أنه يقوم تلقائيًا بالتحقق من عدم وجود نقاط مكررة في نفس الموقع. إذا كانت نقطة البداية لعنصر ما هي نفسها نقطة النهاية لعنصر آخر، سيقوم الأمر بوضع نقطة واحدة فقط، مما يضمن نظافة الرسم ودقة البيانات المُصدرة.</p>
+                </li>
+                <li>
+                    <strong>دعم الكيانات المغلقة (Closed Entities Support):</strong>
+                    <p>يتعامل الأمر بذكاء مع الأشكال المغلقة. عند اختيار كيان مغلق مثل الدائرة (Circle) أو الشكل البيضاوي (Ellipse)، يقوم الأمر تلقائيًا بوضع نقطة واحدة فقط في مركز الشكل الهندسي، وهو الإجراء المطلوب في معظم التطبيقات المساحية.</p>
+                </li>
+                <li>
+                    <strong>دقة المنحنيات (True Curve Measurement):</strong>
+                    <p>يضمن الأمر توزيع النقاط على طول المسار الحقيقي للمنحنيات (True Arc Length)، وليس على طول الأوتار (Chords) التي تربط بين النقاط. هذه الميزة حاسمة للحفاظ على الدقة في المشاريع التي تحتوي على أقواس ومنحنيات.</p>
+                </li>
+                <li>
+                    <strong>توافق شامل مع الكيانات الخطية:</strong>
+                    <p>تم اختبار الأمر ليعمل بدقة متناهية مع مجموعة واسعة من الكيانات الخطية ثنائية الأبعاد (2D) وثلاثية الأبعاد (3D)، بما في ذلك:</p>
+                    <ul style="list-style-type: disc; padding-right: 20px;">
+                        <li><strong>Line:</strong> الخطوط المستقيمة.</li>
+                        <li><strong>Polyline (2D & 3D):</strong> الخطوط المتعددة، سواء كانت ثنائية أو ثلاثية الأبعاد.</li>
+                        <li><strong>Arc:</strong> الأقواس.</li>
+                        <li><strong>Circle:</strong> الدوائر (يتم وضع نقطة في المركز).</li>
+                        <li><strong>Ellipse:</strong> الأشكال البيضاوية (يتم وضع نقطة في المركز).</li>
+                        <li><strong>Spline:</strong> المنحنيات الحرة.</li>
+                    </ul>
+                </li>
             </ul>
         </section>
 
         <section class="example">
-            <h2>تطبيق عملي (Use Case)</h2>
-            <p>
-                <strong>المشكلة:</strong> لديك مسار خط أنابيب (Pipeline) مرسوم كـ Polyline بطول 2.5 كيلومتر، وتحتاج إلى تحديد مواقع اللحامات (Welding Joints) كل 12 مترًا على طول المسار.
-            </p>
-            <p>
-                <strong>الحل باستخدام <code>PP</code>:</strong>
-            </p>
+            <h2>تطبيق عملي متقدم</h2>
+            <p><strong>المشكلة:</strong> لديك مخطط قطعة أرض يحتوي على حدود مستقيمة (Lines)، منحنيات طرق (Arcs)، ودوار (Circle)، وتحتاج إلى وضع نقاط خرسانية (Stakes) كل 10 أمتار على طول محيط القطعة بالكامل، بالإضافة إلى تحديد مركز الدوار.</p>
+            <p><strong>الحل باستخدام <code>PP</code>:</strong></p>
             <ol style="list-style-type: disc; padding-right: 20px;">
                 <li>شغل أمر <code>PP</code>.</li>
-                <li>اختر الـ Polyline الذي يمثل خط الأنابيب.</li>
-                <li>عندما يطلب منك المسافة، أدخل <code>12</code>.</li>
-                <li><strong>النتيجة:</strong> سيتم إنشاء نقاط أوتوكاد على طول المسار كل 12 مترًا بالضبط، جاهزة للتصدير إلى جهاز Total Station أو استخدامها في إعداد اللوحات.</li>
+                <li>اختر جميع الخطوط والأقواس والدائرة التي تشكل المخطط في عملية اختيار واحدة.</li>
+                <li>عندما يطلب منك المسافة، أدخل <code>10</code>.</li>
+                <li><strong>النتيجة الفورية:</strong>
+                    <ul>
+                        <li>سيتم توزيع النقاط كل 10 أمتار على طول الخطوط والأقواس بدقة.</li>
+                        <li>سيتم وضع نقطة واحدة فقط في مركز الدوار.</li>
+                        <li>لن يتم وضع أي نقاط مكررة عند نقاط اتصال الخطوط بالأقواس.</li>
+                    </ul>
+                </li>
             </ol>
-            <!-- يمكنك إضافة صورة أو GIF هنا لتوضيح المثال -->
-            <!-- <img src="../images/pp-example-ar.gif" alt="مثال متحرك لأمر PP"> -->
         </section>
 
         <footer>
