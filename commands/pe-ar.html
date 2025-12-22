@@ -145,7 +145,7 @@
             font-size: 1.5rem;
         }
 
-        /* 4. التكامل مع PP */
+        /* 4. التكامل مع جميع أوامر النقاط */
         .integration {
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(37, 99, 235, 0.1));
             border-radius: 10px;
@@ -278,7 +278,8 @@
                 <div class="definition-box">
                     <h3>⚙️ متى تستخدمه؟</h3>
                     <ul style="color: var(--text-gray); padding-right: 1rem;">
-                        <li>بعد استخدام أمر PP لتصدير النقاط للمساح</li>
+                        <li>بعد استخدام <strong>أي أمر ينشئ نقاطاً</strong> (PP, PPC, PPX, PI, إلخ)</li>
+                        <li>لتصدير <strong>أي نقاط في الرسم</strong> بغض النظر عن مصدرها</li>
                         <li>لإعداد قوائم إحداثيات للعمل الميداني</li>
                         <li>لحفظ بيانات النقاط لمشاريع مستقبلية</li>
                         <li>لتبادل البيانات مع برامج أخرى (Excel, GIS, إلخ)</li>
@@ -387,39 +388,68 @@
             </div>
         </section>
 
-        <!-- 4. التكامل مع PP -->
+        <!-- 4. التكامل مع جميع أوامر النقاط -->
         <section class="section">
-            <h2 class="section-title">🔄 التكامل الكامل مع أمر PP</h2>
+            <h2 class="section-title">🔄 التكامل مع جميع أوامر النقاط</h2>
             <div class="integration">
-                <h3 style="color: var(--secondary); margin-bottom: 1rem;">النظام المتكامل: PP → PE</h3>
+                <h3 style="color: var(--secondary); margin-bottom: 1rem;">نظام تصدير عالمي لأي نوع من النقاط</h3>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); margin: 1rem 0;">
-                    <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-md); border-radius: 8px;">
-                        <h4 style="color: var(--primary); margin-bottom: 0.8rem;">🔧 أمر PP</h4>
-                        <ul style="color: var(--text-gray); padding-right: 1rem; font-size: 0.9rem;">
-                            <li>إنشاء النقاط الهندسية</li>
-                            <li>تحديد المراكز والرؤوس</li>
-                            <li>سرعة: ثوانٍ معدودة</li>
-                            <li>النتيجة: نقاط في الرسم</li>
-                        </ul>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md); margin: 1rem 0;">
+                    <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-sm); border-radius: 8px; text-align: center;">
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">🔵 PP</h4>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">نقاط على العناصر</p>
                     </div>
                     
-                    <div style="background: rgba(16, 185, 129, 0.1); padding: var(--spacing-md); border-radius: 8px;">
-                        <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">📤 أمر PE</h4>
-                        <ul style="color: var(--text-gray); padding-right: 1rem; font-size: 0.9rem;">
-                            <li>تصدير الإحداثيات</li>
-                            <li>تسمية النقاط</li>
-                            <li>سرعة: ثوانٍ معدودة</li>
-                            <li>النتيجة: ملف CSV جاهز</li>
-                        </ul>
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: var(--spacing-sm); border-radius: 8px; text-align: center;">
+                        <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">🎯 PPC</h4>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">مراكز الخطوط</p>
+                    </div>
+                    
+                    <div style="background: rgba(245, 158, 11, 0.1); padding: var(--spacing-sm); border-radius: 8px; text-align: center;">
+                        <h4 style="color: var(--accent); margin-bottom: 0.5rem;">✖️ PPX</h4>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">تقاطعات الخطوط</p>
+                    </div>
+                    
+                    <div style="background: rgba(139, 92, 246, 0.1); padding: var(--spacing-sm); border-radius: 8px; text-align: center;">
+                        <h4 style="color: #8b5cf6; margin-bottom: 0.5rem;">🖱️ يدوي</h4>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">نقاط مرسومة يدوياً</p>
+                    </div>
+                    
+                    <div style="background: rgba(239, 68, 68, 0.1); padding: var(--spacing-sm); border-radius: 8px; text-align: center;">
+                        <h4 style="color: #ef4444; margin-bottom: 0.5rem;">📥 PI</h4>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">نقاط مستوردة</p>
                     </div>
                 </div>
                 
                 <div style="text-align: center; margin-top: 1rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
-                    <h4 style="color: var(--accent); margin-bottom: 0.5rem;">🎯 سير العمل المتكامل</h4>
+                    <h4 style="color: var(--accent); margin-bottom: 0.5rem;">🎯 المبدأ الأساسي</h4>
                     <p style="color: var(--text-light);">
-                        <strong>PP</strong> لإنشاء النقاط → <strong>PE</strong> لتصديرها → <strong>تسليم للمساح</strong> للعمل الميداني
+                        أمر PE يعمل مع <strong>أي نقطة</strong> في الرسم، بغض النظر عن مصدرها أو طريقة إنشائها
                     </p>
+                </div>
+                
+                <div style="background: rgba(34, 197, 94, 0.1); padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem;">
+                    <h4 style="color: var(--success); margin-bottom: 0.8rem;">🔄 أمثلة على سير العمل:</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-sm);">
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px;">
+                            <p style="color: var(--text-light); font-size: 0.9rem;">
+                                <strong>مثال 1:</strong> PPX → PE<br>
+                                <span style="color: var(--text-gray); font-size: 0.85rem;">تقاطعات خطوط → تصدير إحداثيات التقاطعات</span>
+                            </p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px;">
+                            <p style="color: var(--text-light); font-size: 0.9rem;">
+                                <strong>مثال 2:</strong> PPC → PE<br>
+                                <span style="color: var(--text-gray); font-size: 0.85rem;">مراكز خطوط → تصدير إحداثيات المراكز</span>
+                            </p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px;">
+                            <p style="color: var(--text-light); font-size: 0.9rem;">
+                                <strong>مثال 3:</strong> PI → PE<br>
+                                <span style="color: var(--text-gray); font-size: 0.85rem;">نقاط مستوردة → تصدير نفس النقاط بعد المعالجة</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
