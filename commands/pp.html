@@ -3,17 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PP Command Documentation - Borham Tools</title>
-    <!-- الربط الصحيح بملف التصميم الموجود في نفس المجلد -->
+    <title>PP Command - Detailed Technical Documentation</title>
     <link rel="stylesheet" href="command-page.css">
 </head>
 <body>
     <div class="container">
-        <!-- Language Switch Button -->
-        <div class="lang-switch">
-            <a href="pp-ar.html">عرض التوثيق باللغة العربية</a>
-        </div>
-
+        <div class="lang-switch"><a href="pp-ar.html">عرض التوثيق باللغة العربية</a></div>
         <header>
             <h1>Command: PP</h1>
             <p class="subtitle">"Points on Polyline" - Create Surveying Points at Regular Intervals on Linear Entities</p>
@@ -21,59 +16,65 @@
 
         <section class="description">
             <h2>Purpose of the Command</h2>
-            <p>
-                The <code>PP</code> command is designed to automate the process of "staking out" points along a path within the AutoCAD environment. It accurately places AutoCAD Points on any linear entity, whether straight or curved, based on a user-defined interval.
-            </p>
-            <p>
-                This command is an indispensable tool for surveyors and civil engineers when dealing with road layouts, utility lines (power, water, sewage), or any project that requires precise distance division.
-            </p>
+            <p>The <code>PP</code> command is engineered to be the most precise and efficient tool for "staking out" points along a path in the AutoCAD environment. It accurately places AutoCAD Points on any linear entity—whether straight, curved, or closed—based on a user-defined interval.</p>
         </section>
 
         <section class="usage">
             <h2>Workflow</h2>
             <ol>
-                <li>
-                    <strong>Invoke Command:</strong>
-                    <p>Type the shortcut <code>PP</code> into the Command Line and press Enter.</p>
-                </li>
-                <li>
-                    <strong>Select Entities:</strong>
-                    <p>You will be prompted to "Select objects:". Select all the linear entities on which you want to distribute the points. You can select multiple different objects in a single operation.</p>
-                </li>
-                <li>
-                    <strong>Enter Interval Distance:</strong>
-                    <p>You will be prompted to "Enter interval distance:". Enter the numerical value for the desired distance between each point. The distance is calculated along the true length of the entity.</p>
-                </li>
-                <li>
-                    <strong>Process Data:</strong>
-                    <p>The command processes the selected entities and automatically places the points. The points will appear directly on the drawing, typically on a dedicated layer.</p>
-                </li>
+                <li><strong>Invoke Command:</strong> Type the shortcut <code>PP</code> into the Command Line and press Enter.</li>
+                <li><strong>Select Entities:</strong> You will be prompted to "Select objects:". Select all entities you wish to distribute points on.</li>
+                <li><strong>Enter Interval Distance:</strong> You will be prompted to "Enter interval distance:". Enter the numerical value for the desired distance between each point.</li>
+                <li><strong>Process Data:</strong> The command processes the entities and automatically places the points.</li>
             </ol>
         </section>
 
         <section class="features">
-            <h2>Technical Specs & Features</h2>
+            <h2>Advanced Technical Specifications</h2>
+            <p>This command features several advanced technical capabilities that ensure accuracy and efficiency in a real-world work environment:</p>
             <ul>
-                <li><strong>Comprehensive Entity Support:</strong> Works efficiently on Lines, Polylines, Arcs, Circles, and Splines.</li>
-                <li><strong>Curve Accuracy:</strong> Ensures points are distributed correctly along the true length of curves and arcs, not along their chords, providing high surveying accuracy.</li>
-                <li><strong>Batch Processing:</strong> You can select an unlimited number of objects at once, and the command will process them all in a single operation.</li>
-                <li><strong>Performance Efficiency:</strong> The algorithm is optimized to run quickly, even on large and complex drawings.</li>
+                <li>
+                    <strong>Duplicate Point Prevention:</strong>
+                    <p>A key feature of this command is its automatic check for duplicate points. If the start point of one entity is the same as the end point of another, the command will place only a single point at that location, ensuring a clean drawing and accurate exported data.</p>
+                </li>
+                <li>
+                    <strong>Closed Entity Support:</strong>
+                    <p>The command intelligently handles closed shapes. When a closed entity like a Circle or an Ellipse is selected, the command automatically places a single point at its geometric center, which is the required action in most surveying applications.</p>
+                </li>
+                <li>
+                    <strong>True Curve Measurement:</strong>
+                    <p>The command ensures points are distributed along the true arc length of curves, not along the chords connecting the points. This feature is critical for maintaining high accuracy in projects containing arcs and complex curves.</p>
+                </li>
+                <li>
+                    <strong>Comprehensive Linear Entity Compatibility:</strong>
+                    <p>The command has been tested to work with extreme precision on a wide range of 2D and 3D linear entities, including:</p>
+                    <ul style="list-style-type: disc; padding-left: 20px;">
+                        <li><strong>Line:</strong> Straight line segments.</li>
+                        <li><strong>Polyline (2D & 3D):</strong> Both 2D and 3D polylines.</li>
+                        <li><strong>Arc:</strong> Arcs of any radius.</li>
+                        <li><strong>Circle:</strong> Places a single point at the center.</li>
+                        <li><strong>Ellipse:</strong> Places a single point at the center.</li>
+                        <li><strong>Spline:</strong> Complex, free-form curves.</li>
+                    </ul>
+                </li>
             </ul>
         </section>
 
         <section class="example">
-            <h2>Use Case</h2>
-            <p>
-                <strong>Problem:</strong> You have a 2.5 km pipeline route drawn as a Polyline, and you need to mark the locations of welding joints every 12 meters along the path.
-            </p>
-            <p>
-                <strong>Solution with <code>PP</code>:</strong>
-            </p>
+            <h2>Advanced Use Case</h2>
+            <p><strong>Problem:</strong> You have a plot plan that includes straight boundaries (Lines), curved roads (Arcs), and a roundabout (Circle). You need to place stakes every 10 meters along the entire perimeter, plus identify the center of the roundabout.</p>
+            <p><strong>Solution with <code>PP</code>:</strong></p>
             <ol style="list-style-type: disc; padding-left: 20px;">
                 <li>Run the <code>PP</code> command.</li>
-                <li>Select the Polyline representing the pipeline.</li>
-                <li>When prompted for the distance, enter <code>12</code>.</li>
-                <li><strong>Result:</strong> AutoCAD points will be instantly created along the path exactly every 12 meters, ready to be exported to a Total Station or used for generating drawings.</li>
+                <li>Select all the lines, arcs, and the circle that form the plan in a single selection.</li>
+                <li>When prompted for the distance, enter <code>10</code>.</li>
+                <li><strong>Instant Result:</strong>
+                    <ul>
+                        <li>Points will be accurately distributed every 10 meters along the lines and arcs.</li>
+                        <li>A single point will be placed at the center of the roundabout.</li>
+                        <li>No duplicate points will be created where the lines and arcs connect.</li>
+                    </ul>
+                </li>
             </ol>
         </section>
 
