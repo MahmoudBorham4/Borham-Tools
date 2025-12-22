@@ -1,5 +1,5 @@
 /* ========================================
-   Borham Tools v80.7 - تصميم جديد ومحسّن (مع تعديل علم فلسطين)
+   Borham Tools v80.7 - التصميم النهائي المدمج
    بواسطة: محمود برهام & Manus AI
    لوجه الله تعالى - Free for Everyone
    ======================================== */
@@ -228,30 +228,29 @@ html[dir="ltr"] .hadith-arabic {
 /* --- قسم فلسطين --- */
 .palestine-section {
     /* === التعديل هنا === */
-    background: linear-gradient(to top, var(--palestine-green) 33%, var(--palestine-white) 33%, var(--palestine-white) 66%, var(--palestine-black) 66%);
-    color: var(--text-dark); /* تغيير لون النص ليظهر على الخلفية الجديدة */
+    background: linear-gradient(135deg, var(--palestine-red), var(--palestine-black));
+    color: var(--palestine-white);
     padding: var(--spacing-md);
     border-radius: var(--border-radius);
     margin: var(--spacing-lg) auto 0; /* مسافة من الحديث */
     max-width: 900px;
     box-shadow: var(--shadow-lg);
     text-align: center;
-    border: 2px solid var(--border);
 }
 
 .palestine-title {
     font-size: 2rem;
     margin-bottom: var(--spacing-sm);
-    color: var(--palestine-red); /* استخدام اللون الأحمر للعنوان */
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    color: var(--palestine-white);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .palestine-text {
     font-size: 1.1rem;
     line-height: 1.8;
+    opacity: 0.9;
     max-width: 700px;
     margin: 0 auto var(--spacing-sm) auto;
-    font-weight: 500; /* جعل الخط أثقل قليلًا */
 }
 
 .dua {
@@ -259,10 +258,9 @@ html[dir="ltr"] .hadith-arabic {
     font-style: italic;
     margin-top: var(--spacing-sm);
     padding: var(--spacing-sm);
-    background: rgba(255, 255, 255, 0.7); /* خلفية بيضاء شبه شفافة */
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     display: inline-block;
-    color: var(--text-dark);
 }
 
 /* ============ [5] باقي الأقسام (About, Features, etc.) ============ */
