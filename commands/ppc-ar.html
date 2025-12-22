@@ -1,95 +1,313 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>التوثيق الفني لأمر PPC - أدوات برهام</title>
-    <!-- هذا هو الربط الصحيح بملف التصميم الخاص بك -->
-    <link rel="stylesheet" href="command-page.css">
-    <!-- أيقونات Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head>
-<body>
-    <div class="container">
-        <!-- شريط التنقل العلوي (مطابق لتصميمك ) -->
-        <div class="page-nav">
-            <a href="../index.html" class="nav-link"><i class="fa-solid fa-arrow-left"></i> العودة للقائمة</a>
-            <!-- الرابط معطل مؤقتاً بنفس الطريقة -->
-            <a href="#" class="nav-link" style="opacity: 0.5; pointer-events: none;">View in English <i class="fa-solid fa-language"></i></a>
-        </div>
-
-        <header>
-            <h1>الأمر: <span>PPC</span></h1>
-            <p class="subtitle">"Polyline Point Center" - إنشاء نقاط في مراكز الكيانات الخطية</p>
-        </header>
-
-        <!-- بطاقة: الغرض من الأمر (بنفس تصميمك) -->
-        <div class="card">
-            <div class="card-header">
-                <span class="icon"><i class="fa-solid fa-crosshairs"></i></span>
-                <h2>الغرض الأساسي</h2>
+    <!-- 1. تعريف الأمر -->
+    <section class="section">
+        <h2 class="section-title">📌 ما هو الأمر PPC؟</h2>
+        <div class="definition">
+            <p>الأمر <strong>PPC</strong> هو أداة متخصصة لإنشاء نقطة واحدة فقط في المنتصف الهندسي الدقيق لكل خط (LINE) يتم اختياره، وهو الإصدار المتخصص من الأمر PP للتعامل مع الخطوط فقط.</p>
+            
+            <div class="definition-box">
+                <h3>🎯 ماذا يفعل PPC بالتحديد؟</h3>
+                <ul style="color: var(--text-gray); padding-right: 1rem;">
+                    <li>ينشئ <strong>نقطة واحدة فقط</strong> في منتصف كل خط (LINE)</li>
+                    <li>يحسب الإحداثيات الدقيقة للنقطة باستخدام معادلة الوسط الحسابي: <br><code>مركز الخط = ((X1+X2)/2, (Y1+Y2)/2, (Z1+Z2)/2)</code></li>
+                    <li>يتجاهل تلقائياً <strong>جميع أنواع العناصر الأخرى</strong> (دوائر، أقواس، مضلعات)</li>
+                    <li>يستخدم طبقة <strong>"POINT"</strong> بلون أصفر (#6) لتمييز النقاط</li>
+                </ul>
             </div>
-            <p>تم تصميم الأمر <code>PPC</code> لتحديد المراكز الهندسية الدقيقة لمجموعة من الكيانات الخطية (Lines, Polylines, Arcs) بضغطة زر واحدة. بدلاً من حساب المنتصف يدويًا لكل عنصر، يقوم هذا الأمر بوضع نقطة (AutoCAD Point) في منتصف كل كيان يتم اختياره، مما يسرع بشكل هائل من أعمال التخطيط والتحليل.</p>
-        </div>
 
-        <!-- بطاقة: المواصفات الفنية المتقدمة (بنفس تصميمك) -->
-        <div class="card">
-            <div class="card-header">
-                <span class="icon"><i class="fa-solid fa-cogs"></i></span>
-                <h2>المواصفات الفنية المتقدمة</h2>
+            <div class="definition-box">
+                <h3>⚙️ لماذا PPC وليس PP؟</h3>
+                <ul style="color: var(--text-gray); padding-right: 1rem;">
+                    <li>عندما تحتاج <strong>نقاط منتصف الخطوط فقط</strong> بدون أي نقاط أخرى</li>
+                    <li>عند العمل مع <strong>مخططات هيكلية</strong> تحتوي على شبكات خطوط فقط</li>
+                    <li>عند تحديد <strong>مراكز الحوائط</strong> أو العناصر الخطية في التصميم</li>
+                    <li>للتأكد من أن كل نقطة تمثل <strong>مركز خط حقيقي</strong> وليست رأس مضلع</li>
+                </ul>
             </div>
-            <ul>
-                <li>
-                    <strong>سرعة فائقة في المعالجة (Batch Processing):</strong>
-                    <p>يمكنك اختيار مئات أو آلاف الكيانات الخطية في عملية اختيار واحدة. يقوم الأمر بمعالجتها جميعًا في جزء من الثانية، مما يوفر وقتًا ثمينًا في المشاريع الكبيرة والمعقدة.</p>
-                </li>
-                <li>
-                    <strong>دقة حسابية مضمونة:</strong>
-                    <p>يستخدم الأمر خوارزميات دقيقة لحساب نقطة المنتصف الحقيقية لكل كيان. بالنسبة للأقواس (Arcs)، يتم حساب النقطة على طول مسار القوس الفعلي، وليس على وتره، مما يضمن دقة مساحية عالية.</p>
-                </li>
-                <li>
-                    <strong>سهولة الاستخدام والتكامل:</strong>
-                    <p>الأمر بسيط ومباشر. كل ما عليك هو تشغيل الأمر واختيار العناصر. لا توجد خطوات أو إعدادات معقدة، مما يجعله أداة مثالية للاستخدام اليومي السريع.</p>
-                </li>
-                <li>
-                    <strong>توافق واسع مع الكيانات:</strong>
-                    <p>يعمل الأمر بكفاءة مع الكيانات الخطية الأكثر شيوعًا في الرسومات الهندسية والمساحية:</p>
-                    <ul class="sub-list">
-                        <li><strong>Line:</strong> يضع نقطة في منتصف الخط المستقيم.</li>
-                        <li><strong>Polyline (2D/3D):</strong> يضع نقطة في منتصف الطول الإجمالي للبوليلاين.</li>
-                        <li><strong>Arc:</strong> يضع نقطة في منتصف القوس على مساره المنحني.</li>
+        </div>
+    </section>
+
+    <!-- 2. المميزات التقنية -->
+    <section class="section">
+        <h2 class="section-title">✨ المميزات التقنية الفريدة</h2>
+        <div class="tech-features">
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h4>تخصصية مطلقة</h4>
+                <p>يعمل مع <strong>الخطوط (LINE) فقط</strong> ويتجاهل تلقائياً جميع أنواع العناصر الأخرى</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🧮</div>
+                <h4>حساب رياضي دقيق</h4>
+                <p>يستخدم معادلات رياضية دقيقة لحساب منتصف الخط مع مراعاة الإحداثيات ثلاثية الأبعاد</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h4>سرعة فائقة</h4>
+                <p>معالجة آلاف الخطوط في ثوانٍ معدودة مع تثبيت تلقائي لـ PDMODE 35</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h4>فحص مسبق</h4>
+                <p>يتحقق تلقائياً من وجود نقاط في نفس الموقع لمنع التكرار</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. طريقة العمل -->
+    <section class="section">
+        <h2 class="section-title">🚀 كيف يعمل الأمر PPC؟</h2>
+        <div class="how-it-works">
+            <p style="color: var(--text-gray); margin-bottom: 1rem;">عملية إنشاء نقاط منتصف الخطوط تتم في 4 خطوات آلية:</p>
+            
+            <div class="workflow">
+                <div class="work-step">
+                    <strong>الخطوة 1</strong>
+                    <p>بدء الأمر</p>
+                    <small>كتابة PPC ثم Enter</small>
+                </div>
+                <div class="work-step">
+                    <strong>الخطوة 2</strong>
+                    <p>اختيار الخطوط</p>
+                    <small>اختيار الخطوط المراد إنشاء نقاط منتصف لها</small>
+                </div>
+                <div class="work-step">
+                    <strong>الخطوة 3</strong>
+                    <p>معالجة آلية</p>
+                    <small>حساب مراكز جميع الخطوط المختارة</small>
+                </div>
+                <div class="work-step">
+                    <strong>النتيجة</strong>
+                    <p>نقاط منتصف</p>
+                    <small>نقاط صفراء في منتصف كل خط</small>
+                </div>
+            </div>
+
+            <div class="definition-box" style="margin-top: 1rem;">
+                <h3>📐 المعادلة الحسابية التي يستخدمها PPC:</h3>
+                <table class="data-table">
+                    <tr>
+                        <th>المتغير</th>
+                        <th>الوصف</th>
+                        <th>مثال</th>
+                    </tr>
+                    <tr>
+                        <td>Start Point</td>
+                        <td>نقطة بداية الخط (X1, Y1, Z1)</td>
+                        <td>(100, 50, 0)</td>
+                    </tr>
+                    <tr>
+                        <td>End Point</td>
+                        <td>نقطة نهاية الخط (X2, Y2, Z2)</td>
+                        <td>(200, 150, 10)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Center Point</strong></td>
+                        <td>نقطة المنتصف المحسوبة</td>
+                        <td><strong>(150, 100, 5)</strong></td>
+                    </tr>
+                </table>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem; text-align: center;">
+                    🧮 <strong>الصيغة:</strong> المركز = ((X1+X2)/2, (Y1+Y2)/2, (Z1+Z2)/2)
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. التمايز عن الأمر PP -->
+    <section class="section">
+        <h2 class="section-title">🔄 الفرق بين PPC وPP</h2>
+        <div class="comparison">
+            <h3 style="color: var(--accent); margin-bottom: 1rem;">PPC هو الإصدار المتخصص للخطوط فقط</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); margin: 1rem 0;">
+                <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-sm); border-radius: 8px;">
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">🔄 الأمر PP (عام)</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem;">
+                        <li>يعمل مع <strong>جميع أنواع العناصر</strong></li>
+                        <li>ينشئ نقاطاً على <strong>مراكز الدوائر</strong></li>
+                        <li>ينشئ نقاطاً على <strong>رؤوس المضلعات</strong></li>
+                        <li>يقسم <strong>الأقواس والمنحنيات</strong></li>
+                        <li>يحتاج إلى <strong>إدخال قيمة تباعد</strong></li>
                     </ul>
-                </li>
-            </ul>
-        </div>
-
-        <!-- بطاقة: أمثلة عملية من الواقع (بنفس تصميمك) -->
-        <div class="card">
-            <div class="card-header">
-                <span class="icon"><i class="fa-solid fa-vial-circle-check"></i></span>
-                <h2>أمثلة عملية من الواقع</h2>
+                </div>
+                
+                <div style="background: rgba(16, 185, 129, 0.1); padding: var(--spacing-sm); border-radius: 8px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">🎯 الأمر PPC (متخصص)</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem;">
+                        <li>يعمل مع <strong>الخطوط (LINE) فقط</strong></li>
+                        <li>ينشئ <strong>نقطة واحدة فقط في منتصف كل خط</strong></li>
+                        <li>لا يتعامل مع الدوائر أو المضلعات</li>
+                        <li>لا يحتاج إلى قيمة تباعد</li>
+                        <li>ينشئ <strong>طبقة POINT بلون أصفر</strong></li>
+                    </ul>
+                </div>
             </div>
-            <ol>
-                <li>
-                    <strong>تحديد مراكز الطرق في المخططات:</strong>
-                    <p><strong>الموقف:</strong> لديك مخطط تقسيم أراضي يحتوي على عشرات الشوارع مرسومة كخطوط (Lines)، وتحتاج إلى تحديد نقاط المنتصف لكل شارع لوضع علامات خدماتية.  
-
-                    <strong>الحل بـ PPC:</strong> شغل الأمر <code>PPC</code>، اختر جميع خطوط الشوارع مرة واحدة. في لحظة، سيتم وضع نقطة في منتصف كل شارع.</p>
-                </li>
-                <li>
-                    <strong>حساب منتصف الجدران في الرسومات المعمارية:</strong>
-                    <p><strong>الموقف:</strong> تعمل على مخطط معماري وتحتاج إلى إيجاد مراكز الجدران (المرسومة كـ Polylines) لتحديد أماكن تركيب وحدات الإضاءة.  
-
-                    <strong>الحل بـ PPC:</strong> اختر جميع الـ Polylines التي تمثل الجدران. سيقوم الأمر بوضع نقطة في منتصف كل جدار، مما يسهل عملية التوزيع.</p>
-                </li>
-                <li>
-                    <strong>أعمال تنسيق المواقع (Landscaping):</strong>
-                    <p><strong>الموقف:</strong> لديك مسارات منحنية (Arcs) في حديقة، وتريد وضع عمود إنارة في منتصف كل مسار.  
-
-                    <strong>الحل بـ PPC:</strong> اختر جميع الأقواس. سيقوم الأمر بحساب نقطة المنتصف الدقيقة على طول كل قوس ووضع نقطة هناك.</p>
-                </li>
-            </ol>
+            
+            <div style="text-align: center; margin-top: 1rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
+                <h4 style="color: var(--accent); margin-bottom: 0.5rem;">🎯 قاعدة الاختيار البسيطة</h4>
+                <p style="color: var(--text-light);">
+                    استخدم <strong>PP</strong> عندما تريد نقاطاً على <strong>أنواع متعددة</strong> من العناصر<br>
+                    استخدم <strong>PPC</strong> عندما تريد نقاطاً على <strong>منتصف الخطوط فقط</strong>
+                </p>
+            </div>
+            
+            <div style="background: rgba(34, 197, 94, 0.1); padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem;">
+                <h4 style="color: var(--success); margin-bottom: 0.8rem;">💡 أمثلة عملية على استخدام PPC:</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-sm);">
+                    <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px;">
+                        <p style="color: var(--text-light); font-size: 0.9rem;">
+                            <strong>مخططات الإنشاءات المعدنية:</strong><br>
+                            <span style="color: var(--text-gray); font-size: 0.85rem;">تحديد مراكز القضبان والجسور المعدنية الخطية</span>
+                        </p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px;">
+                        <p style="color: var(--text-light); font-size: 0.9rem;">
+                            <strong>مخططات التمديدات الكهربائية:</strong><br>
+                            <span style="color: var(--text-gray); font-size: 0.85rem;">تحديد منتصف مسارات الأسلاك والكابلات</span>
+                        </p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px;">
+                        <p style="color: var(--text-light); font-size: 0.9rem;">
+                            <strong>مخططات الصرف الصحي:</strong><br>
+                            <span style="color: var(--text-gray); font-size: 0.85rem;">تحديد منتصف خطوط المواسير والأنابيب</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</body>
-</html>
+    </section>
+
+    <!-- 5. النتائج والتوفير -->
+    <section class="section">
+        <h2 class="section-title">💰 النتائج والتوفير في الوقت</h2>
+        <div class="results">
+            <div class="result-card">
+                <div class="result-value">95-99%</div>
+                <div class="result-label">توفير في الوقت</div>
+            </div>
+            <div class="result-card">
+                <div class="result-value">⏱️ 0 ثانية</div>
+                <div class="result-label">للحساب اليدوي لكل خط</div>
+            </div>
+            <div class="result-card">
+                <div class="result-value">100%</div>
+                <div class="result-label">دقة هندسية</div>
+            </div>
+            <div class="result-card">
+                <div class="result-value">∞</div>
+                <div class="result-label">قابلية للتوسع</div>
+            </div>
+        </div>
+
+        <div style="background: rgba(34, 197, 94, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
+            <h3 style="color: var(--success); margin-bottom: 1rem;">🏭 سيناريو عملي: مشروع جسر كبير</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+                <div>
+                    <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">بدون PPC:</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem;">
+                        <li>حساب منتصف 800 عارضة (خط) يدوياً</li>
+                        <li>مدة: 4-5 ساعات عمل متواصل</li>
+                        <li>احتمال أخطاء حسابية: مرتفع</li>
+                        <li>جهد ذهني: كبير جداً</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">بـ PPC:</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem;">
+                        <li>اختيار 800 خط دفعة واحدة</li>
+                        <li>مدة: 10 ثوانٍ فقط</li>
+                        <li>دقة: 100% بدون أخطاء</li>
+                        <li>جهد: لا شيء</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                ⚡ توفير 4.9 ساعة عمل لكل 800 خط!
+            </p>
+        </div>
+    </section>
+
+    <!-- 6. الاستخدامات المتخصصة -->
+    <section class="section">
+        <h2 class="section-title">🏗️ الاستخدامات المتخصصة في المشاريع</h2>
+        <div class="tech-features">
+            
+            <div class="feature-card">
+                <div class="feature-icon">🌉</div>
+                <h4>للمنشآت المعدنية</h4>
+                <p>تحديد مراكز القضبان والعوارض في الجسور والمنشآت الفولاذية</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h4>لشبكات الكهرباء</h4>
+                <p>تحديد منتصف خطوط نقل الطاقة والكابلات الأرضية والعلوية</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🚰</div>
+                <h4>لشبكات المياه</h4>
+                <p>تحديد منتصف خطوط الأنابيب والمواسير لتركيب المحابس والمقاييس</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🛣️</div>
+                <h4>للطرق والجسور</h4>
+                <p>تحديد مراكز العناصر الخطية في تصميمات الطرق والجسور</p>
+            </div>
+        </div>
+
+        <div class="definition-box" style="margin-top: 1rem;">
+            <h3>📊 مثال تقني: حساب مراكز خطوط شبكة</h3>
+            <table class="data-table">
+                <tr>
+                    <th>رقم الخط</th>
+                    <th>نقطة البداية</th>
+                    <th>نقطة النهاية</th>
+                    <th>نقطة المنتصف (بـ PPC)</th>
+                </tr>
+                <tr>
+                    <td>Line-1</td>
+                    <td>(0, 0, 0)</td>
+                    <td>(10, 0, 0)</td>
+                    <td><strong>(5, 0, 0)</strong></td>
+                </tr>
+                <tr>
+                    <td>Line-2</td>
+                    <td>(0, 5, 2)</td>
+                    <td>(10, 5, 2)</td>
+                    <td><strong>(5, 5, 2)</strong></td>
+                </tr>
+                <tr>
+                    <td>Line-3</td>
+                    <td>(0, 10, 5)</td>
+                    <td>(10, 10, 5)</td>
+                    <td><strong>(5, 10, 5)</strong></td>
+                </tr>
+                <tr>
+                    <td>Line-100</td>
+                    <td>(0, 500, 20)</td>
+                    <td>(10, 500, 20)</td>
+                    <td><strong>(5, 500, 20)</strong></td>
+                </tr>
+            </table>
+            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">
+                💡 <strong>ملاحظة:</strong> PPC يحسب كل هذه المراكز تلقائياً في جزء من الثانية، بينما تستغرق حساباً يدوياً لكل خط حوالي 30-60 ثانية.
+            </p>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <a href="../index.html" class="back-link">العودة إلى الصفحة الرئيسية</a>
+        <p>📧 للاستفسارات: MahmoudBorham.codes@gmail.com</p>
+        <p>🇵🇸 Free Palestine - لوجه الله تعالى</p>
+        <p style="color: var(--accent); font-size: 0.9rem; margin-top: 1rem;">
+            "أداة متخصصة تحول ساعات الحساب اليدوي إلى ثوانٍ آلية"
+        </p>
+    </footer>
+</div>
