@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الأمر PE - تصدير وتسمية النقاط | Borham Tools</title>
+    <title>الأمر PPC - نقاط مراكز الخطوط | Borham Tools</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -145,45 +145,6 @@
             font-size: 1.5rem;
         }
 
-        /* 4. التكامل مع جميع أوامر النقاط */
-        .integration {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(37, 99, 235, 0.1));
-            border-radius: 10px;
-            padding: var(--spacing-md);
-            margin: var(--spacing-lg) 0;
-            border: 1px solid var(--border);
-        }
-
-        /* 5. تنسيق ملف CSV */
-        .csv-format {
-            background: rgba(245, 158, 11, 0.05);
-            border-right: 3px solid var(--accent);
-            padding: var(--spacing-md);
-            border-radius: 10px;
-            margin: var(--spacing-md) 0;
-            overflow-x: auto;
-        }
-        .csv-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-            font-family: 'Consolas', monospace;
-            font-size: 0.9rem;
-        }
-        .csv-table th {
-            background: var(--primary);
-            color: white;
-            padding: 10px;
-            text-align: right;
-            border: 1px solid var(--border);
-        }
-        .csv-table td {
-            padding: 10px;
-            border: 1px solid var(--border);
-            color: var(--text-gray);
-            background: rgba(255,255,255,0.03);
-        }
-
         /* النتائج */
         .results {
             display: grid;
@@ -254,36 +215,52 @@
     <div class="container">
         <!-- الترويسة -->
         <header class="page-header">
-            <h1>الأمر PE</h1>
-            <p>تصدير وتسمية النقاط - أداة ذكية لاستخراج الإحداثيات وتصديرها</p>
+            <h1>الأمر PPC</h1>
+            <p>نقطة في منتصف كل خط - دقة وسرعة فائقة للخطوط المستقيمة</p>
         </header>
 
         <!-- 1. تعريف الأمر -->
         <section class="section">
-            <h2 class="section-title">📌 ما هو الأمر PE؟</h2>
+            <h2 class="section-title">📌 ما هو الأمر PPC؟</h2>
             <div class="definition">
-                <p>الأمر <strong>PE</strong> هو نظام تصدير ذكي في AutoCAD يقوم باستخراج إحداثيات النقاط وحفظها في ملف CSV مع تسمية تلقائية لكل نقطة.</p>
+                <p>الأمر <strong>PPC</strong> هو أداة متخصصة تضع نقطة بدقة رياضية في منتصف كل خط (LINE) تختاره في AutoCAD. بضغطة واحدة، يحسب المنتصف الهندسي لمئات أو آلاف الخطوط ويضع النقاط تلقائياً.</p>
                 
                 <div class="definition-box">
                     <h3>🎯 المميزات الرئيسية</h3>
                     <ul style="color: var(--text-gray); padding-right: 1rem;">
-                        <li><strong>تصدير إلى CSV:</strong> حفظ الإحداثيات في ملف Excel/CSV جاهز</li>
-                        <li><strong>ترتيب ذكي:</strong> ترتيب النقاط حسب Handle (الأقدم → الأحدث)</li>
-                        <li><strong>تسمية تلقائية:</strong> أرقام تسلسلية بجانب كل نقطة</li>
-                        <li><strong>إدارة الطبقات:</strong> طبقة PointNames بلون أحمر للوضوح</li>
-                        <li><strong>مسار تلقائي:</strong> حفظ على Desktop باسم output.csv</li>
+                        <li><strong>متخصص للخطوط المستقيمة:</strong> يعمل فقط على LINES بدقة 100%</li>
+                        <li><strong>سرعة خيالية:</strong> معالجة 10,000 خط في ثوانٍ معدودة</li>
+                        <li><strong>منع التكرار الذكي:</strong> تقنية Spatial Hashing لتجنب النقاط المكررة</li>
+                        <li><strong>حساب 3D كامل:</strong> يحسب المنتصف للإحداثيات الثلاثة (X, Y, Z)</li>
+                        <li><strong>شريط تقدم حي:</strong> متابعة لحظية لعدد النقاط المُنشأة</li>
                     </ul>
                 </div>
 
                 <div class="definition-box">
                     <h3>⚙️ متى تستخدمه؟</h3>
                     <ul style="color: var(--text-gray); padding-right: 1rem;">
-                        <li>بعد استخدام <strong>أي أمر ينشئ نقاطاً</strong> (PP, PPC, PPX, PI, إلخ)</li>
-                        <li>لتصدير <strong>أي نقاط في الرسم</strong> بغض النظر عن مصدرها</li>
-                        <li>لإعداد قوائم إحداثيات للعمل الميداني</li>
-                        <li>لحفظ بيانات النقاط لمشاريع مستقبلية</li>
-                        <li>لتبادل البيانات مع برامج أخرى (Excel, GIS, إلخ)</li>
+                        <li>عندما تحتاج نقاط <strong>في منتصف خطوط مستقيمة فقط</strong></li>
+                        <li>لتحديد مواقع الأعمدة في منتصف الطرقات</li>
+                        <li>لحساب مراكز الحدود المستقيمة في المخططات المساحية</li>
+                        <li>لوضع نقاط reference في منتصف العناصر الإنشائية</li>
+                        <li>عندما تريد سرعة قصوى مع خطوط مستقيمة فقط</li>
                     </ul>
+                </div>
+
+                <div style="background: rgba(239, 68, 68, 0.1); border-right: 3px solid #ef4444; padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem;">
+                    <h3 style="color: #ef4444; margin-bottom: 0.8rem;">⚠️ تنبيه مهم</h3>
+                    <p style="color: var(--text-gray);">
+                        الأمر <strong>PPC يعمل فقط على LINES</strong> (الخطوط المستقيمة). لن يعمل على:
+                    </p>
+                    <ul style="color: var(--text-gray); padding-right: 1rem; margin-top: 0.5rem;">
+                        <li>❌ Polylines (استخدم PP بدلاً منه)</li>
+                        <li>❌ Arcs (استخدم PP بدلاً منه)</li>
+                        <li>❌ Circles (استخدم PP بدلاً منه)</li>
+                        <li>❌ Splines (استخدم PP بدلاً منه)</li>
+                    </ul>
+                    <p style="color: #ef4444; font-weight: bold; margin-top: 0.5rem;">
+                        💡 للعناصر الأخرى، استخدم الأمر PP العام!
+                    </p>
                 </div>
             </div>
         </section>
@@ -294,243 +271,236 @@
             <div class="tech-features">
                 
                 <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h4>ترتيب النقاط الذكي</h4>
-                    <p>يستخدم نظام Sorting Fix لترتيب النقاط حسب Handle، مما يضمن ترقيم متسق للأقدم إلى الأحدث</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">💾</div>
-                    <h4>تصدير تلقائي</h4>
-                    <p>يحفظ الملف تلقائياً على Desktop باسم output.csv بصيغة CSV قابلة للفتح في Excel</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🎨</div>
-                    <h4>طبقات ملونة</h4>
-                    <p>ينشئ طبقة PointNames بلون أحمر (#1) لتمييز النصوص عن النقاط الأصلية</p>
-                </div>
-
-                <div class="feature-card">
                     <div class="feature-icon">⚡</div>
-                    <h4>سرعة عالية</h4>
-                    <p>معالجة آلاف النقاط في ثوانٍ مع عرض شريط التقدم والنتائج</p>
+                    <h4>سرعة خارقة</h4>
+                    <p>تقنية Spatial Hashing تجعله أسرع 50 مرة من الطرق التقليدية - معالجة 10,000 خط في 5 ثوانٍ فقط</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h4>دقة رياضية 100%</h4>
+                    <p>المعادلة: (نقطة البداية + نقطة النهاية) ÷ 2 - تطبيق دقيق للإحداثيات الثلاثة X, Y, Z</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h4>منع التكرار الذكي</h4>
+                    <p>تقنية Grid-based Hashing تكتشف النقاط المتطابقة وتتجاهلها تلقائياً - tolerance 0.001</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>شريط التقدم الحي</h4>
+                    <p>عرض لحظي للنسبة المئوية وعدد النقاط المُنشأة أثناء المعالجة - لا انتظار في الظلام!</p>
                 </div>
             </div>
         </section>
 
         <!-- 3. طريقة العمل -->
         <section class="section">
-            <h2 class="section-title">🚀 كيف يعمل الأمر PE؟</h2>
+            <h2 class="section-title">🚀 كيف يعمل الأمر PPC؟</h2>
             <div class="how-it-works">
-                <p style="color: var(--text-gray); margin-bottom: 1rem;">عملية التصدير تتم في 5 خطوات بسيطة:</p>
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">عملية بسيطة من 4 خطوات فقط:</p>
                 
                 <div class="workflow">
                     <div class="work-step">
                         <strong>الخطوة 1</strong>
-                        <p>ابدأ الأمر PE</p>
-                        <small>اكتب PE ثم Enter</small>
+                        <p>اكتب PPC</p>
+                        <small>اكتب PPC ثم Enter</small>
                     </div>
                     <div class="work-step">
                         <strong>الخطوة 2</strong>
-                        <p>أدخل ارتفاع النص</p>
-                        <small>اختر حجم النص للتسمية</small>
+                        <p>اختر الخطوط</p>
+                        <small>اختر جميع الخطوط المستقيمة (LINES فقط)</small>
                     </div>
                     <div class="work-step">
                         <strong>الخطوة 3</strong>
-                        <p>اختر مسار الحفظ</p>
-                        <small>Desktop/output.csv تلقائياً</small>
-                    </div>
-                    <div class="work-step">
-                        <strong>الخطوة 4</strong>
-                        <p>اختر النقاط</p>
-                        <small>اختر جميع النقاط المراد تصديرها</small>
+                        <p>اضغط Enter</p>
+                        <small>أكّد الاختيار</small>
                     </div>
                     <div class="work-step">
                         <strong>النتيجة</strong>
-                        <p>ملف CSV + تسمية</p>
-                        <small>بيانات جاهزة للمساح</small>
+                        <p>نقاط جاهزة!</p>
+                        <small>في طبقة POINT باللون الأزرق</small>
                     </div>
                 </div>
 
-                <div class="csv-format">
-                    <h3>📋 تنسيق ملف CSV الناتج:</h3>
-                    <table class="csv-table">
-                        <tr>
-                            <th>PointNumber</th>
-                            <th>X</th>
-                            <th>Y</th>
-                            <th>Z</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>125.456</td>
-                            <td>89.123</td>
-                            <td>0.000</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>126.789</td>
-                            <td>90.456</td>
-                            <td>0.000</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>128.123</td>
-                            <td>91.789</td>
-                            <td>0.000</td>
-                        </tr>
-                    </table>
-                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">
-                        💡 <strong>ملاحظة:</strong> الملف يحتوي على رأس واضح وتنسيق دقيق لثلاثة منازل عشرية
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. التكامل مع جميع أوامر النقاط -->
-        <section class="section">
-            <h2 class="section-title">🔄 التكامل مع جميع أوامر النقاط</h2>
-            <div class="integration">
-                <h3 style="color: var(--secondary); margin-bottom: 1rem;">نظام تصدير عالمي لأي نوع من النقاط</h3>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md); margin: 1rem 0;">
-                    <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-sm); border-radius: 8px; text-align: center;">
-                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">🔵 PP</h4>
-                        <p style="color: var(--text-gray); font-size: 0.85rem;">نقاط على العناصر</p>
-                    </div>
-                    
-                    <div style="background: rgba(16, 185, 129, 0.1); padding: var(--spacing-sm); border-radius: 8px; text-align: center;">
-                        <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">🎯 PPC</h4>
-                        <p style="color: var(--text-gray); font-size: 0.85rem;">مراكز الخطوط</p>
-                    </div>
-                    
-                    <div style="background: rgba(245, 158, 11, 0.1); padding: var(--spacing-sm); border-radius: 8px; text-align: center;">
-                        <h4 style="color: var(--accent); margin-bottom: 0.5rem;">✖️ PPX</h4>
-                        <p style="color: var(--text-gray); font-size: 0.85rem;">تقاطعات الخطوط</p>
-                    </div>
-                    
-                    <div style="background: rgba(139, 92, 246, 0.1); padding: var(--spacing-sm); border-radius: 8px; text-align: center;">
-                        <h4 style="color: #8b5cf6; margin-bottom: 0.5rem;">🖱️ يدوي</h4>
-                        <p style="color: var(--text-gray); font-size: 0.85rem;">نقاط مرسومة يدوياً</p>
-                    </div>
-                    
-                    <div style="background: rgba(239, 68, 68, 0.1); padding: var(--spacing-sm); border-radius: 8px; text-align: center;">
-                        <h4 style="color: #ef4444; margin-bottom: 0.5rem;">📥 PI</h4>
-                        <p style="color: var(--text-gray); font-size: 0.85rem;">نقاط مستوردة</p>
-                    </div>
-                </div>
-                
-                <div style="text-align: center; margin-top: 1rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
-                    <h4 style="color: var(--accent); margin-bottom: 0.5rem;">🎯 المبدأ الأساسي</h4>
-                    <p style="color: var(--text-light);">
-                        أمر PE يعمل مع <strong>أي نقطة</strong> في الرسم، بغض النظر عن مصدرها أو طريقة إنشائها
-                    </p>
-                </div>
-                
-                <div style="background: rgba(34, 197, 94, 0.1); padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem;">
-                    <h4 style="color: var(--success); margin-bottom: 0.8rem;">🔄 أمثلة على سير العمل:</h4>
+                <div style="background: rgba(16, 185, 129, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
+                    <h3 style="color: var(--success); margin-bottom: 1rem;">🔬 الخوارزمية الداخلية</h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-sm);">
                         <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px;">
-                            <p style="color: var(--text-light); font-size: 0.9rem;">
-                                <strong>مثال 1:</strong> PPX → PE<br>
-                                <span style="color: var(--text-gray); font-size: 0.85rem;">تقاطعات خطوط → تصدير إحداثيات التقاطعات</span>
-                            </p>
+                            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>المرحلة 1: تحديد المنطقة</strong></p>
+                            <p style="color: var(--text-gray); font-size: 0.85rem;">تحديد Bounding Box تلقائي للعناصر المختارة لتسريع البحث</p>
                         </div>
                         <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px;">
-                            <p style="color: var(--text-light); font-size: 0.9rem;">
-                                <strong>مثال 2:</strong> PPC → PE<br>
-                                <span style="color: var(--text-gray); font-size: 0.85rem;">مراكز خطوط → تصدير إحداثيات المراكز</span>
-                            </p>
+                            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>المرحلة 2: بناء الهاش</strong></p>
+                            <p style="color: var(--text-gray); font-size: 0.85rem;">إنشاء Spatial Hash للنقاط الموجودة مسبقاً في المنطقة</p>
                         </div>
                         <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px;">
-                            <p style="color: var(--text-light); font-size: 0.9rem;">
-                                <strong>مثال 3:</strong> PI → PE<br>
-                                <span style="color: var(--text-gray); font-size: 0.85rem;">نقاط مستوردة → تصدير نفس النقاط بعد المعالجة</span>
-                            </p>
+                            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>المرحلة 3: المعالجة</strong></p>
+                            <p style="color: var(--text-gray); font-size: 0.85rem;">حساب المنتصف لكل خط والتحقق من عدم التكرار</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px;">
+                            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>المرحلة 4: الإنشاء</strong></p>
+                            <p style="color: var(--text-gray); font-size: 0.85rem;">إنشاء النقاط الجديدة في طبقة POINT مع تحديث الهاش</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. النتائج والتوفير -->
+        <!-- 4. النتائج والأداء -->
         <section class="section">
-            <h2 class="section-title">💰 النتائج والتوفير في الوقت</h2>
+            <h2 class="section-title">💰 النتائج والأداء</h2>
             <div class="results">
                 <div class="result-card">
-                    <div class="result-value">95-99%</div>
-                    <div class="result-label">توفير في الوقت</div>
+                    <div class="result-value">50x</div>
+                    <div class="result-label">أسرع من الطرق التقليدية</div>
                 </div>
                 <div class="result-card">
-                    <div class="result-value">1000x</div>
-                    <div class="result-label">أسرع من التصدير اليدوي</div>
+                    <div class="result-value">10,000+</div>
+                    <div class="result-label">خط في أقل من 5 ثواني</div>
                 </div>
                 <div class="result-card">
-                    <div class="result-value">0%</div>
-                    <div class="result-label">أخطاء في الإحداثيات</div>
+                    <div class="result-value">100%</div>
+                    <div class="result-label">دقة رياضية</div>
                 </div>
                 <div class="result-card">
-                    <div class="result-value">∞</div>
-                    <div class="result-label">قابلية للتوسع</div>
+                    <div class="result-value">0.001</div>
+                    <div class="result-label">Tolerance للتكرار</div>
                 </div>
             </div>
 
             <div style="background: rgba(34, 197, 94, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
-                <h3 style="color: var(--success); margin-bottom: 1rem;">🏭 سيناريو عملي: مشروع سكني كبير</h3>
+                <h3 style="color: var(--success); margin-bottom: 1rem;">🏗️ سيناريو عملي: مخطط تقسيم أراضي</h3>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
                     <div>
-                        <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">بدون PE:</h4>
+                        <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">بدون PPC:</h4>
                         <ul style="color: var(--text-gray); font-size: 0.9rem;">
-                            <li>كتابة إحداثيات 500 نقطة يدوياً</li>
-                            <li>مدة: 6-8 ساعات عمل</li>
-                            <li>احتمال أخطاء: مرتفع جداً</li>
-                            <li>جهد: كبير وممل</li>
+                            <li>تحديد منتصف 200 خط يدوياً</li>
+                            <li>استخدام Midpoint Osnap لكل خط</li>
+                            <li>رسم نقطة واحدة تلو الأخرى</li>
+                            <li>مدة: 45-60 دقيقة</li>
+                            <li>احتمال أخطاء: متوسط إلى مرتفع</li>
                         </ul>
                     </div>
                     <div>
-                        <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">بـ PE:</h4>
+                        <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">بـ PPC:</h4>
                         <ul style="color: var(--text-gray); font-size: 0.9rem;">
-                            <li>تصدير 500 نقطة تلقائياً</li>
-                            <li>مدة: 30 ثانية فقط</li>
+                            <li>اختيار جميع الـ 200 خط مرة واحدة</li>
+                            <li>معالجة تلقائية بالكامل</li>
+                            <li>إنشاء 200 نقطة دفعة واحدة</li>
+                            <li>مدة: 3-5 ثوانٍ فقط</li>
                             <li>دقة: 100% بدون أخطاء</li>
-                            <li>جهد: ضغطة زر واحدة</li>
                         </ul>
                     </div>
                 </div>
                 <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
-                    ⚡ توفير 7.5 ساعات عمل لكل 500 نقطة!
+                    ⚡ توفير 99% من الوقت - من 45 دقيقة إلى 5 ثوانٍ!
                 </p>
             </div>
         </section>
 
-        <!-- 6. الاستخدامات العملية -->
+        <!-- 5. الاستخدامات العملية -->
         <section class="section">
             <h2 class="section-title">🏗️ الاستخدامات العملية في الميدان</h2>
             <div class="tech-features">
                 
                 <div class="feature-card">
-                    <div class="feature-icon">👷</div>
-                    <h4>للمساحين</h4>
-                    <p>ملف CSV جاهز للرفع على أجهزة الـ Total Station للعمل الميداني الدقيق</p>
+                    <div class="feature-icon">🛣️</div>
+                    <h4>الطرق والشوارع</h4>
+                    <p>تحديد مواقع الأعمدة، الإنارة، والخدمات في منتصف الشوارع المستقيمة بدقة عالية</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📐</div>
+                    <h4>المساحة والرفع</h4>
+                    <p>إنشاء نقاط reference في منتصف حدود الأراضي المستقيمة للرفع المساحي الدقيق</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">🏢</div>
-                    <h4>للمهندسين</h4>
-                    <p>حفظ وتوثيق إحداثيات المشروع لمتابعة التنفيذ والمقارنة مع المخطط</p>
+                    <h4>العناصر الإنشائية</h4>
+                    <p>تحديد مراكز الجدران، الأعمدة، والكمرات المستقيمة في المخططات المعمارية</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">📁</div>
-                    <h4>للأرشفة</h4>
-                    <p>إنشاء سجلات رقمية دقيقة للمشاريع للإحتفاظ بها في قاعدة البيانات</p>
+                    <div class="feature-icon">⚡</div>
+                    <h4>الشبكات الخطية</h4>
+                    <p>وضع نقاط في منتصف خطوط شبكات الكهرباء، المياه، والصرف الصحي</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">🤝</div>
-                    <h4>للتنسيق</h4>
-                    <p>تبادل البيانات بين فرق العمل المختلفة (إنشائي، كهرباء، ميكانيكا)</p>
+                    <div class="feature-icon">🎯</div>
+                    <h4>نقاط القياس</h4>
+                    <p>إنشاء نقاط قياس دقيقة في منتصف المسافات للاستخدام في الحسابات الهندسية</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h4>التكامل مع PE</h4>
+                    <p>إنشاء نقاط بـ PPC ثم تصديرها مباشرة بـ PE لإنشاء قوائم إحداثيات جاهزة</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. أمثلة واقعية -->
+        <section class="section">
+            <h2 class="section-title">💼 أمثلة واقعية من المشاريع</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmin(300px, 1fr)); gap: var(--spacing-md);">
+                
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 1: مخطط سكني</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        مخطط سكني به 85 شارع مرسوم كخطوط مستقيمة. المطلوب تحديد موقع عمود كهرباء في منتصف كل شارع.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ PPC:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
+                        <li>تشغيل الأمر PPC</li>
+                        <li>اختيار جميع خطوط الشوارع</li>
+                        <li>Enter - تم إنشاء 85 نقطة في 2 ثانية</li>
+                        <li>استخدام PE لتصدير الإحداثيات</li>
+                    </ol>
+                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                        ✅ توفير 30 دقيقة عمل
+                    </p>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 2: مشروع طرق</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        مشروع طرق رئيسية به 150 قطاع مستقيم. المطلوب نقاط لحساب منسوب منتصف كل قطاع.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ PPC:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
+                        <li>رسم خط لكل قطاع طريق</li>
+                        <li>تشغيل PPC واختيار جميع الخطوط</li>
+                        <li>الحصول على 150 نقطة في المنتصف</li>
+                        <li>استخدام النقاط لحساب المناسيب</li>
+                    </ol>
+                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                        ✅ دقة 100% في المواقع
+                    </p>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 3: شبكة كهرباء</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        شبكة خطوط كهرباء بـ 300 خط. المطلوب وضع نقاط صيانة في منتصف كل خط للمتابعة الميدانية.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ PPC:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
+                        <li>PPC على جميع الخطوط</li>
+                        <li>إنشاء 300 نقطة في 4 ثوانٍ</li>
+                        <li>PE لتصدير إحداثيات النقاط</li>
+                        <li>استخدام الملف في أجهزة GPS الميدانية</li>
+                    </ol>
+                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                        ✅ جاهز للعمل الميداني
+                    </p>
                 </div>
             </div>
         </section>
@@ -541,7 +511,7 @@
             <p>📧 للاستفسارات: MahmoudBorham.codes@gmail.com</p>
             <p>🇵🇸 Free Palestine - لوجه الله تعالى</p>
             <p style="color: var(--accent); font-size: 0.9rem; margin-top: 1rem;">
-                "أداة تصدير ذكية تحول أيام العمل إلى دقائق"
+                "دقة رياضية + سرعة خارقة = PPC لمراكز الخطوط"
             </p>
         </footer>
     </div>
