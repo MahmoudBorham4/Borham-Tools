@@ -1,1 +1,787 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأمر DF - عرض فروق المناسيب | Borham Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --dark: #0f172a;
+            --card: #1e293b;
+            --text: #f1f5f9;
+            --text-light: #cbd5e1;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --border: #475569;
+            --container: 1100px;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2.5rem;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Cairo', sans-serif; background: var(--dark); color: var(--text); line-height: 1.7; }
+        .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+        /* Header */
+        .page-header { 
+            background: linear-gradient(135deg, #1e3a8a, #0c4a6e);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            border-bottom: 3px solid var(--warning);
+        }
+        .page-header h1 { 
+            font-size: 2.4rem; 
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        .page-header .subtitle { 
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .badge {
+            display: inline-block;
+            background: var(--warning);
+            color: var(--dark);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* Sections */
+        .section { margin-bottom: var(--spacing-lg); }
+        .section-title { 
+            color: var(--warning);
+            font-size: 1.7rem;
+            margin-bottom: var(--spacing-md);
+            border-right: 4px solid var(--warning);
+            padding-right: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title i { color: var(--warning); }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            color: var(--warning);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--warning);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--warning);
+            margin-bottom: 0.8rem;
+        }
+        .feature-title {
+            color: var(--text);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .feature-desc {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Workflow */
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            margin: var(--spacing-lg) 0;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+        .step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: var(--spacing-md);
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 10px;
+            border: 1px solid var(--warning);
+            position: relative;
+        }
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--warning);
+            color: white;
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .step:not(:last-child)::after {
+            content: "→";
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--warning);
+            font-size: 1.5rem;
+        }
+
+        /* Comparison */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        .comparison-card {
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        .without { border-color: var(--danger); }
+        .with { border-color: var(--success); }
+
+        /* Examples */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+        }
+        .example-card {
+            background: var(--card);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border);
+        }
+
+        /* Position Demo */
+        .position-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        .position-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: var(--warning);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin: var(--spacing-md) 0;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        .btn:hover { background: #d97706; }
+        .btn-secondary {
+            background: var(--secondary);
+        }
+        .btn-secondary:hover { background: #0da271; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--border);
+            margin-top: var(--spacing-lg);
+            color: var(--text-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.4rem; }
+            .workflow { flex-direction: column; }
+            .step:not(:last-child)::after {
+                content: "↓";
+                left: 50%;
+                top: auto;
+                bottom: -20px;
+                transform: translateX(-50%);
+            }
+            .comparison { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <h1>الأمر DF</h1>
+            <p class="subtitle">عرض فروق المناسيب عن المستوى المعياري - أداة المقارنة الذكية</p>
+        </header>
+
+        <!-- 1. Introduction -->
+        <section class="section">
+            <h2 class="section-title">📌 ما هو الأمر DF؟</h2>
+            <div class="card">
+                <p>الأمر <strong>DF</strong> (Difference) هو أداة ذكية تقوم بحساب <strong>الفرق بين مناسيب النقاط ومنسوب مرجعي</strong> ثم تعرض هذا الفرق بجانب كل نقطة. بدلاً من الحساب اليدوي، يعطيك DF <strong>مقارنة سريعة ودقيقة</strong> تمكنك من تحديد النقاط الأعلى والأقل من المستوى المطلوب.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">حساب الفروق</h3>
+                        <p class="feature-desc">يحتسب الفرق بين منسوب النقطة والمنسوب المرجعي</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3 class="feature-title">تلوين ذكي</h3>
+                        <p class="feature-desc">نصوص حمراء للنقاط المرتفعة، خضراء للنقاط المنخفضة</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">سرعة في التحليل</h3>
+                        <p class="feature-desc">تحليل مئات النقاط في ثوانٍ معدودة</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Unique Features -->
+        <section class="section">
+            <h2 class="section-title">⭐ المميزات الفريدة للأمر DF</h2>
+            
+            <div class="card">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3 class="feature-title">نظام الألوان الذكي</h3>
+                        <p class="feature-desc">
+                            <strong>الأحمر:</strong> النقاط المرتفعة عن المستوى المرجعي (+)<br>
+                            <strong>الأخضر:</strong> النقاط المنخفضة عن المستوى المرجعي (-)<br>
+                            <small>تحديد سريع للمشاكل الميدانية</small>
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🧮</div>
+                        <h3 class="feature-title">حساب تلقائي دقيق</h3>
+                        <p class="feature-desc">
+                            <strong>معادلة:</strong> الفرق = منسوب النقطة - المنسوب المرجعي<br>
+                            <strong>دقة:</strong> 3 منازل عشرية لكل قيمة<br>
+                            <small>مثال: +1.250، -0.750، 0.000</small>
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📂</div>
+                        <h3 class="feature-title">طبقات منظمة</h3>
+                        <p class="feature-desc">
+                            ينشئ تلقائياً طبقتين:<br>
+                            • <strong>"Levels Positive"</strong> (أحمر)<br>
+                            • <strong>"Levels Negative"</strong> (أخضر)
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(245, 158, 11, 0.1); padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem; border-right: 3px solid var(--warning);">
+                    <h4 style="color: var(--warning); margin-bottom: 0.8rem;">🎨 نظام الألوان والإشارات</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div>
+                            <div style="width: 20px; height: 20px; background: #ff0000; display: inline-block; margin-left: 0.5rem; border-radius: 3px;"></div>
+                            <strong>Levels Positive:</strong> لون أحمر (1)<br>
+                            <small>للنقاط المرتفعة (+) - تحتاج حفر</small>
+                        </div>
+                        <div>
+                            <div style="width: 20px; height: 20px; background: #00ff00; display: inline-block; margin-left: 0.5rem; border-radius: 3px;"></div>
+                            <strong>Levels Negative:</strong> لون أخضر (3)<br>
+                            <small>للنقاط المنخفضة (-) - تحتاج ردم</small>
+                        </div>
+                        <div>
+                            <div style="width: 20px; height: 20px; background: #ffff00; display: inline-block; margin-left: 0.5rem; border-radius: 3px;"></div>
+                            <strong>الموضع الثابت:</strong> أعلى يسار النقطة<br>
+                            <small>مسافة ثابتة: 0.25 لأعلى، 0.15 لليسار</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. How to Use -->
+        <section class="section">
+            <h2 class="section-title">🚀 كيفية الاستخدام</h2>
+            <div class="card">
+                <p>عملية سريعة من 3 خطوات لتحليل جميع النقاط!</p>
+                
+                <div class="workflow">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>اكتب DF</h3>
+                        <p>اكتب DF في AutoCAD ثم اضغط Enter</p>
+                        <small>يبدأ الأمر فوراً</small>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>اختر النقاط</h3>
+                        <p>اختر النقاط التي تريد تحليلها</p>
+                        <small>يمكن اختيار أي عدد من النقاط</small>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>أدخل المنسوب المرجعي</h3>
+                        <p>أدخل قيمة المنسوب المرجعي (مثل: 0.00)</p>
+                        <small>يتم التحليل فوراً</small>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(16, 185, 129, 0.1); padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem; border-right: 3px solid var(--secondary);">
+                    <h3 style="color: var(--secondary); margin-bottom: 0.5rem;">💡 مثال عملي سريع</h3>
+                    <p style="color: var(--text-light);">
+                        <strong>السيناريو:</strong> لديك موقع بناء ومنسوب التصميم هو 100.00<br>
+                        <strong>بدون DF:</strong> تحسب يدوياً: 101.25 - 100.00 = +1.25 لكل نقطة<br>
+                        <strong>مع DF:</strong> تختر النقاط → تدخل 100.00 → تحصل على جميع الفروق<br>
+                        <strong>النتيجة:</strong> نصوص حمراء (+1.25) وخضراء (-0.50) بجانب كل نقطة
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Mathematical Model -->
+        <section class="section">
+            <h2 class="section-title">🧮 النموذج الرياضي الذكي</h2>
+            <div class="card">
+                <h3 class="card-header">⚡ كيف يعمل DF داخلياً؟</h3>
+                
+                <div class="position-demo">
+                    <div class="position-item">
+                        <div class="feature-icon">📐</div>
+                        <h3>قراءة المنسوب</h3>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">
+                            يقرأ قيمة Z لكل نقطة<br>
+                            <small>مثال: النقطة A = 101.250</small>
+                        </p>
+                    </div>
+                    
+                    <div class="position-item">
+                        <div class="feature-icon">➖</div>
+                        <h3>طرح المرجعي</h3>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">
+                            يحسب: <br>الفرق = Z النقطة - Z المرجعي<br>
+                            <small>مثال: 101.250 - 100.000 = +1.250</small>
+                        </p>
+                    </div>
+                    
+                    <div class="position-item">
+                        <div class="feature-icon">🎨</div>
+                        <h3>تحديد اللون</h3>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">
+                            <strong>النتيجة ≥ 0:</strong> أحمر (+)<br>
+                            <strong>النتيجة < 0:</strong> أخضر (-)<br>
+                            <small>تلوين ذكي للمشاكل</small>
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 0.8rem;">📊 مثال تطبيقي بالتفصيل</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <div style="background: rgba(255,0,0,0.1); padding: 1rem; border-radius: 6px; border-right: 3px solid #ff0000;">
+                            <strong>النقطة A:</strong><br>
+                            منسوبها = 101.250<br>
+                            المرجعي = 100.000<br>
+                            الفرق = <strong style="color: #ff0000;">+1.250</strong><br>
+                            <small>→ تحتاج حفر 1.25m</small>
+                        </div>
+                        <div style="background: rgba(0,255,0,0.1); padding: 1rem; border-radius: 6px; border-right: 3px solid #00ff00;">
+                            <strong>النقطة B:</strong><br>
+                            منسوبها = 99.500<br>
+                            المرجعي = 100.000<br>
+                            الفرق = <strong style="color: #00ff00;">-0.500</strong><br>
+                            <small>→ تحتاج ردم 0.50m</small>
+                        </div>
+                        <div style="background: rgba(255,255,0,0.1); padding: 1rem; border-radius: 6px; border-right: 3px solid #ffff00;">
+                            <strong>النقطة C:</strong><br>
+                            منسوبها = 100.000<br>
+                            المرجعي = 100.000<br>
+                            الفرق = <strong style="color: #ffff00;">0.000</strong><br>
+                            <small>→ مطابقة تماماً</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Comparison -->
+        <section class="section">
+            <h2 class="section-title">⚖️ مقارنة: DF vs الحساب اليدوي</h2>
+            <div class="comparison">
+                <div class="comparison-card without">
+                    <h3 style="color: var(--danger); margin-bottom: 1rem;">❌ الحساب اليدوي التقليدي</h3>
+                    <ul style="color: var(--text-light); padding-right: 1.5rem;">
+                        <li>فتح خصائص كل نقطة لقراءة المنسوب</li>
+                        <li>حساب الفرق يدوياً لكل نقطة</li>
+                        <li>كتابة النتيجة بجانب كل نقطة</li>
+                        <li>تحديد اللون المناسب يدوياً</li>
+                        <li>احتمال أخطاء في الحسابات</li>
+                        <li>إضاعة وقت كبير في العمليات المتكررة</li>
+                        <li>صعوبة المقارنة السريعة</li>
+                        <li>عدم وجود توثيق مرئي واضح</li>
+                    </ul>
+                    <div style="background: rgba(239, 68, 68, 0.2); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
+                        <strong style="color: var(--danger);">مثال على الوقت الضائع:</strong><br>
+                        <small style="color: var(--text-light);">50 نقطة × 2 دقيقة لكل نقطة = 100 دقيقة (1.6 ساعة)!</small>
+                    </div>
+                </div>
+                
+                <div class="comparison-card with">
+                    <h3 style="color: var(--success); margin-bottom: 1rem;">✅ مع الأمر DF</h3>
+                    <ul style="color: var(--text-light); padding-right: 1.5rem;">
+                        <li>اختيار جميع النقاط مرة واحدة</li>
+                        <li>إدخال المنسوب المرجعي مرة واحدة</li>
+                        <li>حساب جميع الفروق تلقائياً</li>
+                        <li>تلوين ذكي حسب النتيجة</li>
+                        <li>دقة 100% في الحسابات</li>
+                        <li>توفير 95% من الوقت</li>
+                        <li>مقارنة فورية مرئية</li>
+                        <li>توثيق احترافي بلونين</li>
+                    </ul>
+                    <div style="background: rgba(34, 197, 94, 0.2); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
+                        <strong style="color: var(--success);">مثال على التوفير:</strong><br>
+                        <small style="color: var(--text-light);">50 نقطة = 30 ثانية بدلاً من 100 دقيقة!</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 1rem;">
+                <p style="color: var(--warning); font-weight: bold; font-size: 1.1rem;">
+                    ⚡ DF يحول ساعات الحساب إلى ثوانٍ معدودة!
+                </p>
+            </div>
+        </section>
+
+        <!-- 6. Real Examples -->
+        <section class="section">
+            <h2 class="section-title">💼 أمثلة واقعية من المشاريع</h2>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <h4 style="color: var(--warning); margin-bottom: 0.8rem;">🏗️ تسوية أرضية بناء</h4>
+                    <p style="color: var(--text-light); margin-bottom: 0.5rem;"><strong>التحدي:</strong></p>
+                    <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">
+                        تسوية أرضية مصنع بمنسوب تصميمي 100.00. 80 نقطة مساحية تحتاج معرفة كميات الحفر والردم المطلوبة.
+                    </p>
+                    <p style="color: var(--text-light); margin-bottom: 0.5rem;"><strong>الحل باستخدام DF:</strong></p>
+                    <ol style="color: var(--text-light); font-size: 0.9rem; padding-right: 1.5rem;">
+                        <li>تشغيل الأمر DF</li>
+                        <li>اختيار الـ 80 نقطة</li>
+                        <li>إدخال 100.00 كمنسوب مرجعي</li>
+                        <li>ظهور نصوص حمراء (+) وخضراء (-)</li>
+                        <li>حساب كميات الحفر من النقاط الحمراء</li>
+                        <li>حساب كميات الردم من النقاط الخضراء</li>
+                    </ol>
+                    <div style="background: rgba(34, 197, 94, 0.1); padding: 0.5rem; border-radius: 6px; margin-top: 1rem;">
+                        <small style="color: var(--success);">النتيجة: قرار سريع في 45 ثانية</small>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <h4 style="color: var(--warning); margin-bottom: 0.8rem;">🛣️ مراقبة تنفيذ طبقة الأساس</h4>
+                    <p style="color: var(--text-light); margin-bottom: 0.5rem;"><strong>التحدي:</strong></p>
+                    <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">
+                        طبقة أساس طريق سمكها 30 سم. 60 نقطة تنفيذية تحتاج مقارنة مع المنسوب التصميمي لاكتشاف أماكن النقص.
+                    </p>
+                    <p style="color: var(--text-light); margin-bottom: 0.5rem;"><strong>الحل باستخدام DF:</strong></p>
+                    <ol style="color: var(--text-light); font-size: 0.9rem; padding-right: 1.5rem;">
+                        <li>تشغيل DF مع المنسوب التصميمي</li>
+                        <li>النقاط الحمراء: سمك أكبر من 30 سم</li>
+                        <li>النقاط الخضراء: سمك أقل من 30 سم</li>
+                        <li>النقاط باللون الأصفر: السمك صحيح</li>
+                        <li>تحديد الأماكن التي تحتاج إصلاح</li>
+                        <li>طباعة تقرير ملون للفريق</li>
+                    </ol>
+                    <div style="background: rgba(34, 197, 94, 0.1); padding: 0.5rem; border-radius: 6px; margin-top: 1rem;">
+                        <small style="color: var(--success);">الكفاءة: رصد 100% من المشاكل في 35 ثانية</small>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <h4 style="color: var(--warning); margin-bottom: 0.8rem;">🏢 فحص ميل أرضية جراج</h4>
+                    <p style="color: var(--text-light); margin-bottom: 0.5rem;"><strong>التحدي:</strong></p>
+                    <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">
+                        أرضية جراج تحتاج ميل 2% لتصريف المياه. 40 نقطة تحتاج فحص إذا كان الميل صحيحاً أم لا.
+                    </p>
+                    <p style="color: var(--text-light); margin-bottom: 0.5rem;"><strong>الحل باستخدام DF:</strong></p>
+                    <ol style="color: var(--text-light); font-size: 0.9rem; padding-right: 1.5rem;">
+                        <li>حساب المنسوب التصميمي لكل نقطة</li>
+                        <li>تشغيل DF مع القيم المختلفة</li>
+                        <li>النقاط الحمراء: أعلى من التصميم</li>
+                        <li>النقاط الخضراء: أقل من التصميم</li>
+                        <li>النقاط قريبة من الصفر: صحيحة</li>
+                        <li>تعديل المناسيب الخاطئة</li>
+                    </ol>
+                    <div style="background: rgba(34, 197, 94, 0.1); padding: 0.5rem; border-radius: 6px; margin-top: 1rem;">
+                        <small style="color: var(--success);">الدقة: فحص شامل للميل في 25 ثانية</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Integration with Other Commands -->
+        <section class="section">
+            <h2 class="section-title">🔄 التكامل مع أوامر Borham Tools الأخرى</h2>
+            <div class="card">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3 class="feature-title">مع LUP</h3>
+                        <p class="feature-desc">
+                            <strong>LUP:</strong> تحديث المناسيب من النصوص الميدانية<br>
+                            <strong>DF:</strong> مقارنة المناسيب المحدثة مع التصميم<br>
+                            <strong>السير الذكي:</strong> رفع بيانات → مقارنة → تحليل
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">مع LV</h3>
+                        <p class="feature-desc">
+                            <strong>LV:</strong> عرض المناسيب المطلقة (قيمة Z)<br>
+                            <strong>DF:</strong> عرض الفروق عن منسوب مرجعي<br>
+                            <strong>الاختيار:</strong> حسب احتياجك: قراءة أو مقارنة
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📋</div>
+                        <h3 class="feature-title">مع T</h3>
+                        <p class="feature-desc">
+                            <strong>T:</strong> إنشاء جدول بالمناسيب والفروق<br>
+                            <strong>DF:</strong> عرض الفروق مباشرة على الرسم<br>
+                            <strong>المرونة:</strong> توثيق جدولي + عرض مرئي ملون
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(245, 158, 11, 0.1); padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem;">
+                    <h4 style="color: var(--warning); margin-bottom: 0.8rem;">📝 سير العمل الاحترافي المتكامل</h4>
+                    <ol style="color: var(--text-light); padding-right: 1.5rem;">
+                        <li><strong>المرحلة 1:</strong> رفع البيانات الميدانية (PI لاستيراد النقاط)</li>
+                        <li><strong>المرحلة 2:</strong> تحديث المناسيب (LUP إذا كانت منفصلة)</li>
+                        <li><strong>المرحلة 3:</strong> التحليل السريع (DF للمقارنة مع التصميم)</li>
+                        <li><strong>المرحلة 4:</strong> التوثيق (T للتقارير والجداول)</li>
+                        <li><strong>المرحلة 5:</strong> العرض (LV لعرض المناسيب المطلقة)</li>
+                        <li><strong>المرحلة 6:</strong> المراجعة (إخفاء/إظهار طبقات DF حسب الحاجة)</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Tips and Best Practices -->
+        <section class="section">
+            <h2 class="section-title">💡 نصائح وأفضل الممارسات</h2>
+            <div class="card">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: var(--spacing-md); border-radius: 8px; border-right: 3px solid var(--secondary);">
+                        <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">✅ استخدم DF بهذه الطريقة</h4>
+                        <ul style="color: var(--text-light); font-size: 0.9rem; padding-right: 1rem;">
+                            <li><strong>للمقارنات:</strong> DF مثالي لمقارنة التنفيذ مع التصميم</li>
+                            <li><strong>للعروض:</strong> الألوان تجعل العروض التقديمية أكثر وضوحاً</li>
+                            <li><strong>للفرق الميدانية:</strong> سهل إظهار المشاكل للعمال والمقاولين</li>
+                            <li><strong>للمراجعة:</strong> رصد سريع للنقاط التي تحتاج تصحيح</li>
+                            <li><strong>للتوثيق:</strong> توثيق ملون يسهل الفهم للجميع</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: rgba(245, 158, 11, 0.1); padding: var(--spacing-md); border-radius: 8px; border-right: 3px solid var(--warning);">
+                        <h4 style="color: var(--warning); margin-bottom: 0.8rem;">🎯 متى تختار DF بدلاً من LV؟</h4>
+                        <ul style="color: var(--text-light); font-size: 0.9rem; padding-right: 1rem;">
+                            <li><strong>DF:</strong> عندما تريد <strong>مقارنة</strong> مع منسوب معياري</li>
+                            <li><strong>LV:</strong> عندما تريد <strong>قراءة</strong> المناسيب المطلقة</li>
+                            <li><strong>مثال عملي:</strong>
+                                <ul style="padding-right: 1rem; margin-top: 0.5rem;">
+                                    <li>للمشرف: DF لمقارنة التنفيذ مع التصميم</li>
+                                    <li>للمساح: LV لمعرفة المناسيب المساحية فقط</li>
+                                    <li>للمقاول: DF لحساب كميات الحفر والردم</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: rgba(239, 68, 68, 0.1); padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem; border-right: 3px solid var(--danger);">
+                    <h4 style="color: var(--danger); margin-bottom: 0.8rem;">⚠️ إدارة ذكية لطبقات DF</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <div>
+                            <div style="width: 20px; height: 20px; background: #ff0000; display: inline-block; margin-left: 0.5rem; border-radius: 3px;"></div>
+                            <strong>طبقة Levels Positive</strong><br>
+                            <small>للنقاط المرتفعة (+) - تحتاج حفر</small>
+                        </div>
+                        <div>
+                            <div style="width: 20px; height: 20px; background: #00ff00; display: inline-block; margin-left: 0.5rem; border-radius: 3px;"></div>
+                            <strong>طبقة Levels Negative</strong><br>
+                            <small>للنقاط المنخفضة (-) - تحتاج ردم</small>
+                        </div>
+                        <div>
+                            <div style="width: 20px; height: 20px; background: var(--success); display: inline-block; margin-left: 0.5rem; border-radius: 50%;"></div>
+                            <strong>المرونة الكاملة</strong><br>
+                            <small>إخفاء/إظهار كل طبقة على حدة</small>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.8rem;">
+                        <strong>💡 نصيحة ذهبية:</strong> استخدم إخفاء طبقة "Levels Positive" لترى فقط النقاط التي تحتاج ردم، والعكس صحيح!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Business Benefits -->
+        <section class="section">
+            <h2 class="section-title">💰 فوائد DF في الأعمال والمشاريع</h2>
+            <div class="card">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md);">
+                    <div class="feature-card">
+                        <div class="feature-icon">⏱️</div>
+                        <h3 class="feature-title">توفير الوقت</h3>
+                        <p class="feature-desc">
+                            • تقليل وقت الحسابات بنسبة 97%<br>
+                            • إلغاء الحاجة للحساب اليدوي<br>
+                            • سرعة في اتخاذ القرارات الميدانية<br>
+                            • تحليل فوري بدون تأخير
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3 class="feature-title">دقة القرارات</h3>
+                        <p class="feature-desc">
+                            • حسابات دقيقة بلا أخطاء<br>
+                            • رصد 100% من المشاكل<br>
+                            • معلومات موثوقة للفريق<br>
+                            • تقليل المخاطر في المشاريع
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🤝</div>
+                        <h3 class="feature-title">تواصل فعال</h3>
+                        <p class="feature-desc">
+                            • لغة ألوان مفهومة للجميع<br>
+                            • تقليل سوء الفهم في الموقع<br>
+                            • توثيق مرئي للمناقشات<br>
+                            • شفافية كاملة في البيانات
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(245, 158, 11, 0.1); padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem;">
+                    <h4 style="color: var(--warning); margin-bottom: 0.8rem;">📊 إحصائيات تأثير استخدام DF</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: var(--warning); font-weight: bold;">97%</div>
+                            <div style="color: var(--text-light);">توفير في وقت الحساب</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: var(--warning); font-weight: bold;">100%</div>
+                            <div style="color: var(--text-light);">دقة في المقارنات</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: var(--warning); font-weight: bold;">90%</div>
+                            <div style="color: var(--text-light);">تقليل الأخطاء البشرية</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: var(--warning); font-weight: bold;">⚡</div>
+                            <div style="color: var(--text-light);">قرارات أسرع بمقدار 50×</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Conclusion -->
+        <section class="section">
+            <h2 class="section-title">🎯 الخلاصة: DF عينك على الفروق</h2>
+            <div class="card" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.1));">
+                <div style="text-align: center; padding: var(--spacing-md);">
+                    <h3 style="color: var(--warning); margin-bottom: 1rem;">DF: محول البيانات إلى قرارات</h3>
+                    
+                    <div style="display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: #ff0000; font-weight: bold;">📈</div>
+                            <div style="color: var(--text-light); font-size: 0.9rem;">تحليل الفروق</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: #00ff00; font-weight: bold;">🎨</div>
+                            <div style="color: var(--text-light); font-size: 0.9rem;">تلوين ذكي</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: var(--warning); font-weight: bold;">⚡</div>
+                            <div style="color: var(--text-light); font-size: 0.9rem;">سرعة فائقة</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; color: var(--warning); font-weight: bold;">🤝</div>
+                            <div style="color: var(--text-light); font-size: 0.9rem;">تواصل محسّن</div>
+                        </div>
+                    </div>
+                    
+                    <p style="color: var(--text); margin-bottom: 1.5rem; max-width: 800px; margin-left: auto; margin-right: auto; font-size: 1.1rem;">
+                        الأمر <strong>DF</strong> يحول <strong>الأرقام المخفية</strong> في جداول البيانات إلى <strong>قرارات مرئية فورية</strong>. بدلاً من الحسابات المعقدة، يعطيك DF <strong>خريطة ملونة</strong> توضح بالضبط أين تحتاج الحفر وأين تحتاج الردم.
+                    </p>
+                    
+                    <div style="background: rgba(255, 255, 255, 0.1); padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem;">
+                        <p style="color: var(--text-light); font-style: italic; font-size: 1.1rem;">
+                            "مع DF، كل نقطة تخبرك قصتها: أنا مرتفعة فأحتاج حفر، أو منخفضة فأحتاج ردم. القرارات لم تعد تخمينات، بل أصبحت حقائق مرئية."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <a href="../index.html" class="btn">العودة إلى الصفحة الرئيسية</a>
+            <p>📧 للاستفسارات: MahmoudBorham.codes@gmail.com</p>
+            <p>🇵🇸 Free Palestine - لوجه الله تعالى</p>
+            <p style="color: var(--warning); font-size: 0.9rem; margin-top: 1rem;">
+                "حساب ذكي + ألوان ذكية + قرارات ذكية = DF للتحليل الذكي للمناسيب"
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
