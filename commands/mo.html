@@ -1,269 +1,629 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MO - Multi-Offset | Borham Tools</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/command.css">
-    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <title>MO Command - Smart Multi-Offset | Borham Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --bg-dark: #0f172a;
+            --bg-card: #334155;
+            --text-light: #f1f5f9;
+            --text-gray: #cbd5e1;
+            --success: #22c55e;
+            --border: #475569;
+            --container-width: 1000px;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2.5rem;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+        /* Header */
+        .page-header { 
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        .page-header h1 { 
+            font-size: 2.2rem; 
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        .page-header p { 
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Sections */
+        .section { margin-bottom: var(--spacing-lg); }
+        .section-title { 
+            color: var(--secondary);
+            font-size: 1.6rem;
+            margin-bottom: var(--spacing-md);
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        /* 1. Command Definition */
+        .definition {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border: 1px solid var(--border);
+        }
+        .definition-box {
+            background: rgba(37, 99, 235, 0.1);
+            border-left: 3px solid var(--primary);
+            padding: var(--spacing-md);
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .definition-box h3 {
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 2. Technical Features */
+        .tech-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+        .feature-card h4 {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* 3. How It Works */
+        .how-it-works {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border: 1px solid var(--border);
+        }
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            margin: var(--spacing-md) 0;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+        .work-step {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: var(--spacing-sm);
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            position: relative;
+        }
+        .work-step:not(:last-child):after {
+            content: "→";
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        /* Results */
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        .result-card {
+            text-align: center;
+            padding: var(--spacing-md);
+            background: var(--bg-card);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        .result-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+        .result-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Buttons */
+        .back-link {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin: var(--spacing-md) 0;
+            transition: background 0.3s;
+        }
+        .back-link:hover { 
+            background: #1e40af;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--border);
+            margin-top: var(--spacing-lg);
+        }
+        footer p { 
+            color: var(--text-gray); 
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.4rem; }
+            .workflow { flex-direction: column; }
+            .work-step:not(:last-child):after {
+                content: "↓";
+                right: 50%;
+                top: auto;
+                bottom: -20px;
+                transform: translateX(50%);
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Back Button -->
-    <div class="back-button">
-        <a href="../index.html">← Back to Home</a>
-    </div>
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <h1>MO Command</h1>
+            <p>Smart Multi-Offset - Copy objects inward/outward with specific distance and automatic duplicate prevention</p>
+        </header>
 
-    <!-- Command Header -->
-    <section class="command-header">
-        <div class="container">
-            <span class="command-badge">V16 Ultra</span>
-            <h1 class="command-name">MO</h1>
-            <p class="command-title">Multi-Offset with Intelligent Duplicate Prevention</p>
-        </div>
-    </section>
-
-    <!-- Command Content -->
-    <section class="command-content">
-        <div class="container">
-            <!-- Overview Section -->
-            <div class="content-section highlight-box">
-                <h2>📖 Command Overview</h2>
-                <p>The <code>MO</code> command (Optimized V16) creates offset copies of objects with <strong>intelligent duplicate prevention</strong> using advanced object signature caching technology.</p>
+        <!-- 1. What is MO Command? -->
+        <section class="section">
+            <h2 class="section-title">📌 What is MO Command?</h2>
+            <div class="definition">
+                <p>The <strong>MO</strong> (Multi-Offset) command is an enhanced and intelligent version of the Offset command in AutoCAD. It allows you to copy objects inward, outward, or in both directions with a specified distance, with automatic duplicate prevention and advanced layer/color management.</p>
                 
-                <h3>V16 Optimizations:</h3>
-                <ul>
-                    <li><strong>Object signature caching</strong> (build once, use many)</li>
-                    <li><strong>5x faster duplicate checking</strong></li>
-                    <li><strong>Smart direction detection</strong></li>
-                    <li><strong>Batch offset creation</strong></li>
-                    <li><strong>Detailed statistics display</strong></li>
-                </ul>
-            </div>
-
-            <!-- How It Works -->
-            <div class="content-section">
-                <h2>⚙️ How MO V16 Works</h2>
-                
-                <div class="command-tips">
-                    <div class="tip-card">
-                        <h4>1️⃣ Signature Creation</h4>
-                        <p>Creates unique signatures for each object type once.</p>
-                    </div>
-                    
-                    <div class="tip-card">
-                        <h4>2️⃣ Fast Comparison</h4>
-                        <p>Compares signatures instead of full geometry.</p>
-                    </div>
-                    
-                    <div class="tip-card">
-                        <h4>3️⃣ Duplicate Prevention</h4>
-                        <p>Skips duplicates and shows count.</p>
-                    </div>
-                    
-                    <div class="tip-card">
-                        <h4>4️⃣ Batch Processing</h4>
-                        <p>Creates all offsets in optimized batches.</p>
-                    </div>
+                <div class="definition-box">
+                    <h3>🎯 Key Features</h3>
+                    <ul style="color: var(--text-gray); padding-left: 1rem;">
+                        <li><strong>3 Copy Directions:</strong> Outward (Out), Inward (In), or Both directions</li>
+                        <li><strong>Smart Duplicate Prevention:</strong> Detects identical copies and automatically ignores them</li>
+                        <li><strong>Colored Layer Management:</strong> Red layer for outward, orange layer for inward</li>
+                        <li><strong>Batch Processing:</strong> Copy hundreds of objects at once</li>
+                        <li><strong>Live Progress Bar:</strong> Track created copies and ignored duplicates</li>
+                    </ul>
                 </div>
-            </div>
 
-            <!-- Object Signatures -->
-            <div class="content-section">
-                <h2>🎯 Object Signature Types</h2>
-                
-                <div style="background: var(--bg-dark); padding: 20px; border-radius: 8px; margin: 15px 0;">
-                    <table style="width:100%; border-collapse: collapse;">
-                        <tr style="background: var(--primary); color: white;">
-                            <th style="padding: 10px; border: 1px solid var(--border);">Object Type</th>
-                            <th style="padding: 10px; border: 1px solid var(--border);">Signature Components</th>
-                            <th style="padding: 10px; border: 1px solid var(--border);">Optimization</th>
-                        </tr>
-                        <tr>
-                            <td style="padding: 8px; border: 1px solid var(--border);"><strong>Lines</strong></td>
-                            <td style="padding: 8px; border: 1px solid var(--border);">Start & End points</td>
-                            <td style="padding: 8px; border: 1px solid var(--border);">Point comparison</td>
-                        </tr>
-                        <tr style="background: var(--bg-card);">
-                            <td style="padding: 8px; border: 1px solid var(--border);"><strong>Polylines</strong></td>
-                            <td style="padding: 8px; border: 1px solid var(--border);">All vertex coordinates</td>
-                            <td style="padding: 8px; border: 1px solid var(--border);">Coordinate hash</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 8px; border: 1px solid var(--border);"><strong>Circles</strong></td>
-                            <td style="padding: 8px; border: 1px solid var(--border);">Center & Radius</td>
-                            <td style="padding: 8px; border: 1px solid var(--border);">Radius check</td>
-                        </tr>
-                        <tr style="background: var(--bg-card);">
-                            <td style="padding: 8px; border: 1px solid var(--border);"><strong>Arcs</strong></td>
-                            <td style="padding: 8px; border: 1px solid var(--border);">Center, Radius, Start/End angles</td>
-                            <td style="padding: 8px; border: 1px solid var(--border);">Angle range</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 8px; border: 1px solid var(--border);"><strong>Other Objects</strong></td>
-                            <td style="padding: 8px; border: 1px solid var(--border);">Bounding box</td>
-                            <td style="padding: 8px; border: 1px solid var(--border);">Box dimensions</td>
-                        </tr>
-                    </table>
+                <div class="definition-box">
+                    <h3>⚙️ When to Use It?</h3>
+                    <ul style="color: var(--text-gray); padding-left: 1rem;">
+                        <li>When you need to <strong>offset many elements</strong> with the same distance</li>
+                        <li>To create internal and external boundaries for buildings or lands</li>
+                        <li>To draw double walls with specific thickness</li>
+                        <li>To create road curbs and pathways</li>
+                        <li>When you want to avoid duplicate copies automatically</li>
+                    </ul>
                 </div>
-            </div>
 
-            <!-- Usage Section -->
-            <div class="content-section usage-box">
-                <h2>🚀 How to Use</h2>
-                
-                <ol class="steps-list">
-                    <li>Type <code>MO</code> in the command line and press Enter</li>
-                    <li>Enter the offset distance</li>
-                    <li>Choose offset direction:
-                        <ul>
-                            <li><strong>Outward</strong> (creates on "OFFSET-OUT" layer - Red)</li>
-                            <li><strong>Inward</strong> (creates on "OFFSET-IN" layer - Orange)</li>
-                            <li><strong>Both</strong> (creates both outward and inward)</li>
-                        </ul>
-                    </li>
-                    <li>Select objects to offset</li>
-                    <li>View instant results with duplicate count</li>
-                </ol>
-                
-                <h3>Command Line Example:</h3>
-                <pre><code>Command: MO
-Enter offset distance: 2.5
-Choose direction (Outward/Inward/Both): Both
-Select objects: [select objects]
-Creating object signatures...
-Processing 15 objects...
-Created: 28 offsets (Out: 15, In: 13)
-Skipped: 2 duplicates
-Total time: 0.45s</code></pre>
-            </div>
-
-            <!-- Direction Options -->
-            <div class="content-section">
-                <h2>🎨 Direction Options & Layers</h2>
-                
-                <div class="command-tips">
-                    <div class="tip-card" style="border-left: 4px solid #e4312b;">
-                        <h4 style="color: #e4312b;">OUTWARD OFFSET</h4>
-                        <p><strong>Layer:</strong> OFFSET-OUT</p>
-                        <p><strong>Color:</strong> Red</p>
-                        <p><strong>Use Case:</strong> Expanding boundaries</p>
-                    </div>
-                    
-                    <div class="tip-card" style="border-left: 4px solid #f59e0b;">
-                        <h4 style="color: #f59e0b;">INWARD OFFSET</h4>
-                        <p><strong>Layer:</strong> OFFSET-IN</p>
-                        <p><strong>Color:</strong> Orange</p>
-                        <p><strong>Use Case:</strong> Creating setbacks</p>
-                    </div>
-                    
-                    <div class="tip-card" style="border-left: 4px solid #10b981;">
-                        <h4 style="color: #10b981;">BOTH DIRECTIONS</h4>
-                        <p><strong>Layers:</strong> Both created</p>
-                        <p><strong>Colors:</strong> Red & Orange</p>
-                        <p><strong>Use Case:</strong> Parallel lines</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Performance -->
-            <div class="content-section performance-box">
-                <h2>⚡ V16 Performance Improvements</h2>
-                <p class="performance-stat"><strong>5x Faster</strong> duplicate checking</p>
-                
-                <div style="margin-top: 20px;">
-                    <h3>Optimization Techniques:</h3>
-                    <ul>
-                        <li><strong>Single Cache Build:</strong> Signatures built once, reused multiple times</li>
-                        <li><strong>Batch Processing:</strong> Multiple offsets created in single operation</li>
-                        <li><strong>Smart Filtering:</strong> Early duplicate detection</li>
-                        <li><strong>Layer Auto-Unlock:</strong> Automatic layer management</li>
+                <div style="background: rgba(16, 185, 129, 0.1); border-left: 3px solid var(--secondary); padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem;">
+                    <h3 style="color: var(--secondary); margin-bottom: 0.8rem;">✅ Supported Elements</h3>
+                    <p style="color: var(--text-gray); margin-bottom: 0.5rem;">The command works with:</p>
+                    <ul style="color: var(--text-gray); padding-left: 1rem;">
+                        <li>✅ LINES (Straight lines)</li>
+                        <li>✅ POLYLINES (2D & 3D)</li>
+                        <li>✅ ARCS</li>
+                        <li>✅ CIRCLES</li>
+                        <li>✅ ELLIPSES</li>
+                        <li>✅ SPLINES (Curves)</li>
                     </ul>
                 </div>
             </div>
+        </section>
 
-            <!-- Features -->
-            <div class="content-section">
-                <h2>⭐ Advanced Features</h2>
+        <!-- 2. Technical Features -->
+        <section class="section">
+            <h2 class="section-title">✨ Unique Technical Features</h2>
+            <div class="tech-features">
                 
-                <ul>
-                    <li><strong>Duplicate Skipping:</strong> Automatically skips identical offsets</li>
-                    <li><strong>Detailed Statistics:</strong> Shows created/skipped counts</li>
-                    <li><strong>Error Handling:</strong> Silent error handling - no interruptions</li>
-                    <li><strong>Layer Management:</strong> Auto-unlocks and turns on layers</li>
-                    <li><strong>SNAP Preservation:</strong> SNAP settings remain unchanged</li>
-                    <li><strong>Performance Timing:</strong> Shows operation time</li>
-                </ul>
-            </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h4>Automatic Colored Layers</h4>
+                    <p>Outward copies → "Offset Out" red layer | Inward copies → "Offset In" orange layer</p>
+                </div>
 
-            <!-- Applications -->
-            <div class="content-section">
-                <h2>🎯 Practical Applications</h2>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h4>Advanced Duplicate Prevention</h4>
+                    <p>Builds "geometric fingerprint" for each element and compares them - tolerance 0.01 for high accuracy</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h4>Smart Direction Correction</h4>
+                    <p>For closed shapes: automatically detects correct direction (inward/outward) based on area</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>Complete Statistics</h4>
+                    <p>Detailed display: successful copies, ignored duplicates, failed attempts</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. How It Works -->
+        <section class="section">
+            <h2 class="section-title">🚀 How MO Command Works?</h2>
+            <div class="how-it-works">
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">Simple 5-step process:</p>
                 
-                <div class="command-tips">
-                    <div class="tip-card">
-                        <h4>🏗️ Construction</h4>
-                        <p>Create setback lines for building permits</p>
+                <div class="workflow">
+                    <div class="work-step">
+                        <strong>Step 1</strong>
+                        <p>Type MO</p>
+                        <small>Type MO then Enter</small>
                     </div>
-                    
-                    <div class="tip-card">
-                        <h4>🛣️ Road Design</h4>
-                        <p>Generate parallel road edges and curbs</p>
+                    <div class="work-step">
+                        <strong>Step 2</strong>
+                        <p>Enter Distance</p>
+                        <small>Example: 0.5 meters <br><span style="color: var(--accent);">(Default: 0.50 if you press Enter)</span></small>
                     </div>
-                    
-                    <div class="tip-card">
-                        <h4>📐 Architecture</h4>
-                        <p>Create wall thicknesses and finishes</p>
+                    <div class="work-step">
+                        <strong>Step 3</strong>
+                        <p>Choose Direction</p>
+                        <small>Out / In / Both<br><span style="color: var(--accent);">(Default: Out if you press Enter)</span></small>
                     </div>
-                    
-                    <div class="tip-card">
-                        <h4>🏭 Manufacturing</h4>
-                        <p>Generate tool paths and clearance zones</p>
+                    <div class="work-step">
+                        <strong>Step 4</strong>
+                        <p>Select Elements</p>
+                        <small>Select all required elements</small>
+                    </div>
+                    <div class="work-step">
+                        <strong>Result</strong>
+                        <p>Copies Ready!</p>
+                        <small>With correct layers and colors</small>
+                    </div>
+                </div>
+
+                <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🎯 Available Directions (3 Options)</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-sm);">
+                        <div style="background: rgba(239, 68, 68, 0.1); padding: var(--spacing-md); border-radius: 6px; border-left: 3px solid #ef4444;">
+                            <h4 style="color: #ef4444; margin-bottom: 0.5rem;">🔴 Out (Outward)</h4>
+                            <p style="color: var(--text-gray); font-size: 0.85rem;">Copies elements outward only to "Offset Out" layer in red color</p>
+                        </div>
+                        <div style="background: rgba(251, 146, 60, 0.1); padding: var(--spacing-md); border-radius: 6px; border-left: 3px solid #fb923c;">
+                            <h4 style="color: #fb923c; margin-bottom: 0.5rem;">🟠 In (Inward)</h4>
+                            <p style="color: var(--text-gray); font-size: 0.85rem;">Copies elements inward only to "Offset In" layer in orange color</p>
+                        </div>
+                        <div style="background: rgba(16, 185, 129, 0.1); padding: var(--spacing-md); border-radius: 6px; border-left: 3px solid var(--secondary);">
+                            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">🟢 Both (Both Directions)</h4>
+                            <p style="color: var(--text-gray); font-size: 0.85rem;">Copies both inward and outward - two copies per element in separate layers</p>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Command Output -->
-            <div class="content-section">
-                <h2>📊 Typical Command Output</h2>
-                <div style="background: var(--bg-dark); padding: 20px; border-radius: 8px; margin: 15px 0;">
-                    <code style="display: block; line-height: 1.8;">
-<span style="color: var(--accent);">Command: MO</span>
-<span style="color: var(--text-gray);">Enter offset distance:</span> <span style="color: var(--success);">5.0</span>
-<span style="color: var(--text-gray);">Choose direction (Outward/Inward/Both):</span> <span style="color: var(--success);">Both</span>
-<span style="color: var(--text-gray);">Select objects:</span> <span style="color: var(--success);">[12 objects selected]</span>
-<span style="color: var(--accent);">Building object signatures... Done (0.12s)</span>
-<span style="color: var(--accent);">Creating offsets... Processing</span>
-<span style="color: var(--success);">✓ Created: 22 offsets (Outward: 12, Inward: 10)</span>
-<span style="color: var(--warning);">⚠ Skipped: 3 duplicate offsets</span>
-<span style="color: var(--accent);">⏱ Total processing time: 0.85 seconds</span>
-<span style="color: var(--success);">✅ Operation completed successfully!</span>
-                    </code>
+        <!-- 4. Results and Performance -->
+        <section class="section">
+            <h2 class="section-title">💰 Results and Performance</h2>
+            <div class="results">
+                <div class="result-card">
+                    <div class="result-value">0%</div>
+                    <div class="result-label">Duplicate Copies</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">100%</div>
+                    <div class="result-label">Organization Accuracy</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">1000+</div>
+                    <div class="result-label">Elements in Minutes</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">3</div>
+                    <div class="result-label">Direction Options</div>
                 </div>
             </div>
 
-            <!-- Related Commands -->
-            <div class="related-commands">
-                <h3>Related Commands</h3>
-                <div class="related-grid">
-                    <a href="aa.html" class="related-command">AA</a>
-                    <a href="pp.html" class="related-command">PP</a>
-                    <a href="ppc.html" class="related-command">PPC</a>
-                    <a href="../index.html" class="related-command">All Commands</a>
+            <div style="background: rgba(34, 197, 94, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
+                <h3 style="color: var(--success); margin-bottom: 1rem;">🏗️ Practical Scenario: Architectural Plan</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+                    <div>
+                        <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">Without MO (Regular Offset):</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem;">
+                            <li>Manual Offset for each element</li>
+                            <li>Separate direction selection for each element</li>
+                            <li>Manual transfer to appropriate layers</li>
+                            <li>Manual color change one by one</li>
+                            <li>Risk of accidental duplicate creation</li>
+                            <li>Duration: 45-60 minutes for 100 elements</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">With MO:</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem;">
+                            <li>Select all 100 elements at once</li>
+                            <li>Set distance once (e.g.: 0.15)</li>
+                            <li>Choose direction: Both for inward and outward</li>
+                            <li>Layers and colors done automatically</li>
+                            <li>Automatic duplicate prevention - zero duplicates</li>
+                            <li>Duration: 30-45 seconds only!</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                    ⚡ 98% Time Saving + Zero Errors Guarantee!
+                </p>
+            </div>
+        </section>
+
+        <!-- 5. Practical Applications -->
+        <section class="section">
+            <h2 class="section-title">🏗️ Practical Field Applications</h2>
+            <div class="tech-features">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h4>Architectural Walls</h4>
+                    <p>Create double walls with specific thickness - inner and outer - with one click</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🛣️</div>
+                    <h4>Roads and Curbs</h4>
+                    <p>Draw road boundaries and curbs on both sides automatically with specified distance</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌳</div>
+                    <h4>Green Spaces</h4>
+                    <p>Define internal and external boundaries for gardens and parks</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📐</div>
+                    <h4>Land Boundaries</h4>
+                    <p>Create setback boundaries inward from land borders</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Networks and Utilities</h4>
+                    <p>Draw backup lines with safety distance from main lines</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h4>Safety Zones</h4>
+                    <p>Define Buffer Zones around sensitive facilities with specified distance</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>Borham Tools v78.2 - Free AutoCAD LISP Tools</p>
-            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
-            <div class="back-link">
-                <a href="../index.html">← Return to Main Page</a>
+        <!-- 6. Real Project Examples -->
+        <section class="section">
+            <h2 class="section-title">💼 Real Project Examples</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+                
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 Example 1: Structural Column Plan</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Situation:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        Structural plan containing 200 concrete columns. Need to create external offset for each column at 0.30 meters to define formwork and carpentry area before pouring.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Solution with MO:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1.5rem;">
+                        <li>Run MO command</li>
+                        <li>Enter distance: 0.30 meters (formwork working area)</li>
+                        <li>Choose direction: Out (Outward)</li>
+                        <li>Select all 200 columns at once</li>
+                        <li>Enter - 200 area markers created in 15 seconds</li>
+                        <li>All areas in "Offset Out" red layer</li>
+                        <li>Accurate marking for each column on site</li>
+                    </ol>
+                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                        ⚡ Save 4 hours manual work + 100% accuracy
+                    </p>
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
+                        <p style="color: var(--text-gray); font-size: 0.85rem; margin: 0;">
+                            <strong>Practical Benefits:</strong> Precise formwork area marking - easier carpentry work - prevent marking errors - save time on site - accurate pouring measurements.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 Example 2: Main Road</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Situation:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        Main road with 12 segments. Need to draw curbs on both sides with 1.5 meters width from road boundaries.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Solution with MO:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1.5rem;">
+                        <li>MO on road boundary lines</li>
+                        <li>Distance: 1.5 meters</li>
+                        <li>Direction: Both (Both sides)</li>
+                        <li>Enter - Create 24 lines (12 right + 12 left)</li>
+                        <li>External lines red and internal lines orange</li>
+                    </ol>
+                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                        ✅ Accurate curb drawing on both sides
+                    </p>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 Example 3: Land Subdivision Plan</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Situation:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        Subdivision plan with 80 land plots. Need to draw building setback boundaries 3 meters inward from each plot.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Solution with MO:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1.5rem;">
+                        <li>MO on all plot boundaries</li>
+                        <li>Distance: 3.0 meters</li>
+                        <li>Direction: In (Inward only)</li>
+                        <li>Enter - Create 80 internal building boundaries</li>
+                        <li>All building boundaries in separate orange layer</li>
+                        <li>Zero duplicates despite shared boundaries</li>
+                    </ol>
+                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                        ✅ 100% accuracy in calculating buildable areas
+                    </p>
+                </div>
             </div>
-        </div>
-    </footer>
+        </section>
+
+        <!-- 7. Tips and Best Practices -->
+        <section class="section">
+            <h2 class="section-title">💡 Tips and Best Practices</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+                
+                <div style="background: rgba(37, 99, 235, 0.1); border-left: 3px solid var(--primary); padding: var(--spacing-md); border-radius: 8px;">
+                    <h4 style="color: var(--primary); margin-bottom: 0.8rem;">🎯 Choosing the Right Direction</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem;">
+                        <li><strong>Out:</strong> For external boundaries, external safety zones</li>
+                        <li><strong>In:</strong> For internal walls, building setbacks</li>
+                        <li><strong>Both:</strong> For roads with lanes on both sides, double walls</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(16, 185, 129, 0.1); border-left: 3px solid var(--secondary); padding: var(--spacing-md); border-radius: 8px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">✅ Verifying Results</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem;">
+                        <li>Review final results message carefully</li>
+                        <li>Check number of successful and duplicate copies</li>
+                        <li>If there are failed copies, check the original elements</li>
+                        <li>Use Layer Manager to control layers</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(245, 158, 11, 0.1); border-left: 3px solid var(--accent); padding: var(--spacing-md); border-radius: 8px;">
+                    <h4 style="color: var(--accent); margin-bottom: 0.8rem;">⚠️ Avoiding Common Issues</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem;">
+                        <li>Ensure layers are unlocked (Unlocked)</li>
+                        <li>For small closed shapes: use distance smaller than half width</li>
+                        <li>If inward offset fails, command will try outward automatically</li>
+                        <li>Use Undo if you don't like the result</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Comparison with Regular Offset -->
+        <section class="section">
+            <h2 class="section-title">⚖️ Comparison with Regular Offset Command in AutoCAD</h2>
+            <div style="background: var(--bg-card); border-radius: 10px; padding: var(--spacing-md); border: 1px solid var(--border);">
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; color: var(--text-gray);">
+                        <thead>
+                            <tr style="background: rgba(37, 99, 235, 0.2);">
+                                <th style="padding: 1rem; text-align: left; border: 1px solid var(--border); color: var(--text-light);">Feature</th>
+                                <th style="padding: 1rem; text-align: center; border: 1px solid var(--border); color: var(--accent);">Regular Offset</th>
+                                <th style="padding: 1rem; text-align: center; border: 1px solid var(--border); color: var(--secondary);">MO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); font-weight: bold;">Batch Processing</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">❌ One element only</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center; color: var(--success);">✅ Hundreds of elements</td>
+                            </tr>
+                            <tr style="background: rgba(255,255,255,0.02);">
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); font-weight: bold;">Duplicate Prevention</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">❌ Creates duplicates</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center; color: var(--success);">✅ Automatic</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); font-weight: bold;">Layer Management</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">❌ Manual</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center; color: var(--success);">✅ Automatic with colors</td>
+                            </tr>
+                            <tr style="background: rgba(255,255,255,0.02);">
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); font-weight: bold;">Both Directions</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">❌ Run twice</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center; color: var(--success);">✅ Both option</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); font-weight: bold;">Progress Bar</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">❌ None</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center; color: var(--success);">✅ Live and direct</td>
+                            </tr>
+                            <tr style="background: rgba(255,255,255,0.02);">
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); font-weight: bold;">Direction Correction</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">❌ Manual</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center; color: var(--success);">✅ Automatic smart</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); font-weight: bold;">Detailed Statistics</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">❌ None</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center; color: var(--success);">✅ Complete</td>
+                            </tr>
+                            <tr style="background: rgba(255,255,255,0.02);">
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); font-weight: bold;">Default Values</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">❌ None</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center; color: var(--success);">✅ Distance: 0.50 meters<br>Direction: Out</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1.5rem; font-size: 1.1rem;">
+                    🏆 MO = Regular Offset × 100 in Speed and Efficiency!
+                </p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <a href="../index.html" class="back-link">Back to Main Page</a>
+            <p>📧 For inquiries: MahmoudBorham.codes@gmail.com</p>
+            <p>🇵🇸 Free Palestine - For the sake of God</p>
+            <p style="color: var(--accent); font-size: 0.9rem; margin-top: 1rem;">
+                "Smart copying + Duplicate prevention + Layer management = MO for Multi-Offset"
+            </p>
+        </footer>
+    </div>
 </body>
 </html>
