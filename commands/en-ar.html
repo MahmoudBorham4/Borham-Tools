@@ -1,1 +1,659 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأمر EN - إحداثيات شمال وشرق | Borham Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --bg-dark: #0f172a;
+            --bg-card: #334155;
+            --text-light: #f1f5f9;
+            --text-gray: #cbd5e1;
+            --success: #22c55e;
+            --border: #475569;
+            --container-width: 1000px;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2.5rem;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Cairo', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+        /* الترويسة */
+        .page-header { 
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        .page-header h1 { 
+            font-size: 2.2rem; 
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        .page-header p { 
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* الأقسام */
+        .section { margin-bottom: var(--spacing-lg); }
+        .section-title { 
+            color: var(--secondary);
+            font-size: 1.6rem;
+            margin-bottom: var(--spacing-md);
+            border-right: 4px solid var(--accent);
+            padding-right: 1rem;
+        }
+
+        /* 1. تعريف الأمر */
+        .definition {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border: 1px solid var(--border);
+        }
+        .definition-box {
+            background: rgba(37, 99, 235, 0.1);
+            border-right: 3px solid var(--primary);
+            padding: var(--spacing-md);
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .definition-box h3 {
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 2. المميزات التقنية */
+        .tech-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+        .feature-card h4 {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* 3. طريقة العمل */
+        .how-it-works {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border: 1px solid var(--border);
+        }
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            margin: var(--spacing-md) 0;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+        .work-step {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: var(--spacing-sm);
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            position: relative;
+        }
+        .work-step:not(:last-child):after {
+            content: "→";
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        /* النتائج */
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        .result-card {
+            text-align: center;
+            padding: var(--spacing-md);
+            background: var(--bg-card);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        .result-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+        .result-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* الأزرار */
+        .back-link {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin: var(--spacing-md) 0;
+            transition: background 0.3s;
+        }
+        .back-link:hover { 
+            background: #1e40af;
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--border);
+            margin-top: var(--spacing-lg);
+        }
+        footer p { 
+            color: var(--text-gray); 
+            margin: 0.5rem 0;
+        }
+
+        /* التجاوب */
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.4rem; }
+            .workflow { flex-direction: column; }
+            .work-step:not(:last-child):after {
+                content: "↓";
+                left: 50%;
+                top: auto;
+                bottom: -20px;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- الترويسة -->
+        <header class="page-header">
+            <h1>الأمر EN</h1>
+            <p>توثيق إحداثيات الشمال والشرق - إنشاء MLeader باحترافية مع إحداثيات دقيقة</p>
+        </header>
+
+        <!-- 1. تعريف الأمر -->
+        <section class="section">
+            <h2 class="section-title">📌 ما هو الأمر EN؟</h2>
+            <div class="definition">
+                <p>الأمر <strong>EN</strong> (Easting & Northing) هو أداة توثيق سريعة تنشئ MLeader احترافي يعرض إحداثيات X (الشرق) و Y (الشمال) لأي نقطة تختارها في الرسم. بدلاً من كتابة الإحداثيات يدوياً، تختار النقطة والأمر يستخرج الإحداثيات تلقائياً وينشئ MLeader جاهز للطباعة.</p>
+                
+                <div class="definition-box">
+                    <h3>🎯 المميزات الرئيسية</h3>
+                    <ul style="color: var(--text-gray); padding-right: 1rem;">
+                        <li><strong>استخراج تلقائي:</strong> يقرأ إحداثيات X و Y مباشرة من النقطة المختارة</li>
+                        <li><strong>MLeader احترافي:</strong> ينشئ قائد متعدد الأسطر بتنسيق جاهز</li>
+                        <li><strong>دقة عالية:</strong> عرض الإحداثيات بـ 3 منازل عشرية</li>
+                        <li><strong>قابل للتخصيص:</strong> تعديل حجم النص (Scale) وزاوية الدوران</li>
+                        <li><strong>وضع مستمر:</strong> وضع عدة إحداثيات متتالية بدون إعادة الأمر</li>
+                    </ul>
+                </div>
+
+                <div class="definition-box">
+                    <h3>⚙️ متى تستخدمه؟</h3>
+                    <ul style="color: var(--text-gray); padding-right: 1rem;">
+                        <li>لتوثيق <strong>إحداثيات نقاط مهمة</strong> في المخططات</li>
+                        <li>لوضع إحداثيات الزوايا والنقاط المرجعية</li>
+                        <li>للمخططات المساحية التي تتطلب إحداثيات واضحة</li>
+                        <li>عند تسليم مخططات للجهات الحكومية</li>
+                        <li>لتوثيق نقاط Control Points في المشاريع</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(16, 185, 129, 0.1); border-right: 3px solid var(--secondary); padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem;">
+                    <h3 style="color: var(--secondary); margin-bottom: 0.8rem;">✅ تنسيق الإخراج</h3>
+                    <p style="color: var(--text-gray); margin-bottom: 0.5rem;">الأمر ينشئ MLeader بهذا التنسيق:</p>
+                    <div style="background: rgba(0,0,0,0.3); padding: var(--spacing-sm); border-radius: 6px; font-family: monospace; color: var(--text-light); text-align: center;">
+                        <p style="margin: 0.2rem 0;"><strong>E: 456789.123</strong></p>
+                        <p style="margin: 0.2rem 0;"><strong>N: 3456789.456</strong></p>
+                    </div>
+                    <p style="color: var(--text-gray); margin-top: 0.5rem; font-size: 0.9rem;">
+                        💡 <strong>E</strong> = Easting (الشرق) = إحداثي X<br>
+                        💡 <strong>N</strong> = Northing (الشمال) = إحداثي Y
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. المميزات التقنية -->
+        <section class="section">
+            <h2 class="section-title">✨ المميزات التقنية الفريدة</h2>
+            <div class="tech-features">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📏</div>
+                    <h4>دقة عالية</h4>
+                    <p>عرض الإحداثيات بـ 3 منازل عشرية - مناسب للمشاريع المساحية الدقيقة</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h4>MLeader احترافي</h4>
+                    <p>ينشئ Multileader بسهم وخط قائد احترافي - جاهز للطباعة مباشرة</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h4>قابل للتخصيص</h4>
+                    <p>تعديل Scale (الحجم) و Angle (الزاوية) أثناء العمل - مرونة كاملة</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h4>وضع مستمر</h4>
+                    <p>ضع عدة إحداثيات متتالية بدون إعادة الأمر - سير عمل سريع</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. طريقة العمل -->
+        <section class="section">
+            <h2 class="section-title">🚀 كيف يعمل الأمر EN؟</h2>
+            <div class="how-it-works">
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">عملية بسيطة من 4 خطوات (مع خيارات تخصيص):</p>
+                
+                <div class="workflow">
+                    <div class="work-step">
+                        <strong>الخطوة 1</strong>
+                        <p>اكتب EN</p>
+                        <small>اكتب EN ثم Enter</small>
+                    </div>
+                    <div class="work-step">
+                        <strong>الخطوة 2</strong>
+                        <p>انقر النقطة</p>
+                        <small>انقر على النقطة المطلوب إحداثياتها</small>
+                    </div>
+                    <div class="work-step">
+                        <strong>الخطوة 3</strong>
+                        <p>مكان النص</p>
+                        <small>انقر لتحديد موقع MLeader</small>
+                    </div>
+                    <div class="work-step">
+                        <strong>النتيجة</strong>
+                        <p>MLeader جاهز!</p>
+                        <small>في طبقة COORDINATES حمراء</small>
+                    </div>
+                </div>
+
+                <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">⚙️ خيارات التخصيص أثناء العمل</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-sm);">
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-md); border-radius: 6px;">
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">📐 تغيير الحجم (S)</h4>
+                            <p style="color: var(--text-gray); font-size: 0.85rem;">اكتب <strong>S</strong> ثم Enter أثناء الأمر</p>
+                            <p style="color: var(--text-gray); font-size: 0.85rem;">أدخل Scale الجديد (مثال: 0.30)</p>
+                            <p style="color: var(--success); font-size: 0.85rem; margin-top: 0.3rem;">الافتراضي: 0.20</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-md); border-radius: 6px;">
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">🔄 تغيير الزاوية (A)</h4>
+                            <p style="color: var(--text-gray); font-size: 0.85rem;">اكتب <strong>A</strong> ثم Enter أثناء الأمر</p>
+                            <p style="color: var(--text-gray); font-size: 0.85rem;">أدخل الزاوية بالدرجات (مثال: 45)</p>
+                            <p style="color: var(--success); font-size: 0.85rem; margin-top: 0.3rem;">الافتراضي: 0.0</p>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-gray); text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+                        💡 الأمر يحفظ آخر قيم استخدمتها - لن تحتاج إعادة إدخالها في المرات القادمة!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. الفرق بين EN و ENL -->
+        <section class="section">
+            <h2 class="section-title">🔀 الفرق بين EN و ENL</h2>
+            <div style="background: var(--bg-card); border-radius: 10px; padding: var(--spacing-md); border: 1px solid var(--border);">
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; color: var(--text-gray);">
+                        <thead>
+                            <tr style="background: rgba(37, 99, 235, 0.2);">
+                                <th style="padding: 1rem; text-align: right; border: 1px solid var(--border); color: var(--text-light);">الخاصية</th>
+                                <th style="padding: 1rem; text-align: center; border: 1px solid var(--border); color: var(--secondary);">EN</th>
+                                <th style="padding: 1rem; text-align: center; border: 1px solid var(--border); color: var(--accent);">ENL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); font-weight: bold;">الإحداثيات المعروضة</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">E (X) و N (Y) فقط</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">X, Y, Z (ثلاثية)</td>
+                            </tr>
+                            <tr style="background: rgba(255,255,255,0.02);">
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); font-weight: bold;">الاستخدام الأمثل</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">مخططات 2D</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">مخططات 3D</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); font-weight: bold;">عدد الأسطر</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">سطرين</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">3 أسطر</td>
+                            </tr>
+                            <tr style="background: rgba(255,255,255,0.02);">
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); font-weight: bold;">التنسيق</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center; font-family: monospace; font-size: 0.85rem;">E: xxx.xxx<br>N: yyy.yyy</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center; font-family: monospace; font-size: 0.85rem;">X: xxx.xxx<br>Y: yyy.yyy<br>Z: zzz.zzz</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); font-weight: bold;">السرعة</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center; color: var(--success);">أسرع قليلاً</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">نفس السرعة تقريباً</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1.5rem; font-size: 1.1rem;">
+                    💡 استخدم EN للمخططات الأفقية، و ENL للمخططات التي تحتاج معلومات الارتفاع!
+                </p>
+            </div>
+        </section>
+
+        <!-- 5. الاستخدامات العملية -->
+        <section class="section">
+            <h2 class="section-title">🏗️ الاستخدامات العملية في الميدان</h2>
+            <div class="tech-features">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h4>المخططات المساحية</h4>
+                    <p>توثيق إحداثيات زوايا قطع الأراضي والنقاط المرجعية الرئيسية</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h4>المخططات المعمارية</h4>
+                    <p>وضع إحداثيات زوايا المباني والنقاط الإنشائية المهمة</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🛣️</div>
+                    <h4>مشاريع الطرق</h4>
+                    <p>توثيق إحداثيات نقاط محور الطريق والتقاطعات</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h4>Control Points</h4>
+                    <p>توثيق نقاط الكنترول والنقاط المرجعية للمشاريع الكبيرة</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h4>التسليم الحكومي</h4>
+                    <p>إضافة إحداثيات واضحة للمخططات المطلوبة من الجهات الرسمية</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h4>نقاط مهمة</h4>
+                    <p>توثيق أي نقاط استراتيجية تحتاج رجوع سريع للإحداثيات</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. أمثلة واقعية -->
+        <section class="section">
+            <h2 class="section-title">💼 أمثلة واقعية من المشاريع</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+                
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 1: مخطط قطعة أرض</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        قطعة أرض مربعة بـ 4 زوايا. المطلوب وضع إحداثيات كل زاوية على المخطط للتسليم للبلدية.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ EN:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
+                        <li>تشغيل الأمر EN</li>
+                        <li>النقر على الزاوية الأولى</li>
+                        <li>وضع MLeader بجانبها</li>
+                        <li>تكرار العملية للزوايا الـ 3 الأخرى</li>
+                        <li>4 إحداثيات موثّقة في أقل من دقيقة</li>
+                    </ol>
+                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                        ✅ توثيق سريع واحترافي
+                    </p>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 2: نقاط كنترول</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        مشروع كبير به 12 نقطة Control Points. المطلوب توثيق إحداثيات كل نقطة على المخطط الرئيسي.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ EN:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
+                        <li>EN مرة واحدة</li>
+                        <li>الأمر يعمل في وضع مستمر</li>
+                        <li>النقر على كل نقطة ووضع MLeader</li>
+                        <li>12 إحداثية موثّقة بدون إعادة الأمر</li>
+                        <li>كل الإحداثيات في طبقة واحدة منظمة</li>
+                    </ol>
+                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                        ✅ وضع مستمر = سرعة عالية
+                    </p>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 3: مخطط معماري</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+مخطط فيلا بـ 8 أعمدة رئيسية. المطلوب توثيق إحداثيات كل عمود على المخطط الإنشائي.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ EN:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
+                        <li>تعديل Scale إلى 0.15 (للنص الأصغر)</li>
+                        <li>EN على مراكز الأعمدة</li>
+                        <li>وضع MLeader بجانب كل عمود</li>
+                        <li>8 إحداثيات بنفس الحجم الموحد</li>
+                        <li>مخطط احترافي جاهز للطباعة</li>
+                    </ol>
+                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                        ✅ توحيد الحجم = مظهر احترافي
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. نصائح وأفضل الممارسات -->
+        <section class="section">
+            <h2 class="section-title">💡 نصائح وأفضل الممارسات</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+                
+                <div style="background: rgba(16, 185, 129, 0.1); border-right: 3px solid var(--secondary); padding: var(--spacing-md); border-radius: 8px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">✅ للحصول على أفضل النتائج</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                        <li>اضبط <strong>Scale</strong> مناسب لحجم المخطط قبل البدء</li>
+                        <li>استخدم Osnap للنقر على النقاط بدقة</li>
+                        <li>ضع MLeader في مكان واضح لا يتداخل مع العناصر</li>
+                        <li>وحّد موقع MLeader للنقاط المتشابهة (كلها أعلى أو يمين)</li>
+                        <li>استخدم Layer COORDINATES للتحكم في جميع الإحداثيات</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(37, 99, 235, 0.1); border-right: 3px solid var(--primary); padding: var(--spacing-md); border-radius: 8px;">
+                    <h4 style="color: var(--primary); margin-bottom: 0.8rem;">⚙️ تعديل الإعدادات أثناء العمل</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                        <li><strong>للنصوص الكبيرة:</strong> اكتب S ثم 0.30 أو أكثر</li>
+                        <li><strong>للنصوص الصغيرة:</strong> اكتب S ثم 0.15 أو أقل</li>
+                        <li><strong>للدوران:</strong> اكتب A ثم الزاوية المطلوبة</li>
+                        <li><strong>للخروج:</strong> اضغط Enter بدون نقر نقطة</li>
+                        <li>الأمر يحفظ آخر إعدادات تلقائياً</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(245, 158, 11, 0.1); border-right: 3px solid var(--accent); padding: var(--spacing-md); border-radius: 8px;">
+                    <h4 style="color: var(--accent); margin-bottom: 0.8rem;">🎨 نصائح التنسيق</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                        <li>كل MLeaders في طبقة <strong>COORDINATES</strong> حمراء</li>
+                        <li>يمكن تعديل لون الطبقة من Layer Manager</li>
+                        <li>استخدم Properties لتعديل MLeader بعد إنشائه</li>
+                        <li>Scale القياسي (0.20) مناسب لمعظم المخططات</li>
+                        <li>للطباعة A3: استخدم 0.25 أو أكثر</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. الوضع المستمر (Continuous Mode) -->
+        <section class="section">
+            <h2 class="section-title">🔄 الوضع المستمر - ميزة توفير الوقت</h2>
+            <div style="background: var(--bg-card); border-radius: 10px; padding: var(--spacing-md); border: 1px solid var(--border);">
+                <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
+                    واحدة من أقوى مميزات الأمر <strong>EN</strong> هي الوضع المستمر. بعد تشغيل الأمر مرة واحدة، يمكنك وضع عشرات الإحداثيات بدون إعادة كتابة الأمر!
+                </p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); margin-bottom: 1.5rem;">
+                    <div style="background: rgba(239, 68, 68, 0.1); padding: var(--spacing-md); border-radius: 8px; border-right: 3px solid #ef4444;">
+                        <h4 style="color: #ef4444; margin-bottom: 0.8rem;">❌ الطريقة التقليدية</h4>
+                        <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
+                            <li>اكتب EN + Enter</li>
+                            <li>انقر نقطة ووضع MLeader</li>
+                            <li><strong>اكتب EN + Enter مرة أخرى</strong></li>
+                            <li>انقر نقطة ثانية ووضع MLeader</li>
+                            <li><strong>اكتب EN + Enter مرة ثالثة</strong></li>
+                            <li>وهكذا... (ممل ومتعب!)</li>
+                        </ol>
+                    </div>
+
+                    <div style="background: rgba(34, 197, 94, 0.1); padding: var(--spacing-md); border-radius: 8px; border-right: 3px solid var(--success);">
+                        <h4 style="color: var(--success); margin-bottom: 0.8rem;">✅ الوضع المستمر</h4>
+                        <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
+                            <li>اكتب EN + Enter <strong>(مرة واحدة فقط!)</strong></li>
+                            <li>انقر نقطة ووضع MLeader</li>
+                            <li>انقر نقطة ثانية ووضع MLeader</li>
+                            <li>انقر نقطة ثالثة ووضع MLeader</li>
+                            <li>استمر بدون توقف...</li>
+                            <li>Enter للخروج عند الانتهاء</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-md); border-radius: 8px;">
+                    <h4 style="color: var(--primary); margin-bottom: 0.8rem; text-align: center;">🚀 سير العمل الذكي</h4>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+                        <div style="background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 6px; text-align: center; min-width: 120px;">
+                            <p style="color: var(--accent); font-weight: bold; margin-bottom: 0.3rem;">EN + Enter</p>
+                            <p style="color: var(--text-gray); font-size: 0.8rem;">مرة واحدة</p>
+                        </div>
+                        <span style="color: var(--accent); font-size: 1.5rem;">→</span>
+                        <div style="background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 6px; text-align: center; min-width: 120px;">
+                            <p style="color: var(--success); font-weight: bold; margin-bottom: 0.3rem;">نقطة 1</p>
+                            <p style="color: var(--text-gray); font-size: 0.8rem;">نقر + وضع</p>
+                        </div>
+                        <span style="color: var(--accent); font-size: 1.5rem;">→</span>
+                        <div style="background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 6px; text-align: center; min-width: 120px;">
+                            <p style="color: var(--success); font-weight: bold; margin-bottom: 0.3rem;">نقطة 2</p>
+                            <p style="color: var(--text-gray); font-size: 0.8rem;">نقر + وضع</p>
+                        </div>
+                        <span style="color: var(--accent); font-size: 1.5rem;">→</span>
+                        <div style="background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 6px; text-align: center; min-width: 120px;">
+                            <p style="color: var(--success); font-weight: bold; margin-bottom: 0.3rem;">...</p>
+                            <p style="color: var(--text-gray); font-size: 0.8rem;">استمرار</p>
+                        </div>
+                    </div>
+                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1.5rem;">
+                        ⚡ توفير 70% من الوقت عند توثيق إحداثيات متعددة!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. خيارات سريعة -->
+        <section class="section">
+            <h2 class="section-title">⌨️ الخيارات السريعة أثناء الأمر</h2>
+            <div style="background: var(--bg-card); border-radius: 10px; padding: var(--spacing-md); border: 1px solid var(--border);">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md);">
+                    
+                    <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-md); border-radius: 8px; border-right: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary); margin-bottom: 0.8rem; font-size: 1.3rem;">S</h4>
+                        <p style="color: var(--text-light); font-weight: bold; margin-bottom: 0.5rem;">تغيير الحجم (Scale)</p>
+                        <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 0.5rem;">اكتب <code>S</code> ثم Enter</p>
+                        <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 0.5rem;">أدخل القيمة الجديدة (مثال: 0.30)</p>
+                        <p style="color: var(--success); font-size: 0.85rem;">الحالي: 0.20 (افتراضي)</p>
+                    </div>
+
+                    <div style="background: rgba(245, 158, 11, 0.1); padding: var(--spacing-md); border-radius: 8px; border-right: 3px solid var(--accent);">
+                        <h4 style="color: var(--accent); margin-bottom: 0.8rem; font-size: 1.3rem;">A</h4>
+                        <p style="color: var(--text-light); font-weight: bold; margin-bottom: 0.5rem;">تغيير الزاوية (Angle)</p>
+                        <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 0.5rem;">اكتب <code>A</code> ثم Enter</p>
+                        <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 0.5rem;">أدخل الزاوية بالدرجات (مثال: 45)</p>
+                        <p style="color: var(--success); font-size: 0.85rem;">الحالي: 0.0 (افتراضي)</p>
+                    </div>
+
+                    <div style="background: rgba(239, 68, 68, 0.1); padding: var(--spacing-md); border-radius: 8px; border-right: 3px solid #ef4444;">
+                        <h4 style="color: #ef4444; margin-bottom: 0.8rem; font-size: 1.3rem;">Enter</h4>
+                        <p style="color: var(--text-light); font-weight: bold; margin-bottom: 0.5rem;">الخروج من الأمر</p>
+                        <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 0.5rem;">بدون نقر نقطة، اضغط Enter</p>
+                        <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 0.5rem;">سيتوقف الأمر فوراً</p>
+                        <p style="color: var(--success); font-size: 0.85rem;">الإعدادات محفوظة للمرة القادمة</p>
+                    </div>
+                </div>
+
+                <div style="background: rgba(16, 185, 129, 0.1); padding: var(--spacing-md); border-radius: 8px; margin-top: 1.5rem; text-align: center;">
+                    <p style="color: var(--secondary); font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">💾 الحفظ التلقائي</p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        الأمر يحفظ آخر Scale و Angle استخدمتهم. في المرة القادمة، ستجدهم كما هم - لن تحتاج إعادة إدخالهم!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- الفوتر -->
+        <footer>
+            <a href="../index.html" class="back-link">العودة إلى الصفحة الرئيسية</a>
+            <p>📧 للاستفسارات: MahmoudBorham.codes@gmail.com</p>
+            <p>🇵🇸 Free Palestine - لوجه الله تعالى</p>
+            <p style="color: var(--accent); font-size: 0.9rem; margin-top: 1rem;">
+                "نقرة واحدة + MLeader احترافي = EN لتوثيق الإحداثيات"
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
