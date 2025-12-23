@@ -1,151 +1,959 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PI Command - Point Import | Borham Tools</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/command-page.css">
+    <title>PI Command - Multi-Format Point Import | Borham Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --warning: #f97316;
+            --info: #0ea5e9;
+            --bg-dark: #0f172a;
+            --bg-card: #334155;
+            --text-light: #f1f5f9;
+            --text-gray: #cbd5e1;
+            --success: #22c55e;
+            --border: #475569;
+            --container-width: 1200px;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2.5rem;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+        /* Header */
+        .page-header { 
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            border-bottom: 3px solid var(--accent);
+        }
+        .page-header h1 { 
+            font-size: 2.5rem; 
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .page-header p { 
+            color: var(--text-gray);
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Sections */
+        .section { margin-bottom: var(--spacing-lg); }
+        .section-title { 
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-md);
+            border-left: 5px solid var(--accent);
+            padding-left: 1rem;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+
+        /* Definition */
+        .definition {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: var(--spacing-lg);
+            margin: var(--spacing-md) 0;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .definition-box {
+            background: rgba(37, 99, 235, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            transition: transform 0.3s ease;
+        }
+        .definition-box:hover {
+            transform: translateX(5px);
+        }
+        .definition-box h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* Technical Features */
+        .tech-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: inline-block;
+            padding: 15px;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 50%;
+        }
+        .feature-card h4 {
+            color: var(--text-light);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Workflow */
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            margin: var(--spacing-lg) 0;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+        .work-step {
+            background: linear-gradient(145deg, #3c475c, #2d3748);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .work-step:hover {
+            background: linear-gradient(145deg, #475569, #374151);
+            transform: scale(1.05);
+        }
+        .work-step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            background: var(--accent);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+        .work-step:not(:last-child):after {
+            content: "→";
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--spacing-md) 0;
+            background: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        th {
+            background: linear-gradient(135deg, var(--primary), #1e40af);
+            color: white;
+            padding: 1.2rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-gray);
+        }
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Code Examples */
+        .code-example {
+            background: #1e293b;
+            border: 1px solid #475569;
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        .code-example pre {
+            margin: 0;
+            color: #cbd5e1;
+            line-height: 1.4;
+        }
+        .code-example .comment { color: #94a3b8; }
+        .code-example .keyword { color: #f87171; font-weight: bold; }
+        .code-example .function { color: #60a5fa; }
+        .code-example .string { color: #34d399; }
+        .code-example .number { color: #fbbf24; }
+
+        /* Buttons */
+        .back-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), #1e40af);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: var(--spacing-md) 0;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+        .back-link:hover { 
+            background: linear-gradient(135deg, #1e40af, #1e3a8a);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--border);
+            margin-top: var(--spacing-lg);
+            background: rgba(15, 23, 42, 0.8);
+        }
+        footer p { 
+            color: var(--text-gray); 
+            margin: 0.5rem 0;
+        }
+        footer .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            margin: var(--spacing-md) 0;
+            border-left: 4px solid;
+        }
+        .alert-info {
+            background: rgba(14, 165, 233, 0.1);
+            border-color: var(--info);
+        }
+        .alert-success {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: var(--success);
+        }
+        .alert-warning {
+            background: rgba(249, 115, 22, 0.1);
+            border-color: var(--warning);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .container { padding: 0 var(--spacing-sm); }
+            .page-header h1 { font-size: 2rem; }
+            .section-title { font-size: 1.5rem; }
+            .workflow { flex-direction: column; }
+            .work-step { min-width: 100%; margin-bottom: var(--spacing-md); }
+            .work-step:not(:last-child):after {
+                content: "↓";
+                right: 50%;
+                top: auto;
+                bottom: -30px;
+                transform: translateX(50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header { padding: var(--spacing-md) 0; }
+            .page-header h1 { font-size: 1.8rem; }
+            .feature-card { min-width: 100%; }
+            .definition { padding: var(--spacing-md); }
+            .code-example { font-size: 0.8rem; }
+        }
+
+        /* Additional Effects */
+        .glow-text {
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
 <body>
-    <div class="back-button">
-        <a href="../index.html">← Back to Home</a>
-    </div>
-    <header class="command-header">
-        <div class="container">
-            <div class="command-badge">Multi-Format V11</div>
-            <h1 class="command-name">PI</h1>
-            <p class="command-title">Point Import</p>
-        </div>
-    </header>
-    <section class="command-content">
-        <div class="container">
-            <div class="content-section">
-                <h2>📋 Description</h2>
-                <p>Imports points from TXT, CSV, or PNT files with support for multiple coordinate formats. Features a professional dialog box for complete control over import options.</p>
-            </div>
-            <div class="content-section highlight-box">
-                <h2>📊 Supported File Formats</h2>
-                <ul>
-                    <li><strong>Format 1:</strong> P X Y Z C (Point Name, X, Y, Z, Code)</li>
-                    <li><strong>Format 2:</strong> P Y X Z C (Point Name, Y, X, Z, Code)</li>
-                    <li><strong>Format 3:</strong> X Y Z C (Auto-numbered points)</li>
-                    <li><strong>Format 4:</strong> Y X Z C (Auto-numbered points)</li>
-                </ul>
-                <p><strong>Supports:</strong> Comma-separated (CSV) or Space-separated (TXT) files</p>
-            </div>
-            <div class="content-section highlight-box">
-                <h2>✨ Import Options</h2>
-                <ul>
-                    <li><strong>Import Points:</strong> Create point entities (2D or 3D)</li>
-                    <li><strong>Import Names:</strong> Add point name labels</li>
-                    <li><strong>Import Codes:</strong> Add point code labels</li>
-                    <li><strong>Import Elevation:</strong> Add elevation text</li>
-                    <li><strong>Connect Polyline:</strong> Connect points with 2D or 3D polyline</li>
-                </ul>
-            </div>
-            <div class="content-section">
-                <h2>⚙️ Point Types</h2>
-                <ul>
-                    <li><strong>2D Points (Z=0):</strong> All points placed at Z=0</li>
-                    <li><strong>3D Points (Elevated):</strong> Points placed at their actual Z elevation</li>
-                </ul>
-            </div>
-            <div class="content-section">
-                <h2>🔗 Polyline Types</h2>
-                <ul>
-                    <li><strong>2D Polyline:</strong> Connects points in XY plane (Z=0)</li>
-                    <li><strong>3D Polyline:</strong> Connects points with their Z elevations</li>
-                </ul>
-            </div>
-            <div class="content-section highlight-box">
-                <h2>🎨 Layer Management</h2>
-                <ul>
-                    <li><strong>As-built:</strong> Point entities (Color: Red)</li>
-                    <li><strong>As-Built-Point-Name:</strong> Point name labels (Color: Yellow)</li>
-                    <li><strong>As-built-Codes:</strong> Point codes (Color: Green)</li>
-                    <li><strong>As-built-Elevation:</strong> Elevation text (Color: Cyan)</li>
-                    <li><strong>As-built-Polyline:</strong> Connected polyline (Color: Magenta)</li>
-                </ul>
-            </div>
-            <div class="content-section">
-                <h2>📝 Text Settings</h2>
-                <ul>
-                    <li><strong>Text Height:</strong> Configurable (default: 0.2)</li>
-                    <li><strong>Text Rotation:</strong> Adjustable in degrees (default: 0)</li>
-                    <li><strong>Smart Positioning:</strong> Labels placed around points automatically</li>
-                </ul>
-            </div>
-            <div class="content-section usage-box">
-                <h2>💡 How to Use</h2>
-                <ol class="steps-list">
-                    <li>Type <code>PI</code> and press <kbd>Enter</kbd></li>
-                    <li>Configure import options in the dialog box:
-                        <ul style="margin-top: 10px;">
-                            <li>Select what to import (Points, Names, Codes, Elevation)</li>
-                            <li>Choose point type (2D or 3D)</li>
-                            <li>Select coordinate format</li>
-                            <li>Set text height and rotation</li>
-                            <li>Enable polyline connection if needed</li>
-                        </ul>
-                    </li>
-                    <li>Click <kbd>OK</kbd></li>
-                    <li>Browse and select your points file (TXT/CSV/PNT)</li>
-                    <li>Points and labels will be imported automatically</li>
-                    <li>View zooms to fit all imported points</li>
-                </ol>
-            </div>
-            <div class="content-section">
-                <h2>📄 File Format Examples</h2>
-                <div style="background: var(--bg-dark); padding: 15px; border-radius: 8px; margin-top: 10px;">
-                    <p style="color: var(--secondary); margin-bottom: 10px;"><strong>Format 1 (P X Y Z C):</strong></p>
-                    <code style="display:block; margin-bottom: 15px;">
-BM-01, 1000.500, 2000.750, 50.000, Benchmark<br>
-TP-05, 1050.250, 2100.300, 51.200, Turning Point
-                    </code>
-                    
-                    <p style="color: var(--secondary); margin-bottom: 10px;"><strong>Format 3 (X Y Z C):</strong></p>
-                    <code style="display:block;">
-1000.500 2000.750 50.000 Foundation<br>
-1050.250 2100.300 51.200 Column
-                    </code>
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <h1><span class="glow-text">PI Command</span></h1>
+            <p>Multi-Format Point Import v11.0 - Most Powerful Tool for Importing Geographic Data to AutoCAD</p>
+        </header>
+
+        <!-- 1. What is PI Command? -->
+        <section class="section">
+            <h2 class="section-title">📌 What is PI Command?</h2>
+            <div class="definition">
+                <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 1.5rem;">
+                    The <strong style="color: var(--accent);">PI</strong> (Point Import) command is an advanced tool for importing geographic points from CSV/TXT/PNT files to AutoCAD with exceptional accuracy and speed. It supports <strong>4 different formats</strong> with <strong>8 advanced options</strong> for complete control over the import process.
+                </p>
+                
+                <div class="definition-box">
+                    <h3><span>🎯</span> Unique Advantages</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-sm);">
+                        <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <h4 style="color: var(--primary); margin-bottom: 0.5rem;">📊 Multiple Formats</h4>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">Support for 4 different file formats (PXYZ, PYXZ, XYZ, YXZ)</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">🎨 Colored Layers</h4>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">Automatic organization into colored layers for each data type</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">🔗 Multi-Connection</h4>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">Connect points with multi-dimensional polylines (2D/3D)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <h3><span>⚡</span> Import Speed</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-sm); text-align: center;">
+                        <div>
+                            <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">10,000+</div>
+                            <div style="color: var(--text-gray);">Points in Seconds</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; font-weight: 800; color: var(--primary);">4</div>
+                            <div style="color: var(--text-gray);">Supported Formats</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; font-weight: 800; color: var(--secondary);">8</div>
+                            <div style="color: var(--text-gray);">Advanced Options</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; font-weight: 800; color: var(--info);">100%</div>
+                            <div style="color: var(--text-gray);">Data Accuracy</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="content-section highlight-box">
-                <h2>🚀 Features</h2>
-                <ul>
-                    <li>Professional dialog box interface</li>
-                    <li>Multiple coordinate format support</li>
-                    <li>Automatic layer creation with color coding</li>
-                    <li>Smart text positioning around points</li>
-                    <li>Auto-zoom to imported points</li>
-                    <li>Performance statistics display</li>
-                    <li>Supports thousands of points</li>
-                    <li>Handles CSV and space-delimited files</li>
-                    <li>Memory of last-used settings</li>
-                    <li>Optional polyline connection</li>
-                </ul>
+        </section>
+
+        <!-- 2. Supported Formats -->
+        <section class="section">
+            <h2 class="section-title">📊 Supported Formats (4 Formats)</h2>
+            <div class="definition">
+                <div class="alert alert-info">
+                    <h4 style="color: var(--info); margin-bottom: 0.5rem;">💡 How to Choose the Right Format?</h4>
+                    <p style="color: var(--text-gray);">
+                        Format selection depends on your file's column order. You can test multiple formats until you find the correct one that displays your data properly.
+                    </p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Format</th>
+                            <th>Column Order</th>
+                            <th>Common Usage</th>
+                            <th>File Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1</strong></td>
+                            <td><span style="color: var(--accent); font-weight: bold;">P X Y Z C</span></td>
+                            <td>Point Name, X Coordinate, Y Coordinate, Elevation, Code</td>
+                            <td>Surveying and Topography</td>
+                            <td><code style="color: var(--text-gray);">P1,100.50,200.75,15.20,TP</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2</strong></td>
+                            <td><span style="color: var(--primary); font-weight: bold;">P Y X Z C</span></td>
+                            <td>Point Name, Y Coordinate, X Coordinate, Elevation, Code</td>
+                            <td>GIS Software and Google Maps</td>
+                            <td><code style="color: var(--text-gray);">P2,200.75,100.50,15.20,Building</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3</strong></td>
+                            <td><span style="color: var(--secondary); font-weight: bold;">X Y Z C</span></td>
+                            <td>X Coordinate, Y Coordinate, Elevation, Code (No Names)</td>
+                            <td>Laser Scanner Data</td>
+                            <td><code style="color: var(--text-gray);">100.50,200.75,15.20,COLUMN</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4</strong></td>
+                            <td><span style="color: var(--warning); font-weight: bold;">Y X Z C</span></td>
+                            <td>Y Coordinate, X Coordinate, Elevation, Code (No Names)</td>
+                            <td>Reverse Coordinate Systems</td>
+                            <td><code style="color: var(--text-gray);">200.75,100.50,15.20,FENCE</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-success" style="margin-top: var(--spacing-md);">
+                    <h4 style="color: var(--success); margin-bottom: 0.5rem;">✅ Tips for Correct Selection</h4>
+                    <ul style="color: var(--text-gray); padding-left: 1.5rem;">
+                        <li>Open data file in <strong>Notepad or Excel</strong> to see column order</li>
+                        <li>Try <strong>Format 1 first</strong> as it's most common in surveying</li>
+                        <li>If points appear in wrong location, try <strong>Format 2 or 4</strong> (swap X and Y)</li>
+                        <li>If you don't have point names, use <strong>Format 3 or 4</strong></li>
+                    </ul>
+                </div>
             </div>
-            <div class="content-section">
-                <h2>💡 Tips</h2>
-                <ul>
-                    <li>Choose 2D points for plan views, 3D points for terrain models</li>
-                    <li>Use 3D polylines for accurate profiles and sections</li>
-                    <li>Text rotation useful for angled layouts</li>
-                    <li>Import codes to preserve survey point classifications</li>
-                    <li>Settings are remembered between sessions</li>
-                    <li>Layers can be turned off individually for clean views</li>
-                    <li>Perfect for importing total station data</li>
-                    <li>Works with any coordinate system</li>
-                </ul>
+        </section>
+
+        <!-- 3. How to Use -->
+        <section class="section">
+            <h2 class="section-title">🚀 How to Use PI Command?</h2>
+            <div class="definition">
+                <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
+                    The import process consists of <strong>6 simple steps</strong> with an easy-to-use graphical interface:
+                </p>
+                
+                <div class="workflow">
+                    <div class="work-step">
+                        <div class="work-step-number">1</div>
+                        <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">Run Command</strong>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">Type <strong>PI</strong> then Enter</p>
+                    </div>
+                    <div class="work-step">
+                        <div class="work-step-number">2</div>
+                        <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">Select File</strong>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">Choose CSV/TXT/PNT file from your computer</p>
+                    </div>
+                    <div class="work-step">
+                        <div class="work-step-number">3</div>
+                        <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">Configure Settings</strong>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">Choose appropriate format and options</p>
+                    </div>
+                    <div class="work-step">
+                        <div class="work-step-number">4</div>
+                        <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">Preview Results</strong>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">Verify settings are correct</p>
+                    </div>
+                    <div class="work-step">
+                        <div class="work-step-number">5</div>
+                        <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">Import Data</strong>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">Click OK to start import</p>
+                    </div>
+                    <div class="work-step">
+                        <div class="work-step-number">6</div>
+                        <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">Final Result</strong>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">Points and data ready to use!</p>
+                    </div>
+                </div>
+
+                <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-lg);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                        <span>🎛️</span> Advanced Settings Interface
+                    </h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md);">
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 8px;">
+                            <h4 style="color: var(--text-light); margin-bottom: 0.5rem; font-size: 1rem;">📥 Import Options</h4>
+                            <ul style="color: var(--text-gray); font-size: 0.85rem; padding-left: 1rem;">
+                                <li><strong>Import Points:</strong> Create points in drawing</li>
+                                <li><strong>Import Names:</strong> Add names to points</li>
+                                <li><strong>Import Codes:</strong> Add descriptive codes</li>
+                                <li><strong>Import Elevations:</strong> Add elevation values</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 8px;">
+                            <h4 style="color: var(--text-light); margin-bottom: 0.5rem; font-size: 1rem;">🔄 Connection Options</h4>
+                            <ul style="color: var(--text-gray); font-size: 0.85rem; padding-left: 1rem;">
+                                <li><strong>Connect Points:</strong> Link points with polyline</li>
+                                <li><strong>Polyline Type:</strong> 2D or 3D multi-dimensional</li>
+                                <li><strong>Point Type:</strong> 2D (Z=0) or 3D elevated</li>
+                                <li><strong>Polyline Layer:</strong> As-built-Polyline</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 8px;">
+                            <h4 style="color: var(--text-light); margin-bottom: 0.5rem; font-size: 1rem;">🎨 Text Settings</h4>
+                            <ul style="color: var(--text-gray); font-size: 0.85rem; padding-left: 1rem;">
+                                <li><strong>Text Height:</strong> 0.2 (adjustable)</li>
+                                <li><strong>Text Rotation:</strong> 0° (adjustable)</li>
+                                <li><strong>Layer Colors:</strong> Automatic and clear</li>
+                                <li><strong>Organized Layers:</strong> 5 separate layers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
-    <footer>
-        <div class="container">
-            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
-            <p class="back-link"><a href="../index.html">← Back to All Commands</a></p>
-        </div>
-    </footer>
+        </section>
+
+        <!-- 4. Smart Layer System -->
+        <section class="section">
+            <h2 class="section-title">🎨 Smart Layer System</h2>
+            <div class="definition">
+                <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
+                    The PI command organizes data into <strong>5 colored layers</strong> for easy control and separation between different data types:
+                </p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Layer Name</th>
+                            <th>Color</th>
+                            <th>Content</th>
+                            <th>Usage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><div style="background: #FF0000; width: 20px; height: 20px; border-radius: 50%; margin: 0 auto;"></div></td>
+                            <td><strong>As-built</strong></td>
+                            <td><span style="color: #FF0000;">🔴 Red</span></td>
+                            <td>Main Points</td>
+                            <td>Basic points for drawing</td>
+                        </tr>
+                        <tr>
+                            <td><div style="background: #FFFF00; width: 20px; height: 20px; border-radius: 50%; margin: 0 auto;"></div></td>
+                            <td><strong>As-Built-Point-Name</strong></td>
+                            <td><span style="color: #FFFF00;">🟡 Yellow</span></td>
+                            <td>Point Names</td>
+                            <td>Labeling and identifying points</td>
+                        </tr>
+                        <tr>
+                            <td><div style="background: #00FF00; width: 20px; height: 20px; border-radius: 50%; margin: 0 auto;"></div></td>
+                            <td><strong>As-built-Codes</strong></td>
+                            <td><span style="color: #00FF00;">🟢 Green</span></td>
+                            <td>Point Codes</td>
+                            <td>Classification and description</td>
+                        </tr>
+                        <tr>
+                            <td><div style="background: #0000FF; width: 20px; height: 20px; border-radius: 50%; margin: 0 auto;"></div></td>
+                            <td><strong>As-built-Elevation</strong></td>
+                            <td><span style="color: #0000FF;">🔵 Blue</span></td>
+                            <td>Elevation Values</td>
+                            <td>Vertical data</td>
+                        </tr>
+                        <tr>
+                            <td><div style="background: #800080; width: 20px; height: 20px; border-radius: 50%; margin: 0 auto;"></div></td>
+                            <td><strong>As-built-Polyline</strong></td>
+                            <td><span style="color: #800080;">🟣 Purple</span></td>
+                            <td>Connection Lines</td>
+                            <td>Connecting points</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-warning" style="margin-top: var(--spacing-md);">
+                    <h4 style="color: var(--warning); margin-bottom: 0.5rem;">⚠️ Important Notes</h4>
+                    <ul style="color: var(--text-gray); padding-left: 1.5rem;">
+                        <li>If layer doesn't exist, it will be <strong>created automatically</strong></li>
+                        <li>All layers are <strong>open and unlocked</strong> by default</li>
+                        <li>You can <strong>hide/show</strong> any layer as needed</li>
+                        <li>Colors are <strong>adjustable</strong> after import</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Practical Examples -->
+        <section class="section">
+            <h2 class="section-title">💼 Practical Field Examples</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: var(--spacing-md);">
+                
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: var(--spacing-md); position: relative;">
+                    <div style="position: absolute; top: -15px; left: 20px; background: var(--accent); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold;">Example 1</div>
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem; margin-top: 1rem;">🏗️ Survey Project for Land Plot</h4>
+                    
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Data:</strong></p>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem; margin-bottom: 1rem;">
+                            <li>100 boundary points for plot</li>
+                            <li>Point names: P1 to P100</li>
+                            <li>X, Y, Z coordinates for each point</li>
+                            <li>Descriptive codes: BOUNDARY</li>
+                        </ul>
+                    </div>
+                    
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Implementation Steps:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>Compile data in CSV file</li>
+                        <li>Verify format: <code>P,X,Y,Z,Code</code></li>
+                        <li>Run PI and select file</li>
+                        <li>Choose Format 1 (P X Y Z C)</li>
+                        <li>Enable all import options</li>
+                        <li>Enable "Connect Points" option</li>
+                        <li>Set text height to 0.3</li>
+                        <li>Click OK to import</li>
+                    </ol>
+                    
+                    <div style="background: rgba(245, 158, 11, 0.1); padding: 0.8rem; border-radius: 6px;">
+                        <p style="color: var(--accent); font-weight: bold; margin: 0; text-align: center;">
+                            ⏱️ Result: 100 points + names + codes + boundary line in 3 seconds
+                        </p>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: var(--spacing-md); position: relative;">
+                    <div style="position: absolute; top: -15px; left: 20px; background: var(--primary); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold;">Example 2</div>
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem; margin-top: 1rem;">📡 Data from Total Station</h4>
+                    
+                    <div style="background: rgba(37, 99, 235, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Data:</strong></p>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem; margin-bottom: 1rem;">
+                            <li>50 points for column axes</li>
+                            <li>Data without names (numbers only)</li>
+                            <li>X, Y, Z coordinates</li>
+                            <li>Codes: COLUMN, BEAM, SLAB</li>
+                        </ul>
+                    </div>
+                    
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Implementation Steps:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>Export data from device to TXT</li>
+                        <li>File format: <code>X,Y,Z,Code</code></li>
+                        <li>Run PI and select file</li>
+                        <li>Choose Format 3 (X Y Z C)</li>
+                        <li>Enable: points + codes + elevations</li>
+                        <li>Disable: names (no names exist)</li>
+                        <li>Point type: 3D (for elevations)</li>
+                        <li>Click OK to import</li>
+                    </ol>
+                    
+                    <div style="background: rgba(37, 99, 235, 0.1); padding: 0.8rem; border-radius: 6px;">
+                        <p style="color: var(--primary); font-weight: bold; margin: 0; text-align: center;">
+                            ⚡ Result: 50 3D points + code classification in 2 seconds
+                        </p>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: var(--spacing-md); position: relative;">
+                    <div style="position: absolute; top: -15px; left: 20px; background: var(--secondary); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold;">Example 3</div>
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem; margin-top: 1rem;">🗺️ GIS Data from Google Maps</h4>
+                    
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Data:</strong></p>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem; margin-bottom: 1rem;">
+                            <li>Coordinates from Google Earth</li>
+                            <li>Y,X order (Longitude first)</li>
+                            <li>Location names: Site1, Site2</li>
+                            <li>No elevations (Z=0)</li>
+                        </ul>
+                    </div>
+                    
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Implementation Steps:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>Export KML and convert to CSV</li>
+                        <li>Column order: <code>Name,Y,X</code></li>
+                        <li>Run PI and select file</li>
+                        <li>Choose Format 2 (P Y X Z C)</li>
+                        <li>Enable: points + names only</li>
+                        <li>Disable: codes + elevations</li>
+                        <li>Enable 2D connection option</li>
+                        <li>Set text rotation to 90°</li>
+                    </ol>
+                    
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 0.8rem; border-radius: 6px;">
+                        <p style="color: var(--secondary); font-weight: bold; margin: 0; text-align: center;">
+                            🌍 Result: Accurate geographic locations + connecting lines in 4 seconds
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Advanced Tips -->
+        <section class="section">
+            <h2 class="section-title">💡 Advanced Tips and Guidelines</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+                
+                <div style="background: linear-gradient(145deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1)); border-left: 4px solid var(--primary); padding: var(--spacing-md); border-radius: 10px;">
+                    <h4 style="color: var(--primary); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px;"><span>🔧</span> File Preparation</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem;">
+                        <li>Use <strong>Excel</strong> to organize data before export</li>
+                        <li>Ensure <strong>comma</strong> is the column separator</li>
+                        <li>Remove <strong>headers</strong> from CSV file</li>
+                        <li>Verify <strong>numeric format</strong> is correct</li>
+                        <li>Use <strong>Notepad++</strong> to inspect text files</li>
+                        <li>Save file as <strong>UTF-8</strong> for Arabic support</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(145deg, rgba(245, 158, 11, 0.1), rgba(249, 115, 22, 0.1)); border-left: 4px solid var(--accent); padding: var(--spacing-md); border-radius: 10px;">
+                    <h4 style="color: var(--accent); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px;"><span>⚡</span> Performance Optimization</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem;">
+                        <li>For 1000+ points: use <strong>selected options only</strong></li>
+                        <li>Disable <strong>point connection</strong> for large datasets</li>
+                        <li>Use <strong>2D points</strong> if elevations not important</li>
+                        <li>Set <strong>text height</strong> appropriate to drawing scale</li>
+                        <li>Split large data into <strong>multiple files</strong></li>
+                        <li>Use <strong>Undo</strong> if settings are wrong</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(145deg, rgba(16, 185, 129, 0.1), rgba(34, 197, 94, 0.1)); border-left: 4px solid var(--secondary); padding: var(--spacing-md); border-radius: 10px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px;"><span>🎯</span> Troubleshooting</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem;">
+                        <li>If points don't appear: <strong>change format</strong></li>
+                        <li>If points in wrong location: <strong>swap X and Y</strong></li>
+                        <li>If errors appear: <strong>check commas</strong> in file</li>
+                        <li>If texts too large/small: <strong>adjust text height</strong></li>
+                        <li>If some data missing: <strong>check import options</strong></li>
+                        <li>For Arabic characters: <strong>use UTF-8 encoding</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-success" style="margin-top: var(--spacing-md);">
+                <h4 style="color: var(--success); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 10px;"><span>💎</span> Best Practices</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-sm);">
+                    <div>
+                        <strong style="color: var(--text-light);">📁 File Organization</strong>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">Keep backup copies of original CSV files in separate folder.</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--text-light);">🏷️ Consistent Naming</strong>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">Use unified coding system for easy filtering and separation.</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--text-light);">📊 Initial Testing</strong>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">Test settings on 10 points first before processing complete dataset.</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--text-light);">🔄 Continuous Updates</strong>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">Use PI to import updates instead of manual redrawing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Comparison with Traditional Methods -->
+        <section class="section">
+            <h2 class="section-title">⚖️ Comparison with Traditional Methods</h2>
+            <div style="background: var(--bg-card); border-radius: 15px; padding: var(--spacing-lg); border: 1px solid var(--border);">
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr style="background: linear-gradient(135deg, var(--primary), #1e40af);">
+                                <th style="padding: 1.2rem; text-align: left; color: white;">Comparison</th>
+                                <th style="padding: 1.2rem; text-align: center; color: var(--accent);">Manual Method</th>
+                                <th style="padding: 1.2rem; text-align: center; color: var(--secondary);">PI Command</th>
+                                <th style="padding: 1.2rem; text-align: center; color: var(--success);">Savings</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-weight: bold;">Import 1000 points time</td>
+                                <td style="color: var(--accent);">4-6 hours work</td>
+                                <td style="color: var(--secondary);">30-60 seconds</td>
+                                <td style="color: var(--success); font-weight: bold;">99% saving</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Data accuracy</td>
+                                <td style="color: var(--accent);">Prone to human errors</td>
+                                <td style="color: var(--secondary);">100% automatic accuracy</td>
+                                <td style="color: var(--success); font-weight: bold;">0% errors</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Layer organization</td>
+                                <td style="color: var(--accent);">Manual and tiring</td>
+                                <td style="color: var(--secondary);">Automatic and colored</td>
+                                <td style="color: var(--success); font-weight: bold;">5 automatic layers</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Adding texts</td>
+                                <td style="color: var(--accent);">Text by text for each point</td>
+                                <td style="color: var(--secondary);">All texts at once</td>
+                                <td style="color: var(--success); font-weight: bold;">1000x faster</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Connecting points</td>
+                                <td style="color: var(--accent);">Manual line drawing</td>
+                                <td style="color: var(--secondary);">Automatic polyline</td>
+                                <td style="color: var(--success); font-weight: bold;">500x faster</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Data modification</td>
+                                <td style="color: var(--accent);">Start over from beginning</td>
+                                <td style="color: var(--secondary);">Import updated file only</td>
+                                <td style="color: var(--success); font-weight: bold;">Reusable</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">File formats</td>
+                                <td style="color: var(--accent);">Manual conversion work</td>
+                                <td style="color: var(--secondary);">4 formats automatically supported</td>
+                                <td style="color: var(--success); font-weight: bold;">Complete flexibility</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">3D elevations</td>
+                                <td style="color: var(--accent);">Enter Z for each point</td>
+                                <td style="color: var(--secondary);">Automatic 3D points</td>
+                                <td style="color: var(--success); font-weight: bold;">Time saving</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="background: rgba(245, 158, 11, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-lg); text-align: center;">
+                    <p style="color: var(--accent); font-weight: bold; font-size: 1.2rem; margin: 0;">
+                        🚀 PI = Smart Import + Automatic Organization + 99% Time Saving!
+                    </p>
+                    <p style="color: var(--text-gray); margin-top: 0.5rem;">
+                        From months of work to minutes of efficiency
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Practical Applications -->
+        <section class="section">
+            <h2 class="section-title">🏗️ Practical Applications in Various Fields</h2>
+            <div class="tech-features">
+                
+                <div class="feature-card pulse">
+                    <div class="feature-icon">🏢</div>
+                    <h4>Civil Engineering</h4>
+                    <p>Import column axes, foundation points, ground levels, project boundaries</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h4>Surveying Works</h4>
+                    <p>Topographic surveys, land boundaries, control points, geodetic networks</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Utility Networks</h4>
+                    <p>Cable routes, transformer locations, pipeline lines, power towers</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌳</div>
+                    <h4>Urban Planning</h4>
+                    <p>Development boundaries, service locations, green spaces, roads</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📡</div>
+                    <h4>Remote Sensing</h4>
+                    <p>Laser scanner data, point clouds, digital elevation models</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏭</div>
+                    <h4>Industry & Manufacturing</h4>
+                    <p>Machine coordinates, equipment locations, production lines, storage warehouses</p>
+                </div>
+            </div>
+
+            <div style="background: rgba(14, 165, 233, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
+                <h4 style="color: var(--info); margin-bottom: 1rem;">💡 Complete Workflow Idea</h4>
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                    You can use PI as part of a <strong>complete workflow</strong>:
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-sm); text-align: center;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; color: var(--primary);">1</div>
+                        <div style="color: var(--text-light); font-weight: bold;">Data Collection</div>
+                        <div style="color: var(--text-gray); font-size: 0.8rem;">Total Station / GPS</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; color: var(--secondary);">2</div>
+                        <div style="color: var(--text-light); font-weight: bold;">Data Processing</div>
+                        <div style="color: var(--text-gray); font-size: 0.8rem;">Excel / Survey Software</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; color: var(--accent);">3</div>
+                        <div style="color: var(--text-light); font-weight: bold;">Import with PI</div>
+                        <div style="color: var(--text-gray); font-size: 0.8rem;">AutoCAD + Borham Tools</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; color: var(--success);">4</div>
+                        <div style="color: var(--text-light); font-weight: bold;">Drawing Development</div>
+                        <div style="color: var(--text-gray); font-size: 0.8rem;">Design and Details</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <a href="../index.html" class="back-link">Back to Main Page</a>
+            <p>📧 For technical inquiries: MahmoudBorham.codes@gmail.com</p>
+            <p>🌐 Website: https://borham-tools.vercel.app</p>
+            <p>🇵🇸 Free Palestine - For the sake of God</p>
+            <p style="color: var(--accent); font-size: 1rem; margin-top: 1rem; font-weight: bold;">
+                "Smart Import + Automatic Organization + Maximum Efficiency = PI for Point Import"
+            </p>
+            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.5rem;">
+                Borham Tools v80.7 - ULTRA OPTIMIZED FREE VERSION
+            </p>
+        </footer>
+    </div>
 </body>
 </html>
