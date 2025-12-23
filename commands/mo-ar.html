@@ -308,12 +308,12 @@
                     <div class="work-step">
                         <strong>الخطوة 2</strong>
                         <p>أدخل المسافة</p>
-                        <small>مثال: 0.5 متر</small>
+                        <small>مثال: 50 سم <br><span style="color: var(--accent);">(الافتراضي: 0.50 إذا ضغطت Enter)</span></small>
                     </div>
                     <div class="work-step">
                         <strong>الخطوة 3</strong>
                         <p>اختر الاتجاه</p>
-                        <small>Out / In / Both</small>
+                        <small>Out / In / Both<br><span style="color: var(--accent);">(الافتراضي: Out إذا ضغطت Enter)</span></small>
                     </div>
                     <div class="work-step">
                         <strong>الخطوة 4</strong>
@@ -444,29 +444,35 @@
             </div>
         </section>
 
-        <!-- 6. أمثلة واقعية -->
+        <!-- 6. أمثلة واقعية من المشاريع -->
         <section class="section">
             <h2 class="section-title">💼 أمثلة واقعية من المشاريع</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
                 
                 <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
-                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 1: فيلا سكنية</h4>
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 1: مخطط إنشائي للأعمدة</h4>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
                     <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-                        مخطط فيلا به 45 جدار خارجي. المطلوب رسم جدران داخلية بسمك 0.20 متر للداخل من كل جدار خارجي.
+                        مخطط إنشائي يحتوي على 200 عمود خرساني. المطلوب عمل أوفست خارجي لكل عمود بمسافة 0.30 متر لتحديد منطقة الشدات والنجارة قبل الصب.
                     </p>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ MO:</strong></p>
                     <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
                         <li>تشغيل الأمر MO</li>
-                        <li>إدخال المسافة: 0.20</li>
-                        <li>اختيار الاتجاه: In (للداخل)</li>
-                        <li>اختيار جميع الـ 45 جدار</li>
-                        <li>Enter - تم إنشاء 45 جدار داخلي في 10 ثوانٍ</li>
-                        <li>جميع الجدران الداخلية في طبقة برتقالية منفصلة</li>
+                        <li>إدخال المسافة: 0.30 متر (مساحة العمل للشدات)</li>
+                        <li>اختيار الاتجاه: Out (للخارج)</li>
+                        <li>اختيار جميع الـ 200 عمود مرة واحدة</li>
+                        <li>Enter - تم إنشاء 200 منطقة تحديد في 15 ثانية</li>
+                        <li>جميع المناطق في طبقة "Offset Out" حمراء</li>
+                        <li>تحديد دقيق لكل عمود على الأرض</li>
                     </ol>
                     <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
-                        ✅ توفير 40 دقيقة عمل
+                        ⚡ توفير 4 ساعات عمل يدوي + دقة 100%
                     </p>
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
+                        <p style="color: var(--text-gray); font-size: 0.85rem; margin: 0;">
+                            <strong>الفوائد العملية:</strong> تحديد دقيق لمناطق الشدات - تسهيل أعمال النجارة - منع أخطاء التحديد - توفير الوقت في الموقع - دقة في قياسات الصب.
+                        </p>
+                    </div>
                 </div>
 
                 <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
@@ -499,8 +505,7 @@
                         <li>MO على حدود جميع القطع</li>
                         <li>المسافة: 3.0 متر</li>
                         <li>الاتجاه: In (للداخل فقط)</li>
-                        <li>Enter - إنشاء 80 حد بناء داخلي
-<li>Enter - إنشاء 80 حد بناء داخلي</li>
+                        <li>Enter - إنشاء 80 حد بناء داخلي</li>
                         <li>جميع حدود البناء في طبقة منفصلة برتقالية</li>
                         <li>صفر نسخ مكررة رغم وجود حدود مشتركة</li>
                     </ol>
@@ -595,6 +600,11 @@
                                 <td style="padding: 0.8rem; border: 1px solid var(--border); font-weight: bold;">إحصائيات مفصلة</td>
                                 <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">❌ لا يوجد</td>
                                 <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center; color: var(--success);">✅ كاملة</td>
+                            </tr>
+                            <tr style="background: rgba(255,255,255,0.02);">
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); font-weight: bold;">القيم الافتراضية</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center;">❌ لا يوجد</td>
+                                <td style="padding: 0.8rem; border: 1px solid var(--border); text-align: center; color: var(--success);">✅ المسافة: 50 سم<br>الاتجاه: Out</td>
                             </tr>
                         </tbody>
                     </table>
