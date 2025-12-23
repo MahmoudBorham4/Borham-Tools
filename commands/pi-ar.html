@@ -1,1 +1,955 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأمر PI - استيراد النقاط متعدد الصيغ | Borham Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --warning: #f97316;
+            --info: #0ea5e9;
+            --bg-dark: #0f172a;
+            --bg-card: #334155;
+            --text-light: #f1f5f9;
+            --text-gray: #cbd5e1;
+            --success: #22c55e;
+            --border: #475569;
+            --container-width: 1200px;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2.5rem;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Cairo', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+        /* الترويسة */
+        .page-header { 
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            border-bottom: 3px solid var(--accent);
+        }
+        .page-header h1 { 
+            font-size: 2.5rem; 
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .page-header p { 
+            color: var(--text-gray);
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* الأقسام */
+        .section { margin-bottom: var(--spacing-lg); }
+        .section-title { 
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-md);
+            border-right: 5px solid var(--accent);
+            padding-right: 1rem;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -5px;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+
+        /* تعريف الأمر */
+        .definition {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: var(--spacing-lg);
+            margin: var(--spacing-md) 0;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .definition-box {
+            background: rgba(37, 99, 235, 0.1);
+            border-right: 4px solid var(--primary);
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            transition: transform 0.3s ease;
+        }
+        .definition-box:hover {
+            transform: translateX(-5px);
+        }
+        .definition-box h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* المميزات التقنية */
+        .tech-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: inline-block;
+            padding: 15px;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 50%;
+        }
+        .feature-card h4 {
+            color: var(--text-light);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* خطوات العمل */
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            margin: var(--spacing-lg) 0;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+        .work-step {
+            background: linear-gradient(145deg, #3c475c, #2d3748);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .work-step:hover {
+            background: linear-gradient(145deg, #475569, #374151);
+            transform: scale(1.05);
+        }
+        .work-step-number {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: var(--accent);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+        .work-step:not(:last-child):after {
+            content: "→";
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* تنسيق الجداول */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--spacing-md) 0;
+            background: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        th {
+            background: linear-gradient(135deg, var(--primary), #1e40af);
+            color: white;
+            padding: 1.2rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-gray);
+        }
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* أمثلة الكود */
+        .code-example {
+            background: #1e293b;
+            border: 1px solid #475569;
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        .code-example pre {
+            margin: 0;
+            color: #cbd5e1;
+            line-height: 1.4;
+        }
+        .code-example .comment { color: #94a3b8; }
+        .code-example .keyword { color: #f87171; font-weight: bold; }
+        .code-example .function { color: #60a5fa; }
+        .code-example .string { color: #34d399; }
+        .code-example .number { color: #fbbf24; }
+
+        /* الأزرار */
+        .back-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), #1e40af);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: var(--spacing-md) 0;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+        .back-link:hover { 
+            background: linear-gradient(135deg, #1e40af, #1e3a8a);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--border);
+            margin-top: var(--spacing-lg);
+            background: rgba(15, 23, 42, 0.8);
+        }
+        footer p { 
+            color: var(--text-gray); 
+            margin: 0.5rem 0;
+        }
+        footer .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* التنبيهات */
+        .alert {
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            margin: var(--spacing-md) 0;
+            border-right: 4px solid;
+        }
+        .alert-info {
+            background: rgba(14, 165, 233, 0.1);
+            border-color: var(--info);
+        }
+        .alert-success {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: var(--success);
+        }
+        .alert-warning {
+            background: rgba(249, 115, 22, 0.1);
+            border-color: var(--warning);
+        }
+
+        /* التجاوب */
+        @media (max-width: 992px) {
+            .container { padding: 0 var(--spacing-sm); }
+            .page-header h1 { font-size: 2rem; }
+            .section-title { font-size: 1.5rem; }
+            .workflow { flex-direction: column; }
+            .work-step { min-width: 100%; margin-bottom: var(--spacing-md); }
+            .work-step:not(:last-child):after {
+                content: "↓";
+                left: 50%;
+                top: auto;
+                bottom: -30px;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header { padding: var(--spacing-md) 0; }
+            .page-header h1 { font-size: 1.8rem; }
+            .feature-card { min-width: 100%; }
+            .definition { padding: var(--spacing-md); }
+            .code-example { font-size: 0.8rem; }
+        }
+
+        /* تأثيرات إضافية */
+        .glow-text {
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- الترويسة -->
+        <header class="page-header">
+            <h1><span class="glow-text">الأمر PI</span></h1>
+            <p>استيراد النقاط متعدد الصيغ v11.0 - أقوى أداة لاستيراد البيانات الجغرافية إلى AutoCAD</p>
+        </header>
+
+        <!-- 1. تعريف الأمر -->
+        <section class="section">
+            <h2 class="section-title">📌 ما هو الأمر PI؟</h2>
+            <div class="definition">
+                <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 1.5rem;">
+                    الأمر <strong style="color: var(--accent);">PI</strong> (Point Import) هو أداة متقدمة لاستيراد النقاط الجغرافية من ملفات CSV/TXT/PNT إلى AutoCAD بدقة وسرعة فائقتين. يدعم <strong>4 صيغ مختلفة</strong> للملفات مع <strong>8 خيارات متقدمة</strong> للتحكم الكامل في عملية الاستيراد.
+                </p>
+                
+                <div class="definition-box">
+                    <h3><span>🎯</span> المزايا الفريدة</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-sm);">
+                        <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <h4 style="color: var(--primary); margin-bottom: 0.5rem;">📊 صيغ متعددة</h4>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">دعم 4 صيغ ملفات مختلفة (PXYZ, PYXZ, XYZ, YXZ)</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">🎨 طبقات ملونة</h4>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">تنظيم تلقائي في طبقات ملونة لكل نوع بيانات</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">🔗 متعدد التوصيل</h4>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">توصيل النقاط بخطوط متعددة الأبعاد (2D/3D)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <h3><span>⚡</span> سرعة الاستيراد</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-sm); text-align: center;">
+                        <div>
+                            <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">10,000+</div>
+                            <div style="color: var(--text-gray);">نقطة في ثوانٍ</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; font-weight: 800; color: var(--primary);">4</div>
+                            <div style="color: var(--text-gray);">صيغ مدعومة</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; font-weight: 800; color: var(--secondary);">8</div>
+                            <div style="color: var(--text-gray);">خيارات متقدمة</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; font-weight: 800; color: var(--info);">100%</div>
+                            <div style="color: var(--text-gray);">دقة البيانات</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. الصيغ المدعومة -->
+        <section class="section">
+            <h2 class="section-title">📊 الصيغ المدعومة (4 صيغ)</h2>
+            <div class="definition">
+                <div class="alert alert-info">
+                    <h4 style="color: var(--info); margin-bottom: 0.5rem;">💡 كيف تختار الصيغة المناسبة؟</h4>
+                    <p style="color: var(--text-gray);">
+                        اختيار الصيغة يعتمد على ترتيب الأعمدة في ملفك. يمكنك اختبار أكثر من صيغة حتى تجد الصيغة الصحيحة التي تعرض بياناتك بشكل صحيح.
+                    </p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>الصيغة</th>
+                            <th>ترتيب الأعمدة</th>
+                            <th>الاستخدام الشائع</th>
+                            <th>مثال من الملف</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1</strong></td>
+                            <td><span style="color: var(--accent); font-weight: bold;">P X Y Z C</span></td>
+                            <td>اسم النقطة، الإحداثي X، الإحداثي Y، الارتفاع، الكود</td>
+                            <td>المساحة والرفع المساحي</td>
+                            <td><code style="color: var(--text-gray);">P1,100.50,200.75,15.20,TP</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2</strong></td>
+                            <td><span style="color: var(--primary); font-weight: bold;">P Y X Z C</span></td>
+                            <td>اسم النقطة، الإحداثي Y، الإحداثي X، الارتفاع، الكود</td>
+                            <td>برامج GIS وخرائط جوجل</td>
+                            <td><code style="color: var(--text-gray);">P2,200.75,100.50,15.20,Building</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3</strong></td>
+                            <td><span style="color: var(--secondary); font-weight: bold;">X Y Z C</span></td>
+                            <td>الإحداثي X، الإحداثي Y، الارتفاع، الكود (بدون أسماء)</td>
+                            <td>بيانات الليزر سكانر</td>
+                            <td><code style="color: var(--text-gray);">100.50,200.75,15.20,COLUMN</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4</strong></td>
+                            <td><span style="color: var(--warning); font-weight: bold;">Y X Z C</span></td>
+                            <td>الإحداثي Y، الإحداثي X، الارتفاع، الكود (بدون أسماء)</td>
+                            <td>أنظمة الإحداثيات العكسية</td>
+                            <td><code style="color: var(--text-gray);">200.75,100.50,15.20,FENCE</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-success" style="margin-top: var(--spacing-md);">
+                    <h4 style="color: var(--success); margin-bottom: 0.5rem;">✅ نصائح للاختيار الصحيح</h4>
+                    <ul style="color: var(--text-gray); padding-right: 1.5rem;">
+                        <li>افتح ملف البيانات في <strong>Notepad أو Excel</strong> لرؤية ترتيب الأعمدة</li>
+                        <li>اختبر <strong>الصيغة 1 أولاً</strong> فهي الأكثر شيوعاً في الأعمال المساحية</li>
+                        <li>إذا ظهرت النقاط في مكان خاطئ، جرب <strong>الصيغة 2 أو 4</strong> (تبديل X و Y)</li>
+                        <li>إذا لم يكن لديك أسماء للنقاط، استخدم <strong>الصيغة 3 أو 4</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. طريقة الاستخدام -->
+        <section class="section">
+            <h2 class="section-title">🚀 كيف تستخدم الأمر PI؟</h2>
+            <div class="definition">
+                <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
+                    عملية الاستيراد تتكون من <strong>6 خطوات بسيطة</strong> مع واجهة رسومية سهلة الاستخدام:
+                </p>
+                
+                <div class="workflow">
+                    <div class="work-step">
+                        <div class="work-step-number">1</div>
+                        <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">تشغيل الأمر</strong>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">اكتب <strong>PI</strong> ثم Enter</p>
+                    </div>
+                    <div class="work-step">
+                        <div class="work-step-number">2</div>
+                        <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">اختيار الملف</strong>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">اختر ملف CSV/TXT/PNT من جهازك</p>
+                    </div>
+                    <div class="work-step">
+                        <div class="work-step-number">3</div>
+                        <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">تحديد الإعدادات</strong>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">اختر الصيغة والخيارات المناسبة</p>
+                    </div>
+                    <div class="work-step">
+                        <div class="work-step-number">4</div>
+                        <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">معاينة النتائج</strong>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">تأكد من صحة الإعدادات</p>
+                    </div>
+                    <div class="work-step">
+                        <div class="work-step-number">5</div>
+                        <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">استيراد البيانات</strong>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">انقر OK للبدء في الاستيراد</p>
+                    </div>
+                    <div class="work-step">
+                        <div class="work-step-number">6</div>
+                        <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">النتيجة النهائية</strong>
+                        <p style="color: var(--text-gray); font-size: 0.9rem;">النقاط والبيانات جاهزة للاستخدام!</p>
+                    </div>
+                </div>
+
+                <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-lg);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                        <span>🎛️</span> واجهة الإعدادات المتقدمة
+                    </h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md);">
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 8px;">
+                            <h4 style="color: var(--text-light); margin-bottom: 0.5rem; font-size: 1rem;">📥 خيارات الاستيراد</h4>
+                            <ul style="color: var(--text-gray); font-size: 0.85rem; padding-right: 1rem;">
+                                <li><strong>استيراد النقاط:</strong> إنشاء نقاط في الرسم</li>
+                                <li><strong>استيراد الأسماء:</strong> إضافة أسماء للنقاط</li>
+                                <li><strong>استيراد الأكواد:</strong> إضافة أكواد وصفية</li>
+                                <li><strong>استيراد الارتفاعات:</strong> إضافة قيم الارتفاع</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 8px;">
+                            <h4 style="color: var(--text-light); margin-bottom: 0.5rem; font-size: 1rem;">🔄 خيارات التوصيل</h4>
+                            <ul style="color: var(--text-gray); font-size: 0.85rem; padding-right: 1rem;">
+                                <li><strong>توصيل النقاط:</strong> ربط النقاط بخط متعدد</li>
+                                <li><strong>نوع الخط:</strong> 2D أو 3D متعدد الأبعاد</li>
+                                <li><strong>نوع النقاط:</strong> 2D (Z=0) أو 3D مرتفع</li>
+                                <li><strong>طبقة الخط:</strong> As-built-Polyline</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 8px;">
+                            <h4 style="color: var(--text-light); margin-bottom: 0.5rem; font-size: 1rem;">🎨 إعدادات النصوص</h4>
+                            <ul style="color: var(--text-gray); font-size: 0.85rem; padding-right: 1rem;">
+                                <li><strong>ارتفاع النص:</strong> 0.2 (قابل للتعديل)</li>
+                                <li><strong>دوران النص:</strong> 0° (قابل للتعديل)</li>
+                                <li><strong>ألوان الطبقات:</strong> تلقائية وواضحة</li>
+                                <li><strong>طبقات منظمة:</strong> 5 طبقات منفصلة</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. نظام الطبقات -->
+        <section class="section">
+            <h2 class="section-title">🎨 نظام الطبقات الذكي</h2>
+            <div class="definition">
+                <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
+                    ينظم الأمر PI البيانات في <strong>5 طبقات ملونة</strong> لتسهيل التحكم والفصل بين أنواع البيانات المختلفة:
+                </p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>اسم الطبقة</th>
+                            <th>اللون</th>
+                            <th>المحتوى</th>
+                            <th>الاستخدام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><div style="background: #FF0000; width: 20px; height: 20px; border-radius: 50%; margin: 0 auto;"></div></td>
+                            <td><strong>As-built</strong></td>
+                            <td><span style="color: #FF0000;">🔴 أحمر</span></td>
+                            <td>النقاط الرئيسية</td>
+                            <td>النقاط الأساسية للرسم</td>
+                        </tr>
+                        <tr>
+                            <td><div style="background: #FFFF00; width: 20px; height: 20px; border-radius: 50%; margin: 0 auto;"></div></td>
+                            <td><strong>As-Built-Point-Name</strong></td>
+                            <td><span style="color: #FFFF00;">🟡 أصفر</span></td>
+                            <td>أسماء النقاط</td>
+                            <td>تسمية وتحديد النقاط</td>
+                        </tr>
+                        <tr>
+                            <td><div style="background: #00FF00; width: 20px; height: 20px; border-radius: 50%; margin: 0 auto;"></div></td>
+                            <td><strong>As-built-Codes</strong></td>
+                            <td><span style="color: #00FF00;">🟢 أخضر</span></td>
+                            <td>أكواد النقاط</td>
+                            <td>التصنيف والوصف</td>
+                        </tr>
+                        <tr>
+                            <td><div style="background: #0000FF; width: 20px; height: 20px; border-radius: 50%; margin: 0 auto;"></div></td>
+                            <td><strong>As-built-Elevation</strong></td>
+                            <td><span style="color: #0000FF;">🔵 أزرق</span></td>
+                            <td>قيم الارتفاع</td>
+                            <td>البيانات الرأسية</td>
+                        </tr>
+                        <tr>
+                            <td><div style="background: #800080; width: 20px; height: 20px; border-radius: 50%; margin: 0 auto;"></div></td>
+                            <td><strong>As-built-Polyline</strong></td>
+                            <td><span style="color: #800080;">🟣 بنفسجي</span></td>
+                            <td>خطوط الربط</td>
+                            <td>توصيل النقاط</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-warning" style="margin-top: var(--spacing-md);">
+                    <h4 style="color: var(--warning); margin-bottom: 0.5rem;">⚠️ ملاحظات هامة</h4>
+                    <ul style="color: var(--text-gray); padding-right: 1.5rem;">
+                        <li>إذا كانت الطبقة غير موجودة، سيتم <strong>إنشاؤها تلقائياً</strong></li>
+                        <li>جميع الطبقات <strong>مفتوحة وغير مقفلة</strong> افتراضياً</li>
+                        <li>يمكنك <strong>إخفاء/إظهار</strong> أي طبقة حسب الحاجة</li>
+                        <li>الألوان <strong>قابلة للتعديل</strong> بعد الاستيراد</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. أمثلة عملية -->
+        <section class="section">
+            <h2 class="section-title">💼 أمثلة عملية من الميدان</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: var(--spacing-md);">
+                
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: var(--spacing-md); position: relative;">
+                    <div style="position: absolute; top: -15px; right: 20px; background: var(--accent); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold;">مثال 1</div>
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem; margin-top: 1rem;">🏗️ مشروع مساحي لقطعة أرض</h4>
+                    
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>البيانات:</strong></p>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem; margin-bottom: 1rem;">
+                            <li>100 نقطة حدودية للقطعة</li>
+                            <li>أسماء النقاط: P1 إلى P100</li>
+                            <li>إحداثيات X, Y, Z لكل نقطة</li>
+                            <li>أكواد وصفية: BOUNDARY</li>
+                        </ul>
+                    </div>
+                    
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>خطوات التنفيذ:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem; margin-bottom: 1rem;">
+                        <li>تجميع البيانات في ملف CSV</li>
+                        <li>تأكد من الصيغة: <code>P,X,Y,Z,Code</code></li>
+                        <li>تشغيل PI واختيار الملف</li>
+                        <li>اختيار الصيغة 1 (P X Y Z C)</li>
+                        <li>تفعيل جميع خيارات الاستيراد</li>
+                        <li>تفعيل خيار "توصيل النقاط"</li>
+                        <li>تحديد ارتفاع النص 0.3</li>
+                        <li>انقر OK للاستيراد</li>
+                    </ol>
+                    
+                    <div style="background: rgba(245, 158, 11, 0.1); padding: 0.8rem; border-radius: 6px;">
+                        <p style="color: var(--accent); font-weight: bold; margin: 0; text-align: center;">
+                            ⏱️ النتيجة: 100 نقطة + أسماء + أكواد + خط حدود في 3 ثوانٍ
+                        </p>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: var(--spacing-md); position: relative;">
+                    <div style="position: absolute; top: -15px; right: 20px; background: var(--primary); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold;">مثال 2</div>
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem; margin-top: 1rem;">📡 بيانات من جهاز Total Station</h4>
+                    
+                    <div style="background: rgba(37, 99, 235, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>البيانات:</strong></p>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem; margin-bottom: 1rem;">
+                            <li>50 نقطة لمحاور أعمدة</li>
+                            <li>بيانات بدون أسماء (أرقام فقط)</li>
+                            <li>إحداثيات X, Y, Z</li>
+                            <li>أكواد: COLUMN, BEAM, SLAB</li>
+                        </ul>
+                    </div>
+                    
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>خطوات التنفيذ:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem; margin-bottom: 1rem;">
+                        <li>تصدير البيانات من الجهاز إلى TXT</li>
+                        <li>تنسيق الملف: <code>X,Y,Z,Code</code></li>
+                        <li>تشغيل PI واختيار الملف</li>
+                        <li>اختيار الصيغة 3 (X Y Z C)</li>
+                        <li>تفعيل: نقاط + أكواد + ارتفاعات</li>
+                        <li>إلغاء: أسماء (لا توجد أسماء)</li>
+                        <li>نوع النقاط: 3D (للارتفاعات)</li>
+                        <li>انقر OK للاستيراد</li>
+                    </ol>
+                    
+                    <div style="background: rgba(37, 99, 235, 0.1); padding: 0.8rem; border-radius: 6px;">
+                        <p style="color: var(--primary); font-weight: bold; margin: 0; text-align: center;">
+                            ⚡ النتيجة: 50 نقطة 3D + تصنيف أكواد في 2 ثانية
+                        </p>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: var(--spacing-md); position: relative;">
+                    <div style="position: absolute; top: -15px; right: 20px; background: var(--secondary); color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold;">مثال 3</div>
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem; margin-top: 1rem;">🗺️ بيانات GIS من خرائط جوجل</h4>
+                    
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>البيانات:</strong></p>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem; margin-bottom: 1rem;">
+                            <li>إحداثيات من Google Earth</li>
+                            <li>ترتيب Y,X (خطوط الطول أولاً)</li>
+                            <li>أسماء مواقع: Site1, Site2</li>
+                            <li>بدون ارتفاعات (Z=0)</li>
+                        </ul>
+                    </div>
+                    
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>خطوات التنفيذ:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem; margin-bottom: 1rem;">
+                        <li>تصدير KML وتحويله إلى CSV</li>
+                        <li>ترتيب الأعمدة: <code>Name,Y,X</code></li>
+                        <li>تشغيل PI واختيار الملف</li>
+                        <li>اختيار الصيغة 2 (P Y X Z C)</li>
+                        <li>تفعيل: نقاط + أسماء فقط</li>
+                        <li>إلغاء: أكواد + ارتفاعات</li>
+                        <li>تفعيل خيار التوصيل 2D</li>
+                        <li>ضبط دوران النص 90°</li>
+                    </ol>
+                    
+                    <div style="background: rgba(16, 185, 129, 0.1); padding: 0.8rem; border-radius: 6px;">
+                        <p style="color: var(--secondary); font-weight: bold; margin: 0; text-align: center;">
+                            🌍 النتيجة: مواقع جغرافية دقيقة + خطوط ربط في 4 ثوانٍ
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. نصائح متقدمة -->
+        <section class="section">
+            <h2 class="section-title">💡 نصائح وإرشادات متقدمة</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+                
+                <div style="background: linear-gradient(145deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1)); border-right: 4px solid var(--primary); padding: var(--spacing-md); border-radius: 10px;">
+                    <h4 style="color: var(--primary); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px;"><span>🔧</span> إعداد الملفات</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                        <li>استخدم <strong>Excel</strong> لتنظيم البيانات قبل التصدير</li>
+                        <li>تأكد من أن <strong>الفاصلة</strong> هي فاصل الأعمدة</li>
+                        <li>احذف <strong>الرؤوس</strong> (Headers) من ملف CSV</li>
+                        <li>تأكد من <strong>التنسيق العددي</strong> الصحيح</li>
+                        <li>استخدم <strong>Notepad++</strong> لفحص الملفات النصية</li>
+                        <li>احفظ الملف بتنسيق <strong>UTF-8</strong> للدعم العربي</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(145deg, rgba(245, 158, 11, 0.1), rgba(249, 115, 22, 0.1)); border-right: 4px solid var(--accent); padding: var(--spacing-md); border-radius: 10px;">
+                    <h4 style="color: var(--accent); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px;"><span>⚡</span> تحسين الأداء</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                        <li>لـ 1000+ نقطة: استخدم <strong>خيارات محددة فقط</strong></li>
+                        <li>إلغاء <strong>توصيل النقاط</strong> للبيانات الكبيرة</li>
+                        <li>استخدم <strong>النقاط 2D</strong> إذا لم تكن الارتفاعات مهمة</li>
+                        <li>اضبط <strong>ارتفاع النص</strong> مناسباً لمقياس الرسم</li>
+                        <li>قسم البيانات الكبيرة إلى <strong>ملفات متعددة</strong></li>
+                        <li>استخدم <strong>Undo</strong> إذا أخطأت في الإعدادات</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(145deg, rgba(16, 185, 129, 0.1), rgba(34, 197, 94, 0.1)); border-right: 4px solid var(--secondary); padding: var(--spacing-md); border-radius: 10px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 10px;"><span>🎯</span> استكشاف الأخطاء</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                        <li>إذا لم تظهر النقاط: <strong>غير الصيغة</strong></li>
+                        <li>إذا ظهرت في مكان خاطئ: <strong>بدل X و Y</strong></li>
+                        <li>إذا ظهرت أخطاء: <strong>افحص الفواصل</strong> في الملف</li>
+                        <li>إذا كانت النصوص كبيرة/صغيرة: <strong>عدل ارتفاع النص</strong></li>
+                        <li>إذا لم تظهر بعض البيانات: <strong>تفقد خيارات الاستيراد</strong></li>
+                        <li>للأحرف العربية: <strong>استخدم ترميز UTF-8</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-success" style="margin-top: var(--spacing-md);">
+                <h4 style="color: var(--success); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 10px;"><span>💎</span> أفضل الممارسات</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-sm);">
+                    <div>
+                        <strong style="color: var(--text-light);">📁 تنظيم الملفات</strong>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">حافظ على نسخة احتياطية من ملفات CSV الأصلية في مجلد منفصل.</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--text-light);">🏷️ تسمية متسقة</strong>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">استخدم نظام تسمية موحد للأكواد يسهل الفصل والتصفية.</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--text-light);">📊 تجربة أولية</strong>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">جرب الإعدادات على 10 نقاط أولاً قبل معالجة البيانات الكاملة.</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--text-light);">🔄 تحديث مستمر</strong>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">استخدم PI لاستيراد التحديثات بدلاً من إعادة الرسم يدوياً.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. المقارنة مع الطرق التقليدية -->
+        <section class="section">
+            <h2 class="section-title">⚖️ المقارنة مع الطرق التقليدية</h2>
+            <div style="background: var(--bg-card); border-radius: 15px; padding: var(--spacing-lg); border: 1px solid var(--border);">
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr style="background: linear-gradient(135deg, var(--primary), #1e40af);">
+                                <th style="padding: 1.2rem; text-align: right; color: white;">المقارنة</th>
+                                <th style="padding: 1.2rem; text-align: center; color: var(--accent);">الطريقة اليدوية</th>
+                                <th style="padding: 1.2rem; text-align: center; color: var(--secondary);">الأمر PI</th>
+                                <th style="padding: 1.2rem; text-align: center; color: var(--success);">التوفير</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-weight: bold;">وقت استيراد 1000 نقطة</td>
+                                <td style="color: var(--accent);">4-6 ساعات عمل</td>
+                                <td style="color: var(--secondary);">30-60 ثانية</td>
+                                <td style="color: var(--success); font-weight: bold;">99% توفير</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">دقة البيانات</td>
+                                <td style="color: var(--accent);">عرضة للأخطاء البشرية</td>
+                                <td style="color: var(--secondary);">دقة 100% آلية</td>
+                                <td style="color: var(--success); font-weight: bold;">0% أخطاء</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">تنظيم الطبقات</td>
+                                <td style="color: var(--accent);">يدوي ومتعب</td>
+                                <td style="color: var(--secondary);">تلقائي وملون</td>
+                                <td style="color: var(--success); font-weight: bold;">5 طبقات تلقائية</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">إضافة النصوص</td>
+                                <td style="color: var(--accent);">نص نص لكل نقطة</td>
+                                <td style="color: var(--secondary);">جميع النصوص مرة واحدة</td>
+                                <td style="color: var(--success); font-weight: bold;">1000x أسرع</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">توصيل النقاط</td>
+                                <td style="color: var(--accent);">رسم يدوي للخطوط</td>
+                                <td style="color: var(--secondary);">خط متعدد تلقائي</td>
+                                <td style="color: var(--success); font-weight: bold;">أسرع بـ 500x</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">تعديل البيانات</td>
+                                <td style="color: var(--accent);">إعادة العمل من البداية</td>
+                                <td style="color: var(--secondary);">استيراد ملف محدث فقط</td>
+                                <td style="color: var(--success); font-weight: bold;">إعادة استخدام</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">صيغ الملفات</td>
+                                <td style="color: var(--accent);">عمل يدوي للتحويل</td>
+                                <td style="color: var(--secondary);">4 صيغ مدعومة تلقائياً</td>
+                                <td style="color: var(--success); font-weight: bold;">مرونة كاملة</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">الارتفاعات 3D</td>
+                                <td style="color: var(--accent);">إدخال Z لكل نقطة</td>
+                                <td style="color: var(--secondary);">نقاط 3D تلقائية</td>
+                                <td style="color: var(--success); font-weight: bold;">توفير الوقت</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="background: rgba(245, 158, 11, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-lg); text-align: center;">
+                    <p style="color: var(--accent); font-weight: bold; font-size: 1.2rem; margin: 0;">
+                        🚀 PI = استيراد ذكي + تنظيم آلي + توفير 99% من الوقت!
+                    </p>
+                    <p style="color: var(--text-gray); margin-top: 0.5rem;">
+                        من شهور من العمل إلى دقائق من الكفاءة
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. التطبيقات العملية -->
+        <section class="section">
+            <h2 class="section-title">🏗️ التطبيقات العملية في مختلف المجالات</h2>
+            <div class="tech-features">
+                
+                <div class="feature-card pulse">
+                    <div class="feature-icon">🏢</div>
+                    <h4>الهندسة المدنية</h4>
+                    <p>استيراد محاور الأعمدة، نقاط التأسيس، مناسيب الأرض، حدود المشاريع</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h4>الأعمال المساحية</h4>
+                    <p>رفع المساحات، حدود الأراضي، نقاط التحكم، الشبكات الجيوديسية</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h4>شبكات المرافق</h4>
+                    <p>مسارات الكابلات، مواقع المحولات، خطوط الأنابيب، أبراج الكهرباء</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌳</div>
+                    <h4>التخطيط العمراني</h4>
+                    <p>حدود المخططات، مواقع الخدمات، المساحات الخضراء، الطرق</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📡</div>
+                    <h4>الاستشعار عن بعد</h4>
+                    <p>بيانات الليزر سكانر، نقاط السحاب النقطية، نماذج الارتفاعات الرقمية</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏭</div>
+                    <h4>الصناعة والتصنيع</h4>
+                    <p>إحداثيات الماكينات، مواقع المعدات، خطوط الإنتاج، مستودعات التخزين</p>
+                </div>
+            </div>
+
+            <div style="background: rgba(14, 165, 233, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
+                <h4 style="color: var(--info); margin-bottom: 1rem;">💡 فكرة مشروع متكامل</h4>
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                    يمكنك استخدام PI كجزء من <strong>سير عمل متكامل</strong>:
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-sm); text-align: center;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; color: var(--primary);">1</div>
+                        <div style="color: var(--text-light); font-weight: bold;">جمع البيانات</div>
+                        <div style="color: var(--text-gray); font-size: 0.8rem;">Total Station / GPS</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; color: var(--secondary);">2</div>
+                        <div style="color: var(--text-light); font-weight: bold;">معالجة البيانات</div>
+                        <div style="color: var(--text-gray); font-size: 0.8rem;">Excel / برامج مساحية</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; color: var(--accent);">3</div>
+                        <div style="color: var(--text-light); font-weight: bold;">استيراد بال PI</div>
+                        <div style="color: var(--text-gray); font-size: 0.8rem;">AutoCAD + Borham Tools</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px;">
+                        <div style="font-size: 1.5rem; color: var(--success);">4</div>
+                        <div style="color: var(--text-light); font-weight: bold;">تطوير الرسم</div>
+                        <div style="color: var(--text-gray); font-size: 0.8rem;">التصميم والتفاصيل</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- الفوتر -->
+         <footer>
+            <a href="../index.html" class="back-link">العودة إلى الصفحة الرئيسية</a>
+            <p>📧 للاستفسارات التقنية: MahmoudBorham.codes@gmail.com</p>
+            <p>🇵🇸 Free Palestine - لوجه الله تعالى</p>
+            <p style="color: var(--accent); font-size: 1rem; margin-top: 1rem; font-weight: bold;">
+                "استيراد ذكي + تنظيم آلي + كفاءة فائقة = PI لاستيراد النقاط"
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
