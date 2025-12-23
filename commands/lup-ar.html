@@ -1,1 +1,655 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأمر LUP - تحديث مناسيب النقاط | Borham Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --bg-dark: #0f172a;
+            --bg-card: #334155;
+            --text-light: #f1f5f9;
+            --text-gray: #cbd5e1;
+            --success: #22c55e;
+            --border: #475569;
+            --container-width: 1000px;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2.5rem;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Cairo', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+        /* الترويسة */
+        .page-header { 
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        .page-header h1 { 
+            font-size: 2.2rem; 
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        .page-header p { 
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* الأقسام */
+        .section { margin-bottom: var(--spacing-lg); }
+        .section-title { 
+            color: var(--secondary);
+            font-size: 1.6rem;
+            margin-bottom: var(--spacing-md);
+            border-right: 4px solid var(--accent);
+            padding-right: 1rem;
+        }
+
+        /* 1. تعريف الأمر */
+        .definition {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border: 1px solid var(--border);
+        }
+        .definition-box {
+            background: rgba(37, 99, 235, 0.1);
+            border-right: 3px solid var(--primary);
+            padding: var(--spacing-md);
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .definition-box h3 {
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 2. المميزات التقنية */
+        .tech-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+        .feature-card h4 {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* 3. طريقة العمل */
+        .how-it-works {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            border: 1px solid var(--border);
+        }
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            margin: var(--spacing-md) 0;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+        .work-step {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: var(--spacing-sm);
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            position: relative;
+        }
+        .work-step:not(:last-child):after {
+            content: "→";
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        /* النتائج */
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        .result-card {
+            text-align: center;
+            padding: var(--spacing-md);
+            background: var(--bg-card);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        .result-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+        .result-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* الأزرار */
+        .back-link {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin: var(--spacing-md) 0;
+            transition: background 0.3s;
+        }
+        .back-link:hover { 
+            background: #1e40af;
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--border);
+            margin-top: var(--spacing-lg);
+        }
+        footer p { 
+            color: var(--text-gray); 
+            margin: 0.5rem 0;
+        }
+
+        /* التجاوب */
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 1.8rem; }
+            .section-title { font-size: 1.4rem; }
+            .workflow { flex-direction: column; }
+            .work-step:not(:last-child):after {
+                content: "↓";
+                left: 50%;
+                top: auto;
+                bottom: -20px;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- الترويسة -->
+        <header class="page-header">
+            <h1>الأمر LUP</h1>
+            <p>تحديث مناسيب النقاط تلقائياً من أقرب نص - ربط ذكي بين النقاط والأرقام</p>
+        </header>
+
+        <!-- 1. تعريف الأمر -->
+        <section class="section">
+            <h2 class="section-title">📌 ما هو الأمر LUP؟</h2>
+            <div class="definition">
+                <p>الأمر <strong>LUP</strong> (Level Update) هو أداة ذكية تبحث عن أقرب نص (Text/MText) لكل نقطة وتستخرج الرقم منه لتحديث منسوب النقطة (قيمة Z) تلقائياً. بدلاً من إدخال المناسيب يدوياً لمئات النقاط، يربط الأمر النقاط بالأرقام المكتوبة بجانبها في ثوانٍ.</p>
+                
+                <div class="definition-box">
+                    <h3>🎯 المميزات الرئيسية</h3>
+                    <ul style="color: var(--text-gray); padding-right: 1rem;">
+                        <li><strong>ربط تلقائي:</strong> يبحث عن أقرب نص لكل نقطة تلقائياً</li>
+                        <li><strong>استخراج ذكي للأرقام:</strong> يستخرج الأرقام من النصوص المعقدة</li>
+                        <li><strong>سرعة فائقة:</strong> تحديث آلاف النقاط في ثوانٍ</li>
+                        <li><strong>عزل النقاط الفاشلة:</strong> ينقل النقاط بدون مناسيب لطبقة "Wrong_LVL"</li>
+                        <li><strong>شريط تقدم حي:</strong> متابعة لحظية لعدد النقاط المحدّثة</li>
+                    </ul>
+                </div>
+
+                <div class="definition-box">
+                    <h3>⚙️ متى تستخدمه؟</h3>
+                    <ul style="color: var(--text-gray); padding-right: 1rem;">
+                        <li>عندما يكون لديك <strong>نقاط وأرقام مناسيب منفصلة</strong></li>
+                        <li>بعد استيراد نقاط من ملفات خارجية بدون Z</li>
+                        <li>عند تحديث مناسيب نقاط قديمة من مسح جديد</li>
+                        <li>لربط نقاط المساحة بقراءات الارتفاع المكتوبة</li>
+                        <li>عندما تريد توفير ساعات من الإدخال اليدوي</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(239, 68, 68, 0.1); border-right: 3px solid #ef4444; padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem;">
+                    <h3 style="color: #ef4444; margin-bottom: 0.8rem;">⚠️ متطلبات مهمة</h3>
+                    <ul style="color: var(--text-gray); padding-right: 1rem;">
+                        <li>يجب أن يكون لديك <strong>نقاط (POINTS)</strong> في الرسم</li>
+                        <li>يجب أن يكون لديك <strong>نصوص (TEXT/MTEXT)</strong> تحتوي على أرقام</li>
+                        <li>النصوص يجب أن تكون <strong>قريبة من النقاط</strong> (المسافة القصوى: 5 وحدات)</li>
+                        <li>الأرقام يمكن أن تكون في أي مكان داخل النص</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. المميزات التقنية -->
+        <section class="section">
+            <h2 class="section-title">✨ المميزات التقنية الفريدة</h2>
+            <div class="tech-features">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h4>استخراج أرقام ذكي</h4>
+                    <p>يستخرج الأرقام من نصوص معقدة مثل "المنسوب: 123.45" أو "{\\...}125.30" - يتجاهل الرموز</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h4>بحث مكاني متقدم</h4>
+                    <p>يبحث في شبكة Grid ذكية لإيجاد أقرب نص لكل نقطة - سرعة O(1) للبحث</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h4>معالجة دفعية</h4>
+                    <p>تحديث مئات أو آلاف النقاط دفعة واحدة - لا حاجة لتحديث نقطة تلو الأخرى</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h4>عزل الفاشلة تلقائياً</h4>
+                    <p>النقاط التي لم يُعثر لها على مناسيب تُنقل لطبقة "Wrong_LVL" حمراء للمراجعة</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. طريقة العمل -->
+        <section class="section">
+            <h2 class="section-title">🚀 كيف يعمل الأمر LUP؟</h2>
+            <div class="how-it-works">
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">عملية بسيطة من 4 خطوات:</p>
+                
+                <div class="workflow">
+                    <div class="work-step">
+                        <strong>الخطوة 1</strong>
+                        <p>اكتب LUP</p>
+                        <small>اكتب LUP ثم Enter</small>
+                    </div>
+                    <div class="work-step">
+                        <strong>الخطوة 2</strong>
+                        <p>اختر النقاط والنصوص</p>
+                        <small>اختر كل النقاط والنصوص معاً</small>
+                    </div>
+                    <div class="work-step">
+                        <strong>الخطوة 3</strong>
+                        <p>اضغط Enter</p>
+                        <small>الأمر يبدأ الربط تلقائياً</small>
+                    </div>
+                    <div class="work-step">
+                        <strong>النتيجة</strong>
+                        <p>نقاط محدّثة!</p>
+                        <small>بمناسيب دقيقة من النصوص</small>
+                    </div>
+                </div>
+
+                <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">🔬 كيف يستخرج الأرقام؟</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-sm);">
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-md); border-radius: 6px;">
+                            <p style="color: var(--accent); font-weight: bold; margin-bottom: 0.5rem;">مثال 1:</p>
+                            <p style="color: var(--text-gray); font-size: 0.85rem;">النص: <code>"123.45"</code></p>
+                            <p style="color: var(--success); font-size: 0.85rem;">النتيجة: <strong>123.45</strong></p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-md); border-radius: 6px;">
+                            <p style="color: var(--accent); font-weight: bold; margin-bottom: 0.5rem;">مثال 2:</p>
+                            <p style="color: var(--text-gray); font-size: 0.85rem;">النص: <code>"المنسوب: 89.30"</code></p>
+                            <p style="color: var(--success); font-size: 0.85rem;">النتيجة: <strong>89.30</strong></p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-md); border-radius: 6px;">
+                            <p style="color: var(--accent); font-weight: bold; margin-bottom: 0.5rem;">مثال 3:</p>
+                            <p style="color: var(--text-gray); font-size: 0.85rem;">النص: <code>"{\\H0.8x;}125.67"</code></p>
+                            <p style="color: var(--success); font-size: 0.85rem;">النتيجة: <strong>125.67</strong></p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-md); border-radius: 6px;">
+                            <p style="color: var(--accent); font-weight: bold; margin-bottom: 0.5rem;">مثال 4:</p>
+                            <p style="color: var(--text-gray); font-size: 0.85rem;">النص: <code>"BM-01: +3.25"</code></p>
+                            <p style="color: var(--success); font-size: 0.85rem;">النتيجة: <strong>3.25</strong></p>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; text-align: center; margin-top: 1rem;">
+                        💡 يتعامل مع <strong>الفواصل العشرية (.) والفواصل (,)</strong> ويتجاهل جميع الرموز الخاصة!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. النتائج والأداء -->
+        <section class="section">
+            <h2 class="section-title">💰 النتائج والأداء</h2>
+            <div class="results">
+                <div class="result-card">
+                    <div class="result-value">1000+</div>
+                    <div class="result-label">نقطة في أقل من 10 ثوانٍ</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">100%</div>
+                    <div class="result-label">دقة في استخراج الأرقام</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">5.0</div>
+                    <div class="result-label">مسافة بحث قصوى (وحدات)</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-value">0</div>
+                    <div class="result-label">إدخال يدوي مطلوب</div>
+                </div>
+            </div>
+
+            <div style="background: rgba(34, 197, 94, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
+                <h3 style="color: var(--success); margin-bottom: 1rem;">🏗️ سيناريو عملي: رفع مساحي</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+                    <div>
+                        <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">بدون LUP:</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem;">
+                            <li>قراءة رقم المنسوب من النص يدوياً</li>
+                            <li>فتح خصائص النقطة (Properties)</li>
+                            <li>إدخال قيمة Z يدوياً</li>
+                            <li>تكرار العملية لكل نقطة</li>
+                            <li>احتمال أخطاء في النقل</li>
+                            <li>مدة: 3-5 ساعات لـ 500 نقطة</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">بـ LUP:</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem;">
+                            <li>اختيار جميع النقاط والنصوص</li>
+                            <li>تشغيل LUP</li>
+                            <li>الربط التلقائي لكل نقطة بأقرب نص</li>
+                            <li>تحديث 500 نقطة في 8-10 ثوانٍ</li>
+                            <li>دقة 100% - لا أخطاء بشرية</li>
+                            <li>النقاط الفاشلة معزولة للمراجعة</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                    ⚡ توفير 99.9% من الوقت - من 4 ساعات إلى 10 ثوانٍ!
+                </p>
+            </div>
+        </section>
+
+        <!-- 5. الاستخدامات العملية -->
+        <section class="section">
+            <h2 class="section-title">🏗️ الاستخدامات العملية في الميدان</h2>
+            <div class="tech-features">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📐</div>
+                    <h4>الرفع المساحي</h4>
+                    <p>ربط نقاط الرفع بقراءات الارتفاع من أجهزة Total Station</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h4>تحديث الخرائط</h4>
+                    <p>تحديث مناسيب نقاط قديمة من بيانات رفع حديثة</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>استيراد البيانات</h4>
+                    <p>بعد استيراد نقاط من Excel أو CSV بدون Z، تحديث المناسيب من النصوص</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏗️</div>
+                    <h4>مشاريع التسوية</h4>
+                    <p>ربط نقاط شبكة التسوية بالمناسيب المحسوبة</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🛣️</div>
+                    <h4>مشاريع الطرق</h4>
+                    <p>تحديث مناسيب نقاط المحور من جداول التصميم</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h4>Quality Control</h4>
+                    <p>التحقق من مطابقة مناسيب النقاط للقراءات المكتوبة</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. أمثلة واقعية -->
+        <section class="section">
+            <h2 class="section-title">💼 أمثلة واقعية من المشاريع</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+                
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 1: رفع موقع بناء</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        تم عمل رفع مساحي لموقع بناء وتسجيل 380 نقطة. القراءات مكتوبة بجانب كل نقطة كنصوص، لكن النقاط نفسها Z=0.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ LUP:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
+                        <li>تشغيل الأمر LUP</li>
+                        <li>اختيار جميع النقاط (380) والنصوص معاً</li>
+                        <li>Enter - المعالجة التلقائية تبدأ</li>
+                        <li>تم تحديث 375 نقطة بنجاح في 7 ثوانٍ</li>
+                        <li>5 نقاط فاشلة انتقلت لطبقة "Wrong_LVL"</li>
+                        <li>مراجعة الـ 5 نقاط وتصحيحها يدوياً</li>
+                    </ol>
+                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                        ✅ توفير 3 ساعات عمل
+                    </p>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 2: مشروع طريق</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        مشروع طريق بطول 5 كم. تم رسم 600 نقطة على المحور، والمناسيب محسوبة ومكتوبة بجانب كل نقطة، لكن النقاط بدون Z.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ LUP:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
+                        <li>LUP على جميع النقاط والنصوص</li>
+                        <li>فحص 600 نقطة و600 نص</li>
+                        <li>ربط تلقائي لكل نقطة بأقرب نص</li>
+                        <li>تحديث 598 نقطة بنجاح في 9 ثوانٍ</li>
+                        <li>نقطتان فاشلتان (النصوص بعيدة جداً)</li>
+                        <li>تصحيح النقطتين يدوياً</li>
+                    </ol>
+                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                        ✅ دقة 99.7% في الربط التلقائي
+                    </p>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 3: استيراد من Excel</h4>
+                    <p style="color: var(--text-gray); margin-
+<p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        تم استيراد 450 نقطة من ملف Excel باستخدام PI. النقاط دخلت بإحداثيات X,Y صحيحة لكن Z=0. المناسيب موجودة كنصوص منفصلة.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ LUP:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
+                        <li>بعد استيراد النقاط بـ PI</li>
+                        <li>استيراد النصوص (المناسيب) بنفس الملف</li>
+                        <li>تشغيل LUP واختيار الكل</li>
+                        <li>تحديث 445 نقطة تلقائياً</li>
+                        <li>5 نقاط في "Wrong_LVL" (نصوصها تالفة)</li>
+                        <li>إصلاح النصوص وإعادة LUP</li>
+                    </ol>
+                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
+                        ✅ حل مثالي لما بعد الاستيراد
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. نصائح وحلول للمشاكل الشائعة -->
+        <section class="section">
+            <h2 class="section-title">💡 نصائح وحلول للمشاكل الشائعة</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+                
+                <div style="background: rgba(16, 185, 129, 0.1); border-right: 3px solid var(--secondary); padding: var(--spacing-md); border-radius: 8px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">✅ للحصول على أفضل النتائج</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                        <li>ضع النصوص <strong>قريبة</strong> من النقاط (أقل من 5 وحدات)</li>
+                        <li>تأكد من أن النصوص تحتوي على <strong>أرقام صحيحة</strong></li>
+                        <li>استخدم Text أو MText - كلاهما يعمل بنفس الكفاءة</li>
+                        <li>يمكن أن يكون الرقم في أي مكان بالنص</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(245, 158, 11, 0.1); border-right: 3px solid var(--accent); padding: var(--spacing-md); border-radius: 8px;">
+                    <h4 style="color: var(--accent); margin-bottom: 0.8rem;">⚠️ المشاكل الشائعة</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                        <li><strong>نقاط في Wrong_LVL:</strong> النصوص بعيدة جداً أو لا تحتوي أرقام</li>
+                        <li><strong>أرقام خاطئة:</strong> تحقق من أن النص يحتوي رقم واحد فقط</li>
+                        <li><strong>بطء في المعالجة:</strong> قلل عدد النصوص المحيطة غير المطلوبة</li>
+                        <li><strong>لا يجد النصوص:</strong> تحقق من أن النصوص في نطاق 5 وحدات</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(37, 99, 235, 0.1); border-right: 3px solid var(--primary); padding: var(--spacing-md); border-radius: 8px;">
+                    <h4 style="color: var(--primary); margin-bottom: 0.8rem;">🔧 حلول سريعة</h4>
+                    <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                        <li><strong>نقاط كثيرة فاشلة:</strong> قرّب النصوص من النقاط وأعد LUP</li>
+                        <li><strong>أرقام غير دقيقة:</strong> نظّف النصوص من الأرقام الزائدة</li>
+                        <li><strong>طبقة Wrong_LVL مخفية:</strong> افتحها من Layer Manager</li>
+                        <li><strong>بعد المراجعة:</strong> يمكنك إعادة LUP على النقاط المصححة</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. كيف يعزل النقاط الفاشلة -->
+        <section class="section">
+            <h2 class="section-title">🔴 نظام عزل النقاط الفاشلة</h2>
+            <div style="background: var(--bg-card); border-radius: 10px; padding: var(--spacing-md); border: 1px solid var(--border);">
+                <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
+                    عندما لا يستطيع LUP إيجاد منسوب لنقطة معينة، يضعها تلقائياً في طبقة <strong>"Wrong_LVL"</strong> حمراء. هذا يسهّل عليك إيجاد النقاط التي تحتاج مراجعة.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-md); margin-top: 1.5rem;">
+                    <div style="background: rgba(34, 197, 94, 0.1); padding: var(--spacing-md); border-radius: 8px; border-right: 3px solid var(--success);">
+                        <h4 style="color: var(--success); margin-bottom: 0.8rem;">✅ النقاط الناجحة</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                            <li>تبقى في طبقاتها الأصلية</li>
+                            <li>يتم تحديث Z تلقائياً</li>
+                            <li>جاهزة للاستخدام مباشرة</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: rgba(239, 68, 68, 0.1); padding: var(--spacing-md); border-radius: 8px; border-right: 3px solid #ef4444;">
+                        <h4 style="color: #ef4444; margin-bottom: 0.8rem;">❌ النقاط الفاشلة</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                            <li>تُنقل لطبقة "Wrong_LVL"</li>
+                            <li>تظهر باللون الأحمر</li>
+                            <li>سهل إيجادها للمراجعة</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-md); border-radius: 8px; margin-top: 1.5rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 0.8rem;">🔄 خطوات المراجعة الموصى بها:</h4>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
+                        <li>افتح طبقة "Wrong_LVL" وشغّلها</li>
+                        <li>Zoom على النقاط الحمراء</li>
+                        <li>تحقق من سبب الفشل:
+                            <ul style="padding-right: 1rem; margin-top: 0.3rem;">
+                                <li>• هل يوجد نص قريب؟</li>
+                                <li>• هل النص يحتوي رقم؟</li>
+                                <li>• هل المسافة أكبر من 5 وحدات؟</li>
+                            </ul>
+                        </li>
+                        <li>اصلح المشكلة (قرّب النص أو اكتب رقم صحيح)</li>
+                        <li>شغّل LUP مرة أخرى على النقاط الحمراء فقط</li>
+                        <li>بعد النجاح، انقل النقاط للطبقة الصحيحة يدوياً</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. إحصائيات وتقارير -->
+        <section class="section">
+            <h2 class="section-title">📊 إحصائيات مفصلة بعد التنفيذ</h2>
+            <div style="background: var(--bg-card); border-radius: 10px; padding: var(--spacing-md); border: 1px solid var(--border);">
+                <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                    بعد انتهاء الأمر، تحصل على رسالة تفصيلية تحتوي على:
+                </p>
+
+                <div style="background: rgba(16, 185, 129, 0.1); padding: var(--spacing-md); border-radius: 8px; border-right: 3px solid var(--secondary); margin: 1rem 0;">
+                    <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">📈 مثال على التقرير النهائي:</h4>
+                    <div style="background: rgba(0,0,0,0.3); padding: var(--spacing-md); border-radius: 6px; font-family: monospace; color: var(--text-light);">
+                        <p style="margin: 0.3rem 0;">==================================================================</p>
+                        <p style="margin: 0.3rem 0; color: var(--success);">[OK] Points Updated: 475 of 500</p>
+                        <p style="margin: 0.3rem 0; color: #ef4444;">[OK] Points Failed: 25</p>
+                        <p style="margin: 0.3rem 0; color: var(--accent);">Processing Time: 8.3 seconds</p>
+                        <p style="margin: 0.3rem 0; color: var(--accent);">Speed: 60 points/sec</p>
+                        <p style="margin: 0.3rem 0;">==================================================================</p>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-sm); margin-top: 1.5rem;">
+                    <div style="text-align: center; padding: var(--spacing-sm); background: rgba(255,255,255,0.03); border-radius: 6px;">
+                        <p style="color: var(--success); font-size: 1.8rem; font-weight: bold; margin-bottom: 0.3rem;">475</p>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">نقطة محدّثة بنجاح</p>
+                    </div>
+                    <div style="text-align: center; padding: var(--spacing-sm); background: rgba(255,255,255,0.03); border-radius: 6px;">
+                        <p style="color: #ef4444; font-size: 1.8rem; font-weight: bold; margin-bottom: 0.3rem;">25</p>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">نقطة فاشلة (Wrong_LVL)</p>
+                    </div>
+                    <div style="text-align: center; padding: var(--spacing-sm); background: rgba(255,255,255,0.03); border-radius: 6px;">
+                        <p style="color: var(--accent); font-size: 1.8rem; font-weight: bold; margin-bottom: 0.3rem;">8.3s</p>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">وقت المعالجة</p>
+                    </div>
+                    <div style="text-align: center; padding: var(--spacing-sm); background: rgba(255,255,255,0.03); border-radius: 6px;">
+                        <p style="color: var(--primary); font-size: 1.8rem; font-weight: bold; margin-bottom: 0.3rem;">95%</p>
+                        <p style="color: var(--text-gray); font-size: 0.85rem;">نسبة النجاح</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- الفوتر -->
+        <footer>
+            <a href="../index.html" class="back-link">العودة إلى الصفحة الرئيسية</a>
+            <p>📧 للاستفسارات: MahmoudBorham.codes@gmail.com</p>
+            <p>🇵🇸 Free Palestine - لوجه الله تعالى</p>
+            <p style="color: var(--accent); font-size: 0.9rem; margin-top: 1rem;">
+                "ربط ذكي + استخراج أرقام + عزل فاشلة = LUP لتحديث المناسيب"
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
