@@ -3,147 +3,610 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSL - Select Similar | Borham Tools</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/command.css">
-    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <title>SSL Command - Select Similar Objects | Borham Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --accent2: #8b5cf6;
+            --bg-dark: #0f172a;
+            --bg-card: #334155;
+            --text-light: #f1f5f9;
+            --text-gray: #cbd5e1;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --border: #475569;
+            --container-width: 1100px;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2.5rem;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.7; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+        /* Header */
+        .page-header { 
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            border-bottom: 2px solid var(--accent);
+        }
+        .page-header h1 { 
+            font-size: 2.5rem; 
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        .page-header .tagline {
+            color: var(--accent);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .page-header p { 
+            color: var(--text-gray); 
+            max-width: 900px; 
+            margin: 0 auto;
+        }
+
+        /* Sections */
+        .section { margin-bottom: var(--spacing-lg); }
+        .section-title { 
+            color: var(--secondary);
+            font-size: 1.8rem;
+            border-left: 5px solid var(--accent);
+            padding-left: 1rem;
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        /* Cards */
+        .definition, .how-it-works {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .definition-box {
+            background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(37,99,235,0.05));
+            border-left: 4px solid var(--primary);
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            margin: 1.2rem 0;
+        }
+
+        /* Features */
+        .tech-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+        }
+        .feature-card {
+            background: linear-gradient(145deg, rgba(51,65,85,0.8), rgba(30,41,59,0.8));
+            padding: var(--spacing-md);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--accent);
+        }
+        .feature-icon { 
+            font-size: 2.5rem; 
+            color: var(--accent); 
+            margin-bottom: 0.8rem;
+        }
+        .feature-card h4 { 
+            color: var(--text-light); 
+            margin-bottom: 0.6rem;
+            font-size: 1.2rem;
+        }
+        .feature-card p { 
+            color: var(--text-gray); 
+            font-size: 0.95rem;
+        }
+
+        /* Matching Rules */
+        .matching-rules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: 1.5rem 0;
+        }
+        .rule-card {
+            background: rgba(255,255,255,0.05);
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .rule-card:hover {
+            background: rgba(37,99,235,0.1);
+            border-color: var(--primary);
+        }
+        .rule-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .rule-card h4 {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .rule-card ul {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            padding-left: 1rem;
+        }
+
+        /* Workflow */
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin: 1.5rem 0;
+        }
+        .work-step {
+            background: linear-gradient(145deg, rgba(30,41,59,0.8), rgba(15,23,42,0.8));
+            border: 2px solid var(--border);
+            padding: var(--spacing-md);
+            text-align: center;
+            border-radius: 12px;
+            position: relative;
+            flex: 1;
+            min-width: 180px;
+        }
+        .work-step-number {
+            position: absolute;
+            top: -12px;
+            left: 15px;
+            background: var(--accent);
+            color: var(--bg-dark);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .work-step:not(:last-child):after {
+            content: "➜";
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+
+        /* Comparison */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        .comparison-card {
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .comparison-before {
+            background: rgba(239,68,68,0.1);
+            border: 2px solid var(--error);
+        }
+        .comparison-after {
+            background: rgba(34,197,94,0.1);
+            border: 2px solid var(--success);
+        }
+
+        /* Buttons */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), #1d4ed8);
+            padding: 12px 28px;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 1.5rem 0;
+        }
+        .back-link:hover { 
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: var(--spacing-lg);
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--border);
+        }
+        footer p { 
+            color: var(--text-gray); 
+            margin: 0.5rem 0;
+        }
+        .footer-highlight {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background: rgba(245,158,11,0.1);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2rem; }
+            .section-title { font-size: 1.5rem; }
+            .workflow { flex-direction: column; }
+            .work-step:not(:last-child):after {
+                content: "⬇";
+                left: 50%;
+                right: auto;
+                top: auto;
+                bottom: -20px;
+                transform: translateX(-50%);
+            }
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Back Button -->
-    <div class="back-button">
-        <a href="../index.html">← Back to Home</a>
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <h1>SSL Command - Select Similar Objects</h1>
+            <div class="tagline">Intelligent selection of matching objects based on multiple properties</div>
+            <p>
+                Advanced system for selecting similar objects in drawings with support for multiple reference objects and fast filtering.
+            </p>
+        </header>
+
+        <!-- 1. What is SSL -->
+        <section class="section">
+            <h2 class="section-title">📌 What is the SSL Command?</h2>
+            <div class="definition">
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--text-light);">
+                    The <strong>SSL</strong> (Select Similar) command is an advanced tool for selecting similar objects in AutoCAD based on multiple properties with speed and accuracy optimizations.
+                </p>
+
+                <div class="definition-box">
+                    <h3>🎯 Key Features</h3>
+                    <div class="tech-features">
+                        <div class="feature-card">
+                            <div class="feature-icon">🔍</div>
+                            <h4>Intelligent Selection</h4>
+                            <p>Select similar objects based on multiple properties</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h4>High Speed</h4>
+                            <p>Fast processing even for large drawings</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h4>Varied Accuracy</h4>
+                            <p>Support for different properties for each object type</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="definition-box" style="background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(16,185,129,0.05)); border-left-color: var(--secondary);">
+                    <h3 style="color: var(--secondary);">🔄 Multiple Reference Support</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div style="background: rgba(59,130,246,0.15); padding: 0.8rem; border-radius: 8px; border-left: 3px solid #3b82f6;">
+                            <strong style="color: #3b82f6;">Single Reference</strong>
+                            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">Select objects similar to one reference</p>
+                        </div>
+                        <div style="background: rgba(139,92,246,0.15); padding: 0.8rem; border-radius: 8px; border-left: 3px solid var(--accent2);">
+                            <strong style="color: var(--accent2);">Multiple References</strong>
+                            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">Select objects similar to multiple references</p>
+                        </div>
+                        <div style="background: rgba(245,158,11,0.15); padding: 0.8rem; border-radius: 8px; border-left: 3px solid var(--accent);">
+                            <strong style="color: var(--accent);">Different Types</strong>
+                            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">Support different object types in same selection</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Matching Rules -->
+        <section class="section">
+            <h2 class="section-title">🎯 Matching Rules</h2>
+            <div class="how-it-works">
+                <div class="matching-rules">
+                    <div class="rule-card">
+                        <div class="rule-icon">📏</div>
+                        <h4>Lines & Shapes</h4>
+                        <ul>
+                            <li>Lines: Length (0.001 accuracy)</li>
+                            <li>Polylines: Length</li>
+                            <li>Splines: Length</li>
+                            <li>Layer & Color</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="rule-card">
+                        <div class="rule-icon">⭕</div>
+                        <h4>Circles & Arcs</h4>
+                        <ul>
+                            <li>Circles: Radius (0.001 accuracy)</li>
+                            <li>Arcs: Radius</li>
+                            <li>Layer & Color</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="rule-card">
+                        <div class="rule-icon">🅰️</div>
+                        <h4>Texts</h4>
+                        <ul>
+                            <li>Text: Text Style</li>
+                            <li>MText: Text Style</li>
+                            <li>Layer & Color</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="rule-card">
+                        <div class="rule-icon">🔲</div>
+                        <h4>Other Elements</h4>
+                        <ul>
+                            <li>Blocks: Block Name</li>
+                            <li>Hatches: Pattern</li>
+                            <li>Dimensions: Dimension Style</li>
+                            <li>Layer & Color</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box" style="background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(245,158,11,0.05)); border-left-color: var(--accent);">
+                    <h3 style="color: var(--accent);">⚙️ Matching Algorithm</h3>
+                    <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                        <ol style="color: var(--text-light); padding-left: 1.5rem;">
+                            <li>Analyze reference object properties</li>
+                            <li>Extract key properties based on type</li>
+                            <li>Search for all objects of same type and layer</li>
+                            <li>Filter objects based on extracted properties</li>
+                            <li>Add matching objects to selection set</li>
+                        </ol>
+                    </div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        The algorithm uses property hashing for high speed even in large drawings.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. How It Works -->
+        <section class="section">
+            <h2 class="section-title">🚀 How SSL Command Works</h2>
+            <div class="how-it-works">
+                
+                <div class="workflow">
+                    <div class="work-step">
+                        <div class="work-step-number">1</div>
+                        <strong>Select Reference</strong>
+                        <p>Select one or more reference objects</p>
+                        <small>Supports different types</small>
+                    </div>
+
+                    <div class="work-step">
+                        <div class="work-step-number">2</div>
+                        <strong>Analyze Properties</strong>
+                        <p>Extract key properties</p>
+                        <small>Based on object type</small>
+                    </div>
+
+                    <div class="work-step">
+                        <div class="work-step-number">3</div>
+                        <strong>Search & Filter</strong>
+                        <p>Find similar objects</p>
+                        <small>Throughout entire drawing</small>
+                    </div>
+
+                    <div class="work-step">
+                        <div class="work-step-number">4</div>
+                        <strong>Final Selection</strong>
+                        <p>Select matching objects</p>
+                        <small>With results display</small>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <h3>🔍 Practical Examples</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div style="background: rgba(37,99,235,0.1); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--primary); display: block; margin-bottom: 0.5rem;">Example 1: Lines with Same Length</strong>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">
+                                Select all lines with 5.00 meter length in "Walls" layer
+                            </p>
+                        </div>
+                        <div style="background: rgba(16,185,129,0.1); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--secondary); display: block; margin-bottom: 0.5rem;">Example 2: Circles with Same Diameter</strong>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">
+                                Select all circles with 2.50 meter radius in "Columns" layer
+                            </p>
+                        </div>
+                        <div style="background: rgba(245,158,11,0.1); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">Example 3: Text with Same Style</strong>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">
+                                Select all text using "Arial" style in "Text" layer
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Use Cases -->
+        <section class="section">
+            <h2 class="section-title">💼 Practical Use Cases</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">🏗️ Structural Organization</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        Select all columns with same diameter or all beams with same dimensions.
+                    </p>
+                    <div style="background: rgba(59,130,246,0.1); padding: 1rem; border-radius: 8px;">
+                        <strong style="color: #3b82f6; display: block; margin-bottom: 0.5rem;">🎯 Application:</strong>
+                        <ul style="color: var(--text-gray); padding-left: 1rem;">
+                            <li>Modify properties of similar elements</li>
+                            <li>Check dimension consistency</li>
+                            <li>Update labels for similar elements</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">🗺️ Survey Drawings</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        Select all boundary points or all lines with same thickness and color.
+                    </p>
+                    <div style="background: rgba(16,185,129,0.1); padding: 1rem; border-radius: 8px;">
+                        <strong style="color: var(--secondary); display: block; margin-bottom: 0.5rem;">🎯 Application:</strong>
+                        <ul style="color: var(--text-gray); padding-left: 1rem;">
+                            <li>Update line styles</li>
+                            <li>Change colors of similar elements</li>
+                            <li>Check drawing consistency</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">🎨 Architectural Design</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        Select all windows or doors of same type or all text with same font.
+                    </p>
+                    <div style="background: rgba(245,158,11,0.1); padding: 1rem; border-radius: 8px;">
+                        <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">🎯 Application:</strong>
+                        <ul style="color: var(--text-gray); padding-left: 1rem;">
+                            <li>Update specifications of similar elements</li>
+                            <li>Adjust text sizes</li>
+                            <li>Organize element layers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Comparison -->
+        <section class="section">
+            <h2 class="section-title">⚖️ SSL vs AutoCAD Select Similar</h2>
+            <div class="comparison">
+                <div class="comparison-card comparison-before">
+                    <h3 style="color: var(--error); margin-bottom: 1rem;">❌ Traditional AutoCAD</h3>
+                    <ul style="color: var(--text-gray); text-align: left; padding-left: 1rem;">
+                        <li>Supports limited properties only</li>
+                        <li>Single reference at a time</li>
+                        <li>Doesn't support different types</li>
+                        <li>Slow speed in large drawings</li>
+                        <li>No results statistics display</li>
+                        <li>Limited matching options</li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-card comparison-after">
+                    <h3 style="color: var(--success); margin-bottom: 1rem;">✅ SSL from Borham Tools</h3>
+                    <ul style="color: var(--text-gray); text-align: left; padding-left: 1rem;">
+                        <li>Supports advanced properties by type</li>
+                        <li>Supports multiple references at once</li>
+                        <li>Supports different element types</li>
+                        <li>High speed with hashing</li>
+                        <li>Detailed statistics display</li>
+                        <li>Smart matching options</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="color: var(--accent); text-align: center; font-weight: bold; margin-top: 1rem; font-size: 1.1rem;">
+                ⚡ Select 1000 similar objects in less than 2 seconds
+            </p>
+        </section>
+
+        <!-- 6. Tips & Best Practices -->
+        <section class="section">
+            <h2 class="section-title">💡 Professional Tips</h2>
+            <div class="definition">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md);">
+                    <div style="background: rgba(37,99,235,0.1); padding: var(--spacing-md); border-radius: 10px; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary); margin-bottom: 0.8rem;">🔍 Before Selection</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem;">
+                            <li>Select reference object carefully</li>
+                            <li>Verify reference object properties</li>
+                            <li>Use Purge to clean drawing first</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(16,185,129,0.1); padding: var(--spacing-md); border-radius: 10px; border-left: 3px solid var(--secondary);">
+                        <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">⚡ During Selection</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem;">
+                            <li>You can select multiple references at once</li>
+                            <li>Watch command line messages</li>
+                            <li>Use selection window for many objects</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(245,158,11,0.1); padding: var(--spacing-md); border-radius: 10px; border-left: 3px solid var(--accent);">
+                        <h4 style="color: var(--accent); margin-bottom: 0.8rem;">🎨 After Selection</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem;">
+                            <li>Verify selected objects</li>
+                            <li>Use Properties for batch editing</li>
+                            <li>Save selection if needed</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(139,92,246,0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md); text-align: center;">
+                    <p style="color: var(--accent2); font-weight: bold; margin-bottom: 0.5rem;">💡 Advanced Tip</p>
+                    <p style="color: var(--text-gray); font-size: 0.95rem;">
+                        To select objects of different types, use <strong>multiple references</strong> from each type.
+                        SSL will combine results from all references into one selection set.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Button -->
+        <div style="text-align: center;">
+            <a href="../index.html" class="back-link">
+                <span>←</span> Back to Homepage
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>📧 For technical inquiries: MahmoudBorham.codes@gmail.com</p>
+            <p>🛠️ Part of Borham Tools package specialized in engineering automation</p>
+            <p>🇵🇸 Free Palestine - For the Sake of Allah</p>
+            <div class="footer-highlight">
+                "Smart reference + Advanced algorithm = Accurate selection of similar objects"
+            </div>
+        </footer>
     </div>
-
-    <!-- Command Header -->
-    <section class="command-header">
-        <div class="container">
-            <span class="command-badge">Smart Selection</span>
-            <h1 class="command-name">SSL</h1>
-            <p class="command-title">Select Similar Objects with Intelligent Property Matching</p>
-        </div>
-    </section>
-
-    <!-- Command Content -->
-    <section class="command-content">
-        <div class="container">
-            <!-- Overview Section -->
-            <div class="content-section highlight-box">
-                <h2>📖 Command Overview</h2>
-                <p>The <code>SSL</code> command intelligently selects objects similar to reference objects throughout the entire drawing using advanced property matching algorithms.</p>
-                
-                <h3>Key Capabilities:</h3>
-                <ul>
-                    <li><strong>Multi-criteria matching</strong> by object type</li>
-                    <li><strong>Multiple reference object</strong> support</li>
-                    <li><strong>Smart property caching</strong> for lightning speed</li>
-                    <li><strong>Automatic layer management</strong> (unlocks/frozen layers)</li>
-                    <li><strong>Performance timing</strong> display</li>
-                    <li><strong>Duplicate property filtering</strong></li>
-                </ul>
-            </div>
-
-            <!-- Matching Criteria -->
-            <div class="content-section">
-                <h2>🎯 Matching Criteria by Object Type</h2>
-                <ul>
-                    <li><strong>LINES / POLYLINES / ARCS / SPLINES / ELLIPSES:</strong> Length</li>
-                    <li><strong>CIRCLES:</strong> Radius</li>
-                    <li><strong>HATCH:</strong> Pattern</li>
-                    <li><strong>TEXT / MTEXT:</strong> Style & Height</li>
-                    <li><strong>INSERTS (Blocks):</strong> Block Name & Scale</li>
-                    <li><strong>DIMENSIONS:</strong> Dimension Style</li>
-                    <li><strong>OTHER OBJECTS:</strong> Type, Layer & Color</li>
-                </ul>
-            </div>
-
-            <!-- Usage Section -->
-            <div class="content-section usage-box">
-                <h2>🚀 How to Use</h2>
-                <p>To select similar objects in AutoCAD:</p>
-                
-                <ol class="steps-list">
-                    <li>Type <code>SSL</code> in the command line and press Enter</li>
-                    <li>Select one or more reference objects</li>
-                    <li>Press Enter to confirm selection</li>
-                    <li>Watch as similar objects are selected automatically throughout the drawing</li>
-                    <li>Use standard AutoCAD commands to modify the selected objects</li>
-                </ol>
-                
-                <h3>Command Line Example:</h3>
-                <pre><code>Command: SSL
-Select reference objects: [select objects]
-Found 24 similar objects. Time: 0.15s
-Objects selected successfully!</code></pre>
-            </div>
-
-            <!-- Features -->
-            <div class="content-section">
-                <h2>⭐ Advanced Features</h2>
-                <div class="command-tips">
-                    <div class="tip-card">
-                        <h4>⚡ Fast Filtering</h4>
-                        <p>Uses <code>ssget "_X"</code> for rapid drawing-wide selection with intelligent property caching.</p>
-                    </div>
-                    <div class="tip-card">
-                        <h4>🔓 Auto Layer Management</h4>
-                        <p>Automatically opens locked and hidden layers to ensure complete selection.</p>
-                    </div>
-                    <div class="tip-card">
-                        <h4>📊 Performance Display</h4>
-                        <p>Shows selection time and object count for performance monitoring.</p>
-                    </div>
-                    <div class="tip-card">
-                        <h4>🎨 Smart Highlighting</h4>
-                        <p>Automatically highlights selected objects for visual confirmation.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Performance -->
-            <div class="content-section performance-box">
-                <h2>⚡ Performance Benefits</h2>
-                <p class="performance-stat">Up to <strong>10x Faster</strong> than standard selection methods</p>
-                <p>Using smart property caching and optimized filtering algorithms.</p>
-            </div>
-
-            <!-- Tips & Tricks -->
-            <div class="content-section">
-                <h2>💡 Professional Tips</h2>
-                <ul>
-                    <li><strong>Batch Selection:</strong> Select multiple reference objects for combined criteria matching</li>
-                    <li><strong>Quality Control:</strong> Perfect for finding inconsistent objects in large drawings</li>
-                    <li><strong>Layer Preservation:</strong> SNAP settings remain unchanged during operation</li>
-                    <li><strong>Silent Operation:</strong> No annoying error messages - clean execution</li>
-                    <li><strong>Large Drawings:</strong> Efficient even with thousands of objects</li>
-                </ul>
-            </div>
-
-            <!-- Related Commands -->
-            <div class="related-commands">
-                <h3>Related Commands</h3>
-                <div class="related-grid">
-                    <a href="pp.html" class="related-command">PP</a>
-                    <a href="ppc.html" class="related-command">PPC</a>
-                    <a href="ppx.html" class="related-command">PPX</a>
-                    <a href="../index.html" class="related-command">All Commands</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>Borham Tools v78.2 - Free AutoCAD LISP Tools</p>
-            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
-            <div class="back-link">
-                <a href="../index.html">← Return to Main Page</a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Add any specific JavaScript for this page if needed
-    </script>
 </body>
 </html>
