@@ -1,1 +1,612 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأمر SSL - اختيار العناصر المتشابهة | Borham Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --accent2: #8b5cf6;
+            --bg-dark: #0f172a;
+            --bg-card: #334155;
+            --text-light: #f1f5f9;
+            --text-gray: #cbd5e1;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --border: #475569;
+            --container-width: 1100px;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2.5rem;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Cairo', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.7; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+        /* Header */
+        .page-header { 
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            border-bottom: 2px solid var(--accent);
+        }
+        .page-header h1 { 
+            font-size: 2.5rem; 
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        .page-header .tagline {
+            color: var(--accent);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .page-header p { 
+            color: var(--text-gray); 
+            max-width: 900px; 
+            margin: 0 auto;
+        }
+
+        /* Sections */
+        .section { margin-bottom: var(--spacing-lg); }
+        .section-title { 
+            color: var(--secondary);
+            font-size: 1.8rem;
+            border-right: 5px solid var(--accent);
+            padding-right: 1rem;
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        /* Cards */
+        .definition, .how-it-works {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .definition-box {
+            background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(37,99,235,0.05));
+            border-right: 4px solid var(--primary);
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            margin: 1.2rem 0;
+        }
+
+        /* Features */
+        .tech-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+        }
+        .feature-card {
+            background: linear-gradient(145deg, rgba(51,65,85,0.8), rgba(30,41,59,0.8));
+            padding: var(--spacing-md);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--accent);
+        }
+        .feature-icon { 
+            font-size: 2.5rem; 
+            color: var(--accent); 
+            margin-bottom: 0.8rem;
+        }
+        .feature-card h4 { 
+            color: var(--text-light); 
+            margin-bottom: 0.6rem;
+            font-size: 1.2rem;
+        }
+        .feature-card p { 
+            color: var(--text-gray); 
+            font-size: 0.95rem;
+        }
+
+        /* Matching Rules */
+        .matching-rules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: 1.5rem 0;
+        }
+        .rule-card {
+            background: rgba(255,255,255,0.05);
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .rule-card:hover {
+            background: rgba(37,99,235,0.1);
+            border-color: var(--primary);
+        }
+        .rule-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .rule-card h4 {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .rule-card ul {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            padding-right: 1rem;
+        }
+
+        /* Workflow */
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin: 1.5rem 0;
+        }
+        .work-step {
+            background: linear-gradient(145deg, rgba(30,41,59,0.8), rgba(15,23,42,0.8));
+            border: 2px solid var(--border);
+            padding: var(--spacing-md);
+            text-align: center;
+            border-radius: 12px;
+            position: relative;
+            flex: 1;
+            min-width: 180px;
+        }
+        .work-step-number {
+            position: absolute;
+            top: -12px;
+            right: 15px;
+            background: var(--accent);
+            color: var(--bg-dark);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .work-step:not(:last-child):after {
+            content: "➜";
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+
+        /* Comparison */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        .comparison-card {
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .comparison-before {
+            background: rgba(239,68,68,0.1);
+            border: 2px solid var(--error);
+        }
+        .comparison-after {
+            background: rgba(34,197,94,0.1);
+            border: 2px solid var(--success);
+        }
+
+        /* Buttons */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), #1d4ed8);
+            padding: 12px 28px;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 1.5rem 0;
+        }
+        .back-link:hover { 
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: var(--spacing-lg);
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--border);
+        }
+        footer p { 
+            color: var(--text-gray); 
+            margin: 0.5rem 0;
+        }
+        .footer-highlight {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background: rgba(245,158,11,0.1);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2rem; }
+            .section-title { font-size: 1.5rem; }
+            .workflow { flex-direction: column; }
+            .work-step:not(:last-child):after {
+                content: "⬇";
+                right: 50%;
+                left: auto;
+                top: auto;
+                bottom: -20px;
+                transform: translateX(50%);
+            }
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <h1>الأمر SSL - اختيار العناصر المتشابهة</h1>
+            <div class="tagline">اختيار ذكي للعناصر المتطابقة في الخصائص</div>
+            <p>
+                نظام متقدم لاختيار العناصر المتشابهة في الرسم بناءً على خصائص متعددة مع دعم مراجع متعددة وفلترة سريعة.
+            </p>
+        </header>
+
+        <!-- 1. What is SSL -->
+        <section class="section">
+            <h2 class="section-title">📌 ما هو الأمر SSL؟</h2>
+            <div class="definition">
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--text-light);">
+                    الأمر <strong>SSL</strong> (Select Similar) هو أداة متقدمة لاختيار العناصر المتشابهة في AutoCAD بناءً على خصائص متعددة مع تحسينات في السرعة والدقة.
+                </p>
+
+                <div class="definition-box">
+                    <h3>🎯 الميزات الرئيسية</h3>
+                    <div class="tech-features">
+                        <div class="feature-card">
+                            <div class="feature-icon">🔍</div>
+                            <h4>اختيار ذكي</h4>
+                            <p>اختيار العناصر المتشابهة بناءً على خصائص متعددة</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h4>سرعة عالية</h4>
+                            <p>معالجة سريعة حتى للرسومات الكبيرة</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h4>دقة متنوعة</h4>
+                            <p>دعم خصائص مختلفة لأنواع العناصر</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="definition-box" style="background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(16,185,129,0.05)); border-right-color: var(--secondary);">
+                    <h3 style="color: var(--secondary);">🔄 دعم المراجع المتعددة</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div style="background: rgba(59,130,246,0.15); padding: 0.8rem; border-radius: 8px; border-right: 3px solid #3b82f6;">
+                            <strong style="color: #3b82f6;">مرجع واحد</strong>
+                            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">اختيار العناصر المشابهة لمرجع واحد</p>
+                        </div>
+                        <div style="background: rgba(139,92,246,0.15); padding: 0.8rem; border-radius: 8px; border-right: 3px solid var(--accent2);">
+                            <strong style="color: var(--accent2);">مراجع متعددة</strong>
+                            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">اختيار العناصر المشابهة لعدة مراجع</p>
+                        </div>
+                        <div style="background: rgba(245,158,11,0.15); padding: 0.8rem; border-radius: 8px; border-right: 3px solid var(--accent);">
+                            <strong style="color: var(--accent);">أنواع مختلفة</strong>
+                            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">دعم أنواع عناصر مختلفة في نفس الاختيار</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Matching Rules -->
+        <section class="section">
+            <h2 class="section-title">🎯 قواعد المطابقة</h2>
+            <div class="how-it-works">
+                <div class="matching-rules">
+                    <div class="rule-card">
+                        <div class="rule-icon">📏</div>
+                        <h4>الخطوط والأشكال</h4>
+                        <ul>
+                            <li>الخطوط: الطول (بدقة 0.001)</li>
+                            <li>البولي لاينات: الطول</li>
+                            <li>السبلاين: الطول</li>
+                            <li>الطبقة واللون</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="rule-card">
+                        <div class="rule-icon">⭕</div>
+                        <h4>الدوائر والأقواس</h4>
+                        <ul>
+                            <li>الدوائر: نصف القطر (بدقة 0.001)</li>
+                            <li>الأقواس: نصف القطر</li>
+                            <li>الطبقة واللون</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="rule-card">
+                        <div class="rule-icon">🅰️</div>
+                        <h4>النصوص</h4>
+                        <ul>
+                            <li>النصوص: نمط الخط (Text Style)</li>
+                            <li>النصوص المتعددة: نمط الخط</li>
+                            <li>الطبقة واللون</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="rule-card">
+                        <div class="rule-icon">🔲</div>
+                        <h4>العناصر الأخرى</h4>
+                        <ul>
+                            <li>البلوكات: اسم البلوك</li>
+                            <li>الهاتش: النمط (Pattern)</li>
+                            <li>الأبعاد: نمط البعد</li>
+                            <li>الطبقة واللون</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="definition-box" style="background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(245,158,11,0.05)); border-right-color: var(--accent);">
+                    <h3 style="color: var(--accent);">⚙️ خوارزمية المطابقة</h3>
+                    <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                        <ol style="color: var(--text-light); padding-right: 1.5rem;">
+                            <li>تحليل خصائص العنصر المرجعي</li>
+                            <li>استخراج الخصائص الرئيسية حسب النوع</li>
+                            <li>البحث عن جميع العناصر من نفس النوع والطبقة</li>
+                            <li>فلترة العناصر بناءً على الخصائص المستخرجة</li>
+                            <li>إضافة العناصر المطابقة إلى مجموعة الاختيار</li>
+                        </ol>
+                    </div>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        الخوارزمية تستخدم التجزئة للخصائص لتحقيق سرعة عالية حتى في الرسومات الضخمة.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. How It Works -->
+        <section class="section">
+            <h2 class="section-title">🚀 كيف يعمل الأمر SSL؟</h2>
+            <div class="how-it-works">
+                
+                <div class="workflow">
+                    <div class="work-step">
+                        <div class="work-step-number">1</div>
+                        <strong>اختيار المرجع</strong>
+                        <p>اختر عنصراً أو أكثر كمرجع</p>
+                        <small>يدعم أنواع مختلفة</small>
+                    </div>
+
+                    <div class="work-step">
+                        <div class="work-step-number">2</div>
+                        <strong>تحليل الخصائص</strong>
+                        <p>استخراج الخصائص الرئيسية</p>
+                        <small>حسب نوع العنصر</small>
+                    </div>
+
+                    <div class="work-step">
+                        <div class="work-step-number">3</div>
+                        <strong>البحث والفلترة</strong>
+                        <p>البحث عن العناصر المتشابهة</p>
+                        <small>في كامل الرسم</small>
+                    </div>
+
+                    <div class="work-step">
+                        <div class="work-step-number">4</div>
+                        <strong>الاختيار النهائي</strong>
+                        <p>تحديد العناصر المطابقة</p>
+                        <small>مع عرض النتائج</small>
+                    </div>
+                </div>
+
+                <div class="definition-box">
+                    <h3>🔍 أمثلة عملية</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div style="background: rgba(37,99,235,0.1); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--primary); display: block; margin-bottom: 0.5rem;">مثال 1: خطوط بنفس الطول</strong>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">
+                                اختيار جميع الخطوط بطول 5.00 متر في طبقة "Walls"
+                            </p>
+                        </div>
+                        <div style="background: rgba(16,185,129,0.1); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--secondary); display: block; margin-bottom: 0.5rem;">مثال 2: دوائر بنفس القطر</strong>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">
+                                اختيار جميع الدوائر بنصف قطر 2.50 متر في طبقة "Columns"
+                            </p>
+                        </div>
+                        <div style="background: rgba(245,158,11,0.1); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">مثال 3: نصوص بنفس النمط</strong>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">
+                                اختيار جميع النصوص باستخدام نمط "Arial" في طبقة "Text"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Use Cases -->
+        <section class="section">
+            <h2 class="section-title">💼 حالات الاستخدام</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">🏗️ التنظيم الإنشائي</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        اختيار جميع الأعمدة بنفس القطر أو جميع الكمرات بنفس الأبعاد.
+                    </p>
+                    <div style="background: rgba(59,130,246,0.1); padding: 1rem; border-radius: 8px;">
+                        <strong style="color: #3b82f6; display: block; margin-bottom: 0.5rem;">🎯 التطبيق:</strong>
+                        <ul style="color: var(--text-gray); padding-right: 1rem;">
+                            <li>تعديل خصائص الأعمدة المتشابهة</li>
+                            <li>فحص تناسق الأبعاد</li>
+                            <li>تحديث التسميات للعناصر المتشابهة</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">🗺️ الرسومات المساحية</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        اختيار جميع نقاط الحدود أو جميع الخطوط بنفس السمك واللون.
+                    </p>
+                    <div style="background: rgba(16,185,129,0.1); padding: 1rem; border-radius: 8px;">
+                        <strong style="color: var(--secondary); display: block; margin-bottom: 0.5rem;">🎯 التطبيق:</strong>
+                        <ul style="color: var(--text-gray); padding-right: 1rem;">
+                            <li>تحديث أنماط الخطوط</li>
+                            <li>تغيير ألوان العناصر المتشابهة</li>
+                            <li>فحص تناسق الرسم</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">🎨 التصميم المعماري</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                        اختيار جميع النوافذ أو الأبواب من نفس النوع أو جميع النصوص بنفس الخط.
+                    </p>
+                    <div style="background: rgba(245,158,11,0.1); padding: 1rem; border-radius: 8px;">
+                        <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">🎯 التطبيق:</strong>
+                        <ul style="color: var(--text-gray); padding-right: 1rem;">
+                            <li>تحديث مواصفات العناصر المتشابهة</li>
+                            <li>ضبط أحجام النصوص</li>
+                            <li>تنظيم طبقات العناصر</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Comparison -->
+        <section class="section">
+            <h2 class="section-title">⚖️ SSL vs AutoCAD Select Similar</h2>
+            <div class="comparison">
+                <div class="comparison-card comparison-before">
+                    <h3 style="color: var(--error); margin-bottom: 1rem;">❌ AutoCAD التقليدي</h3>
+                    <ul style="color: var(--text-gray); text-align: right; padding-right: 1rem;">
+                        <li>يدعم خصائص محدودة فقط</li>
+                        <li>مرجع واحد فقط في كل مرة</li>
+                        <li>لا يدعم الأنواع المختلفة</li>
+                        <li>سرعة بطيئة في الرسومات الكبيرة</li>
+                        <li>لا يعرض إحصائيات النتائج</li>
+                        <li>خيارات محدودة للمطابقة</li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-card comparison-after">
+                    <h3 style="color: var(--success); margin-bottom: 1rem;">✅ SSL من Borham Tools</h3>
+                    <ul style="color: var(--text-gray); text-align: right; padding-right: 1rem;">
+                        <li>يدعم خصائص متقدمة حسب النوع</li>
+                        <li>يدعم مراجع متعددة في مرة واحدة</li>
+                        <li>يدعم أنواع عناصر مختلفة</li>
+                        <li>سرعة عالية مع التجزئة</li>
+                        <li>عرض إحصائيات مفصلة</li>
+                        <li>خيارات مطابقة ذكية</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="color: var(--accent); text-align: center; font-weight: bold; margin-top: 1rem; font-size: 1.1rem;">
+                ⚡ اختيار 1000 عنصر متشابه في أقل من 2 ثانية
+            </p>
+        </section>
+
+        <!-- 6. Tips & Best Practices -->
+        <section class="section">
+            <h2 class="section-title">💡 نصائح احترافية</h2>
+            <div class="definition">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md);">
+                    <div style="background: rgba(37,99,235,0.1); padding: var(--spacing-md); border-radius: 10px; border-right: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary); margin-bottom: 0.8rem;">🔍 قبل الاختيار</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                            <li>حدد العنصر المرجعي بدقة</li>
+                            <li>تأكد من خصائص العنصر المرجعي</li>
+                            <li>استخدم Purge لتنظيف الرسم أولاً</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(16,185,129,0.1); padding: var(--spacing-md); border-radius: 10px; border-right: 3px solid var(--secondary);">
+                        <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">⚡ أثناء الاختيار</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                            <li>يمكنك اختيار عدة مراجع مرة واحدة</li>
+                            <li>راقب الرسائل في سطر الأوامر</li>
+                            <li>استخدم نافذة اختيار للعديد من العناصر</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(245,158,11,0.1); padding: var(--spacing-md); border-radius: 10px; border-right: 3px solid var(--accent);">
+                        <h4 style="color: var(--accent); margin-bottom: 0.8rem;">🎨 بعد الاختيار</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                            <li>تحقق من العناصر المحددة</li>
+                            <li>استخدم Properties للتعديل الجماعي</li>
+                            <li>احفظ التحديد إذا لزم الأمر</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(139,92,246,0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md); text-align: center;">
+                    <p style="color: var(--accent2); font-weight: bold; margin-bottom: 0.5rem;">💡 نصيحة متقدمة</p>
+                    <p style="color: var(--text-gray); font-size: 0.95rem;">
+                        لاختيار عناصر من أنواع مختلفة، استخدم <strong>مراجع متعددة</strong> من كل نوع.
+                        SSL سيجمع النتائج من جميع المراجع في مجموعة اختيار واحدة.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Button -->
+        <div style="text-align: center;">
+            <a href="../index.html" class="back-link">
+                <span>←</span> العودة إلى الصفحة الرئيسية
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>📧 للاستفسارات التقنية: MahmoudBorham.codes@gmail.com</p>
+            <p>🛠️ جزء من حزمة Borham Tools المتخصصة في أتمتة الأعمال الهندسية</p>
+            <p>🇵🇸 Free Palestine - لوجه الله تعالى</p>
+            <div class="footer-highlight">
+                "مرجع ذكي + خوارزمية متقدمة = اختيار دقيق للعناصر المتشابهة"
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
