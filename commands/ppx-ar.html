@@ -4,257 +4,481 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الأمر PPX - نقاط تقاطع الخطوط | Borham Tools</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2563eb;
             --secondary: #10b981;
             --accent: #f59e0b;
+            --accent2: #8b5cf6;
             --bg-dark: #0f172a;
             --bg-card: #334155;
             --text-light: #f1f5f9;
             --text-gray: #cbd5e1;
             --success: #22c55e;
+            --warning: #f59e0b;
             --border: #475569;
-            --container-width: 1000px;
+            --container-width: 1100px;
             --spacing-sm: 1rem;
             --spacing-md: 1.5rem;
             --spacing-lg: 2.5rem;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Cairo', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background: var(--bg-dark); 
+            color: var(--text-light); 
+            line-height: 1.7;
+        }
         .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
 
         /* الترويسة */
-        .page-header { 
+        .page-header {
             background: linear-gradient(135deg, #1e293b, #0f172a);
             padding: var(--spacing-lg) 0;
             text-align: center;
             margin-bottom: var(--spacing-lg);
+            border-bottom: 2px solid var(--accent);
         }
         .page-header h1 { 
-            font-size: 2.2rem; 
+            font-size: 2.5rem; 
             color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        .page-header .tagline {
+            color: var(--accent);
+            font-size: 1.1rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
         }
         .page-header p { 
-            color: var(--text-gray);
-            max-width: 800px;
-            margin: 0 auto;
+            color: var(--text-gray); 
+            font-size: 1.05rem; 
+            max-width: 900px; 
+            margin: 0.6rem auto 0;
+            line-height: 1.8;
         }
 
         /* الأقسام */
-        .section { margin-bottom: var(--spacing-lg); }
-        .section-title { 
+        .section { 
+            margin-bottom: var(--spacing-lg);
+        }
+        .section-title {
             color: var(--secondary);
-            font-size: 1.6rem;
-            margin-bottom: var(--spacing-md);
-            border-right: 4px solid var(--accent);
+            font-size: 1.8rem;
+            border-right: 5px solid var(--accent);
             padding-right: 1rem;
-        }
-
-        /* 1. تعريف الأمر */
-        .definition {
-            background: var(--bg-card);
-            border-radius: 10px;
-            padding: var(--spacing-md);
-            margin: var(--spacing-md) 0;
-            border: 1px solid var(--border);
-        }
-        .definition-box {
-            background: rgba(37, 99, 235, 0.1);
-            border-right: 3px solid var(--primary);
-            padding: var(--spacing-md);
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-        .definition-box h3 {
-            color: var(--accent);
-            margin-bottom: 0.8rem;
+            margin-bottom: var(--spacing-md);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.8rem;
         }
 
-        /* 2. المميزات التقنية */
+        /* صناديق */
+        .definition,
+        .how-it-works,
+        .integration-box {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        .definition:hover,
+        .how-it-works:hover,
+        .integration-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+        }
+        
+        .definition-box {
+            background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(37,99,235,0.05));
+            border-right: 4px solid var(--primary);
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            margin: 1.2rem 0;
+        }
+        .definition-box h3 { 
+            color: var(--accent); 
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* المميزات التقنية */
         .tech-features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: var(--spacing-md);
-            margin: var(--spacing-md) 0;
         }
         .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
+            background: linear-gradient(145deg, rgba(51,65,85,0.8), rgba(30,41,59,0.8));
             padding: var(--spacing-md);
+            border-radius: 12px;
+            border: 1px solid var(--border);
             text-align: center;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .feature-card:hover {
-            transform: translateY(-5px);
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+        .feature-card:hover { 
+            transform: translateY(-8px); 
             border-color: var(--accent);
+            box-shadow: 0 8px 20px rgba(245,158,11,0.15);
         }
-        .feature-icon {
-            font-size: 2rem;
-            color: var(--accent);
+        .feature-icon { 
+            font-size: 2.5rem; 
+            color: var(--accent); 
             margin-bottom: 0.8rem;
         }
-        .feature-card h4 {
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
+        .feature-card h4 { 
+            color: var(--text-light); 
+            margin-bottom: 0.6rem;
+            font-size: 1.2rem;
         }
-        .feature-card p {
-            color: var(--text-gray);
-            font-size: 0.9rem;
+        .feature-card p { 
+            color: var(--text-gray); 
+            font-size: 0.95rem;
         }
 
-        /* 3. طريقة العمل */
-        .how-it-works {
-            background: var(--bg-card);
-            border-radius: 10px;
-            padding: var(--spacing-md);
-            margin: var(--spacing-md) 0;
-            border: 1px solid var(--border);
-        }
+        /* سير العمل */
         .workflow {
             display: flex;
             justify-content: space-between;
-            margin: var(--spacing-md) 0;
             flex-wrap: wrap;
             gap: var(--spacing-sm);
+            margin: 1.5rem 0;
         }
         .work-step {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: var(--spacing-sm);
+            background: linear-gradient(145deg, rgba(30,41,59,0.8), rgba(15,23,42,0.8));
+            border: 2px solid var(--border);
+            padding: var(--spacing-md);
             text-align: center;
-            flex: 1;
-            min-width: 150px;
+            border-radius: 12px;
             position: relative;
+            flex: 1;
+            min-width: 180px;
+            transition: all 0.3s ease;
+        }
+        .work-step:hover {
+            background: rgba(37,99,235,0.1);
+            border-color: var(--primary);
+        }
+        .work-step-number {
+            position: absolute;
+            top: -12px;
+            right: 15px;
+            background: var(--accent);
+            color: var(--bg-dark);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
         }
         .work-step:not(:last-child):after {
-            content: "→";
+            content: "➜";
             position: absolute;
             left: -20px;
             top: 50%;
             transform: translateY(-50%);
+            font-size: 1.8rem;
             color: var(--accent);
-            font-size: 1.5rem;
         }
 
-        /* النتائج */
-        .results {
+        /* تصور التقاطع */
+        .visualization {
+            background: rgba(37,99,235,0.1);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            margin: 1.5rem 0;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .intersection-visual {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        .intersection-visual .line-diagonal-1 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            width: 3px;
+            background: #ef4444;
+            transform: rotate(45deg);
+            transform-origin: center;
+            margin: auto;
+        }
+        .intersection-visual .line-diagonal-2 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            width: 3px;
+            background: #10b981;
+            transform: rotate(-45deg);
+            transform-origin: center;
+            margin: auto;
+        }
+        .intersection-visual .intersection-point {
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+            border: 3px solid var(--bg-dark);
+            box-shadow: 0 0 0 2px var(--accent);
+            z-index: 2;
+        }
+
+        /* أنواع التقاطعات */
+        .intersection-types {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: var(--spacing-md);
-            margin: var(--spacing-lg) 0;
+            margin: 1.5rem 0;
         }
-        .result-card {
-            text-align: center;
-            padding: var(--spacing-md);
+        .intersection-type {
             background: var(--bg-card);
-            border-radius: 10px;
             border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            text-align: center;
         }
-        .result-value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--accent);
-        }
-        .result-label {
-            color: var(--text-gray);
-            font-size: 0.9rem;
+        .intersection-type-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
 
-        /* الأزرار */
-        .back-link {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 6px;
-            text-decoration: none;
+        /* جدول المقارنة */
+        .comparison-table {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        .comparison-table th {
+            background: rgba(37,99,235,0.3);
+            color: var(--text-light);
+            padding: 1rem;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        .comparison-table td {
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-gray);
+        }
+        .comparison-table tr:nth-child(even) {
+            background: rgba(255,255,255,0.03);
+        }
+
+        /* التكامل مع الأوامر الأخرى */
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
             margin: var(--spacing-md) 0;
-            transition: background 0.3s;
+        }
+        .integration-card {
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            border: 2px solid;
+            background: rgba(255,255,255,0.03);
+        }
+        .integration-pe { border-color: #3b82f6; }
+        .integration-t { border-color: #10b981; }
+        .integration-ppc { border-color: #f59e0b; }
+
+        /* أمثلة واقعية */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+        }
+        .example-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+        }
+
+        /* زر العودة */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), #1d4ed8);
+            padding: 12px 28px;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 1.5rem 0;
         }
         .back-link:hover { 
-            background: #1e40af;
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: translateY(-2px);
         }
 
         /* الفوتر */
         footer {
             text-align: center;
+            margin-top: var(--spacing-lg);
             padding: var(--spacing-lg) 0;
             border-top: 1px solid var(--border);
-            margin-top: var(--spacing-lg);
+            background: linear-gradient(180deg, transparent, rgba(15,23,42,0.5));
         }
         footer p { 
             color: var(--text-gray); 
             margin: 0.5rem 0;
         }
+        .footer-highlight {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background: rgba(245,158,11,0.1);
+            border-radius: 8px;
+            display: inline-block;
+        }
 
-        /* التجاوب */
+        /* تجاوب */
         @media (max-width: 768px) {
-            .page-header h1 { font-size: 1.8rem; }
-            .section-title { font-size: 1.4rem; }
+            .page-header h1 { font-size: 2rem; }
+            .section-title { font-size: 1.5rem; }
             .workflow { flex-direction: column; }
             .work-step:not(:last-child):after {
-                content: "↓";
-                left: 50%;
+                content: "⬇";
+                right: 50%;
+                left: auto;
                 top: auto;
                 bottom: -20px;
-                transform: translateX(-50%);
+                transform: translateX(50%);
+            }
+            .integration-grid, .examples-grid, .intersection-types {
+                grid-template-columns: 1fr;
+            }
+            .intersection-visual {
+                width: 180px;
+                height: 180px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
+
         <!-- الترويسة -->
         <header class="page-header">
-            <h1>الأمر PPX</h1>
-            <p>اكتشاف نقاط التقاطع تلقائياً - ضع نقطة عند كل تقاطع خطين</p>
+            <h1>الأمر PPX — نقاط تقاطع الخطوط الذكية</h1>
+            <div class="tagline">اكتشاف وإنشاء تلقائي لنقاط تقاطع الخطوط</div>
+            <p>
+                أداة متخصصة للعثور على جميع نقاط التقاطع بين الخطوط المحددة وإنشاؤها. 
+                معالجة شبكات معقدة بمئات الخطوط وتحديد جميع نقاط التقاطع تلقائياً.
+            </p>
         </header>
 
-        <!-- 1. تعريف الأمر -->
+        <!-- 1. ما هو الأمر PPX -->
         <section class="section">
             <h2 class="section-title">📌 ما هو الأمر PPX؟</h2>
             <div class="definition">
-                <p>الأمر <strong>PPX</strong> هو أداة ذكية تبحث عن جميع التقاطعات بين الخطوط المستقيمة (LINES) وتضع نقطة دقيقة عند كل تقاطع تلقائياً. بدلاً من البحث اليدوي عن التقاطعات، يفحص الأمر جميع الخطوط المختارة ويحدد نقاط التقاطع في ثوانٍ.</p>
-                
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--text-light);">
+                    <strong>الأمر PPX</strong> هو أداة AutoCAD التي تعثر تلقائياً على جميع نقاط التقاطع بين الخطوط المحددة وتنشئ نقاطاً في 
+                    <span style="color: var(--accent); font-weight: bold;">جميع مواقع التقاطع بين الخطوط</span>. 
+                    يكتشف أماكن تقاطع الخطوط ويضع نقاطاً دقيقة في مواقع التقاطع فوراً.
+                </p>
+
+                <div class="visualization">
+                    <div class="intersection-visual">
+                        <div class="line-diagonal-1"></div>
+                        <div class="line-diagonal-2"></div>
+                        <div class="intersection-point"></div>
+                        <div style="position: absolute; top: 20px; right: 50%; transform: translateX(50%); font-size: 0.8rem; color: #ef4444;">خط قطري أول</div>
+                        <div style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%); font-size: 0.8rem; color: #10b981;">خط قطري ثاني</div>
+                        <div style="position: absolute; bottom: 20px; right: 50%; transform: translateX(50%); font-size: 0.8rem; color: var(--accent); font-weight: bold;">نقطة التقاطع</div>
+                    </div>
+                    <p style="color: var(--text-gray); margin-top: 1rem; font-size: 0.9rem;">
+                        يكتشف نقاط التقاطع بين أي خطين في التحديد
+                    </p>
+                </div>
+
                 <div class="definition-box">
                     <h3>🎯 المميزات الرئيسية</h3>
                     <ul style="color: var(--text-gray); padding-right: 1rem;">
-                        <li><strong>كشف تلقائي للتقاطعات:</strong> يفحص جميع الأزواج الممكنة من الخطوط</li>
-                        <li><strong>سرعة فائقة:</strong> فحص آلاف التقاطعات في ثوانٍ</li>
-                        <li><strong>دقة مطلقة:</strong> استخدام IntersectWith API لحساب رياضي دقيق</li>
-                        <li><strong>منع التكرار:</strong> نقطة واحدة فقط لكل تقاطع</li>
-                        <li><strong>شريط تقدم حي:</strong> متابعة لحظية لعدد التقاطعات المكتشفة</li>
+                        <li><strong>اكتشاف تلقائي للتقاطعات:</strong> يجد جميع نقاط تقاطع الخطوط</li>
+                        <li><strong>سرعة معالجة عالية:</strong> يتعامل مع مئات أزواج الخطوط في ثوانٍ</li>
+                        <li><strong>منع تكرار ذكي:</strong> يتجنب إنشاء نقاط متعددة في نفس الموقع</li>
+                        <li><strong>متابعة حية للتقدم:</strong> يظهر النسبة المئوية والنقاط المكتشفة في الوقت الفعلي</li>
+                        <li><strong>طبقة متخصصة:</strong> ينشئ النقاط في طبقة XPOINTS (لون أحمر)</li>
+                        <li><strong>حساب ثلاثي الأبعاد:</strong> يحسب نقاط التقاطع بدقة في الفضاء ثلاثي الأبعاد</li>
                     </ul>
+                </div>
+
+                <div class="definition-box" style="background: linear-gradient(135deg, rgba(239,68,68,0.1), rgba(239,68,68,0.05)); border-right-color: #ef4444;">
+                    <h3 style="color: #ef4444;">⚠️ تنبيه مهم</h3>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;">
+                        الأمر <strong>PPX يعمل فقط على LINES</strong> (كائنات الخط المستقيم). لن يعمل على:
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div style="background: rgba(239,68,68,0.15); padding: 0.8rem; border-radius: 8px; border-right: 3px solid #ef4444;">
+                            <strong style="color: #ef4444;">Polylines</strong>
+                            <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.3rem;">استخدم طرقاً أخرى</p>
+                        </div>
+                        <div style="background: rgba(239,68,68,0.15); padding: 0.8rem; border-radius: 8px; border-right: 3px solid #ef4444;">
+                            <strong style="color: #ef4444;">Arcs</strong>
+                            <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.3rem;">استخدم طرقاً أخرى</p>
+                        </div>
+                        <div style="background: rgba(239,68,68,0.15); padding: 0.8rem; border-radius: 8px; border-right: 3px solid #ef4444;">
+                            <strong style="color: #ef4444;">Circles</strong>
+                            <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.3rem;">استخدم طرقاً أخرى</p>
+                        </div>
+                    </div>
+                    <p style="color: #ef4444; font-weight: bold; margin-top: 1rem;">
+                        💡 للحصول على أفضل النتائج، استخدم كائنات LINE المستقيمة فقط!
+                    </p>
                 </div>
 
                 <div class="definition-box">
                     <h3>⚙️ متى تستخدمه؟</h3>
                     <ul style="color: var(--text-gray); padding-right: 1rem;">
-                        <li>عندما تحتاج تحديد <strong>جميع نقاط التقاطع</strong> بين مجموعة خطوط</li>
-                        <li>لتحديد نقاط تقاطع شبكات الطرق والمرافق</li>
-                        <li>لإيجاد نقاط التقاطع في المخططات الإنشائية</li>
-                        <li>لحساب عدد التقاطعات في تصميم معقد</li>
-                        <li>لوضع علامات عند كل تقاطع بين خطوط</li>
+                        <li>عندما تحتاج إلى إيجاد <strong>جميع نقاط التقاطع في شبكة خطوط</strong></li>
+                        <li>للشبكات المساحية وأنظمة الإحداثيات</li>
+                        <li>لتحديد نقاط التقاطع في شبكات المرافق</li>
+                        <li>لتحليل الإنشاءات المتقاطعة</li>
+                        <li>عند العمل مع مخططات خطية معقدة</li>
+                        <li>لإنشاء نقاط مرجعية في جميع تقاطعات الخطوط</li>
                     </ul>
-                </div>
-
-                <div style="background: rgba(16, 185, 129, 0.1); border-right: 3px solid var(--secondary); padding: var(--spacing-md); border-radius: 8px; margin-top: 1rem;">
-                    <h3 style="color: var(--secondary); margin-bottom: 0.8rem;">✅ معلومة مهمة</h3>
-                    <p style="color: var(--text-gray);">
-                        الأمر <strong>PPX يعمل فقط على LINES</strong> (الخطوط المستقيمة). يفحص كل خط مع كل خط آخر لإيجاد نقاط التقاطع.
-                    </p>
-                    <p style="color: var(--text-gray); margin-top: 0.5rem;">
-                        💡 <strong>مثال:</strong> لو اخترت 100 خط، الأمر هيفحص 4,950 احتمالية تقاطع (100×99÷2) ويحط نقطة عند كل تقاطع فعلي!
-                    </p>
                 </div>
             </div>
         </section>
@@ -263,255 +487,416 @@
         <section class="section">
             <h2 class="section-title">✨ المميزات التقنية الفريدة</h2>
             <div class="tech-features">
-                
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h4>فحص شامل</h4>
-                    <p>يفحص كل خط مع جميع الخطوط الأخرى - لا يفوت أي تقاطع محتمل</p>
-                </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h4>دقة رياضية</h4>
-                    <p>استخدام IntersectWith API من AutoCAD لحساب نقاط التقاطع بدقة مطلقة</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h4>منع التكرار الذكي</h4>
-                    <p>حتى لو تقاطع أكثر من خطين في نفس النقطة، يضع نقطة واحدة فقط - tolerance 0.001</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h4>عداد حي</h4>
-                    <p>يعرض عدد الأزواج المفحوصة وعدد التقاطعات المكتشفة أثناء العمل</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. طريقة العمل -->
-        <section class="section">
-            <h2 class="section-title">🚀 كيف يعمل الأمر PPX؟</h2>
-            <div class="how-it-works">
-                <p style="color: var(--text-gray); margin-bottom: 1rem;">عملية بسيطة من 4 خطوات:</p>
-                
-                <div class="workflow">
-                    <div class="work-step">
-                        <strong>الخطوة 1</strong>
-                        <p>اكتب PPX</p>
-                        <small>اكتب PPX ثم Enter</small>
-                    </div>
-                    <div class="work-step">
-                        <strong>الخطوة 2</strong>
-                        <p>اختر الخطوط</p>
-                        <small>اختر جميع الخطوط المراد فحصها</small>
-                    </div>
-                    <div class="work-step">
-                        <strong>الخطوة 3</strong>
-                        <p>اضغط Enter</p>
-                        <small>الأمر يبدأ الفحص تلقائياً</small>
-                    </div>
-                    <div class="work-step">
-                        <strong>النتيجة</strong>
-                        <p>نقاط التقاطع!</p>
-                        <small>في طبقة XPOINTS باللون الأحمر</small>
-                    </div>
-                </div>
-
-                <div style="background: rgba(37, 99, 235, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
-                    <h3 style="color: var(--primary); margin-bottom: 1rem;">📐 كيف يحسب عدد الفحوصات؟</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-sm);">
-                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px; text-align: center;">
-                            <p style="color: var(--accent); font-size: 1.5rem; font-weight: bold; margin-bottom: 0.3rem;">10 خطوط</p>
-                            <p style="color: var(--text-gray); font-size: 0.85rem;">45 فحص محتمل</p>
-                        </div>
-                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px; text-align: center;">
-                            <p style="color: var(--accent); font-size: 1.5rem; font-weight: bold; margin-bottom: 0.3rem;">50 خط</p>
-                            <p style="color: var(--text-gray); font-size: 0.85rem;">1,225 فحص محتمل</p>
-                        </div>
-                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px; text-align: center;">
-                            <p style="color: var(--accent); font-size: 1.5rem; font-weight: bold; margin-bottom: 0.3rem;">100 خط</p>
-                            <p style="color: var(--text-gray); font-size: 0.85rem;">4,950 فحص محتمل</p>
-                        </div>
-                        <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-sm); border-radius: 6px; text-align: center;">
-                            <p style="color: var(--accent); font-size: 1.5rem; font-weight: bold; margin-bottom: 0.3rem;">200 خط</p>
-                            <p style="color: var(--text-gray); font-size: 0.85rem;">19,900 فحص محتمل</p>
-                        </div>
-                    </div>
-                    <p style="color: var(--text-gray); font-size: 0.9rem; text-align: center; margin-top: 1rem;">
-                        💡 المعادلة: <strong>(عدد الخطوط × (عدد الخطوط - 1)) ÷ 2</strong>
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. النتائج والأداء -->
-        <section class="section">
-            <h2 class="section-title">💰 النتائج والأداء</h2>
-            <div class="results">
-                <div class="result-card">
-                    <div class="result-value">100%</div>
-                    <div class="result-label">كشف جميع التقاطعات</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-value">10,000+</div>
-                    <div class="result-label">فحص في أقل من 10 ثواني</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-value">0%</div>
-                    <div class="result-label">نقاط مكررة</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-value">0.001</div>
-                    <div class="result-label">دقة التقاطع</div>
-                </div>
-            </div>
-
-            <div style="background: rgba(34, 197, 94, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
-                <h3 style="color: var(--success); margin-bottom: 1rem;">🏗️ سيناريو عملي: شبكة طرق</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
-                    <div>
-                        <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">بدون PPX:</h4>
-                        <ul style="color: var(--text-gray); font-size: 0.9rem;">
-                            <li>البحث اليدوي عن كل تقاطع</li>
-                            <li>استخدام Intersection Osnap لكل تقاطع</li>
-                            <li>رسم نقطة واحدة تلو الأخرى</li>
-                            <li>احتمال فوات بعض التقاطعات</li>
-                            <li>مدة: 1-2 ساعة لـ 80 خط</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">بـ PPX:</h4>
-                        <ul style="color: var(--text-gray); font-size: 0.9rem;">
-                            <li>اختيار جميع الـ 80 خط</li>
-                            <li>فحص 3,160 احتمالية تلقائياً</li>
-                            <li>إنشاء جميع نقاط التقاطع دفعة واحدة</li>
-                            <li>ضمان عدم فوات أي تقاطع</li>
-                            <li>مدة: 5-8 ثوانٍ فقط</li>
-                        </ul>
-                    </div>
-                </div>
-                <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
-                    ⚡ توفير 99.9% من الوقت + ضمان 100% من التقاطعات!
-                </p>
-            </div>
-        </section>
-
-        <!-- 5. الاستخدامات العملية -->
-        <section class="section">
-            <h2 class="section-title">🏗️ الاستخدامات العملية في الميدان</h2>
-            <div class="tech-features">
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🛣️</div>
-                    <h4>شبكات الطرق</h4>
-                    <p>تحديد جميع نقاط تقاطع الطرق تلقائياً - مفيد للإشارات المرورية والدوارات</p>
+                    <div class="feature-icon">🔍</div>
+                    <h4>اكتشاف تلقائي</h4>
+                    <p>يجد جميع نقاط التقاطع بين أي خطين في التحديد</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
-                    <h4>شبكات المرافق</h4>
-                    <p>كشف نقاط تقاطع خطوط الكهرباء، المياه، والصرف - مهم لتجنب التعارضات</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🏢</div>
-                    <h4>المخططات الإنشائية</h4>
-                    <p>إيجاد نقاط تقاطع الكمرات والأعمدة في المخططات الهيكلية</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">📐</div>
-                    <h4>المساحة</h4>
-                    <p>تحديد نقاط التقاطع بين حدود الأراضي المختلفة</p>
+                    <h4>سرعة معالجة عالية</h4>
+                    <p>يعالج مئات أزواج الخطوط بكفاءة مع متابعة التقدم</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">🎯</div>
-                    <h4>التحقق من التصميم</h4>
-                    <p>فحص وجود تقاطعات غير مرغوبة في التصميم - Quality Control</p>
+                    <h4>حساب دقيق</h4>
+                    <p>يحسب إحداثيات التقاطع ثلاثية الأبعاد بدقة باستخدام محرك AutoCAD</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">🔄</div>
-                    <h4>التكامل مع PE</h4>
-                    <p>إنشاء نقاط التقاطع بـ PPX ثم تصديرها بـ PE للعمل الميداني</p>
+                    <h4>منع التكرار</h4>
+                    <p>يمنع إنشاء نقاط متعددة في نفس موقع التقاطع</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>عرض التقدم</h4>
+                    <p>يعرض النسبة المئوية وعدد النقاط المكتشفة في الوقت الفعلي</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h4>مخرجات منظمة</h4>
+                    <p>ينشئ نقاطاً في طبقة XPOINTS مخصصة بتنسيق متسق</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. أنواع التقاطعات المكتشفة -->
+        <section class="section">
+            <h2 class="section-title">📐 أنواع التقاطعات المكتشفة</h2>
+            <div class="intersection-types">
+                
+                <div class="intersection-type">
+                    <div class="intersection-type-icon">✕</div>
+                    <h4>تقاطع متقاطع</h4>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        خطين يتقاطعان بأي زاوية (غير متوازيين)
+                    </p>
+                </div>
+
+                <div class="intersection-type">
+                    <div class="intersection-type-icon">⊥</div>
+                    <h4>تقاطع عمودي</h4>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        خطين يتقاطعان بزاوية 90 درجة
+                    </p>
+                </div>
+
+                <div class="intersection-type">
+                    <div class="intersection-type-icon">×</div>
+                    <h4>زوايا حادة/منفرجة</h4>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        خطين يتقاطعان بأي زاوية بين 0-180 درجة
+                    </p>
+                </div>
+
+                <div class="intersection-type">
+                    <div class="intersection-type-icon">─</div>
+                    <h4>اكتشاف خطوط متداخلة</h4>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        يتعرف على الخطوط المتداخلة (لا ينشئ نقاطاً)
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. طريقة العمل -->
+        <section class="section">
+            <h2 class="section-title">🚀 كيف يعمل الأمر PPX؟</h2>
+            <div class="how-it-works">
+                
+                <div class="workflow">
+                    <div class="work-step">
+                        <div class="work-step-number">1</div>
+                        <strong>تشغيل الأمر</strong>
+                        <p>اكتب <code style="background: var(--accent); color: var(--bg-dark); padding: 2px 8px; border-radius: 4px;">PPX</code></p>
+                        <small>بدء عملية اكتشاف التقاطعات</small>
+                    </div>
+
+                    <div class="work-step">
+                        <div class="work-step-number">2</div>
+                        <strong>اختيار الخطوط</strong>
+                        <p>اختر جميع الخطوط المتقاطعة</p>
+                        <small>تحديد متعدد للخطوط</small>
+                    </div>
+
+                    <div class="work-step">
+                        <div class="work-step-number">3</div>
+                        <strong>اكتشاف تلقائي</strong>
+                        <p>عرض التقدم الحي</p>
+                        <small>فحص جميع أزواج الخطوط للتقاطعات</small>
+                    </div>
+
+                    <div class="work-step">
+                        <div class="work-step-number">4</div>
+                        <strong>إنشاء النقاط</strong>
+                        <p>نقاط التقاطع جاهزة!</p>
+                        <small>في طبقة XPOINTS (لون أحمر)</small>
+                    </div>
+                </div>
+
+                <div style="background: rgba(30,41,59,0.8); border-radius: 8px; padding: var(--spacing-md); margin: 1rem 0; border-right: 4px solid var(--accent);">
+                    <h4 style="color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                        <span>⚙️</span> مبدأ العمل
+                    </h4>
+                    <p style="color: var(--text-gray); font-size: 0.95rem;">
+                        يفحص الأمر كل زوج ممكن من الخطوط المحددة لإيجاد أماكن تقاطعها. 
+                        لكل زوج يتقاطع، يحسب إحداثيات التقاطع الدقيقة وينشئ نقطة في ذلك الموقع.
+                    </p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.8rem;">
+                        <strong>على سبيل المثال:</strong> مع تحديد 10 خطوط، يفحص الأمر 45 زوجاً فريداً من الخطوط 
+                        (10×9÷2) وينشئ نقاطاً في جميع مواقع التقاطع.
+                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- 6. أمثلة واقعية -->
+        <!-- 5. التكامل مع الأوامر الأخرى -->
+        <section class="section">
+            <h2 class="section-title">🔄 التكامل مع الأوامر الأخرى</h2>
+            <div class="integration-box">
+                
+                <div class="integration-grid">
+                    <div class="integration-card integration-pe">
+                        <h4 style="color: #3b82f6; margin-bottom: 1rem;">🔗 مع الأمر PE</h4>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            <strong>PPX</strong> يجد نقاط التقاطع<br>
+                            <strong>PE</strong> يصدر النقاط مع ترقيم وتسمية
+                        </p>
+                        <div style="background: rgba(59,130,246,0.1); padding: 0.8rem; border-radius: 6px;">
+                            <p style="color: #3b82f6; font-size: 0.9rem; margin: 0;">
+                                📌 سير العمل: PPX → نقاط التقاطع → PE → قائمة إحداثيات مرقمة
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="integration-card integration-t">
+                        <h4 style="color: #10b981; margin-bottom: 1rem;">🔗 مع الأمر T</h4>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            <strong>PPX</strong> ينشئ نقاط التقاطع<br>
+                            <strong>T</strong> ينظم النقاط في جدول إحداثيات
+                        </p>
+                        <div style="background: rgba(16,185,129,0.1); padding: 0.8rem; border-radius: 6px;">
+                            <p style="color: #10b981; font-size: 0.9rem; margin: 0;">
+                                📌 سير العمل: PPX → نقاط التقاطع → T → جدول إحداثيات احترافي
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="integration-card integration-ppc">
+                        <h4 style="color: #f59e0b; margin-bottom: 1rem;">🔗 مع الأمر PPC</h4>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            <strong>PPX</strong> لتقاطعات الخطوط<br>
+                            <strong>PPC</strong> لمنتصف الخطوط
+                        </p>
+                        <div style="background: rgba(245,158,11,0.1); padding: 0.8rem; border-radius: 6px;">
+                            <p style="color: #f59e0b; font-size: 0.9rem; margin: 0;">
+                                📌 تكامل: PPX يجد التقاطعات، PPC يجد المراكز
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(139,92,246,0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: 1.5rem; text-align: center;">
+                    <p style="color: var(--accent2); font-weight: bold; margin-bottom: 0.5rem;">💡 حل متكامل للنقاط</p>
+                    <p style="color: var(--text-gray); font-size: 0.95rem;">
+                        الأمر PPX هو جزء من نظام إدارة النقاط الشامل في Borham Tools
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. التطبيقات العملية -->
+        <section class="section">
+            <h2 class="section-title">🏗️ التطبيقات العملية في الميدان</h2>
+            <div class="tech-features">
+                
+                <div class="feature-card" style="border-top: 3px solid #3b82f6;">
+                    <div class="feature-icon">🏙️</div>
+                    <h4>شبكات التخطيط الحضري</h4>
+                    <p>إيجاد نقاط التقاطع في تخطيطات الكتل السكنية وشبكات الشوارع</p>
+                    <div style="background: rgba(59,130,246,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
+                        <span style="color: #3b82f6; font-size: 0.8rem;">📍 مثال: تقاطعات الشوارع</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" style="border-top: 3px solid #10b981;">
+                    <div class="feature-icon">📐</div>
+                    <h4>شبكات التحكم المساحي</h4>
+                    <p>تحديد نقاط التقاطع في الشبكات المساحية وأنظمة الإحداثيات</p>
+                    <div style="background: rgba(16,185,129,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
+                        <span style="color: #10b981; font-size: 0.8rem;">🎯 نقاط التحكم المساحي</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" style="border-top: 3px solid #f59e0b;">
+                    <div class="feature-icon">⚡</div>
+                    <h4>شبكات المرافق</h4>
+                    <p>تحديد نقاط التقاطع في شبكات الكهرباء والمياه والاتصالات</p>
+                    <div style="background: rgba(245,158,11,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
+                        <span style="color: #f59e0b; font-size: 0.8rem;">🔧 تقاطعات المرافق</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" style="border-top: 3px solid #8b5cf6;">
+                    <div class="feature-icon">🏗️</div>
+                    <h4>التحليل الإنشائي</h4>
+                    <p>تحديد نقاط التقاطع في الهياكل الإنشائية وأنظمة الجمالونات</p>
+                    <div style="background: rgba(139,92,246,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
+                        <span style="color: #8b5cf6; font-size: 0.8rem;">📐 مفاصل إنشائية</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" style="border-top: 3px solid #ef4444;">
+                    <div class="feature-icon">🗺️</div>
+                    <h4>الخرائط والرسوم البيانية</h4>
+                    <p>إنشاء نقاط مرجعية في تقاطعات الخطوط في الخرائط والمخططات</p>
+                    <div style="background: rgba(239,68,68,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
+                        <span style="color: #ef4444; font-size: 0.8rem;">📊 إحداثيات الخرائط</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" style="border-top: 3px solid #06b6d4;">
+                    <div class="feature-icon">🔄</div>
+                    <h4>سير عمل متكامل</h4>
+                    <p>PPX للتقاطعات → PE للتصدير → T للتوثيق</p>
+                    <div style="background: rgba(6,182,212,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
+                        <span style="color: #06b6d4; font-size: 0.8rem;">📈 سير عمل كامل</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 7. أمثلة واقعية -->
         <section class="section">
             <h2 class="section-title">💼 أمثلة واقعية من المشاريع</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+            <div class="examples-grid">
                 
-                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
-                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 1: مخطط حي سكني</h4>
+                <div class="example-card">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 1: شبكة شوارع مدينة</h4>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
                     <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-                        مخطط حي به 65 شارع متقاطع. المطلوب تحديد جميع نقاط التقاطع لوضع إشارات مرورية ولوحات إرشادية.
+                        خريطة مدينة تحتوي على 50 شارعاً متقاطعاً. الحاجة لتحديد جميع تقاطعات الشوارع لتخطيط إشارات المرور.
                     </p>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ PPX:</strong></p>
                     <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
-                        <li>تشغيل الأمر PPX</li>
-                        <li>اختيار جميع خطوط الشوارع (65 خط)</li>
-                        <li>Enter - فحص 2,080 احتمالية في 4 ثوانٍ</li>
-                        <li>تم إنشاء 38 نقطة تقاطع فعلية</li>
-                        <li>استخدام PE لتصدير الإحداثيات</li>
+                        <li>اختيار جميع خطوط وسط الشوارع (50 خطاً)</li>
+                        <li>تشغيل أمر PPX</li>
+                        <li>اكتشاف تلقائي لـ 35 نقطة تقاطع</li>
+                        <li>إنشاء النقاط في طبقة XPOINTS</li>
+                        <li>تصدير الإحداثيات لإدارة المرور</li>
                     </ol>
-                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
-                        ✅ ضمان عدم فوات أي تقاطع
-                    </p>
+                    <div style="background: rgba(34,197,94,0.1); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
+                        <p style="color: var(--success); font-size: 0.9rem; margin: 0;">
+                            ✅ <strong>توفير الوقت:</strong> من ساعتين إلى 30 ثانية<br>
+                            ✅ <strong>الدقة:</strong> جميع التقاطعات الـ 35 تم تحديدها بشكل صحيح<br>
+                            ✅ <strong>التوثيق:</strong> قائمة تقاطعات كاملة
+                        </p>
+                    </div>
                 </div>
 
-                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
-                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 2: شبكة مياه وصرف</h4>
+                <div class="example-card">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 2: شبكة مساحية</h4>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
                     <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-                        شبكة مياه (40 خط) وشبكة صرف (35 خط) في نفس المنطقة. المطلوب كشف جميع نقاط التقاطع لتجنب التعارضات.
+                        شبكة مساحية 10×10 تحتوي على 20 خطاً أفقياً و20 خطاً عمودياً. الحاجة لإحداثيات جميع تقاطعات الشبكة البالغة 400 تقاطع.
                     </p>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ PPX:</strong></p>
                     <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
-                        <li>اختيار خطوط المياه والصرف معاً (75 خط)</li>
-                        <li>تشغيل PPX - فحص 2,775 احتمالية</li>
-                        <li>اكتشاف 12 نقطة تعارض بين الشبكتين</li>
-                        <li>تعديل التصميم قبل التنفيذ</li>
+                        <li>اختيار جميع خطوط الشبكة (40 خطاً)</li>
+                        <li>تشغيل PPX - معالجة 780 زوجاً من الخطوط</li>
+                        <li>إنشاء 400 نقطة تقاطع</li>
+                        <li>استخدام PE لتصدير جميع الإحداثيات</li>
+                        <li>إنشاء تقرير مساحي ببيانات الشبكة الكاملة</li>
                     </ol>
-                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
-                        ✅ تجنب مشاكل كبيرة في التنفيذ
-                    </p>
+                    <div style="background: rgba(34,197,94,0.1); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
+                        <p style="color: var(--success); font-size: 0.9rem; margin: 0;">
+                            ✅ <strong>الكفاءة:</strong> 400 نقطة في 15 ثانية<br>
+                            ✅ <strong>الاكتمال:</strong> كل تقاطع تم التقاطه<br>
+                            ✅ <strong>احترافية:</strong> إحداثيات جاهزة للعمل المساحي
+                        </p>
+                    </div>
                 </div>
 
-                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
-                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 3: مخطط هيكلي</h4>
+                <div class="example-card">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 3: هيكل إنشائي</h4>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
                     <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-                        مخطط هيكلي لمبنى به 120 خط يمثل الكمرات والأعمدة. المطلوب تحديد جميع نقاط التقاطع (وصلات الكمرات بالأعمدة).
+                        هيكل صلب إنشائي يحتوي على 25 عارضة وعمود تتقاطع بزوايا مختلفة. الحاجة لإحداثيات المفاصل للتجهيز.
                     </p>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ PPX:</strong></p>
                     <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
-                        <li>PPX على جميع الخطوط (120 خط)</li>
-                        <li>فحص 7,140 احتمالية في 8 ثوانٍ</li>
-                        <li>إنشاء 95 نقطة تقاطع (نقاط الوصل)</li>
-                        <li>استخدام النقاط لحسابات التصميم الإنشائي</li>
+                        <li>اختيار جميع خطوط وسط العناصر الإنشائية</li>
+                        <li>تشغيل أمر PPX</li>
+                        <li>تحديد 18 نقطة تقاطع للمفاصل</li>
+                        <li>إنشاء نقاط في جميع تقاطعات العوارض والأعمدة</li>
+                        <li>تصدير الإحداثيات لبرنامج التجهيز</li>
                     </ol>
-                    <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">
-                        ✅ دقة 100% في تحديد الوصلات
+                    <div style="background: rgba(34,197,94,0.1); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
+                        <p style="color: var(--success); font-size: 0.9rem; margin: 0;">
+                            ✅ <strong>الدقة:</strong> مواقع المفاصل الدقيقة<br>
+                            ✅ <strong>السرعة:</strong> دقائق بدلاً من ساعات<br>
+                            ✅ <strong>التكامل:</strong> بيانات مباشرة للتجهيز
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="background: rgba(245,158,11,0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
+                <h4 style="color: var(--accent); margin-bottom: 1rem; text-align: center;">📈 تحليل الأداء</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md);">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">100%</div>
+                        <div style="color: var(--text-gray); font-size: 0.9rem;">اكتشاف التقاطعات</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">50x</div>
+                        <div style="color: var(--text-gray); font-size: 0.9rem;">أسرع من الطريقة اليدوية</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">0</div>
+                        <div style="color: var(--text-gray); font-size: 0.9rem;">تقاطعات مفقودة</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">400+</div>
+                        <div style="color: var(--text-gray); font-size: 0.9rem;">نقطة في ثوانٍ</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. مزايا استخدام الأمر PPX -->
+        <section class="section">
+            <h2 class="section-title">💎 مزايا استخدام الأمر PPX</h2>
+            <div class="definition">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md);">
+                    <div style="background: rgba(37,99,235,0.1); padding: var(--spacing-md); border-radius: 10px; border-right: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary); margin-bottom: 0.8rem;">⏱️ توفير الوقت الهائل</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                            <li>400 تقاطع في 15 ثانية</li>
+                            <li>بدلاً من 4-6 ساعات يدوياً</li>
+                            <li>توفير 99% من الوقت</li>
+                            <li>أسرع 50 مرة من الطرق التقليدية</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(16,185,129,0.1); padding: var(--spacing-md); border-radius: 10px; border-right: 3px solid var(--secondary);">
+                        <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">🎯 دقة مثالية</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                            <li>يجد كل تقاطع</li>
+                            <li>لا تفويت نقاط تقاطع</li>
+                            <li>حساب إحداثيات دقيق</li>
+                            <li>دقة تقاطع ثلاثية الأبعاد</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(245,158,11,0.1); padding: var(--spacing-md); border-radius: 10px; border-right: 3px solid var(--accent);">
+                        <h4 style="color: var(--accent); margin-bottom: 0.8rem;">📊 نتائج احترافية</h4>
+                        <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
+                            <li>طبقة XPOINTS منظمة</li>
+                            <li>جاهزة للتصدير والتوثيق</li>
+                            <li>تنسيق نقاط متسق</li>
+                            <li>تكامل سهل مع أدوات أخرى</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(139,92,246,0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md); text-align: center;">
+                    <p style="color: var(--accent2); font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">🚀 للشبكات المعقدة</p>
+                    <p style="color: var(--text-gray); font-size: 0.95rem;">
+                        الأمر PPX يتفوق مع الشبكات الخطية المعقدة، حيث يعالج مئات الخطوط وآلاف التقاطعات المحتملة بكفاءة 
+                        مع الحفاظ على الدقة المثالية والسرعة العالية.
                     </p>
                 </div>
             </div>
         </section>
+
+        <!-- زر العودة -->
+        <div style="text-align: center;">
+            <a href="../index.html" class="back-link">
+                <span>←</span> العودة إلى الصفحة الرئيسية
+            </a>
+        </div>
 
         <!-- الفوتر -->
         <footer>
-            <a href="../index.html" class="back-link">العودة إلى الصفحة الرئيسية</a>
-            <p>📧 للاستفسارات: MahmoudBorham.codes@gmail.com</p>
+            <p>📧 للاستفسارات التقنية: MahmoudBorham.codes@gmail.com</p>
+            <p>🛠️ جزء من حزمة Borham Tools المتخصصة في أتمتة الأعمال المساحية والإنشائية</p>
             <p>🇵🇸 Free Palestine - لوجه الله تعالى</p>
-            <p style="color: var(--accent); font-size: 0.9rem; margin-top: 1rem;">
-                "فحص ذكي + دقة مطلقة = PPX لنقاط التقاطع"
-            </p>
+            <div class="footer-highlight">
+                "اكتشاف تلقائي + دقة مثالية + سرعة عالية = PPX لتقاطعات الخطوط"
+            </div>
         </footer>
+
     </div>
 </body>
 </html>
