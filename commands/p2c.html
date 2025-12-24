@@ -3,72 +3,798 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P2C Command - Polyline to Circle | Borham Tools</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/command-page.css">
+    <title>P2C Command - Intelligent Shape to Circle Conversion | Borham Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --mech-blue: #3b82f6;
+            --elect-yellow: #fbbf24;
+            --arch-green: #10b981;
+            --bg-dark: #0f172a;
+            --bg-card: #334155;
+            --text-light: #f1f5f9;
+            --text-gray: #cbd5e1;
+            --success: #22c55e;
+            --border: #475569;
+            --container-width: 1100px;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2.5rem;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.7; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+        /* Header */
+        .page-header { 
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            border-bottom: 3px solid var(--accent);
+        }
+        .page-header h1 { 
+            font-size: 2.6rem; 
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        .page-header .subtitle {
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .page-header p { 
+            color: var(--text-gray);
+            max-width: 1000px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Sections */
+        .section { margin-bottom: var(--spacing-lg); }
+        .section-title { 
+            color: var(--secondary);
+            font-size: 1.9rem;
+            border-left: 6px solid var(--accent);
+            padding-left: 1rem;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            padding-top: 0.5rem;
+        }
+        .section-title::before {
+            content: "📌";
+            position: absolute;
+            left: -2.5rem;
+            top: 0;
+            font-size: 2rem;
+        }
+
+        /* Content Boxes */
+        .content-box {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: var(--spacing-lg);
+            border: 1px solid var(--border);
+            margin-bottom: var(--spacing-md);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Problem Cards */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        .problem-card {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid #ef4444;
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            transition: all 0.3s ease;
+        }
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.2);
+        }
+        .problem-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .problem-card h3 {
+            color: #ef4444;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+
+        /* Solution Cards */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        .solution-card {
+            background: rgba(34, 197, 94, 0.1);
+            border: 2px solid var(--success);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            transition: all 0.3s ease;
+        }
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.2);
+        }
+        .solution-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .solution-card h3 {
+            color: var(--success);
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+
+        /* Field Sections */
+        .field-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            border: 1px solid var(--border);
+        }
+        .field-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid;
+        }
+        .mechanical .field-header { border-color: var(--mech-blue); }
+        .electrical .field-header { border-color: var(--elect-yellow); }
+        .architectural .field-header { border-color: var(--arch-green); }
+        
+        .field-icon {
+            font-size: 2.5rem;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        .mechanical .field-icon { background: rgba(59, 130, 246, 0.2); color: var(--mech-blue); }
+        .electrical .field-icon { background: rgba(251, 191, 36, 0.2); color: var(--elect-yellow); }
+        .architectural .field-icon { background: rgba(16, 185, 129, 0.2); color: var(--arch-green); }
+
+        .field-title {
+            font-size: 1.6rem;
+            color: var(--text-light);
+        }
+        .mechanical .field-title { color: var(--mech-blue); }
+        .electrical .field-title { color: var(--elect-yellow); }
+        .architectural .field-title { color: var(--arch-green); }
+
+        /* Examples Grid */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: 1.5rem;
+        }
+        .example-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .example-card:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-3px);
+        }
+        .example-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .example-number {
+            background: var(--accent);
+            color: var(--bg-dark);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .example-title {
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+
+        /* Workflow */
+        .workflow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+        .step-number {
+            background: var(--primary);
+            color: white;
+            min-width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .step-content h4 {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Integration Section */
+        .integration-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
+            border: 2px solid var(--secondary);
+            border-radius: 14px;
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+            text-align: center;
+        }
+        .integration-title {
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        .integration-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        .flow-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: bold;
+            color: var(--text-light);
+        }
+        .flow-arrow {
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        .benefit-card {
+            text-align: center;
+            padding: var(--spacing-md);
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        .benefit-card h4 {
+            color: var(--text-light);
+            margin-bottom: 0.8rem;
+        }
+
+        /* Button */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, var(--primary), #1d4ed8);
+            padding: 14px 32px;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin: 2rem 0;
+        }
+        .back-link:hover { 
+            background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: var(--spacing-lg);
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--border);
+            background: linear-gradient(180deg, transparent, rgba(15,23,42,0.5));
+        }
+        footer p { 
+            color: var(--text-gray); 
+            margin: 0.5rem 0;
+        }
+        .footer-highlight {
+            color: var(--accent);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(245,158,11,0.15);
+            border-radius: 10px;
+            display: inline-block;
+            border: 1px solid rgba(245,158,11,0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2rem; }
+            .section-title { font-size: 1.6rem; }
+            .section-title::before { display: none; }
+            .field-header { flex-direction: column; text-align: center; }
+            .workflow-step { flex-direction: column; text-align: center; }
+            .integration-flow { flex-direction: column; }
+            .flow-arrow { transform: rotate(90deg); }
+            .problem-grid, .solution-grid, .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="back-button">
-        <a href="../index.html">← Back to Home</a>
+    <div class="container">
+
+        <!-- Header -->
+        <header class="page-header">
+            <h1>P2C Command - Intelligent Shape to Circle Conversion</h1>
+            <div class="subtitle">Complete solution for determining centers of geometric shapes in mechanical and electrical drawings</div>
+            <p>
+                Specially designed innovative solution to solve real problems engineers face in determining centers of irregular geometric shapes 
+                - whether squares, hexagons, arcs, or any closed shapes - and converting them to precise circles for automatic center extraction.
+            </p>
+        </header>
+
+        <!-- The Core Problem -->
+        <section class="section">
+            <h2 class="section-title">⚡ The Problem: Determining Centers of Non-Circular Shapes</h2>
+            <div class="content-box">
+                <p style="color: var(--text-light); font-size: 1.2rem; margin-bottom: 2rem; text-align: center;">
+                    In practical engineering work, we face a fundamental problem:<br>
+                    <strong style="color: var(--accent);">How to accurately and quickly determine centers of small and multiple geometric shapes?</strong>
+                </p>
+                
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon">⏱️</div>
+                        <h3>Time Wasting</h3>
+                        <p style="color: var(--text-gray);">
+                            Manually determining each shape's center takes minutes, and in large drawings containing 
+                            <strong>hundreds of shapes</strong>, this means hours of tedious and error-prone work.
+                        </p>
+                    </div>
+                    
+                    <div class="problem-card">
+                        <div class="problem-icon">🎯</div>
+                        <h3>Lack of Accuracy</h3>
+                        <p style="color: var(--text-gray);">
+                            Manual estimation of centers doesn't provide the required accuracy in professional engineering work, 
+                            especially in precise projects requiring up to 3 decimal places accuracy.
+                        </p>
+                    </div>
+                    
+                    <div class="problem-card">
+                        <div class="problem-icon">🔄</div>
+                        <h3>Processing Difficulty</h3>
+                        <p style="color: var(--text-gray);">
+                            Complex shapes like double arcs or circular polylines don't allow using traditional commands 
+                            to extract centers, requiring a special solution for each case.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Solution -->
+        <section class="section">
+            <h2 class="section-title">✅ The Solution: P2C Command</h2>
+            <div class="content-box">
+                <p style="color: var(--text-light); font-size: 1.2rem; margin-bottom: 2rem; text-align: center;">
+                    P2C is specifically designed to solve all these problems in one simple step:
+                </p>
+                
+                <div class="solution-grid">
+                    <div class="solution-card">
+                        <div class="solution-icon">⚡</div>
+                        <h3>Ultra-Fast Speed</h3>
+                        <p style="color: var(--text-gray);">
+                            Processing <strong>100 shapes</strong> in less than <strong>5 seconds</strong> instead of hours of manual work.
+                        </p>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <div class="solution-icon">🎯</div>
+                        <h3>Mathematical Accuracy</h3>
+                        <p style="color: var(--text-gray);">
+                            Calculating centers with accuracy up to <strong>6 decimal places</strong> using Bounding Box mathematical calculations.
+                        </p>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <div class="solution-icon">🔧</div>
+                        <h3>Comprehensive Solution</h3>
+                        <p style="color: var(--text-gray);">
+                            Supports all types of closed shapes: squares, rectangles, hexagons, arcs, polylines.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Field Examples: Mechanical -->
+        <section class="section">
+            <div class="field-section mechanical">
+                <div class="field-header">
+                    <div class="field-icon">⚙️</div>
+                    <h2 class="field-title">In Mechanical Field</h2>
+                </div>
+                
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <div class="example-header">
+                            <div class="example-number">1</div>
+                            <h3 class="example-title">Grille Openings</h3>
+                        </div>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            <strong>Situation:</strong> Ventilation drawing containing 200 grille openings drawn as small 20×20 cm squares.
+                        </p>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            <strong>Problem:</strong> Manually determining each opening's center would take 4-5 working hours with high error probability.
+                        </p>
+                        <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--mech-blue);">🎯 Solution with P2C:</strong>
+                            <ol style="color: var(--text-gray); padding-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>P2C on the 200 squares</li>
+                                <li>Conversion to circles in 3 seconds</li>
+                                <li>PP to extract centers in 2 seconds</li>
+                            </ol>
+                            <p style="color: var(--success); font-weight: bold; text-align: center; margin-top: 0.8rem;">
+                                ⚡ 200 centers in 5 seconds instead of 4 hours
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <div class="example-header">
+                            <div class="example-number">2</div>
+                            <h3 class="example-title">Anchor Points</h3>
+                        </div>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            <strong>Situation:</strong> 150 equipment anchor points drawn as hexagons or octagons.
+                        </p>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            <strong>Problem:</strong> Difficulty in manually determining accurate centers of complex shapes.
+                        </p>
+                        <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--mech-blue);">🎯 Solution with P2C:</strong>
+                            <ol style="color: var(--text-gray); padding-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>Select all hexagonal shapes</li>
+                                <li>Convert to precise circles</li>
+                                <li>Extract centers for field implementation</li>
+                            </ol>
+                            <p style="color: var(--success); font-weight: bold; text-align: center; margin-top: 0.8rem;">
+                                ⚡ Perfect accuracy for installation points
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <div class="example-header">
+                            <div class="example-number">3</div>
+                            <h3 class="example-title">Ventilation Openings</h3>
+                        </div>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            <strong>Situation:</strong> 80 circular ventilation openings drawn as circular polylines (connected arcs).
+                        </p>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            <strong>Problem:</strong> Circular polylines don't allow using PP command directly.
+                        </p>
+                        <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--mech-blue);">🎯 Solution with P2C:</strong>
+                            <ol style="color: var(--text-gray); padding-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>No need to use JOIN first</li>
+                                <li>P2C directly on polylines</li>
+                                <li>Convert to real circles</li>
+                                <li>PP for centers</li>
+                            </ol>
+                            <p style="color: var(--success); font-weight: bold; text-align: center; margin-top: 0.8rem;">
+                                ⚡ Bypassing circular polyline problem
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Field Examples: Electrical -->
+        <section class="section">
+            <div class="field-section electrical">
+                <div class="field-header">
+                    <div class="field-icon">🔌</div>
+                    <h2 class="field-title">In Electrical Field</h2>
+                </div>
+                
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <div class="example-header">
+                            <div class="example-number">1</div>
+                            <h3 class="example-title">Distribution Boards</h3>
+                        </div>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            <strong>Situation:</strong> 60 distribution boards drawn as rectangles of different dimensions.
+                        </p>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            <strong>Problem:</strong> Each board needs center determination for installation and connections.
+                        </p>
+                        <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--elect-yellow);">🎯 Solution with P2C:</strong>
+                            <ol style="color: var(--text-gray); padding-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>P2C on all rectangles</li>
+                                <li>Circles with precise centers for each board</li>
+                                <li>Determine main connection points</li>
+                            </ol>
+                            <p style="color: var(--success); font-weight: bold; text-align: center; margin-top: 0.8rem;">
+                                ⚡ 60 connection centers in two minutes
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <div class="example-header">
+                            <div class="example-number">2</div>
+                            <h3 class="example-title">Switches & Sockets</h3>
+                        </div>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            <strong>Situation:</strong> 120 electrical switches and sockets in various geometric shapes.
+                        </p>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            <strong>Problem:</strong> Variety of shapes and sizes makes manual center determination complex.
+                        </p>
+                        <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--elect-yellow);">🎯 Solution with P2C:</strong>
+                            <ol style="color: var(--text-gray); padding-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>Select all shapes at once</li>
+                                <li>Automatic conversion to circles</li>
+                                <li>Precise centers for installation</li>
+                            </ol>
+                            <p style="color: var(--success); font-weight: bold; text-align: center; margin-top: 0.8rem;">
+                                ⚡ Unify all centers with single accuracy
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <div class="example-header">
+                            <div class="example-number">3</div>
+                            <h3 class="example-title">Service Symbols</h3>
+                        </div>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            <strong>Situation:</strong> 90 electrical services drawn as opposing arcs (Arc).
+                        </p>
+                        <p style="color: var(--text-gray); margin-bottom: 1rem;">
+                            <strong>Problem:</strong> JOIN converts them to circular polyline unsuitable for PP.
+                        </p>
+                        <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 8px;">
+                            <strong style="color: var(--elect-yellow);">🎯 Solution with P2C:</strong>
+                            <ol style="color: var(--text-gray); padding-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>P2C directly on arcs</li>
+                                <li>Skip JOIN step completely</li>
+                                <li>Complete circles ready for centers</li>
+                            </ol>
+                            <p style="color: var(--success); font-weight: bold; text-align: center; margin-top: 0.8rem;">
+                                ⚡ Direct solution for double arcs problem
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workflow -->
+        <section class="section">
+            <h2 class="section-title">🔄 Professional Workflow</h2>
+            <div class="content-box">
+                <div class="workflow-steps">
+                    <div class="workflow-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Identify Required Shapes</h4>
+                            <p style="color: var(--text-gray);">
+                                Select all closed geometric shapes you want to determine centers for - whether squares, rectangles, hexagons, arcs, or any closed shapes.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>P2C Magic Operation</h4>
+                            <p style="color: var(--text-gray);">
+                                Run P2C command to convert all shapes to real AutoCAD circles with high mathematical accuracy, bypassing all circular polyline and double arc problems.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Extract Centers with PP</h4>
+                            <p style="color: var(--text-gray);">
+                                Run PP command to extract centers of all created circles, with ability to control distance between points if needed.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="workflow-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Ready Results</h4>
+                            <p style="color: var(--text-gray);">
+                                Get all required centers with high accuracy ready for use in planning, implementation, or any subsequent operations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="integration-box">
+                    <div class="integration-title">Perfect Integration: P2C + PP</div>
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem;">
+                        These two commands are designed to work together seamlessly to solve center determination problems from start to finish
+                    </p>
+                    
+                    <div class="integration-flow">
+                        <div class="flow-item">Complex Shapes</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-item" style="background: rgba(245,158,11,0.2); color: var(--accent);">P2C</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-item">Precise Circles</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-item" style="background: rgba(37,99,235,0.2); color: var(--primary);">PP</div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-item" style="background: rgba(34,197,94,0.2); color: var(--success);">Ready Centers</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits -->
+        <section class="section">
+            <h2 class="section-title">💎 Tangible Practical Benefits</h2>
+            <div class="content-box">
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">⏱️</div>
+                        <h4>Save 95% of Time</h4>
+                        <p style="color: var(--text-gray); font-size: 0.95rem;">
+                            Process 100 shapes in 5 seconds instead of 3 hours manual work
+                        </p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🎯</div>
+                        <h4>Mathematical Accuracy</h4>
+                        <p style="color: var(--text-gray); font-size: 0.95rem;">
+                            Accuracy up to 6 decimal places in center determination
+                        </p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🔧</div>
+                        <h4>Solve Complex Problems</h4>
+                        <p style="color: var(--text-gray); font-size: 0.95rem;">
+                            Bypass polyline and double arc problems
+                        </p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📊</div>
+                        <h4>Handle Large Quantities</h4>
+                        <p style="color: var(--text-gray); font-size: 0.95rem;">
+                            Handle hundreds of shapes in single operation
+                        </p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🔄</div>
+                        <h4>Smooth Integration</h4>
+                        <p style="color: var(--text-gray); font-size: 0.95rem;">
+                            Integrated work with PP command for complete workflow
+                        </p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">💼</div>
+                        <h4>Practical Applications</h4>
+                        <p style="color: var(--text-gray); font-size: 0.95rem;">
+                            Real solutions for mechanical and electrical problems
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(139, 92, 246, 0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: 2rem; text-align: center;">
+                    <p style="color: #8b5cf6; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.5rem;">
+                        🎯 Conclusion
+                    </p>
+                    <p style="color: var(--text-light);">
+                        P2C is not just a technical command, but a <strong>practical solution specifically designed</strong> for real problems 
+                        engineers face daily in determining shape centers in mechanical and electrical drawings.
+                    </p>
+                    <p style="color: var(--accent); font-weight: bold; margin-top: 1rem;">
+                        From hours of tedious and error-prone work ← To seconds of accuracy and efficiency
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Button -->
+        <div style="text-align: center;">
+            <a href="../index.html" class="back-link">
+                <span>←</span> Back to Homepage
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>🔧 Core tool for mechanical and electrical engineers in handling complex engineering drawings</p>
+            <p>⚡ Practical solution for real problems in determining geometric shape centers</p>
+            <p>📧 For inquiries: MahmoudBorham.codes@gmail.com</p>
+            <p>🇵🇸 Free Palestine - For the Sake of Allah</p>
+            <div class="footer-highlight">
+                "Hundreds of shapes + P2C + PP = Precise centers in minutes"
+            </div>
+        </footer>
+
     </div>
-    <header class="command-header">
-        <div class="container">
-            <div class="command-badge">Fast</div>
-            <h1 class="command-name">P2C</h1>
-            <p class="command-title">Polyline to Circle</p>
-        </div>
-    </header>
-    <section class="command-content">
-        <div class="container">
-            <div class="content-section">
-                <h2>📋 Description</h2>
-                <p>Converts closed polylines and arcs to circles.</p>
-            </div>
-            <div class="content-section">
-                <h2>✅ Supported Objects</h2>
-                <ul>
-                    <li><strong>Closed LWPOLYLINE:</strong> Creates circle from bounding box center</li>
-                    <li><strong>Closed POLYLINE:</strong> Creates circle from bounding box center</li>
-                    <li><strong>ARC:</strong> Creates circle with same center and radius</li>
-                </ul>
-            </div>
-            <div class="content-section highlight-box">
-                <h2>✨ Features</h2>
-                <ul>
-                    <li>Uses 'P2C' layer (Color: Red)</li>
-                    <li>Prevents duplicate circles</li>
-                    <li>Maintains geometric properties</li>
-                    <li>Handles both closed shapes and arcs</li>
-                    <li>Automatic closed polyline detection</li>
-                    <li>Bounding box calculation for polylines</li>
-                    <li>Preserves SNAP settings</li>
-                    <li>Opens locked/hidden layers automatically</li>
-                </ul>
-            </div>
-            <div class="content-section usage-box">
-                <h2>💡 How to Use</h2>
-                <ol class="steps-list">
-                    <li>Type <code>P2C</code> and press <kbd>Enter</kbd></li>
-                    <li>Select closed polylines and arcs to process</li>
-                    <li>Circles will be created automatically</li>
-                </ol>
-            </div>
-            <div class="content-section">
-                <h2>💡 Tips</h2>
-                <ul>
-                    <li>Only works with closed polylines and arcs</li>
-                    <li>New circles are placed on 'P2C' layer</li>
-                    <li>Original objects remain unchanged</li>
-                    <li>Useful for converting shapes to circles for machining or analysis</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <footer>
-        <div class="container">
-            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
-            <p class="back-link"><a href="../index.html">← Back to All Commands</a></p>
-        </div>
-    </footer>
 </body>
 </html>
