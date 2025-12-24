@@ -1,232 +1,709 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T - Coordinate Table | Borham Tools</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/command.css">
-    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Command T — Smart Coordinate Table Generator | Borham Tools</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #10b981;
+      --accent: #f59e0b;
+      --accent2: #8b5cf6;
+      --bg-dark: #0f172a;
+      --bg-card: #334155;
+      --text-light: #f1f5f9;
+      --text-gray: #cbd5e1;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --border: #475569;
+      --container-width: 1100px;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2.5rem;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg-dark);
+      font-family: 'Cairo', sans-serif;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+    .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+    /* Header */
+    .page-header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      padding: var(--spacing-lg) 0;
+      text-align: center;
+      margin-bottom: var(--spacing-lg);
+      border-bottom: 2px solid var(--accent);
+    }
+    .page-header h1 {
+      font-size: 2.5rem;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+    .page-header .tagline {
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .page-header p {
+      color: var(--text-gray);
+      font-size: 1.05rem;
+      max-width: 900px;
+      margin: 0.6rem auto 0;
+      line-height: 1.8;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: var(--spacing-lg);
+      animation: fadeIn 0.6s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      color: var(--secondary);
+      font-size: 1.8rem;
+      border-left: 5px solid var(--accent);
+      padding-left: 1rem;
+      margin-bottom: var(--spacing-md);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    /* Boxes */
+    .definition,
+    .how-it-works,
+    .integration-box {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: var(--spacing-md);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    .definition:hover,
+    .how-it-works:hover,
+    .integration-box:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    }
+
+    .definition-box {
+      background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(37,99,235,0.05));
+      border-left: 4px solid var(--primary);
+      padding: var(--spacing-md);
+      border-radius: 10px;
+      margin: 1.2rem 0;
+    }
+    .definition-box h3 {
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Technical Features */
+    .tech-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-md);
+    }
+    .feature-card {
+      background: linear-gradient(145deg, rgba(51,65,85,0.8), rgba(30,41,59,0.8));
+      padding: var(--spacing-md);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 20px rgba(245,158,11,0.15);
+    }
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+    .feature-card h4 {
+      color: var(--text-light);
+      margin-bottom: 0.6rem;
+      font-size: 1.2rem;
+    }
+    .feature-card p {
+      color: var(--text-gray);
+      font-size: 0.95rem;
+    }
+
+    /* Workflow */
+    .workflow {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      margin: 1.5rem 0;
+    }
+    .work-step {
+      background: linear-gradient(145deg, rgba(30,41,59,0.8), rgba(15,23,42,0.8));
+      border: 2px solid var(--border);
+      padding: var(--spacing-md);
+      text-align: center;
+      border-radius: 12px;
+      position: relative;
+      flex: 1;
+      min-width: 180px;
+    }
+    .work-step-number {
+      position: absolute;
+      top: -12px;
+      left: 15px;
+      background: var(--accent);
+      color: var(--bg-dark);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    .work-step:not(:last-child):after {
+      content: "➜";
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+
+    /* Quick Options */
+    .quick-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-md);
+      margin: var(--spacing-md) 0;
+    }
+    .option-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: var(--spacing-md);
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .option-card:hover {
+      background: rgba(37,99,235,0.1);
+      border-color: var(--primary);
+    }
+    .option-key {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg-dark);
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-family: 'Cairo', monospace;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* Table Examples */
+    .table-example {
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      padding: var(--spacing-md);
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+    .table-example table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Cairo', monospace;
+      font-size: 0.95rem;
+    }
+    .table-example th {
+      background: rgba(37,99,235,0.3);
+      color: var(--text-light);
+      padding: 0.8rem;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .table-example td {
+      padding: 0.7rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-gray);
+    }
+    .table-example tr:nth-child(even) {
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* Integration with Other Commands */
+    .integration-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-md);
+      margin: var(--spacing-md) 0;
+    }
+    .integration-card {
+      padding: var(--spacing-md);
+      border-radius: 10px;
+      border: 2px solid;
+      background: rgba(255,255,255,0.03);
+    }
+    .integration-pe { border-color: #3b82f6; }
+    .integration-pi { border-color: #10b981; }
+    .integration-lup { border-color: #f59e0b; }
+
+    /* Back Button */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--primary), #1d4ed8);
+      padding: 12px 28px;
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin: 1.5rem 0;
+    }
+    .back-link:hover {
+      background: linear-gradient(135deg, #1d4ed8, #1e40af);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: var(--spacing-lg);
+      padding: var(--spacing-lg) 0;
+      border-top: 1px solid var(--border);
+      background: linear-gradient(180deg, transparent, rgba(15,23,42,0.5));
+    }
+    footer p {
+      color: var(--text-gray);
+      margin: 0.5rem 0;
+    }
+    .footer-highlight {
+      color: var(--accent);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 1rem;
+      padding: 0.8rem;
+      background: rgba(245,158,11,0.1);
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-header h1 { font-size: 2rem; }
+      .section-title { font-size: 1.5rem; }
+      .workflow { flex-direction: column; }
+      .work-step:not(:last-child):after {
+        content: "⬇";
+        left: 50%;
+        right: auto;
+        top: auto;
+        bottom: -20px;
+        transform: translateX(-50%);
+      }
+      .integration-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="page-header">
+      <h1>Command T — Smart Coordinate Table Generator</h1>
+      <div class="tagline">Automated conversion of drawing points into organized tables</div>
+      <p>
+        An integrated system for extracting and managing point coordinates in AutoCAD. Transform geospatial data into structured tables with
+        automatic numbering, intelligent code extraction, and professional layer management.
+      </p>
+    </header>
+
+    <!-- 1. What is Command T -->
+    <section class="section">
+      <h2 class="section-title">📌 What is Command T?</h2>
+      <div class="definition">
+        <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--text-light);">
+          <strong>Command T</strong> is a comprehensive tool for converting AutoCAD points into a
+          <span style="color: var(--accent); font-weight: bold;">professional coordinate table</span>
+          with advanced capabilities such as code extraction, automatic numbering, and intelligent data segmentation for large datasets.
+        </p>
+
+        <div class="definition-box">
+          <h3>🎯 Final Output</h3>
+          <div class="table-example">
+            <table>
+              <thead>
+                <tr>
+                  <th>NO</th>
+                  <th>EAST</th>
+                  <th>NORTH</th>
+                  <th>LEVEL</th>
+                  <th>CODE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>456123.456</td>
+                  <td>3456123.789</td>
+                  <td>125.45</td>
+                  <td>CL</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>456145.789</td>
+                  <td>3456145.123</td>
+                  <td>126.12</td>
+                  <td>EP</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>456178.123</td>
+                  <td>3456178.456</td>
+                  <td>127.89</td>
+                  <td>BP</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="definition-box" style="background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(16,185,129,0.05)); border-left-color: var(--secondary);">
+          <h3 style="color: var(--secondary);">🏗️ Smart Layer Structure</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+            <div style="background: rgba(59,130,246,0.15); padding: 0.8rem; border-radius: 8px; border-left: 3px solid #3b82f6;">
+              <strong style="color: #3b82f6;">Point-Names</strong>
+              <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">Point numbers (NO)</p>
+            </div>
+            <div style="background: rgba(139,92,246,0.15); padding: 0.8rem; border-radius: 8px; border-left: 3px solid var(--accent2);">
+              <strong style="color: var(--accent2);">Coordinates-Table</strong>
+              <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">Main coordinate table</p>
+            </div>
+            <div style="background: rgba(239,68,68,0.15); padding: 0.8rem; border-radius: 8px; border-left: 3px solid #ef4444;">
+              <strong style="color: #ef4444;">Manual-Points</strong>
+              <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">Manual points (red)</p>
+            </div>
+            <div style="background: rgba(245,158,11,0.15); padding: 0.8rem; border-radius: 8px; border-left: 3px solid var(--accent);">
+              <strong style="color: var(--accent);">Point-Codes</strong>
+              <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.3rem;">Point codes (yellow)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Advanced Features -->
+    <section class="section">
+      <h2 class="section-title">✨ Advanced Features</h2>
+      <div class="tech-features">
+
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h4>Intelligent Extraction</h4>
+          <p>Automatic extraction of X, Y, Z coordinates with sequential numbering</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h4>Smart Code Extraction</h4>
+          <p>Finds nearest text for each point and uses it as CODE in the table</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h4>Manual & Auto Mode</h4>
+          <p>Select existing points or create points manually during execution</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h4>Auto-Segmentation</h4>
+          <p>Automatically splits tables when exceeding 100 points</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h4>Progress Bar</h4>
+          <p>Visual indicator showing completion percentage and processed points</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h4>Professional Formatting</h4>
+          <p>Tables in native AutoCAD format with organized colors and fonts</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. Execution Workflow -->
+    <section class="section">
+      <h2 class="section-title">🚀 Execution Workflow</h2>
+      <div class="how-it-works">
+
+        <div class="workflow">
+          <div class="work-step">
+            <div class="work-step-number">1</div>
+            <strong>Run Command</strong>
+            <p>Type <code style="background: var(--accent); color: var(--bg-dark); padding: 2px 8px; border-radius: 4px;">T</code></p>
+            <small>Initiate table creation process</small>
+          </div>
+
+          <div class="work-step">
+            <div class="work-step-number">2</div>
+            <strong>Select Points</strong>
+            <p>Select Points or use <code>M</code></p>
+            <small>For manual point conversion</small>
+          </div>
+
+          <div class="work-step">
+            <div class="work-step-number">3</div>
+            <strong>Activate Code</strong>
+            <p>Press <code>C</code> during selection</p>
+            <small>Add CODE column automatically</small>
+          </div>
+
+          <div class="work-step">
+            <div class="work-step-number">4</div>
+            <strong>Adjust Settings</strong>
+            <p>Enter text height</p>
+            <small>For point numbers and codes</small>
+          </div>
+
+          <div class="work-step">
+            <div class="work-step-number">5</div>
+            <strong>Create Table</strong>
+            <p>Select insertion point</p>
+            <small>Table is built automatically</small>
+          </div>
+        </div>
+
+        <div class="quick-options">
+          <div class="option-card">
+            <div class="option-key">C</div>
+            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Enable/Disable Code</h4>
+            <p style="color: var(--text-gray); font-size: 0.9rem;">Add or remove CODE column from table</p>
+          </div>
+          <div class="option-card">
+            <div class="option-key">M</div>
+            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Manual Mode</h4>
+            <p style="color: var(--text-gray); font-size: 0.9rem;">Capture points manually by screen clicking</p>
+          </div>
+          <div class="option-card">
+            <div class="option-key">ESC</div>
+            <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Cancel Operation</h4>
+            <p style="color: var(--text-gray); font-size: 0.9rem;">Exit command at any stage</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Integration with Other Commands -->
+    <section class="section">
+      <h2 class="section-title">🤝 Integration with Other Commands</h2>
+      <div class="integration-box">
+
+        <div class="integration-grid">
+          <div class="integration-card integration-pe">
+            <h4 style="color: #3b82f6; margin-bottom: 1rem;">🔗 With Command PE</h4>
+            <p style="color: var(--text-gray); margin-bottom: 1rem;">
+              <strong>PE</strong> exports points to CSV with numbering<br>
+              <strong>T</strong> uses numbered points to create table
+            </p>
+            <div style="background: rgba(59,130,246,0.1); padding: 0.8rem; border-radius: 6px;">
+              <p style="color: #3b82f6; font-size: 0.9rem; margin: 0;">
+                📌 Workflow: PE → Numbering → T → Organized Table
+              </p>
+            </div>
+          </div>
+
+          <div class="integration-card integration-pi">
+            <h4 style="color: #10b981; margin-bottom: 1rem;">🔗 With Command PI</h4>
+            <p style="color: var(--text-gray); margin-bottom: 1rem;">
+              <strong>PI</strong> imports points from external files<br>
+              <strong>T</strong> converts imported points into table
+            </p>
+            <div style="background: rgba(16,185,129,0.1); padding: 0.8rem; border-radius: 6px;">
+              <p style="color: #10b981; font-size: 0.9rem; margin: 0;">
+                📌 Workflow: PI → Import → T → Coordinate Table
+              </p>
+            </div>
+          </div>
+
+          <div class="integration-card integration-lup">
+            <h4 style="color: #f59e0b; margin-bottom: 1rem;">🔗 With Command LUP</h4>
+            <p style="color: var(--text-gray); margin-bottom: 1rem;">
+              <strong>LUP</strong> updates point elevations from text<br>
+              <strong>T</strong> displays updated elevations in table
+            </p>
+            <div style="background: rgba(245,158,11,0.1); padding: 0.8rem; border-radius: 6px;">
+              <p style="color: #f59e0b; font-size: 0.9rem; margin: 0;">
+                📌 Workflow: LUP → Update → T → Accurate Table
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: rgba(139,92,246,0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: 1.5rem; text-align: center;">
+          <p style="color: var(--accent2); font-weight: bold; margin-bottom: 0.5rem;">💡 Integrated System</p>
+          <p style="color: var(--text-gray); font-size: 0.95rem;">
+            Command T is not an isolated tool, but part of an integrated point management system within Borham Tools
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Practical Applications -->
+    <section class="section">
+      <h2 class="section-title">💼 Practical Applications</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+          <h4 style="color: var(--secondary); margin-bottom: 1rem;">🏗️ Structural Engineering Projects</h4>
+          <p style="color: var(--text-gray); margin-bottom: 1rem;">
+            Documentation of column centers, slabs with elevation levels and classification codes.
+          </p>
+          <div style="background: rgba(59,130,246,0.1); padding: 1rem; border-radius: 8px;">
+            <strong style="color: #3b82f6; display: block; margin-bottom: 0.5rem;">🎯 Result:</strong>
+            <ul style="color: var(--text-gray); padding-left: 1rem;">
+              <li>Table of all column centers</li>
+              <li>Foundation elevation per column</li>
+              <li>Column classification codes</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+          <h4 style="color: var(--secondary); margin-bottom: 1rem;">🗺️ Surveying Works</h4>
+          <p style="color: var(--text-gray); margin-bottom: 1rem;">
+            Creation of boundary and control point tables for large surveying projects.
+          </p>
+          <div style="background: rgba(16,185,129,0.1); padding: 1rem; border-radius: 8px;">
+            <strong style="color: var(--secondary); display: block; margin-bottom: 0.5rem;">🎯 Result:</strong>
+            <ul style="color: var(--text-gray); padding-left: 1rem;">
+              <li>Complete coordinate table</li>
+              <li>Point codes (Boundary, Control)</li>
+              <li>Automatic data segmentation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+          <h4 style="color: var(--secondary); margin-bottom: 1rem;">🛣️ Road Projects</h4>
+          <p style="color: var(--text-gray); margin-bottom: 1rem;">
+            Extraction of road alignment coordinates and side points at regular intervals.
+          </p>
+          <div style="background: rgba(245,158,11,0.1); padding: 1rem; border-radius: 8px;">
+            <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">🎯 Result:</strong>
+            <ul style="color: var(--text-gray); padding-left: 1rem;">
+              <li>Stations table every 25m or 50m</li>
+              <li>CL, Edge, Shoulder coordinates</li>
+              <li>Design elevations</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Benefits of Using Command T -->
+    <section class="section">
+      <h2 class="section-title">💎 Benefits of Using Command T</h2>
+      <div class="definition">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md);">
+          <div style="background: rgba(37,99,235,0.1); padding: var(--spacing-md); border-radius: 10px; border-left: 3px solid var(--primary);">
+            <h4 style="color: var(--primary); margin-bottom: 0.8rem;">⏱️ Time Saving</h4>
+            <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem;">
+              <li>Convert 100 points in 2 minutes</li>
+              <li>Instead of 30 minutes manually</li>
+              <li>Saves 90% of time</li>
+            </ul>
+          </div>
+
+          <div style="background: rgba(16,185,129,0.1); padding: var(--spacing-md); border-radius: 10px; border-left: 3px solid var(--secondary);">
+            <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">🎯 Improved Accuracy</h4>
+            <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem;">
+              <li>3 decimal place precision</li>
+              <li>Automatic sequential numbering</li>
+              <li>Accurate codes from text</li>
+            </ul>
+          </div>
+
+          <div style="background: rgba(245,158,11,0.1); padding: var(--spacing-md); border-radius: 10px; border-left: 3px solid var(--accent);">
+            <h4 style="color: var(--accent); margin-bottom: 0.8rem;">📊 Data Organization</h4>
+            <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem;">
+              <li>Organized layers for each element</li>
+              <li>Automatic table segmentation</li>
+              <li>Ready professional formatting</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="background: rgba(139,92,246,0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md); text-align: center;">
+          <p style="color: var(--accent2); font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">🚀 For Large Projects</p>
+          <p style="color: var(--text-gray); font-size: 0.95rem;">
+            When processing more than 500 points, the command uses <strong>automatic segmentation</strong> and creates multiple tables with sequential numbering
+            (Table-1, Table-2, ...) ensuring better performance and easier readability.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- Back Button -->
-    <div class="back-button">
-        <a href="../index.html">← Back to Home</a>
+    <div style="text-align: center;">
+      <a href="../index.html" class="back-link">
+        <span>←</span> Back to Homepage
+      </a>
     </div>
-
-    <!-- Command Header -->
-    <section class="command-header">
-        <div class="container">
-            <span class="command-badge">New Column Feature</span>
-            <h1 class="command-name">T</h1>
-            <p class="command-title">Professional Coordinate Table with Automatic Code Detection</p>
-        </div>
-    </section>
-
-    <!-- Command Content -->
-    <section class="command-content">
-        <div class="container">
-            <!-- Overview Section -->
-            <div class="content-section highlight-box">
-                <h2>📖 Command Overview</h2>
-                <p>The <code>T</code> command creates a professional coordinate table with <strong>automatic code detection</strong> from nearby text labels, perfect for survey reports and point documentation.</p>
-                
-                <h3>NEW: Code Column Feature</h3>
-                <ul>
-                    <li><strong>Automatic code extraction</strong> from nearest text labels</li>
-                    <li><strong>Smart search radius</strong> (within 5 units)</li>
-                    <li><strong>Supports TEXT and MTEXT</strong> objects</li>
-                    <li><strong>Displays "N/A"</strong> if no text found</li>
-                    <li><strong>Perfect for labeled points</strong> (BM-01, TP-05, etc.)</li>
-                </ul>
-            </div>
-
-            <!-- Table Structure -->
-            <div class="content-section">
-                <h2>📊 Table Structure</h2>
-                
-                <div style="background: var(--bg-dark); padding: 20px; border-radius: 8px; margin: 15px 0; overflow-x: auto;">
-                    <table style="width:100%; border-collapse: collapse; min-width: 500px;">
-                        <tr style="background: var(--primary); color: white;">
-                            <th style="padding: 12px; border: 1px solid var(--border); text-align: center;">Column</th>
-                            <th style="padding: 12px; border: 1px solid var(--border); text-align: center;">Description</th>
-                            <th style="padding: 12px; border: 1px solid var(--border); text-align: center;">Example</th>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;"><strong>NO.</strong></td>
-                            <td style="padding: 10px; border: 1px solid var(--border);">Sequential point number</td>
-                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;">1, 2, 3...</td>
-                        </tr>
-                        <tr style="background: var(--bg-card);">
-                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;"><strong>X</strong></td>
-                            <td style="padding: 10px; border: 1px solid var(--border);">Easting coordinate</td>
-                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;">12345.678</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;"><strong>Y</strong></td>
-                            <td style="padding: 10px; border: 1px solid var(--border);">Northing coordinate</td>
-                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;">98765.432</td>
-                        </tr>
-                        <tr style="background: var(--bg-card);">
-                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;"><strong>Z</strong></td>
-                            <td style="padding: 10px; border: 1px solid var(--border);">Elevation coordinate</td>
-                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;">100.500</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;"><strong>CODE</strong></td>
-                            <td style="padding: 10px; border: 1px solid var(--border);"><strong>NEW:</strong> Nearest text label</td>
-                            <td style="padding: 10px; border: 1px solid var(--border); text-align: center;">BM-01, TP-05, N/A</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Workflow Options -->
-            <div class="content-section usage-box">
-                <h2>🚀 Three Workflow Options</h2>
-                
-                <div class="command-tips">
-                    <div class="tip-card">
-                        <h4>1️⃣ PRE-SELECT & RUN (Fastest)</h4>
-                        <p><strong>Steps:</strong></p>
-                        <ol style="padding-left: 20px; margin: 10px 0;">
-                            <li>Select points first</li>
-                            <li>Type <code>T</code> and press Enter</li>
-                            <li>System searches for nearby text labels</li>
-                            <li>Enter text height</li>
-                            <li>Click table insertion point</li>
-                        </ol>
-                    </div>
-                    
-                    <div class="tip-card">
-                        <h4>2️⃣ REGULAR METHOD</h4>
-                        <p><strong>Steps:</strong></p>
-                        <ol style="padding-left: 20px; margin: 10px 0;">
-                            <li>Type <code>T</code> and press Enter</li>
-                            <li>Select points</li>
-                            <li>System searches for nearby text labels</li>
-                            <li>Enter text height</li>
-                            <li>Click table insertion point</li>
-                        </ol>
-                    </div>
-                    
-                    <div class="tip-card">
-                        <h4>3️⃣ MANUAL MODE</h4>
-                        <p><strong>Steps:</strong></p>
-                        <ol style="padding-left: 20px; margin: 10px 0;">
-                            <li>Type <code>T</code> and press Enter</li>
-                            <li>Type <code>M</code> for manual mode</li>
-                            <li>Click points one by one</li>
-                            <li>Red points drawn for reference</li>
-                            <li>System searches for nearby text labels</li>
-                            <li>Enter text height</li>
-                            <li>Click table insertion point</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Code Detection -->
-            <div class="content-section">
-                <h2>🔍 Smart Code Detection</h2>
-                
-                <h3>How It Works:</h3>
-                <ol>
-                    <li>For each selected point, searches within <strong>5-unit radius</strong></li>
-                    <li>Looks for <strong>TEXT and MTEXT</strong> objects</li>
-                    <li>Uses <strong>nearest text content</strong> as code</li>
-                    <li>If no text found → Shows <strong>"N/A"</strong></li>
-                    <li>Perfect for survey points with labels like:
-                        <ul>
-                            <li><code>BM-01</code> (Benchmark)</li>
-                            <li><code>TP-05</code> (Turning Point)</li>
-                            <li><code>COL-A</code> (Column)</li>
-                            <li><code>MH-12</code> (Manhole)</li>
-                        </ul>
-                    </li>
-                </ol>
-                
-                <h3>Search Parameters:</h3>
-                <ul>
-                    <li><strong>Search Radius:</strong> 5 drawing units</li>
-                    <li><strong>Text Types:</strong> TEXT, MTEXT</li>
-                    <li><strong>Priority:</strong> Nearest text first</li>
-                    <li><strong>Fallback:</strong> "N/A" if no text found</li>
-                </ul>
-            </div>
-
-            <!-- Layer Management -->
-            <div class="content-section">
-                <h2>🎨 Layer Management</h2>
-                
-                <div style="background: var(--bg-dark); padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4 style="color: var(--secondary); margin-bottom: 10px;">Automatic Layer Creation:</h4>
-                    <ul>
-                        <li><strong>Coordinates-Table:</strong> Gray layer for the table</li>
-                        <li><strong>Point-Names:</strong> Orange layer for point labels</li>
-                        <li><strong>Manual-Points:</strong> Red layer (used in manual mode)</li>
-                    </ul>
-                </div>
-                
-                <h3>Text Height Memory:</h3>
-                <p>The command remembers the last used text height between sessions for consistent formatting.</p>
-            </div>
-
-            <!-- Command Example -->
-            <div class="content-section">
-                <h2>💻 Command Line Example</h2>
-                <pre><code>Command: T
-Select points or type M for manual mode: [select points]
-Searching for text labels near points...
-Found codes for 8 out of 10 points
-Enter text height for labels <0.20>: 0.25
-Click table insertion point: [click location]
-Table created with 10 points
-Layers created: Coordinates-Table, Point-Names</code></pre>
-            </div>
-
-            <!-- Applications -->
-            <div class="content-section">
-                <h2>🎯 Professional Applications</h2>
-                <ul>
-                    <li><strong>Survey Reports:</strong> Create coordinate schedules with point codes</li>
-                    <li><strong>As-built Documentation:</strong> Document existing conditions with labels</li>
-                    <li><strong>Quality Control:</strong> Verify point coordinates and labels</li>
-                    <li><strong>Construction Layout:</strong> Generate setting-out sheets with codes</li>
-                    <li><strong>Infrastructure Projects:</strong> Document manholes, valves, benchmarks</li>
-                    <li><strong>BIM Coordination:</strong> Create equipment coordinate schedules</li>
-                </ul>
-            </div>
-
-            <!-- Performance -->
-            <div class="content-section performance-box">
-                <h2>⚡ Time Savings</h2>
-                <p class="performance-stat"><strong>80% Faster</strong> than manual table creation</p>
-                <p>Automates the entire process of table creation with intelligent code detection.</p>
-            </div>
-
-            <!-- Related Commands -->
-            <div class="related-commands">
-                <h3>Related Commands</h3>
-                <div class="related-grid">
-                    <a href="en.html" class="related-command">EN</a>
-                    <a href="enl.html" class="related-command">ENL</a>
-                    <a href="pe.html" class="related-command">PE</a>
-                    <a href="../index.html" class="related-command">All Commands</a>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <p>Borham Tools v78.2 - Free AutoCAD LISP Tools</p>
-            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
-            <div class="back-link">
-                <a href="../index.html">← Return to Main Page</a>
-            </div>
-        </div>
+      <p>📧 For technical inquiries: MahmoudBorham.codes@gmail.com</p>
+      <p>🛠️ Part of Borham Tools package specialized in surveying and engineering automation</p>
+      <p>🇵🇸 Free Palestine - For the sake of Allah Almighty</p>
+      <div class="footer-highlight">
+        "Points + Codes + Organization = Professional Coordinate Table in Minutes"
+      </div>
     </footer>
+
+  </div>
 </body>
 </html>
