@@ -1,1 +1,362 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>الأمر T — إنشاء جدول إحداثيات النقاط | Borham Tools</title>
+
+  <!-- خطوط Google: استخدام وسم link الصحيح -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #10b981;
+      --accent: #f59e0b;
+      --bg-dark: #0f172a;
+      --bg-card: #334155;
+      --text-light: #f1f5f9;
+      --text-gray: #cbd5e1;
+      --success: #22c55e;
+      --border: #475569;
+      --container-width: 1000px;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2.5rem;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg-dark);
+      font-family: 'Cairo', system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+    .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+    /* الترويسة */
+    .page-header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      padding: var(--spacing-lg) 0;
+      text-align: center;
+      margin-bottom: var(--spacing-lg);
+    }
+    .page-header h1 { font-size: 2.2rem; color: var(--secondary); }
+    .page-header p { color: var(--text-gray); font-size: 1.05rem; max-width: 850px; margin: 0.6rem auto 0; }
+
+    /* الأقسام */
+    .section { margin-bottom: var(--spacing-lg); }
+    .section-title {
+      color: var(--secondary);
+      font-size: 1.6rem;
+      border-right: 4px solid var(--accent);
+      padding-right: 1rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    /* صناديق */
+    .definition,
+    .how-it-works {
+      background: var(--bg-card);
+      border-radius: 10px;
+      padding: var(--spacing-md);
+      border: 1px solid var(--border);
+    }
+    .definition-box {
+      background: rgba(37,99,235,0.1);
+      border-right: 3px solid var(--primary);
+      padding: var(--spacing-md);
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+    .definition-box h3 { color: var(--accent); margin-bottom: 0.7rem; }
+
+    /* المميزات التقنية */
+    .tech-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-md);
+    }
+    .feature-card {
+      background: var(--bg-card);
+      padding: var(--spacing-md);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: 0.3s ease;
+    }
+    .feature-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+    .feature-icon { font-size: 2rem; color: var(--accent); margin-bottom: 0.6rem; }
+    .feature-card h4 { color: var(--text-light); margin-bottom: 0.4rem; }
+    .feature-card p { color: var(--text-gray); font-size: 0.95rem; }
+
+    /* سير العمل */
+    .workflow {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+    }
+    .work-step {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: var(--spacing-sm);
+      text-align: center;
+      border-radius: 10px;
+      position: relative;
+      flex: 1;
+      min-width: 170px;
+    }
+    /* استخدام سهم مباشر لتفادي NO GLYPH */
+    .work-step:not(:last-child):after {
+      content: "→";
+      position: absolute;
+      left: -25px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.6rem;
+      color: var(--accent);
+    }
+
+    /* زر العودة */
+    .back-link {
+      display: inline-block;
+      background: var(--primary);
+      padding: 10px 25px;
+      border-radius: 7px;
+      color: white;
+      text-decoration: none;
+      transition: 0.3s ease;
+      margin-top: 1.5rem;
+    }
+    .back-link:hover { background: #1e40af; }
+
+    /* الفوتر */
+    footer {
+      text-align: center;
+      margin-top: var(--spacing-lg);
+      padding: var(--spacing-lg) 0;
+      border-top: 1px solid var(--border);
+    }
+    footer p { color: var(--text-gray); }
+
+    /* تجاوب */
+    @media (max-width: 768px) {
+      .page-header h1 { font-size: 1.9rem; }
+      .section-title { font-size: 1.45rem; }
+      .workflow { flex-direction: column; }
+      .work-step:not(:last-child):after {
+        content: "↓";
+        left: 50%;
+        top: auto;
+        bottom: -20px;
+        transform: translateX(-50%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- الترويسة -->
+    <header class="page-header">
+      <h1>الأمر T</h1>
+      <p>إنشاء جدول إحداثيات للنقاط داخل الرسم — مع إمكانية إضافة عمود الأكواد تلقائيًا وربطه بأقرب نص، وتقسيم تلقائي للبيانات الكبيرة، وتنظيم الطبقات لكل عنصر لضمان لوحة نظيفة واحترافية.</p>
+    </header>
+
+    <!-- 1. تعريف الأمر -->
+    <section class="section">
+      <h2 class="section-title">📌 ما هو الأمر T؟</h2>
+      <div class="definition">
+        <p>
+          الأمر <strong>T</strong> (Create Table From Points) من حزمة <em>Borham Tools</em> يتيح لك إنشاء
+          <strong>جدول إحداثيات كامل داخل الرسم</strong> يحتوي على:
+          <br/>✔ رقم النقطة (NO) — يُكتب أعلى كل نقطة
+          <br/>✔ EAST — الإحداثي الشرقي (X)
+          <br/>✔ NORTH — الإحداثي الشمالي (Y)
+          <br/>✔ LEVEL — المنسوب (Z)
+          <br/>✔ CODE — <em>اختياري</em>، يُلتقط تلقائيًا من أقرب نص حول النقطة
+        </p>
+
+        <div class="definition-box">
+          <h3>🎯 المميزات الرئيسية</h3>
+          <ul style="color: var(--text-gray); line-height: 1.9; padding-right: 1rem;">
+            <li>إنشاء جدول AutoCAD أصلي <strong>داخل الرسم</strong> بخلايا منسقة وجاهزة للطباعة.</li>
+            <li>سحب الكود تلقائيًا من أقرب <strong>TEXT/MTEXT</strong> لكل نقطة.</li>
+            <li>دعم <strong>الوضع اليدوي</strong> لتسجيل نقاط لا تحتوي عناصر POINT مسبقًا.</li>
+            <li>تقسيم تلقائي للجدول عند وجود أكثر من <strong>100 نقطة</strong> (Multi‑Tables).</li>
+            <li>عرض <strong>شريط تقدم</strong> أثناء المعالجة (Progress %).</li>
+          </ul>
+        </div>
+
+        <div class="definition-box" style="background: rgba(16,185,129,0.1); border-right: 3px solid var(--secondary);">
+          <h3 style="color: var(--secondary);">📂 تنظيم الطبقات تلقائيًا</h3>
+          <p style="color: var(--text-gray);">
+            يقوم الأمر بإنشاء طبقات منفصلة لكل عنصر لضمان لوحة نظيفة وسهلة الإدارة:
+          </p>
+          <ul style="color: var(--text-gray); line-height: 1.9; padding-right: 1rem;">
+            <li><strong>Point-Names</strong> — لأرقام النقاط (NO).</li>
+            <li><strong>Coordinates-Table</strong> — لجدول الإحداثيات.</li>
+            <li><strong>Manual-Points</strong> — للنقاط اليدوية (مرسومة كنقطة حمراء).</li>
+            <li><strong>Point-Codes</strong> — لأكواد النقاط (لون أصفر).</li>
+          </ul>
+          <p style="color: var(--text-gray); font-size: 0.95rem;">
+            بهذه الطبقات يمكنك إظهار/إخفاء أو التحكم في خصائص كل مجموعة بعرض واحد من <em>Layer Manager</em>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. المميزات التقنية الفريدة -->
+    <section class="section">
+      <h2 class="section-title">✨ المميزات التقنية الفريدة</h2>
+      <div class="tech-features">
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h4>جدول تلقائي داخل الرسم</h4>
+          <p>إنشاء جدول AutoCAD أصلي مع عنوان وHeader وData منسقة تلقائيًا.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🏷️</div>
+          <h4>سحب الأكواد الذكي</h4>
+          <p>البحث عن أقرب TEXT/MTEXT لكل نقطة ووضع قيمته في عمود CODE.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🖊️</div>
+          <h4>رقم النقطة (NO)</h4>
+          <p>كتابة رقم النقطة أعلى موقعها داخل طبقة Point-Names.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📍</div>
+          <h4>الوضع اليدوي</h4>
+          <p>التقاط نقاط يدويًا ورسم نقطة حمراء لكل اختيار داخل Manual-Points.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🧩</div>
+          <h4>طبقات منفصلة لكل عنصر</h4>
+          <p>إنشاء Layers مخصصة: Point-Names، Coordinates-Table، Manual-Points، Point-Codes لتنظيم اللوحة.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h4>تقسيم تلقائي + شريط تقدم</h4>
+          <p>تقسيم تلقائي للبيانات الكبيرة (100 صف لكل جدول) مع Progress % أثناء الإنشاء.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. كيف يعمل الأمر -->
+    <section class="section">
+      <h2 class="section-title">🚀 كيف يعمل الأمر T؟</h2>
+      <div class="how-it-works">
+        <p style="color: var(--text-gray); margin-bottom: 1rem;">خطوات الاستخدام الأساسية:</p>
+        <div class="workflow">
+
+          <div class="work-step">
+            <strong>الخطوة 1</strong>
+            <p>تشغيل الأمر</p>
+            <small>اكتب <code>T</code> ثم Enter</small>
+          </div>
+
+          <div class="work-step">
+            <strong>الخطوة 2</strong>
+            <p>اختيار النقاط</p>
+            <small>اختر عناصر <code>POINT</code> أو اضغط <code>M</code> للوضع اليدوي</small>
+          </div>
+
+          <div class="work-step">
+            <strong>الخطوة 3</strong>
+            <p>تفعيل الكود (اختياري)</p>
+            <small>أثناء الاختيار اضغط <code>C</code> لإضافة عمود <code>CODE</code></small>
+          </div>
+
+          <div class="work-step">
+            <strong>الخطوة 4</strong>
+            <p>ارتفاع النص</p>
+            <small>أدخل قيمة <em>Text Height</em> لرقم النقطة والكود</small>
+          </div>
+
+          <div class="work-step">
+            <strong>الخطوة 5</strong>
+            <p>مكان الجدول</p>
+            <small>حدد نقطة الإدراج وسيتم بناء الجدول</small>
+          </div>
+
+        </div>
+
+        <div class="definition-box" style="margin-top: 1rem;">
+          <h3>🧠 تفاصيل مهمة أثناء التنفيذ</h3>
+          <ul style="color: var(--text-gray); line-height: 1.9; padding-right: 1rem;">
+            <li>إذا فُعِّل <code>CODE</code>، يتم البحث في نطاق قريب (افتراضيًا ~5 وحدات) عن أقرب نص ووضعه في الجدول.</li>
+            <li>يُكتب <strong>NO</strong> أعلى كل نقطة في طبقة <em>Point-Names</em>، وتُرسم النقاط اليدوية في <em>Manual-Points</em>.</li>
+            <li>عند تجاوز <strong>100 نقطة</strong>، ينشئ الأمر أكثر من جدول تلقائيًا (<em>Coordinates-Table</em> رقم 1، 2، ...).</li>
+            <li>يظهر شريط تقدم داخل سطر الأوامر يوضح نسبة الإنجاز وعدد النقاط المعالجة.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 3 حالات استخدام -->
+    <section class="section">
+      <h2 class="section-title">📍 ثلاث حالات نستخدم فيها الأمر T</h2>
+      <div class="tech-features">
+
+        <div class="feature-card">
+          <div class="feature-icon">📑</div>
+          <h4>1 — تسليم مساحي رسمي</h4>
+          <p>جدول نقاط ببيانات EAST/NORTH/LEVEL مع CODE موحد (Boundary/Control/Traverse ...).</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🏗️</div>
+          <h4>2 — مشاريع إنشائية كبيرة</h4>
+          <p>توثيق مراكز الأعمدة والبلاطات بمناسيب Z وترقيم NO منسق جاهز للطباعة.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🛣️</div>
+          <h4>3 — مشاريع الطرق</h4>
+          <p>محطات كل 25م: استخراج جدول إحداثيات مع LEVEL وCODE للـ CL/Edge/Slope وغيرها.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. نصائح وأفضل الممارسات -->
+    <section class="section">
+      <h2 class="section-title">💡 نصائح وأفضل الممارسات</h2>
+      <div class="definition">
+        <ul style="color: var(--text-gray); line-height: 1.9; padding-right: 1rem;">
+          <li>اجعل الأكواد بالقرب من النقاط لضمان التقاطها تلقائيًا بشكل صحيح.</li>
+          <li>اختر <em>Text Height</em> مناسب للمقياس قبل التنفيذ (مثل 1.0 أو 1.5 أو حسب مخططك).</li>
+          <li>استخدم الـ <strong>Layers</strong> لإظهار/إخفاء مجموعات البيانات بسرعة (NO، TABLE، CODES، POINTS).</li>
+          <li>لوحة كبيرة؟ ضع الجداول بالتتابع أفقيًا أو رأسيًا مع مسافة فاصلة لضمان قراءة واضحة.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- زر العودة -->
+    <div style="text-align: center;">
+      <a href="../index.html" class="back-link">العودة إلى الصفحة الرئيسية</a>
+    </div>
+
+    <!-- الفوتر -->
+    <footer>
+      <p>📧 للتواصل: MahmoudBorham.codes@gmail.com</p>
+      <p>🇵🇸 Free Palestine - لوجه الله تعالى</p>
+      <p style="color: var(--accent); font-size: 0.9rem; margin-top: 1rem;">
+        "جدول نقاط متكامل + كود تلقائي + تنظيم الطبقات = الأمر T"
+      </p>
+    </footer>
+
+  </div>
+</body>
+</html>
+
