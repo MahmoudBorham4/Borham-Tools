@@ -1,203 +1,598 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ENL - XYZ Coordinates | Borham Tools</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/command.css">
-    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ENL Command — Full XYZ Coordinates | Borham Tools</title>
+  <!-- Fonts: Inter (UI) + Roboto Mono (code) -->
+  https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto+Mono:wght@400;600&display=swap
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #10b981;
+      --accent: #f59e0b;
+      --bg-dark: #0f172a;
+      --bg-card: #334155;
+      --text-light: #f1f5f9;
+      --text-gray: #cbd5e1;
+      --success: #22c55e;
+      --border: #475569;
+      --container-width: 1000px;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2.5rem;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Inter, "Segoe UI Emoji", "Apple Color Emoji", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    .mono { font-family: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
+
+    /* Header */
+    .page-header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      padding: var(--spacing-lg) 0;
+      text-align: center;
+      margin-bottom: var(--spacing-lg);
+    }
+    .page-header h1 { font-size: 2.2rem; color: var(--secondary); margin-bottom: 0.5rem; }
+    .page-header p { color: var(--text-gray); max-width: 800px; margin: 0 auto; }
+
+    /* Sections */
+    .section { margin-bottom: var(--spacing-lg); }
+    .section-title {
+      color: var(--secondary);
+      font-size: 1.6rem;
+      margin-bottom: var(--spacing-md);
+      border-left: 4px solid var(--accent);
+      padding-left: 1rem;
+    }
+
+    /* Definition */
+    .definition {
+      background: var(--bg-card);
+      border-radius: 10px;
+      padding: var(--spacing-md);
+      margin: var(--spacing-md) 0;
+      border: 1px solid var(--border);
+    }
+    .definition-box {
+      background: rgba(37, 99, 235, 0.1);
+      border-left: 3px solid var(--primary);
+      padding: var(--spacing-md);
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+    .definition-box h3 {
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Feature grid */
+    .tech-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-md);
+      margin: var(--spacing-md) 0;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: var(--spacing-md);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .feature-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+    .feature-icon { font-size: 2rem; color: var(--accent); margin-bottom: 0.8rem; }
+    .feature-card h4 { color: var(--text-light); margin-bottom: 0.5rem; }
+    .feature-card p { color: var(--text-gray); font-size: 0.95rem; }
+
+    /* How it works */
+    .how-it-works {
+      background: var(--bg-card);
+      border-radius: 10px;
+      padding: var(--spacing-md);
+      margin: var(--spacing-md) 0;
+      border: 1px solid var(--border);
+    }
+    .workflow {
+      display: flex;
+      justify-content: space-between;
+      margin: var(--spacing-md) 0;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+    }
+    .work-step {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: var(--spacing-sm);
+      text-align: center;
+      flex: 1;
+      min-width: 150px;
+      position: relative;
+    }
+    /* Literal arrow glyphs to avoid NO GLYPH */
+    .work-step:not(:last-child):after {
+      content: "→";
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-size: 1.5rem;
+    }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; color: var(--text-gray); }
+    th, td { padding: 1rem; border: 1px solid var(--border); }
+    thead tr { background: rgba(37, 99, 235, 0.2); }
+    th { color: var(--text-light); text-align: left; }
+
+    /* Buttons */
+    .back-link {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 10px 25px;
+      border-radius: 6px;
+      text-decoration: none;
+      margin: var(--spacing-md) 0;
+      transition: background 0.3s;
+    }
+    .back-link:hover { background: #1e40af; }
+
+    /* Footer */
+    footer { text-align: center; padding: var(--spacing-lg) 0; border-top: 1px solid var(--border); margin-top: var(--spacing-lg); }
+    footer p { color: var(--text-gray); margin: 0.5rem 0; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-header h1 { font-size: 1.8rem; }
+      .section-title { font-size: 1.4rem; }
+      .workflow { flex-direction: column; }
+      .work-step:not(:last-child):after {
+        content: "↓";
+        right: 50%;
+        top: auto;
+        bottom: -20px;
+        transform: translateX(50%);
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Back Button -->
-    <div class="back-button">
-        <a href="../index.html">← Back to Home</a>
-    </div>
+  <div class="container">
+    <!-- Header -->
+    <header class="page-header">
+      <h1>ENL Command</h1>
+      <p>Label full <strong>XYZ</strong> coordinates — generate a clean, print‑ready MLeader with precise values.</p>
+    </header>
 
-    <!-- Command Header -->
-    <section class="command-header">
-        <div class="container">
-            <span class="command-badge">3D MLeader</span>
-            <h1 class="command-name">ENL</h1>
-            <p class="command-title">Complete XYZ Coordinate Annotation with Elevation</p>
+    <!-- 1. Definition -->
+    <section class="section">
+      <h2 class="section-title">📌 What is ENL?</h2>
+      <div class="definition">
+        <p>
+          <strong>ENL</strong> (Full XYZ Coordinates) builds a professional <strong>MLeader</strong> showing
+          <strong>X</strong>, <strong>Y</strong>, and <strong>Z</strong> for any point you pick in the drawing.
+          Instead of entering values by hand, you pick a point — ENL reads the coordinates and places a formatted, print‑ready label.
+        </p>
+
+        <div class="definition-box">
+          <h3>🎯 Key benefits</h3>
+          <ul style="color: var(--text-gray); padding-left: 1rem;">
+            <li><strong>Auto extraction:</strong> reads X, Y, Z directly from the picked point</li>
+            <li><strong>3D output:</strong> shows elevation <strong>Z</strong> alongside X/Y</li>
+            <li><strong>High precision:</strong> three decimal places for clarity</li>
+            <li><strong>Customizable:</strong> adjust <em>Scale</em> and <em>Angle</em> on the fly</li>
+            <li><strong>Continuous mode:</strong> place many labels without restarting</li>
+          </ul>
         </div>
+
+        <div class="definition-box" style="background: rgba(16,185,129,0.1); border-left: 3px solid var(--secondary);">
+          <h3 style="color: var(--secondary); margin-bottom: 0.8rem;">✅ Output format</h3>
+          <p style="color: var(--text-gray); margin-bottom: 0.5rem;">Each MLeader uses this template:</p>
+          <div class="mono" style="background: rgba(0,0,0,0.3); padding: var(--spacing-sm); border-radius: 6px; color: var(--text-light); text-align: center;">
+            <p style="margin: 0.2rem 0;"><strong>X: 456789.123</strong></p>
+            <p style="margin: 0.2rem 0;"><strong>Y: 3456789.456</strong></p>
+            <p style="margin: 0.2rem 0;"><strong>Z: 25.500</strong></p>
+          </div>
+          <p style="color: var(--text-gray); margin-top: 0.5rem; font-size: 0.9rem;">
+            💡 <strong>X</strong> = Easting &nbsp;|&nbsp; <strong>Y</strong> = Northing &nbsp;|&nbsp; <strong>Z</strong> = Elevation
+          </p>
+        </div>
+
+        <div class="definition-box">
+          <h3>⚙️ When should you use it?</h3>
+          <ul style="color: var(--text-gray); padding-left: 1rem;">
+            <li>3D drawings that must show elevation</li>
+            <li>Road and topography work needing Z values</li>
+            <li>Authority submittals requiring XYZ callouts</li>
+            <li>Documenting <strong>Control Points</strong> with full data</li>
+            <li>Multi‑story buildings and precise structural work</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
-    <!-- Command Content -->
-    <section class="command-content">
-        <div class="container">
-            <!-- Overview Section -->
-            <div class="content-section highlight-box">
-                <h2>📖 Command Overview</h2>
-                <p>The <code>ENL</code> command creates comprehensive MLeader annotations displaying full X, Y, and Z coordinates, perfect for 3D modeling and terrain analysis.</p>
-                
-                <h3>Key Features:</h3>
-                <ul>
-                    <li><strong>Complete 3D coordinates</strong> (X, Y, Z)</li>
-                    <li><strong>Shared settings</strong> with EN command</li>
-                    <li><strong>Automatic Z-coordinate detection</strong></li>
-                    <li><strong>Professional multi-line MLeader format</strong></li>
-                    <li><strong>Handles 2D points</strong> (Z = 0.0)</li>
-                    <li><strong>Interactive scale/angle adjustment</strong></li>
-                </ul>
-            </div>
-
-            <!-- Usage Section -->
-            <div class="content-section usage-box">
-                <h2>🚀 How to Use</h2>
-                <p>To annotate 3D coordinates in AutoCAD:</p>
-                
-                <ol class="steps-list">
-                    <li>Type <code>ENL</code> in the command line and press Enter</li>
-                    <li>Click on the 3D point you want to annotate</li>
-                    <li>Click again to place the MLeader at desired location</li>
-                    <li>Repeat for multiple points or press Enter to exit</li>
-                </ol>
-                
-                <h3>Interactive Options During Command:</h3>
-                <ul>
-                    <li>Type <code>S</code> → Change scale (default: 0.20)</li>
-                    <li>Type <code>A</code> → Change angle (default: 0.0)</li>
-                </ul>
-                
-                <h3>Command Line Example:</h3>
-                <pre><code>Command: ENL
-Current scale: 0.20, Current angle: 0.0
-Type S to change scale, A to change angle
-Select 3D point: [click point]
-Place leader: [click location]
-Coordinates: 12345.678, 98765.432, 100.500</code></pre>
-            </div>
-
-            <!-- Configuration -->
-            <div class="content-section">
-                <h2>⚙️ Shared Configuration</h2>
-                
-                <h3>Global Variables (Shared with EN):</h3>
-                <ul>
-                    <li><code>en_scale</code>: Text scale (default: 0.20) - <em>Shared with EN</em></li>
-                    <li><code>en_angle</code>: Text angle in degrees (default: 0.0) - <em>Shared with EN</em></li>
-                </ul>
-                
-                <h3>Layer Management:</h3>
-                <p>Uses the same layer as EN command: <strong>"COORDINATES"</strong></p>
-                <ul>
-                    <li><strong>Color:</strong> Red (Index 1)</li>
-                    <li><strong>Consistency:</strong> Same layer for both 2D and 3D coordinates</li>
-                    <li><strong>Auto-unlock:</strong> Opens if locked or hidden</li>
-                </ul>
-            </div>
-
-            <!-- Z-Coordinate Handling -->
-            <div class="content-section">
-                <h2>📐 Z-Coordinate Detection</h2>
-                
-                <div class="command-tips">
-                    <div class="tip-card">
-                        <h4>🔍 Automatic Detection</h4>
-                        <p>Automatically extracts Z-coordinate from selected point.</p>
-                    </div>
-                    <div class="tip-card">
-                        <h4>📏 2D Point Support</h4>
-                        <p>If point has no Z value, automatically uses <code>0.0</code>.</p>
-                    </div>
-                    <div class="tip-card">
-                        <h4>🎯 Precision Formatting</h4>
-                        <p>All coordinates displayed with 3 decimal places.</p>
-                    </div>
-                    <div class="tip-card">
-                        <h4>🔄 Real-time Adjustment</h4>
-                        <p>Change scale and angle during annotation.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Format Example -->
-            <div class="content-section">
-                <h2>📋 3D Output Format</h2>
-                <p>MLeader displays complete 3D coordinates in this professional format:</p>
-                <div style="background: var(--bg-dark); padding: 20px; border-radius: 8px; margin: 15px 0;">
-                    <code style="font-size: 1.1rem; color: var(--secondary);">
-                        E: 12345.678<br>
-                        N: 98765.432<br>
-                        Z: 100.500
-                    </code>
-                </div>
-                <p><strong>Angle Application:</strong> Angle is applied to entire MLeader for perfect alignment.</p>
-            </div>
-
-            <!-- Applications -->
-            <div class="content-section">
-                <h2>🎯 3D Applications</h2>
-                <ul>
-                    <li><strong>Terrain Modeling:</strong> Annotate elevation points in topographic surveys</li>
-                    <li><strong>3D Structures:</strong> Mark column heights and beam elevations</li>
-                    <li><strong>Mining & Geology:</strong> Document borehole coordinates and depths</li>
-                    <li><strong>Hydrology:</strong> Mark water level elevations and pipe inverts</li>
-                    <li><strong>Construction:</strong> Annotate floor levels and foundation depths</li>
-                    <li><strong>BIM Coordination:</strong> Mark MEP equipment elevations</li>
-                </ul>
-            </div>
-
-            <!-- Comparison -->
-            <div class="content-section">
-                <h2>🔄 EN vs ENL Comparison</h2>
-                <table style="width:100%; border-collapse: collapse; margin: 20px 0;">
-                    <tr style="background: var(--bg-card);">
-                        <th style="padding: 12px; border: 1px solid var(--border);">Feature</th>
-                        <th style="padding: 12px; border: 1px solid var(--border);">EN Command</th>
-                        <th style="padding: 12px; border: 1px solid var(--border);">ENL Command</th>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px; border: 1px solid var(--border);">Coordinates</td>
-                        <td style="padding: 10px; border: 1px solid var(--border);">X, Y only</td>
-                        <td style="padding: 10px; border: 1px solid var(--border);">X, Y, Z</td>
-                    </tr>
-                    <tr style="background: var(--bg-card);">
-                        <td style="padding: 10px; border: 1px solid var(--border);">Format</td>
-                        <td style="padding: 10px; border: 1px solid var(--border);">2-line MLeader</td>
-                        <td style="padding: 10px; border: 1px solid var(--border);">3-line MLeader</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px; border: 1px solid var(--border);">Settings</td>
-                        <td colspan="2" style="padding: 10px; border: 1px solid var(--border); text-align:center;"><strong>Shared (en_scale, en_angle)</strong></td>
-                    </tr>
-                    <tr style="background: var(--bg-card);">
-                        <td style="padding: 10px; border: 1px solid var(--border);">Layer</td>
-                        <td colspan="2" style="padding: 10px; border: 1px solid var(--border); text-align:center;"><strong>"COORDINATES" (Red)</strong></td>
-                    </tr>
-                </table>
-            </div>
-
-            <!-- Performance -->
-            <div class="content-section performance-box">
-                <h2>⚡ Workflow Efficiency</h2>
-                <p class="performance-stat"><strong>95% Faster</strong> than manual 3D coordinate annotation</p>
-                <p>Complete automation of 3D point annotation with professional formatting.</p>
-            </div>
-
-            <!-- Related Commands -->
-            <div class="related-commands">
-                <h3>Related Commands</h3>
-                <div class="related-grid">
-                    <a href="en.html" class="related-command">EN</a>
-                    <a href="t.html" class="related-command">T</a>
-                    <a href="lv.html" class="related-command">LV</a>
-                    <a href="../index.html" class="related-command">All Commands</a>
-                </div>
-            </div>
+    <!-- 2. Technical highlights -->
+    <section class="section">
+      <h2 class="section-title">✨ Technical highlights</h2>
+      <div class="tech-features">
+        <div class="feature-card">
+          <div class="feature-icon">📏</div>
+          <h4>XYZ precision</h4>
+          <p>Three decimal places across X, Y, and Z — survey/structural ready.</p>
         </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h4>Clean MLeader style</h4>
+          <p>Arrow and leader line tuned for sheet output.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚙️</div>
+          <h4>Full control</h4>
+          <p>Change <em>Scale</em> and <em>Angle</em> while the command is running.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h4>Continuous placement</h4>
+          <p>Label dozens of points without relaunching ENL.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. How ENL works -->
+    <section class="section">
+      <h2 class="section-title">🚀 How ENL works</h2>
+      <div class="how-it-works">
+        <p style="color: var(--text-gray); margin-bottom: 1rem;">Four quick steps with optional adjustments:</p>
+
+        <div class="workflow">
+          <div class="work-step">
+            <strong>Step 1</strong>
+            <p>Type ENL</p>
+            <small>Press Enter to run</small>
+          </div>
+          <div class="work-step">
+            <strong>Step 2</strong>
+            <p>Pick the point</p>
+            <small>ENL reads its XYZ</small>
+          </div>
+          <div class="work-step">
+            <strong>Step 3</strong>
+            <p>Place the label</p>
+            <small>Click to position the MLeader</small>
+          </div>
+          <div class="work-step">
+            <strong>Result</strong>
+            <p>MLeader created!</p>
+            <small>On <code>COORDINATES</code> layer (red)</small>
+          </div>
+        </div>
+
+        <div style="background: rgba(37,99,235,0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
+          <h3 style="color: var(--primary); margin-bottom: 1rem;">⚙️ On‑the‑fly adjustments</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-sm);">
+            <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-md); border-radius: 6px;">
+              <h4 style="color: var(--accent); margin-bottom: 0.5rem;">📐 Change Scale (S)</h4>
+              <p style="color: var(--text-gray); font-size: 0.9rem;">Type <strong>S</strong> then Enter while ENL is active</p>
+              <p style="color: var(--text-gray); font-size: 0.9rem;">Enter a new scale (e.g., <code class="mono">0.30</code>)</p>
+              <p style="color: var(--success); font-size: 0.9rem; margin-top: 0.3rem;">Default: <code class="mono">0.20</code></p>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); padding: var(--spacing-md); border-radius: 6px;">
+              <h4 style="color: var(--accent); margin-bottom: 0.5rem;">🔄 Change Angle (A)</h4>
+              <p style="color: var(--text-gray); font-size: 0.9rem;">Type <strong>A</strong> then Enter while ENL is active</p>
+              <p style="color: var(--text-gray); font-size: 0.9rem;">Enter the angle in degrees (e.g., <code class="mono">45</code>)</p>
+              <p style="color: var(--success); font-size: 0.9rem; margin-top: 0.3rem;">Default: <code class="mono">0.0</code></p>
+            </div>
+          </div>
+          <p style="color: var(--text-gray); text-align: center; margin-top: 1rem; font-size: 0.9rem;">
+            💡 ENL remembers your last <em>Scale</em> and <em>Angle</em>. No need to re‑enter them next time.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. EN vs ENL -->
+    <section class="section">
+      <h2 class="section-title">🔀 EN vs ENL</h2>
+      <div style="background: var(--bg-card); border-radius: 10px; padding: var(--spacing-md); border: 1px solid var(--border);">
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th style="text-align:center; color: var(--secondary);">EN</th>
+                <th style="text-align:center; color: var(--accent);">ENL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight: bold;">Shown coordinates</td>
+                <td style="text-align: center;">E (X) & N (Y)</td>
+                <td style="text-align: center;">X, Y, Z (3D)</td>
+              </tr>
+              <tr style="background: rgba(255,255,255,0.02);">
+                <td style="font-weight: bold;">Best for</td>
+                <td style="text-align: center;">2D plans</td>
+                <td style="text-align: center;">3D drawings</td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Lines per label</td>
+                <td style="text-align: center;">2 lines</td>
+                <td style="text-align: center;">3 lines</td>
+              </tr>
+              <tr style="background: rgba(255,255,255,0.02);">
+                <td style="font-weight: bold;">Formatting</td>
+                <td style="text-align: center;" class="mono">E: xxx.xxx<br>N: yyy.yyy</td>
+                <td style="text-align: center;" class="mono">X: xxx.xxx<br>Y: yyy.yyy<br>Z: zzz.zzz</td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">Speed</td>
+                <td style="text-align: center;">Slightly faster</td>
+                <td style="text-align: center; color: var(--success);">Comparable</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1.5rem; font-size: 1.05rem;">
+          💡 Use <strong>EN</strong> for horizontal plans; choose <strong>ENL</strong> whenever elevation (Z) must be shown.
+        </p>
+      </div>
+    </section>
+
+    <!-- 5. Practical applications -->
+    <section class="section">
+      <h2 class="section-title">🏗️ Practical applications</h2>
+      <div class="tech-features">
+        <div class="feature-card">
+          <div class="feature-icon">🗺️</div>
+          <h4>Topographic survey</h4>
+          <p>Label key points with clear Z (hills, low areas, cut/fill edges).</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏢</div>
+          <h4>Architectural 3D plans</h4>
+          <p>Show elevations of columns, slabs, and floors.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛣️</div>
+          <h4>Road projects</h4>
+          <p>Station labels with X/Y plus Z for vertical design.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📍</div>
+          <h4>Control points</h4>
+          <p>XYZ‑complete data across large sites.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📋</div>
+          <h4>Authority submittals</h4>
+          <p>Standardized XYZ labels for approvals.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h4>Critical locations</h4>
+          <p>Any point where elevation matters later.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Real‑world examples -->
+    <section class="section">
+      <h2 class="section-title">💼 Real‑world examples</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+          <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 Example 1: Open site</h4>
+          <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Scenario:</strong></p>
+          <p style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 1rem;">Site with elevation changes; XYZ labels needed for terrain modeling.</p>
+          <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Using ENL:</strong></p>
+          <ol style="color: var(--text-gray); font-size: 0.95rem; padding-left: 1.5rem;">
+            <li>Run ENL once</li>
+            <li>Click key points in sequence</li>
+            <li>Place an MLeader per point</li>
+            <li>Z appears with X/Y instantly</li>
+            <li>Ready for topo analysis</li>
+          </ol>
+          <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">✅ Precise XYZ, fast workflow</p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+          <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 Example 2: Multi‑story building</h4>
+          <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Scenario:</strong></p>
+          <p style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 1rem;">Column centers must include floor elevations (Z) on structural sheets.</p>
+          <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Using ENL:</strong></p>
+          <ol style="color: var(--text-gray); font-size: 0.95rem; padding-left: 1.5rem;">
+            <li>Set <em>Scale</em> to <code class="mono">0.15</code> (smaller text)</li>
+            <li>Run ENL and click each column center</li>
+            <li>Place labels consistently</li>
+            <li>Unified XYZ callouts ready to print</li>
+            <li>Clear for authority review</li>
+          </ol>
+          <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">✅ Organized Z = professional drawings</p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: var(--spacing-md);">
+          <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 Example 3: Long road alignment</h4>
+          <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Scenario:</strong></p>
+          <p style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 1rem;">Stations every 25 m require Z shown with X/Y for vertical profile checks.</p>
+          <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Using ENL:</strong></p>
+          <ol style="color: var(--text-gray); font-size: 0.95rem; padding-left: 1.5rem;">
+            <li>Run ENL in continuous mode</li>
+            <li>Click each station, place the MLeader</li>
+            <li>Adjust angle (A) if needed</li>
+            <li>Fast, consistent XYZ labels</li>
+            <li>Ready for design validation</li>
+          </ol>
+          <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1rem;">✅ Speed + accuracy together</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Tips & best practices -->
+    <section class="section">
+      <h2 class="section-title">💡 Tips & best practices</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+        <div style="background: rgba(16,185,129,0.1); border-left: 3px solid var(--secondary); padding: var(--spacing-md); border-radius: 8px;">
+          <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">✅ For best results</h4>
+          <ul style="color: var(--text-gray); font-size: 0.95rem; padding-left: 1rem;">
+            <li>Choose an appropriate <strong>Scale</strong> for the sheet size</li>
+            <li>Use OSNAP to snap precisely</li>
+            <li>Place labels away from geometry clashes</li>
+            <li>Keep consistent placement (e.g., all above or to the right)</li>
+            <li>Manage all labels via the <code>COORDINATES</code> layer</li>
+          </ul>
+        </div>
+
+        <div style="background: rgba(37,99,235,0.1); border-left: 3px solid var(--primary); padding: var(--spacing-md); border-radius: 8px;">
+          <h4 style="color: var(--primary); margin-bottom: 0.8rem;">⚙️ Adjust while working</h4>
+          <ul style="color: var(--text-gray); font-size: 0.95rem; padding-left: 1rem;">
+            <li><strong>Bigger text:</strong> type <code class="mono">S</code> then <code class="mono">0.30</code>+</li>
+            <li><strong>Smaller text:</strong> type <code class="mono">S</code> then <code class="mono">0.15</code>-</li>
+            <li><strong>Rotate:</strong> type <code class="mono">A</code> then set the angle</li>
+            <li><strong>Exit:</strong> press <code class="mono">Enter</code> without picking a point</li>
+            <li>Last settings are remembered automatically</li>
+          </ul>
+        </div>
+
+        <div style="background: rgba(245,158,11,0.1); border-left: 3px solid var(--accent); padding: var(--spacing-md); border-radius: 8px;">
+          <h4 style="color: var(--accent); margin-bottom: 0.8rem;">🎨 Formatting tips</h4>
+          <ul style="color: var(--text-gray); font-size: 0.95rem; padding-left: 1rem;">
+            <li>All labels go to the <strong>COORDINATES</strong> (red) layer</li>
+            <li>Change layer color in Layer Manager if needed</li>
+            <li>Use <em>Properties</em> to fine‑tune after creation</li>
+            <li>Standard scale (<code class="mono">0.20</code>) suits most sheets</li>
+            <li>For A3 printing, try <code class="mono">0.25</code> or slightly higher</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Continuous mode -->
+    <section class="section">
+      <h2 class="section-title">🔄 Continuous mode — save time</h2>
+      <div style="background: var(--bg-card); border-radius: 10px; padding: var(--spacing-md); border: 1px solid var(--border);">
+        <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
+          After launching <strong>ENL</strong> once, you can place dozens of XYZ labels without retyping the command.
+        </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); margin-bottom: 1.5rem;">
+          <div style="background: rgba(239,68,68,0.1); padding: var(--spacing-md); border-radius: 8px; border-left: 3px solid #ef4444;">
+            <h4 style="color: #ef4444; margin-bottom: 0.8rem;">❌ Traditional way</h4>
+            <ol style="color: var(--text-gray); font-size: 0.95rem; padding-left: 1.5rem;">
+              <li>Type ENL + Enter</li>
+              <li>Pick point & place MLeader</li>
+              <li><strong>Type ENL + Enter again</strong></li>
+              <li>Pick point & place MLeader</li>
+              <li><strong>Type ENL + Enter again</strong></li>
+              <li>…repeat (slow and tedious)</li>
+            </ol>
+          </div>
+
+          <div style="background: rgba(34,197,94,0.1); padding: var(--spacing-md); border-radius: 8px; border-left: 3px solid var(--success);">
+            <h4 style="color: var(--success); margin-bottom: 0.8rem;">✅ Continuous mode</h4>
+            <ol style="color: var(--text-gray); font-size: 0.95rem; padding-left: 1.5rem;">
+              <li>Type ENL + Enter <strong>(only once)</strong></li>
+              <li>Pick & place the first label</li>
+              <li>Pick & place the second label</li>
+              <li>Pick & place the third label</li>
+              <li>Continue as needed…</li>
+              <li>Press Enter to exit</li>
+            </ol>
+          </div>
+        </div>
+
+        <div style="background: rgba(37,99,235,0.1); padding: var(--spacing-md); border-radius: 8px;">
+          <h4 style="color: var(--primary); margin-bottom: 0.8rem; text-align: center;">🚀 Smart workflow</h4>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+            <div style="background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 6px; text-align: center; min-width: 120px;">
+              <p style="color: var(--accent); font-weight: bold; margin-bottom: 0.3rem;">ENL + Enter</p>
+              <p style="color: var(--text-gray); font-size: 0.85rem;">once</p>
+            </div>
+            <span style="color: var(--accent); font-size: 1.5rem;">→</span>
+            <div style="background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 6px; text-align: center; min-width: 120px;">
+              <p style="color: var(--success); font-weight: bold; margin-bottom: 0.3rem;">Point 1</p>
+              <p style="color: var(--text-gray); font-size: 0.85rem;">pick + place</p>
+            </div>
+            <span style="color: var(--accent); font-size: 1.5rem;">→</span>
+            <div style="background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 6px; text-align: center; min-width: 120px;">
+              <p style="color: var(--success); font-weight: bold; margin-bottom: 0.3rem;">Point 2</p>
+              <p style="color: var(--text-gray); font-size: 0.85rem;">pick + place</p>
+            </div>
+            <span style="color: var(--accent); font-size: 1.5rem;">→</span>
+            <div style="background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 6px; text-align: center; min-width: 120px;">
+              <p style="color: var(--success); font-weight: bold; margin-bottom: 0.3rem;">…</p>
+              <p style="color: var(--text-gray); font-size: 0.85rem;">continue</p>
+            </div>
+          </div>
+          <p style="color: var(--accent); font-weight: bold; text-align: center; margin-top: 1.5rem;">
+            ⚡ Save up to 70% of the time when labeling multiple XYZ points.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Quick options -->
+    <section class="section">
+      <h2 class="section-title">⌨️ Quick options during the command</h2>
+      <div style="background: var(--bg-card); border-radius: 10px; padding: var(--spacing-md); border: 1px solid var(--border);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md);">
+          <div style="background: rgba(37,99,235,0.1); padding: var(--spacing-md); border-radius: 8px; border-left: 3px solid var(--primary);">
+            <h4 style="color: var(--primary); margin-bottom: 0.8rem; font-size: 1.3rem;">S</h4>
+            <p style="color: var(--text-light); font-weight: bold; margin-bottom: 0.5rem;">Change Scale</p>
+            <p style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 0.5rem;">Type <code class="mono">S</code> then Enter</p>
+            <p style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 0.5rem;">Enter a new value (e.g., <code class="mono">0.30</code>)</p>
+            <p style="color: var(--success); font-size: 0.9rem;">Current default: <code class="mono">0.20</code></p>
+          </div>
+
+          <div style="background: rgba(245,158,11,0.1); padding: var(--spacing-md); border-radius: 8px; border-left: 3px solid var(--accent);">
+            <h4 style="color: var(--accent); margin-bottom: 0.8rem; font-size: 1.3rem;">A</h4>
+            <p style="color: var(--text-light); font-weight: bold; margin-bottom: 0.5rem;">Change Angle</p>
+            <p style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 0.5rem;">Type <code class="mono">A</code> then Enter</p>
+            <p style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 0.5rem;">Enter the angle in degrees (e.g., <code class="mono">45</code>)</p>
+            <p style="color: var(--success); font-size: 0.9rem;">Current default: <code class="mono">0.0</code></p>
+          </div>
+
+          <div style="background: rgba(239,68,68,0.1); padding: var(--spacing-md); border-radius: 8px; border-left: 3px solid #ef4444;">
+            <h4 style="color: #ef4444; margin-bottom: 0.8rem; font-size: 1.3rem;">Enter</h4>
+            <p style="color: var(--text-light); font-weight: bold; margin-bottom: 0.5rem;">Exit the command</p>
+            <p style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 0.5rem;">Press <code class="mono">Enter</code> without picking a point</p>
+            <p style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 0.5rem;">The command ends immediately</p>
+            <p style="color: var(--success); font-size: 0.9rem;">Your last settings are saved</p>
+          </div>
+        </div>
+
+        <div style="background: rgba(16,185,129,0.1); padding: var(--spacing-md); border-radius: 8px; margin-top: 1.5rem; text-align: center;">
+          <p style="color: var(--secondary); font-weight: bold; font-size: 1.05rem; margin-bottom: 0.5rem;">💾 Auto‑save</p>
+          <p style="color: var(--text-gray); font-size: 0.95rem;">
+            ENL remembers your last <em>Scale</em> and <em>Angle</em>. Next time, they’re already set.
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <p>Borham Tools v78.2 - Free AutoCAD LISP Tools</p>
-            <p>Created by Mahmoud Borham | Free for Everyone لوجه الله</p>
-            <div class="back-link">
-                <a href="../index.html">← Return to Main Page</a>
-            </div>
-        </div>
+      ../index.htmlBack to Home</a>
+      <p>📧 Contact: MahmoudBorham.codes@gmail.com</p>
+      <p>🇵🇸 Free Palestine — For the sake of Allah</p>
+      <p style="color: var(--accent); font-size: 0.9rem; margin-top: 1rem;">
+        “Accurate XYZ + clean MLeader = ENL for elevation documentation.”
+      </p>
     </footer>
+  </div>
 </body>
 </html>
+``
