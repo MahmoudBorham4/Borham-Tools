@@ -59,7 +59,10 @@ const translations = {
         'cmd.en.desc': 'E & N Coordinates',
         'cmd.enl.desc': '3D Coordinates',
         'cmd.t.desc': 'Table with Codes',
-        'cmd.i.desc': 'Interactive Help'
+        'cmd.i.desc': 'Interactive Help',
+        // Version Info (Updated as requested)
+        'version.label': 'Current Version:',
+        'version.date': '| Dec 2025'
     },
     'ar': {
         'langBtn': 'English',
@@ -119,6 +122,9 @@ const translations = {
         'cmd.en.desc': 'إحداثيات شمال وشرق',
         'cmd.enl.desc': 'إحداثيات ثلاثية الأبعاد',
         'cmd.t.desc': 'جدول بالأكواد',
-        'cmd.i.desc': 'مساعدة تفاعلية'
+        'cmd.i.desc': 'مساعدة تفاعلية',
+        // Version Info (Updated as requested)
+        'version.label': 'الإصدار الحالي:',
+        'version.date': '| ديسمبر 2025'
     }
 };
