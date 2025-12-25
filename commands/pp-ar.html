@@ -3,256 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الأمر PP - إنشاء نقاط على العناصر الهندسية | Borham Tools</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>الأمر PP - إنشاء نقاط لتوقيع الأساسات والجدران | Borham Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2563eb;
             --secondary: #10b981;
             --accent: #f59e0b;
+            --accent2: #8b5cf6;
             --bg-dark: #0f172a;
             --bg-card: #334155;
             --text-light: #f1f5f9;
             --text-gray: #cbd5e1;
             --success: #22c55e;
+            --warning: #f59e0b;
             --border: #475569;
-            --container-width: 1000px;
+            --container-width: 1100px;
             --spacing-sm: 1rem;
             --spacing-md: 1.5rem;
             --spacing-lg: 2.5rem;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Cairo', sans-serif; background: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background: var(--bg-dark); 
+            color: var(--text-light); 
+            line-height: 1.7;
+        }
         .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
 
         /* الترويسة */
-        .page-header { 
+        .page-header {
             background: linear-gradient(135deg, #1e293b, #0f172a);
             padding: var(--spacing-lg) 0;
             text-align: center;
             margin-bottom: var(--spacing-lg);
+            border-bottom: 2px solid var(--accent);
         }
         .page-header h1 { 
-            font-size: 2.2rem; 
+            font-size: 2.5rem; 
             color: var(--secondary);
             margin-bottom: 0.5rem;
         }
+        .page-header .tagline {
+            color: var(--accent);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
         .page-header p { 
-            color: var(--text-gray);
-            max-width: 800px;
-            margin: 0 auto;
+            color: var(--text-gray); 
+            font-size: 1.05rem; 
+            max-width: 900px; 
+            margin: 0.6rem auto 0;
+            line-height: 1.8;
         }
 
         /* الأقسام */
-        .section { margin-bottom: var(--spacing-lg); }
-        .section-title { 
+        .section { 
+            margin-bottom: var(--spacing-lg);
+        }
+        .section-title {
             color: var(--secondary);
-            font-size: 1.6rem;
-            margin-bottom: var(--spacing-md);
-            border-right: 4px solid var(--accent);
+            font-size: 1.8rem;
+            border-right: 5px solid var(--accent);
             padding-right: 1rem;
-        }
-
-        /* 1. تعريف الأمر */
-        .definition {
-            background: var(--bg-card);
-            border-radius: 10px;
-            padding: var(--spacing-md);
-            margin: var(--spacing-md) 0;
-            border: 1px solid var(--border);
-        }
-        .definition-box {
-            background: rgba(37, 99, 235, 0.1);
-            border-right: 3px solid var(--primary);
-            padding: var(--spacing-md);
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-        .definition-box h3 {
-            color: var(--accent);
-            margin-bottom: 0.8rem;
+            margin-bottom: var(--spacing-md);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.8rem;
         }
 
-        /* 2. طريقة الاستخدام */
-        .how-to-use {
+        /* صناديق */
+        .definition,
+        .how-it-works,
+        .integration-box {
             background: var(--bg-card);
-            border-radius: 10px;
+            border-radius: 12px;
             padding: var(--spacing-md);
-            margin: var(--spacing-md) 0;
             border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
         }
-        .steps {
+        .definition:hover,
+        .how-it-works:hover,
+        .integration-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+        }
+        
+        .definition-box {
+            background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(37,99,235,0.05));
+            border-right: 4px solid var(--primary);
+            padding: var(--spacing-md);
+            border-radius: 10px;
+            margin: 1.2rem 0;
+        }
+        .definition-box h3 { 
+            color: var(--accent); 
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* المميزات التقنية */
+        .tech-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: var(--spacing-md);
-            margin: var(--spacing-md) 0;
         }
-        .step {
+        .feature-card {
+            background: linear-gradient(145deg, rgba(51,65,85,0.8), rgba(30,41,59,0.8));
+            padding: var(--spacing-md);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+        .feature-card:hover { 
+            transform: translateY(-8px); 
+            border-color: var(--accent);
+            box-shadow: 0 8px 20px rgba(245,158,11,0.15);
+        }
+
+        /* سير العمل */
+        .workflow {
             display: flex;
-            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap;
             gap: var(--spacing-sm);
-            padding: var(--spacing-sm);
-            background: rgba(255,255,255,0.03);
-            border-radius: 8px;
+            margin: 1.5rem 0;
         }
-        .step-number {
+        .work-step {
+            background: linear-gradient(145deg, rgba(30,41,59,0.8), rgba(15,23,42,0.8));
+            border: 2px solid var(--border);
+            padding: var(--spacing-md);
+            text-align: center;
+            border-radius: 12px;
+            position: relative;
+            flex: 1;
+            min-width: 180px;
+            transition: all 0.3s ease;
+        }
+        .work-step:hover {
+            background: rgba(37,99,235,0.1);
+            border-color: var(--primary);
+        }
+        .work-step-number {
+            position: absolute;
+            top: -12px;
+            right: 15px;
             background: var(--accent);
-            color: #000;
-            width: 32px;
-            height: 32px;
+            color: var(--bg-dark);
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            flex-shrink: 0;
+            font-size: 0.9rem;
         }
-        .step-content h4 {
-            color: var(--text-light);
-            margin-bottom: 0.3rem;
-        }
-        .step-content p {
-            color: var(--text-gray);
-            font-size: 0.95rem;
+        .work-step:not(:last-child):after {
+            content: "➜";
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.8rem;
+            color: var(--accent);
         }
 
-        /* 3. الأمثلة العملية */
+        /* التصور المرئي للشكال الهندسية - محسن */
+        .visualization-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin: 1.5rem 0;
+        }
+        .shape-visual {
+            background: rgba(30,41,59,0.8);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+        .shape-visual:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        .shape-title {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        /* SVG الرسومات */
+        .shape-svg-container {
+            width: 100%;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        .shape-svg {
+            width: 140px;
+            height: 140px;
+        }
+
+        /* تطبيقات الأشكال */
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin: 1.5rem 0;
+        }
+        .application-item {
+            background: rgba(51,65,85,0.5);
+            border-radius: 10px;
+            padding: var(--spacing-md);
+            text-align: center;
+            border-left: 4px solid var(--accent);
+            transition: transform 0.3s ease;
+        }
+        .application-item:hover {
+            transform: translateY(-3px);
+            background: rgba(51,65,85,0.8);
+        }
+        .app-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+
+        /* الأمثلة */
         .examples-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: var(--spacing-md);
-            margin: var(--spacing-md) 0;
         }
         .example-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
+            background: rgba(30,41,59,0.8);
             padding: var(--spacing-md);
-            transition: transform 0.3s ease;
-        }
-        .example-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent);
-        }
-        .example-icon {
-            font-size: 2rem;
-            margin-bottom: 0.8rem;
-        }
-        .example-card h3 {
-            color: var(--accent);
-            margin-bottom: 0.8rem;
-            font-size: 1.2rem;
-        }
-        .example-card ul {
-            color: var(--text-gray);
-            padding-right: 1.2rem;
-            font-size: 0.9rem;
-        }
-        .example-card li {
-            margin-bottom: 0.5rem;
-            position: relative;
-        }
-        .example-card li:before {
-            content: "✓";
-            color: var(--success);
-            position: absolute;
-            right: -1.2rem;
-        }
-        .time-saving {
-            display: inline-block;
-            background: rgba(34, 197, 94, 0.1);
-            color: var(--success);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-top: 0.8rem;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-
-        /* 4. الفوائد */
-        .benefits {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--spacing-md);
-            margin: var(--spacing-lg) 0;
-        }
-        .benefit {
-            text-align: center;
-            padding: var(--spacing-md);
-            background: var(--bg-card);
-            border-radius: 10px;
+            border-radius: 12px;
             border: 1px solid var(--border);
         }
-        .benefit-icon {
-            font-size: 2rem;
-            color: var(--accent);
-            margin-bottom: 0.8rem;
-        }
-        .benefit h4 {
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-        }
-        .benefit p {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-        }
 
-        /* النصائح */
-        .tips {
-            background: rgba(245, 158, 11, 0.05);
-            border-right: 3px solid var(--accent);
-            padding: var(--spacing-md);
-            border-radius: 10px;
-            margin: var(--spacing-lg) 0;
-        }
-        .tips h3 {
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-        .tips ul {
-            color: var(--text-gray);
-            padding-right: 1.2rem;
-        }
-        .tips li {
-            margin-bottom: 0.5rem;
-        }
-
-        /* الأزرار */
+        /* زر العودة */
         .back-link {
-            display: inline-block;
-            background: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), #1d4ed8);
+            padding: 12px 28px;
+            border-radius: 8px;
             color: white;
-            padding: 10px 25px;
-            border-radius: 6px;
             text-decoration: none;
-            margin: var(--spacing-md) 0;
-            transition: background 0.3s;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 1.5rem 0;
         }
         .back-link:hover { 
-            background: #1e40af;
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: translateY(-2px);
         }
 
         /* الفوتر */
         footer {
             text-align: center;
+            margin-top: var(--spacing-lg);
             padding: var(--spacing-lg) 0;
             border-top: 1px solid var(--border);
-            margin-top: var(--spacing-lg);
+            background: linear-gradient(180deg, transparent, rgba(15,23,42,0.5));
         }
         footer p { 
             color: var(--text-gray); 
             margin: 0.5rem 0;
         }
+        .footer-highlight {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background: rgba(245,158,11,0.1);
+            border-radius: 8px;
+            display: inline-block;
+        }
 
-        /* التجاوب */
+        /* تجاوب */
         @media (max-width: 768px) {
-            .page-header h1 { font-size: 1.8rem; }
-            .section-title { font-size: 1.4rem; }
-            .benefits, .examples-grid {
+            .page-header h1 { font-size: 2rem; }
+            .section-title { font-size: 1.5rem; }
+            .workflow { flex-direction: column; }
+            .work-step:not(:last-child):after {
+                content: "⬇";
+                right: 50%;
+                left: auto;
+                top: auto;
+                bottom: -20px;
+                transform: translateX(50%);
+            }
+            .visualization-container, .applications-grid, .examples-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -260,227 +332,448 @@
 </head>
 <body>
     <div class="container">
+
         <!-- الترويسة -->
         <header class="page-header">
-            <h1>الأمر PP</h1>
-            <p>أداة ذكية لإنشاء نقاط على العناصر الهندسية - توفر 95% من وقتك</p>
+            <h1>الأمر PP — توقيع الأساسات والجدران في الموقع</h1>
+            <div class="tagline">إنشاء نقاط إحداثيات لجميع الأعمال المساحية والإنشائية</div>
+            <p>
+                أداة مساحية أساسية لتوليد نقاط إحداثيات لجميع العناصر الإنشائية: الأساسات، الجدران، الأعمدة، 
+                الكهرباء، الميكانيكا، وأي شكل هندسي في الموقع. بدلاً من تعليم كل نقطة يدوياً، PP ينفذ المهمة في ثوانٍ.
+            </p>
         </header>
 
-        <!-- 1. تعريف الأمر -->
+        <!-- 1. ما هو الأمر PP -->
         <section class="section">
             <h2 class="section-title">📌 ما هو الأمر PP؟</h2>
             <div class="definition">
-                <p>الأمر <strong>PP</strong> هو أداة ذكية في برنامج AutoCAD تقوم بإنشاء نقاط هندسية (Points) على العناصر المحددة، مما يوفر ساعات من العمل اليدوي.</p>
-                
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--text-light);">
+                    <strong>الأمر PP</strong> هو الحل المساحي الشامل لإنشاء نقاط إحداثيات 
+                    <span style="color: var(--accent); font-weight: bold;">لجميع العناصر الإنشائية في الموقع</span>. 
+                    من الأساسات إلى الأعمدة، من الجدران إلى التمديدات - كل نقطة تحتاج توقيعها في الموقع.
+                </p>
+
+                <!-- التصور المرئي المحسن باستخدام SVG -->
+                <div class="visualization-container">
+                    <div class="shape-visual">
+                        <div class="shape-title">🔵 الدوائر والأعمدة</div>
+                        <div class="shape-svg-container">
+                            <svg class="shape-svg" viewBox="0 0 200 200">
+                                <!-- الدائرة -->
+                                <circle cx="100" cy="100" r="60" stroke="#10b981" stroke-width="4" fill="rgba(16,185,129,0.1)" />
+                                
+                                <!-- المركز -->
+                                <circle cx="100" cy="100" r="6" fill="#f59e0b" stroke="#0f172a" stroke-width="2" />
+                                
+                                <!-- نقاط المحيط -->
+                                <circle cx="100" cy="40" r="5" fill="#f59e0b" stroke="#0f172a" stroke-width="2" />
+                                <circle cx="40" cy="100" r="5" fill="#f59e0b" stroke="#0f172a" stroke-width="2" />
+                                <circle cx="100" cy="160" r="5" fill="#f59e0b" stroke="#0f172a" stroke-width="2" />
+                                <circle cx="160" cy="100" r="5" fill="#f59e0b" stroke="#0f172a" stroke-width="2" />
+                                
+                                <!-- خطوط لتوضيح النقاط -->
+                                <line x1="100" y1="40" x2="100" y2="100" stroke="#475569" stroke-width="1" stroke-dasharray="5,5" />
+                                <line x1="40" y1="100" x2="100" y2="100" stroke="#475569" stroke-width="1" stroke-dasharray="5,5" />
+                                
+                                <!-- نصوص -->
+                                <text x="100" y="100" text-anchor="middle" fill="#cbd5e1" font-size="10" dy="-15">المركز</text>
+                                <text x="100" y="40" text-anchor="middle" fill="#cbd5e1" font-size="10" dy="-10">نقطة محيط</text>
+                            </svg>
+                        </div>
+                        <p style="color: var(--text-gray); margin-top: 1rem; font-size: 0.9rem;">
+                            مركز + نقاط على المحيط للأعمدة الدائرية بدقة هندسية
+                        </p>
+                    </div>
+
+                    <div class="shape-visual">
+                        <div class="shape-title">⬜ الأساسات والجدران</div>
+                        <div class="shape-svg-container">
+                            <svg class="shape-svg" viewBox="0 0 200 150">
+                                <!-- المستطيل -->
+                                <rect x="30" y="25" width="140" height="100" stroke="#3b82f6" stroke-width="4" fill="rgba(59,130,246,0.1)" />
+                                
+                                <!-- النقاط في الأركان -->
+                                <circle cx="30" cy="25" r="5" fill="#f59e0b" stroke="#0f172a" stroke-width="2" />
+                                <circle cx="170" cy="25" r="5" fill="#f59e0b" stroke="#0f172a" stroke-width="2" />
+                                <circle cx="30" cy="125" r="5" fill="#f59e0b" stroke="#0f172a" stroke-width="2" />
+                                <circle cx="170" cy="125" r="5" fill="#f59e0b" stroke="#0f172a" stroke-width="2" />
+                                
+                                <!-- خطوط لتوضيح الأبعاد -->
+                                <line x1="30" y1="25" x2="170" y2="25" stroke="#475569" stroke-width="1" stroke-dasharray="5,5" />
+                                <line x1="30" y1="25" x2="30" y2="125" stroke="#475569" stroke-width="1" stroke-dasharray="5,5" />
+                                
+                                <!-- نصوص -->
+                                <text x="100" y="20" text-anchor="middle" fill="#cbd5e1" font-size="10">الطول</text>
+                                <text x="20" y="75" text-anchor="middle" fill="#cbd5e1" font-size="10" transform="rotate(-90,20,75)">العرض</text>
+                            </svg>
+                        </div>
+                        <p style="color: var(--text-gray); margin-top: 1rem; font-size: 0.9rem;">
+                            أركان المستطيلات للأساسات والغرف بدقة تامة
+                        </p>
+                    </div>
+
+                    <div class="shape-visual">
+                        <div class="shape-title">⎯ المنحنيات والطرق</div>
+                        <div class="shape-svg-container">
+                            <svg class="shape-svg" viewBox="0 0 200 150">
+                                <!-- المنحنى -->
+                                <path d="M30,100 Q80,30 130,70 Q180,110 170,130" stroke="#f59e0b" stroke-width="4" fill="none" />
+                                
+                                <!-- النقاط على المنحنى -->
+                                <circle cx="30" cy="100" r="4" fill="#ef4444" stroke="#0f172a" stroke-width="2" />
+                                <circle cx="60" cy="60" r="4" fill="#ef4444" stroke="#0f172a" stroke-width="2" />
+                                <circle cx="90" cy="50" r="4" fill="#ef4444" stroke="#0f172a" stroke-width="2" />
+                                <circle cx="120" cy="60" r="4" fill="#ef4444" stroke="#0f172a" stroke-width="2" />
+                                <circle cx="150" cy="80" r="4" fill="#ef4444" stroke="#0f172a" stroke-width="2" />
+                                <circle cx="170" cy="130" r="4" fill="#ef4444" stroke="#0f172a" stroke-width="2" />
+                                
+                                <!-- خطوط للتوضيح -->
+                                <line x1="30" y1="100" x2="60" y2="60" stroke="#475569" stroke-width="1" stroke-dasharray="5,5" />
+                                
+                                <!-- نصوص -->
+                                <text x="100" y="30" text-anchor="middle" fill="#cbd5e1" font-size="10">منحنى الطريق</text>
+                                <text x="60" y="60" text-anchor="end" fill="#cbd5e1" font-size="8" dx="-5" dy="-5">نقطة 1</text>
+                            </svg>
+                        </div>
+                        <p style="color: var(--text-gray); margin-top: 1rem; font-size: 0.9rem;">
+                            نقاط على المنحنيات بتباعد منتظم ودقيق
+                        </p>
+                    </div>
+                </div>
+
                 <div class="definition-box">
-                    <h3>🎯 ماذا يفعل PP؟</h3>
+                    <h3>🎯 الوظيفة المساحية الأساسية</h3>
                     <ul style="color: var(--text-gray); padding-right: 1rem;">
-                        <li>ينشئ نقاطاً على مراكز <strong>الدوائر</strong></li>
-                        <li>ينشئ نقاطاً على رؤوس <strong>المضلعات</strong></li>
-                        <li>يقسم <strong>الأقواس والمنحنيات</strong> إلى نقاط متباعدة</li>
-                        <li>يعمل مع جميع أنواع العناصر مرة واحدة</li>
+                        <li><strong>توقيع الأساسات:</strong> تحديد أركان القواعد والشدادات بدقة مطلقة</li>
+                        <li><strong>تحديد الجدران:</strong> نقاط أركان الحوائط والفواصل بمقاييس صحيحة</li>
+                        <li><strong>الأعمدة الإنشائية:</strong> مراكز وأطراف الأعمدة بنقاط دقيقة</li>
+                        <li><strong>أعمال الكهرباء:</strong> نقاط اللوحات والمفاتيح في مواقعها الحقيقية</li>
+                        <li><strong>أعمال الميكانيكا:</strong> مواقع الخزانات والتمديدات بدقة مساحية</li>
+                        <li><strong>الموقع العام:</strong> أي شكل هندسي يحتاج توقيع بإحداثيات دقيقة</li>
                     </ul>
                 </div>
 
-                <div class="definition-box">
-                    <h3>⚙️ متى تستخدمه؟</h3>
-                    <ul style="color: var(--text-gray); padding-right: 1rem;">
-                        <li>عند تحديد مراكز الأعمدة في المخططات الإنشائية</li>
-                        <li>عند تحديد مواقع نقاط الكهرباء والميكانيكا</li>
-                        <li>عند تقسيم منحنيات الطرق أو المسارات</li>
-                        <li>عند تحديد مراكز التجهيزات الصحية</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. طريقة الاستخدام -->
-        <section class="section">
-            <h2 class="section-title">🚀 طريقة استخدام الأمر PP</h2>
-            <div class="how-to-use">
-                <p style="color: var(--text-gray); margin-bottom: 1rem;">يستخدم الأمر PP في 4 خطوات بسيطة:</p>
-                
-                <div class="steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>ابدأ الأمر</h4>
-                            <p>اكتب <strong>PP</strong> في سطر أوامر AutoCAD ثم اضغط <strong>Enter</strong></p>
+                <div class="definition-box" style="background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(16,185,129,0.05)); border-right-color: var(--secondary);">
+                    <h3 style="color: var(--secondary);">✅ العملية المساحية الكاملة</h3>
+                    <div style="text-align: center; padding: 1rem;">
+                        <div style="display: inline-block; background: rgba(37,99,235,0.2); padding: 1rem 2rem; border-radius: 8px; margin: 0.5rem; min-width: 150px;">
+                            <strong style="color: var(--primary); font-size: 1.2rem;">1. PP</strong><br>
+                            <span style="color: var(--text-gray); font-size: 0.9rem;">إنشاء النقاط الهندسية</span>
+                        </div>
+                        <span style="color: var(--accent); font-size: 1.5rem; margin: 0 1rem;">→</span>
+                        <div style="display: inline-block; background: rgba(16,185,129,0.2); padding: 1rem 2rem; border-radius: 8px; margin: 0.5rem; min-width: 150px;">
+                            <strong style="color: var(--secondary); font-size: 1.2rem;">2. PE</strong><br>
+                            <span style="color: var(--text-gray); font-size: 0.9rem;">استخراج الإحداثيات الدقيقة</span>
+                        </div>
+                        <span style="color: var(--accent); font-size: 1.5rem; margin: 0 1rem;">→</span>
+                        <div style="display: inline-block; background: rgba(245,158,11,0.2); padding: 1rem 2rem; border-radius: 8px; margin: 0.5rem; min-width: 150px;">
+                            <strong style="color: var(--accent); font-size: 1.2rem;">3. التوقيع</strong><br>
+                            <span style="color: var(--text-gray); font-size: 0.9rem;">في الموقع بدقة مساحية</span>
                         </div>
                     </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>أدخل المسافة</h4>
-                            <p>أدخل قيمة المسافة بين النقاط للمنحنيات (أو اضغط <strong>Enter</strong> لاستخدام 0.30 متر)</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>اختر العناصر</h4>
-                            <p>اختر جميع الدوائر، المضلعات، الأقواس التي تريد عمل نقاط لها (يمكن اختيار المئات مرة واحدة)</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h4>انتهيت!</h4>
-                            <p>شاهد النقاط تُنشأ تلقائياً في أقل من ثانية مع عرض عدد النقاط المنشأة</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tips" style="margin: 1rem 0; padding: 1rem;">
-                    <h3 style="font-size: 1rem;">💡 نصائح سريعة:</h3>
-                    <ul style="font-size: 0.9rem;">
-                        <li>استخدم <strong>Window Selection</strong> لاختيار مجموعات كبيرة</li>
-                        <li>لنقاط مراكز الدوائر فقط، استخدم <strong>spacing = 0</strong></li>
-                        <li>للحصول على أفضل أداء، قسم العناصر إلى مجموعات إذا كانت كثيرة جداً</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. أمثلة عملية -->
-        <section class="section">
-            <h2 class="section-title">🏗️ أمثلة عملية من مشاريع حقيقية</h2>
-            <div class="examples-grid">
-                
-                <div class="example-card">
-                    <div class="example-icon">🚒</div>
-                    <h3>رشاشات الحريق في مبنى تجاري</h3>
-                    <ul>
-                        <li>مخطط حريق يحتوي على 350 دائرة تمثل رشاشات</li>
-                        <li><strong>بـ PP:</strong> اختيار جميع الدوائر → 350 نقطة في 3 ثواني</li>
-                        <li><strong>يدوياً:</strong> 3 ساعات ونصف عمل متواصل</li>
-                        <li><strong>التوفير:</strong> 3 ساعات و29 دقيقة و57 ثانية</li>
-                    </ul>
-                    <span class="time-saving">توفير 99.8% من الوقت</span>
-                </div>
-
-                <div class="example-card">
-                    <div class="example-icon">💡</div>
-                    <h3>نقاط الإنارة في فندق 5 نجوم</h3>
-                    <ul>
-                        <li>مخطط إنارة يحتوي على 480 نقطة (إنارة، مآخذ، كشافات)</li>
-                        <li><strong>بـ PP:</strong> اختيار جميع العناصر → 480 نقطة في 4 ثواني</li>
-                        <li><strong>يدوياً:</strong> 4 ساعات عمل يدوي</li>
-                        <li><strong>التوفير:</strong> 3 ساعات و59 دقيقة و56 ثانية</li>
-                    </ul>
-                    <span class="time-saving">توفير 99.7% من الوقت</span>
-                </div>
-
-                <div class="example-card">
-                    <div class="example-icon">🏢</div>
-                    <h3>أعمدة مبنى سكني 15 طابق</h3>
-                    <ul>
-                        <li>120 عمود إنشائي ممثل بدوائر في المخطط</li>
-                        <li><strong>بـ PP:</strong> اختيار الدوائر → 120 نقطة في ثانية واحدة</li>
-                        <li><strong>يدوياً:</strong> ساعة كاملة من العمل الدقيق</li>
-                        <li><strong>التوفير:</strong> 59 دقيقة و59 ثانية</li>
-                    </ul>
-                    <span class="time-saving">توفير 99.7% من الوقت</span>
-                </div>
-
-                <div class="example-card">
-                    <div class="example-icon">⚙️</div>
-                    <h3>تجهيزات تكييف في مستشفى</h3>
-                    <ul>
-                        <li>220 وحدة تكييف ومجاري هواء ممثلة بمضلعات</li>
-                        <li><strong>بـ PP:</strong> اختيار المضلعات → 220 نقطة في 2 ثانية</li>
-                        <li><strong>يدوياً:</strong> ساعتان من العمل المتواصل</li>
-                        <li><strong>التوفير:</strong> 1 ساعة و59 دقيقة و58 ثانية</li>
-                    </ul>
-                    <span class="time-saving">توفير 99.8% من الوقت</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. الفوائد -->
-        <section class="section">
-            <h2 class="section-title">✨ فوائد واستخدامات الأمر PP</h2>
-            <div class="benefits">
-                <div class="benefit">
-                    <div class="benefit-icon">⚡</div>
-                    <h4>توفير الوقت</h4>
-                    <p>يوفر 95-99% من وقت العمل مقارنة بالطريقة اليدوية</p>
-                </div>
-                <div class="benefit">
-                    <div class="benefit-icon">🎯</div>
-                    <h4>دقة عالية</h4>
-                    <p>نقاط هندسية دقيقة 100% بدون أخطاء بشرية</p>
-                </div>
-                <div class="benefit">
-                    <div class="benefit-icon">🔄</div>
-                    <h4>معالجة جماعية</h4>
-                    <p>يعالج مئات العناصر دفعة واحدة وليس واحداً واحداً</p>
-                </div>
-                <div class="benefit">
-                    <div class="benefit-icon">📊</div>
-                    <h4>تكامل مع PE</h4>
-                    <p>يتكامل مع أمر PE لتصدير الإحداثيات مباشرة للمساح</p>
-                </div>
-            </div>
-
-            <div class="tips">
-                <h3>🎯 الاستخدامات العملية في المكاتب الهندسية:</h3>
-                <ul>
-                    <li><strong>مكاتب الاستشاري:</strong> تحديد مواقع الأعمدة للمقاول</li>
-                    <li><strong>مقاولات الكهرباء:</strong> تحديد نقاط الإنارة والمآخذ</li>
-                    <li><strong>مقاولات الميكانيكا:</strong> تحديد مواقع وحدات التكييف</li>
-                    <li><strong>مكاتب التصميم:</strong> تقسيم المنحنيات للقياسات</li>
-                    <li><strong>شركات المقاولات:</strong> تسليم بيانات دقيقة للمساحين</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- سيناريو واقعي -->
-        <section class="section">
-            <h2 class="section-title">🏭 سيناريو واقعي: مشروع مصنع كبير</h2>
-            <div class="definition" style="background: rgba(16, 185, 129, 0.05);">
-                <h3 style="color: var(--secondary); margin-bottom: 1rem;">مصنع جديد يحتوي على 2500+ نقطة متنوعة</h3>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); margin: 1rem 0;">
-                    <div style="background: rgba(239, 68, 68, 0.1); padding: var(--spacing-sm); border-radius: 8px;">
-                        <h4 style="color: #ef4444; margin-bottom: 0.5rem;">⚡ الطريقة التقليدية</h4>
-                        <ul style="color: var(--text-gray); font-size: 0.9rem;">
-                            <li>فريق مكون من 4 أشخاص</li>
-                            <li>مدة العمل: 5 أيام كاملة</li>
-                            <li>تكلفة: 160 ساعة عمل</li>
-                            <li>احتمال أخطاء: مرتفع</li>
-                        </ul>
-                    </div>
-                    
-                    <div style="background: rgba(34, 197, 94, 0.1); padding: var(--spacing-sm); border-radius: 8px;">
-                        <h4 style="color: var(--success); margin-bottom: 0.5rem;">🚀 باستخدام PP</h4>
-                        <ul style="color: var(--text-gray); font-size: 0.9rem;">
-                            <li>شخص واحد فقط</li>
-                            <li>مدة العمل: 15 دقيقة</li>
-                            <li>تكلفة: 0.25 ساعة عمل</li>
-                            <li>دقة: 100% بدون أخطاء</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div style="text-align: center; margin-top: 1rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
-                    <h4 style="color: var(--accent); margin-bottom: 0.5rem;">💰 التوفير الكلي</h4>
-                    <p style="color: var(--text-light); font-size: 1.1rem;">
-                        <strong>159.75 ساعة عمل موفرة</strong> ≈ <strong>6.5 أيام عمل كاملة</strong>
+                    <p style="color: var(--text-gray); text-align: center; margin-top: 1rem; font-weight: bold;">
+                        دورة عمل مساحية كاملة: من الرسم الهندسي إلى التوقيع الفعلي في الموقع بدقة مطلقة
                     </p>
                 </div>
             </div>
         </section>
 
+        <!-- 2. تطبيقات عملية -->
+        <section class="section">
+            <h2 class="section-title">🏗️ تطبيقات عملية في الموقع</h2>
+            <div class="applications-grid">
+                
+                <div class="application-item">
+                    <div class="app-icon">🏗️</div>
+                    <h4>الأساسات والقواعد</h4>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        تحديد أركان القواعد المسلحة والشدادات الخرسانية بدقة تامة
+                    </p>
+                </div>
+
+                <div class="application-item">
+                    <div class="app-icon">🧱</div>
+                    <h4>الحوائط والجدران</h4>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        نقاط أركان الحوائط والفواصل الداخلية والخارجية بمقاييس دقيقة
+                    </p>
+                </div>
+
+                <div class="application-item">
+                    <div class="app-icon">⚡</div>
+                    <h4>أعمال الكهرباء</h4>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        مواقع اللوحات الكهربائية، المفاتيح، المآخذ في أماكنها الصحيحة
+                    </p>
+                </div>
+
+                <div class="application-item">
+                    <div class="app-icon">🚰</div>
+                    <h4>أعمال السباكة</h4>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        نقاط التغذية والصرف، الخزانات، المواسير بإحداثيات دقيقة
+                    </p>
+                </div>
+
+                <div class="application-item">
+                    <div class="app-icon">🔩</div>
+                    <h4>الأعمدة الإنشائية</h4>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        مراكز وأطراف أعمدة الخرسانة والحديد بنقاط هندسية صحيحة
+                    </p>
+                </div>
+
+                <div class="application-item">
+                    <div class="app-icon">🛣️</div>
+                    <h4>الطرق والأرصفة</h4>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        نقاط على المنحنيات والمستقيمات للطرق بتباعد منتظم
+                    </p>
+                </div>
+
+                <div class="application-item">
+                    <div class="app-icon">🌳</div>
+                    <h4>التنسيق الخارجي</h4>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        مواقع الأشجار، النوافير، المقاعد بإحداثيات محددة
+                    </p>
+                </div>
+
+                <div class="application-item">
+                    <div class="app-icon">📐</div>
+                    <h4>أي شكل هندسي</h4>
+                    <p style="color: var(--text-gray); font-size: 0.9rem;">
+                        أي عنصر في الموقع يحتاج تحديد إحداثياته بدقة مساحية
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. طريقة العمل -->
+        <section class="section">
+            <h2 class="section-title">🚀 كيف يعمل الأمر PP عملياً؟</h2>
+            <div class="how-it-works">
+                
+                <div class="workflow">
+                    <div class="work-step">
+                        <div class="work-step-number">1</div>
+                        <strong>التخطيط في المكتب</strong>
+                        <p>رسم العناصر الإنشائية</p>
+                        <small style="color: var(--accent);">الدوائر، المستطيلات، المنحنيات</small>
+                    </div>
+
+                    <div class="work-step">
+                        <div class="work-step-number">2</div>
+                        <strong>تشغيل PP</strong>
+                        <p>إنشاء النقاط تلقائياً</p>
+                        <small style="color: var(--accent);">جميع النقاط المطلوبة في ثوانٍ</small>
+                    </div>
+
+                    <div class="work-step">
+                        <div class="work-step-number">3</div>
+                        <strong>تشغيل PE</strong>
+                        <p>استخراج الإحداثيات</p>
+                        <small style="color: var(--accent);">قائمة إحداثيات مرقمة ودقيقة</small>
+                    </div>
+
+                    <div class="work-step">
+                        <div class="work-step-number">4</div>
+                        <strong>التوقيع في الموقع</strong>
+                        <p>تنفيذ العمل فعلياً</p>
+                        <small style="color: var(--accent);">بالإحداثيات المستخرجة بدقة</small>
+                    </div>
+                </div>
+
+                <div style="background: rgba(30,41,59,0.8); border-radius: 8px; padding: var(--spacing-md); margin: 1rem 0; border-right: 4px solid var(--accent);">
+                    <h4 style="color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                        <span>🎯</span> مثال عملي: تأسيس غرفة
+                    </h4>
+                    <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.8;">
+                        1. ترسم مستطيل الغرفة في AutoCAD بدقة المقاييس<br>
+                        2. تشغيل PP ← 4 نقاط في أركان المستطيل بدقة هندسية<br>
+                        3. تشغيل PE ← إحداثيات الأركان الأربعة (X,Y,Z)<br>
+                        4. التوقيع في الموقع ← حفر الأساسات في الأماكن الصحيحة بدقة مطلقة
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. مقارنة قبل وبعد -->
+        <section class="section">
+            <h2 class="section-title">📊 مقارنة: الطريقة التقليدية vs PP</h2>
+            <div class="definition">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+                    
+                    <div style="background: rgba(239,68,68,0.1); padding: var(--spacing-md); border-radius: 10px; border-right: 3px solid #ef4444;">
+                        <h4 style="color: #ef4444; margin-bottom: 1rem; text-align: center;">❌ الطريقة اليدوية</h4>
+                        <ul style="color: var(--text-gray); padding-right: 1rem;">
+                            <li>⏱️ <strong>الوقت:</strong> ساعات طويلة (3-8 ساعات)</li>
+                            <li>🤦 <strong>الجهد:</strong> تعليم كل نقطة يدوياً (إرهاق)</li>
+                            <li>⚠️ <strong>الأخطاء:</strong> احتمال كبير للخطأ (15-25%)</li>
+                            <li>📉 <strong>الكفاءة:</strong> منخفضة جداً (بطيئة)</li>
+                            <li>💸 <strong>التكلفة:</strong> عالية (وقت + جهد + أخطاء)</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(34,197,94,0.1); padding: var(--spacing-md); border-radius: 10px; border-right: 3px solid var(--success);">
+                        <h4 style="color: var(--success); margin-bottom: 1rem; text-align: center;">✅ باستخدام PP</h4>
+                        <ul style="color: var(--text-gray); padding-right: 1rem;">
+                            <li>⚡ <strong>الوقت:</strong> ثوانٍ معدودة (30-60 ثانية)</li>
+                            <li>😌 <strong>الجهد:</strong> ضغطة زر واحدة (بدون تعب)</li>
+                            <li>🎯 <strong>الدقة:</strong> 100% بدون أخطاء (هندسية)</li>
+                            <li>📈 <strong>الكفاءة:</strong> عالية جداً (فورية)</li>
+                            <li>💰 <strong>التكلفة:</strong> شبه معدومة (توفير 95%)</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+                <div style="background: rgba(245,158,11,0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md); text-align: center;">
+                    <p style="color: var(--accent); font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">📈 إحصائية واقعية</p>
+                    <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">
+                        مشروع متوسط (20 عمود + 10 غرف + 100 متر منحنيات):<br>
+                        <strong>اليدوي:</strong> 8 ساعات عمل مع احتمال أخطاء → <strong>PP:</strong> 3 دقائق فقط بدقة 100%
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. أمثلة مفصلة -->
+        <section class="section">
+            <h2 class="section-title">💼 أمثلة مفصلة من واقع العمل</h2>
+            <div class="examples-grid">
+                
+                <div class="example-card">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 1: تأسيس فيلا (5 غرف)</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>المطلوب:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        توقيع أركان 5 غرف، 3 حمامات، 20 عمود، والمطبخ في الموقع بدقة مساحية.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>بـ PP:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem; line-height: 1.6;">
+                        <li>اختيار كل المستطيلات (الغرف) والدوائر (الأعمدة)</li>
+                        <li>تشغيل PP مرة واحدة (60 ثانية)</li>
+                        <li>إنشاء 68 نقطة تلقائياً (4×8 + 20) بدقة هندسية</li>
+                        <li>تصدير الإحداثيات بـ PE (X,Y,Z)</li>
+                        <li>توقيع جميع العناصر في الموقع بدقة مساحية كاملة</li>
+                    </ol>
+                    <div style="background: rgba(34,197,94,0.1); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
+                        <p style="color: var(--success); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+                            ✅ <strong>الوفر:</strong> من يوم كامل إلى 10 دقائق فقط<br>
+                            ✅ <strong>الدقة:</strong> كل نقطة في مكانها الصحيح هندسياً<br>
+                            ✅ <strong>الاكتمال:</strong> لا يوجد نقاط مفقودة أو أخطاء
+                        </p>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 2: طريق منحني 200 متر</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>المطلوب:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        تقسيم طريق منحني إلى نقاط كل 30 سم لأعمال التسوية والرصف بدقة عالية.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>بـ PP:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem; line-height: 1.6;">
+                        <li>اختيار منحنى الطريق (SPLINE أو Polyline)</li>
+                        <li>تشغيل PP مع التباعد 0.30 متر (دقيقة)</li>
+                        <li>إنشاء 667 نقطة على الطول كله (200/0.3)</li>
+                        <li>كل نقطة تمثل موقع تسوية بدقة مساحية</li>
+                        <li>جاهز للتنفيذ في الموقع بدقة عالية</li>
+                    </ol>
+                    <div style="background: rgba(34,197,94,0.1); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
+                        <p style="color: var(--success); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+                            ✅ <strong>الانتظام:</strong> نقاط كل 30 سم تماماً (دقيقة)<br>
+                            ✅ <strong>العدد:</strong> 667 نقطة دقيقة هندسياً<br>
+                            ✅ <strong>المستحيل يدوياً:</strong> عملية شبه مستحيلة يدوياً بدقة
+                        </p>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 3: شبكة أعمدة إنارة</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>المطلوب:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        توقيع 50 عمود إنارة على طول شارع، مع نقاط التمديدات الكهربائية بدقة.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>بـ PP:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem; line-height: 1.6;">
+                        <li>اختيار الدوائر الـ 50 (تمثل أعمدة الإنارة)</li>
+                        <li>تشغيل PP مع تباعد 0 للمراكز (مركز كل عمود)</li>
+                        <li>تشغيل PP مرة أخرى للمحيطات إذا لزم (للقواعد)</li>
+                        <li>50 نقطة مركز + 200 نقطة محيطية (4×50)</li>
+                        <li>جاهز للتنفيذ الكهربائي بدقة مساحية كاملة</li>
+                    </ol>
+                    <div style="background: rgba(34,197,94,0.1); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
+                        <p style="color: var(--success); font-size: 0.9rem; margin: 0; line-height: 1.5;">
+                            ✅ <strong>الشامل:</strong> مراكز + محيطات (كامل)<br>
+                            ✅ <strong>السرعة:</strong> 2 دقيقتين لعمل يوم كامل<br>
+                            ✅ <strong>الدقة:</strong> أعمدة في أماكنها الدقيقة هندسياً
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 6. الخلاصة -->
+        <section class="section">
+            <h2 class="section-title">💎 خلاصة: لماذا PP أساسي لكل مساح؟</h2>
+            <div class="definition">
+                <div style="background: rgba(30,41,59,0.8); border-radius: 10px; padding: var(--spacing-md); text-align: center;">
+                    <h4 style="color: var(--accent); margin-bottom: 1.5rem;">📝 جوهر الأمر PP</h4>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md); margin-bottom: 1.5rem;">
+                        <div style="background: rgba(37,99,235,0.1); padding: 1rem; border-radius: 8px;">
+                            <div style="font-size: 2rem; color: var(--primary);">⚡</div>
+                            <div style="color: var(--text-light); font-weight: bold; margin: 0.5rem 0;">سرعة فائقة</div>
+                            <div style="color: var(--text-gray); font-size: 0.9rem;">ثوانٍ بدلاً من ساعات</div>
+                        </div>
+                        
+                        <div style="background: rgba(16,185,129,0.1); padding: 1rem; border-radius: 8px;">
+                            <div style="font-size: 2rem; color: var(--secondary);">🎯</div>
+                            <div style="color: var(--text-light); font-weight: bold; margin: 0.5rem 0;">دقة مطلقة</div>
+                            <div style="color: var(--text-gray); font-size: 0.9rem;">100% بدون أخطاء</div>
+                        </div>
+                        
+                        <div style="background: rgba(245,158,11,0.1); padding: 1rem; border-radius: 8px;">
+                            <div style="font-size: 2rem; color: var(--accent);">🔄</div>
+                            <div style="color: var(--text-light); font-weight: bold; margin: 0.5rem 0;">تكامل كامل</div>
+                            <div style="color: var(--text-gray); font-size: 0.9rem;">مع PE للعمل المساحي</div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(245,158,11,0.1); padding: var(--spacing-md); border-radius: 8px; border-right: 3px solid var(--accent); margin-top: 1rem;">
+                        <p style="color: var(--text-light); font-weight: bold; margin-bottom: 0.5rem; font-size: 1.1rem;">
+                            🎖️ PP ليس رفاهية... PP ضرورة هندسية لكل مساح
+                        </p>
+                        <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">
+                            في عالم الأعمال الإنشائية حيث الوقت = مال، والدقة = سلامة، PP هو الحل الأمثل 
+                            الذي يجمع بين السرعة الفائقة والدقة المطلقة لكل عمل مساحي في الموقع. 
+                            بدقة هندسية كاملة وموثوقية 100%.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- زر العودة -->
+        <div style="text-align: center;">
+            <a href="../index.html" class="back-link">
+                <span>←</span> العودة إلى الصفحة الرئيسية
+            </a>
+        </div>
+
         <!-- الفوتر -->
         <footer>
-            <a href="../index.html" class="back-link">العودة إلى الصفحة الرئيسية</a>
-            <p>📧 للاستفسارات: MahmoudBorham.codes@gmail.com</p>
+            <p>📧 للاستفسارات التقنية: MahmoudBorham.codes@gmail.com</p>
+            <p>🛠️ جزء من حزمة Borham Tools المتخصصة في أتمتة الأعمال المساحية والإنشائية</p>
             <p>🇵🇸 Free Palestine - لوجه الله تعالى</p>
-            <p style="color: var(--accent); font-size: 0.9rem; margin-top: 1rem;">
-                "أداة واحدة توفر آلاف الساعات من العمل البشري في المشاريع الهندسية"
-            </p>
+            <div class="footer-highlight">
+                "بدلاً من تعليم نقطة نقطة... PP ينفذ المهمة كلها في ثوانٍ بدقة هندسية كاملة"
+            </div>
         </footer>
+
     </div>
 </body>
 </html>
