@@ -548,3 +548,45 @@ footer .hadith {
     .bismillah-text { font-size: 1.5rem; }
     .features-grid, .about-grid, .steps { gap: var(--spacing-sm); }
 }
+/* ============ شريط الإعلان عن الإصدار ============ */
+.version-announcement {
+    background: var(--bg-light);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0;
+    text-align: center;
+}
+
+.version-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.v-label {
+    color: var(--text-gray);
+}
+
+.v-number {
+    background: var(--accent);
+    color: var(--bg-dark);
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-weight: 800;
+    box-shadow: var(--shadow-sm);
+}
+
+.v-date {
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+/* تحسين بسيط لمكان زر اللغة ليكون متناسقاً مع الشريط الجديد */
+.lang-toggle {
+    top: 50px; /* تم خفضه قليلاً ليتناسب مع وجود الشريط العلوي */
+}
+
+@media (max-width: 768px) {
+    .lang-toggle { top: 45px; }
+}
