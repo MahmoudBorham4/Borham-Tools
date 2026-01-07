@@ -19,8 +19,9 @@ function updatePageLanguage() {
     document.documentElement.lang = currentLang;
     
     updateLanguageButton();
-    updateCommandLinks(); // <-- الدالة الجديدة التي أضفناها
+    updateCommandLinks();
     saveLanguagePreference();
+    updateDateDisplay(); // إضافة تحديث التاريخ
 }
 
 function updateLanguageButton() {
@@ -30,7 +31,6 @@ function updateLanguageButton() {
     }
 }
 
-// === هذا هو الجزء الجديد والمهم ===
 function updateCommandLinks() {
     const commandLinks = document.querySelectorAll('[data-command-link]');
     commandLinks.forEach(link => {
@@ -42,7 +42,42 @@ function updateCommandLinks() {
         }
     });
 }
-// =================================
+
+// دالة جديدة لتحديث التاريخ ديناميكياً
+function updateDateDisplay() {
+    const dateElement = document.querySelector('.last-update');
+    if (dateElement) {
+        // يمكنك استخدام التاريخ الحقيقي أو الترجمة الثابتة
+        // الخيار 1: استخدام الترجمة الثابتة (يناير 2026)
+        if (translations[currentLang] && translations[currentLang]['version.date']) {
+            dateElement.textContent = translations[currentLang]['version.date'];
+        }
+        
+        // الخيار 2: استخدام التاريخ الحقيقي (تعليق)
+        /*
+        const now = new Date();
+        const monthNames = currentLang === 'ar' 
+            ? ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
+            : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        
+        const month = monthNames[now.getMonth()];
+        const year = now.getFullYear();
+        
+        if (currentLang === 'ar') {
+            // تحويل الأرقام إلى عربية
+            const arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+            const yearStr = year.toString();
+            let arabicYear = '';
+            for (let i = 0; i < yearStr.length; i++) {
+                arabicYear += arabicNumbers[parseInt(yearStr[i])];
+            }
+            dateElement.textContent = `| ${month} ${arabicYear}`;
+        } else {
+            dateElement.textContent = `| ${month} ${year}`;
+        }
+        */
+    }
+}
 
 function saveLanguagePreference() {
     localStorage.setItem('borham-tools-lang', currentLang);
