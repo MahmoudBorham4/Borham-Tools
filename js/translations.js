@@ -20,7 +20,7 @@ const translations = {
         'developer.title': '👨‍💻 The Developer',
         'developer.text': 'Created by Mahmoud Borham, a Senior Surveyor dedicated to helping the surveying community through free, high-quality tools.',
         'overview.title': 'What is Borham Tools?',
-        'overview.desc': 'Borham Tools is a collection of ultra-optimized AutoCAD LISP commands designed specifically for surveyors, civil engineers, and CAD professionals. These tools use advanced algorithms to deliver exceptional performance.',
+        'overview.desc': 'Borham Tools v81.9 is a collection of ultra-optimized AutoCAD LISP commands designed specifically for surveyors, civil engineers, and CAD professionals. These tools use advanced algorithms to deliver exceptional performance.',
         'feature1.title': 'Ultra Fast',
         'feature1.text': 'Advanced algorithms for 10x-50x faster performance',
         'feature2.title': 'Specialized',
@@ -31,8 +31,8 @@ const translations = {
         'feature4.text': 'Real-time progress display for long operations',
         'quickstart.title': 'Quick Start Guide',
         'step1.title': 'Download',
-        'step1.text': 'Click the download button to get the latest BorhamTools v81.9',
-        'download.btn': 'Download Now',
+        'step1.text': 'Click the download button to get the latest BorhamTools file',
+        'download.btn': 'Download Now ',
         'step2.title': 'Install',
         'step2.text': 'In AutoCAD, type APPLOAD and select the downloaded file',
         'step3.title': 'Start Using',
@@ -45,11 +45,11 @@ const translations = {
         'footer.hadith': '"The Best Of People Are Those Who Are Most Beneficial To People" — Prophet Muhammad ﷺ',
         // Command Descriptions
         'cmd.pp.desc': 'Points on Objects',
-        'cmd.ppc.desc': 'Line Center Points',
+        'cmd.ppc.desc': 'Center Points of Various Objects',
         'cmd.ppx.desc': 'Intersection Points',
         'cmd.pe.desc': 'Export & Label Points',
         'cmd.pi.desc': 'Point Import',
-        'cmd.p2c.desc': 'Polyline to Circle',
+        'cmd.p2c.desc': 'Polyline/Arc to Circle',
         'cmd.df.desc': 'Elevation Difference',
         'cmd.lv.desc': 'Absolute Level Text',
         'cmd.aa.desc': 'Area & Hatch',
@@ -60,9 +60,9 @@ const translations = {
         'cmd.enl.desc': '3D Coordinates',
         'cmd.t.desc': 'Table with Codes',
         'cmd.i.desc': 'Interactive Help',
-        // Version Info (Updated as requested)
-        'version.label': 'Current Version:',
-        'version.date': '| Jan 2026'
+        // Version Info
+        'version.current': 'Current Version: ',
+        'version.date': '| January 2026'
     },
     'ar': {
         'langBtn': 'English',
@@ -94,8 +94,8 @@ const translations = {
         'feature4.text': 'عرض التقدم في الوقت الفعلي للعمليات الطويلة',
         'quickstart.title': 'دليل البدء السريع',
         'step1.title': 'تحميل',
-        'step1.text': 'اضغط على زر التحميل للحصول على أحدث ملف للأدوات v81.9',
-        'download.btn': 'حمل الآن',
+        'step1.text': 'اضغط على زر التحميل للحصول على أحدث ملف للأدوات',
+        'download.btn': '   حمل الأن   ',
         'step2.title': 'تثبيت',
         'step2.text': 'في الأوتوكاد، اكتب APPLOAD واختر الملف الذي تم تنزيله',
         'step3.title': 'ابدأ الاستخدام',
@@ -108,11 +108,11 @@ const translations = {
         'footer.hadith': '"خير الناس أنفعهم للناس" - النبي محمد ﷺ',
         // Command Descriptions
         'cmd.pp.desc': 'نقاط على العناصر',
-        'cmd.ppc.desc': 'نقاط مركز الخطوط',
+        'cmd.ppc.desc': 'نقاط مراكز الأشكال الهندسية',
         'cmd.ppx.desc': 'نقاط التقاطع',
         'cmd.pe.desc': 'تصدير وتوصيف النقاط',
         'cmd.pi.desc': 'استيراد النقاط',
-        'cmd.p2c.desc': 'بوليلاين إلى دوائر',
+        'cmd.p2c.desc': 'بوليلاين/قوس إلى دائرة',
         'cmd.df.desc': 'فرق المنسوب',
         'cmd.lv.desc': 'نص المنسوب المطلق',
         'cmd.aa.desc': 'المساحة والتهشير',
@@ -123,8 +123,8 @@ const translations = {
         'cmd.enl.desc': 'إحداثيات ثلاثية الأبعاد',
         'cmd.t.desc': 'جدول بالأكواد',
         'cmd.i.desc': 'مساعدة تفاعلية',
-        // Version Info (Updated as requested)
-        'version.label': 'الإصدار الحالي:',
+        // Version Info
+        'version.current': 'الإصدار الحالي: ',
         'version.date': '| يناير 2026'
     }
 };
