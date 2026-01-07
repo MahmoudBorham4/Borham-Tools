@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الأمر PPC - نقاط مراكز الخطوط الذكية | Borham Tools</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>أمر PPC - نقاط مراكز الأشكال الهندسية | أدوات برهام الإصدار 81.9</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2563eb;
@@ -33,7 +33,7 @@
         }
         .container { max-width: var(--container-width); margin: 0 auto; padding: 0 var(--spacing-sm); }
 
-        /* الترويسة */
+        /* Header */
         .page-header {
             background: linear-gradient(135deg, #1e293b, #0f172a);
             padding: var(--spacing-lg) 0;
@@ -60,7 +60,7 @@
             line-height: 1.8;
         }
 
-        /* الأقسام */
+        /* Sections */
         .section { 
             margin-bottom: var(--spacing-lg);
         }
@@ -75,7 +75,7 @@
             gap: 0.8rem;
         }
 
-        /* صناديق */
+        /* Boxes */
         .definition,
         .how-it-works,
         .integration-box {
@@ -109,7 +109,7 @@
             gap: 0.5rem;
         }
 
-        /* المميزات التقنية */
+        /* Technical Features */
         .tech-features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -132,7 +132,7 @@
             right: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent), transparent);
+            background: linear-gradient(270deg, var(--accent), transparent);
         }
         .feature-card:hover { 
             transform: translateY(-8px); 
@@ -154,7 +154,7 @@
             font-size: 0.95rem;
         }
 
-        /* سير العمل */
+        /* Workflow */
         .workflow {
             display: flex;
             justify-content: space-between;
@@ -197,69 +197,48 @@
             position: absolute;
             left: -20px;
             top: 50%;
-            transform: translateY(-50%);
+            transform: translateY(-50%) rotate(180deg);
             font-size: 1.8rem;
             color: var(--accent);
         }
 
-        /* تصور هندسي */
-        .visualization {
-            background: rgba(37,99,235,0.1);
-            border-radius: 12px;
-            padding: var(--spacing-md);
-            margin: 1.5rem 0;
+        /* Object Type Grid */
+        .object-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--spacing-sm);
+            margin: var(--spacing-md) 0;
+        }
+        .object-card {
+            background: rgba(255,255,255,0.03);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: var(--spacing-sm);
             text-align: center;
-            border: 1px solid var(--border);
+            transition: all 0.3s ease;
         }
-        .line-visual {
-            position: relative;
-            width: 300px;
-            height: 100px;
-            margin: 0 auto;
+        .object-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            background: rgba(245,158,11,0.05);
         }
-        .line-visual .line {
-            position: absolute;
-            top: 50%;
-            right: 0;
-            left: 0;
-            height: 3px;
-            background: #ef4444;
-            transform: translateY(-50%);
+        .object-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
         }
-        .line-visual .start-point {
-            position: absolute;
-            top: 50%;
-            right: 20%;
-            width: 12px;
-            height: 12px;
-            background: #2563eb;
-            border-radius: 50%;
-            transform: translate(50%, -50%);
+        .object-card.supported {
+            border-color: #10b981;
+            background: rgba(16,185,129,0.05);
         }
-        .line-visual .end-point {
-            position: absolute;
-            top: 50%;
-            left: 20%;
-            width: 12px;
-            height: 12px;
-            background: #2563eb;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
+        .object-card.supported .object-icon {
+            color: #10b981;
         }
-        .line-visual .midpoint {
-            position: absolute;
-            top: 50%;
-            right: 50%;
-            width: 18px;
-            height: 18px;
-            background: #10b981;
-            border-radius: 50%;
-            transform: translate(50%, -50%);
-            border: 3px solid var(--bg-dark);
-            box-shadow: 0 0 0 2px #10b981;
+        .object-card.supported h5 {
+            color: #10b981;
         }
 
-        /* جدول المقارنة */
+        /* Comparison Table */
         .comparison-table {
             overflow-x: auto;
             margin: 1.5rem 0;
@@ -286,7 +265,7 @@
             background: rgba(255,255,255,0.03);
         }
 
-        /* التكامل مع الأوامر الأخرى */
+        /* Integration with Other Commands */
         .integration-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -303,7 +282,7 @@
         .integration-t { border-color: #10b981; }
         .integration-pp { border-color: #f59e0b; }
 
-        /* أمثلة واقعية */
+        /* Real Examples */
         .examples-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -316,23 +295,7 @@
             padding: var(--spacing-md);
         }
 
-        /* آلية العمل التقنية */
-        .code-block {
-            background: rgba(30,41,59,0.8);
-            border-radius: 8px;
-            padding: var(--spacing-md);
-            margin: 1rem 0;
-            border-right: 4px solid var(--accent);
-        }
-        .code-block code {
-            font-family: monospace;
-            font-size: 0.85rem;
-            color: #60a5fa;
-            line-height: 1.8;
-            display: block;
-        }
-
-        /* زر العودة */
+        /* Back Button */
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -351,7 +314,7 @@
             transform: translateY(-2px);
         }
 
-        /* الفوتر */
+        /* Footer */
         footer {
             text-align: center;
             margin-top: var(--spacing-lg);
@@ -374,7 +337,7 @@
             display: inline-block;
         }
 
-        /* تجاوب */
+        /* Responsive */
         @media (max-width: 768px) {
             .page-header h1 { font-size: 2rem; }
             .section-title { font-size: 1.5rem; }
@@ -390,8 +353,8 @@
             .integration-grid, .examples-grid {
                 grid-template-columns: 1fr;
             }
-            .line-visual {
-                width: 250px;
+            .object-types {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -399,91 +362,181 @@
 <body>
     <div class="container">
 
-        <!-- الترويسة -->
+        <!-- Header -->
         <header class="page-header">
-            <h1>الأمر PPC — نقاط مراكز الخطوط الذكية</h1>
-            <div class="tagline">حساب رياضي دقيق لمنتصف الخطوط في AutoCAD</div>
+            <h1>أمر PPC — نقاط مراكز الأشكال الهندسية</h1>
+            <div class="tagline">يعمل الآن مع جميع أنواع الأشكال: الخطوط، المتعددات، الدوائر، الأقواس، القطوع الناقصة، المنحنيات</div>
             <p>
-                نظام متخصص لوضع نقاط في منتصف كل خط بدقة رياضية 100%. معالجة آلاف الخطوط في ثوانٍ معدودة 
-                مع منع التكرار الذكي وعرض تقدم حي.
+                <strong>PPC (الإصدار المحسن v81.9)</strong> - ينشئ نقاط المركز للأشكال الهندسية المختلفة بدقة رياضية. 
+                هذا الإصدار يجمع وظيفة P2C القديمة ويعمل الآن مع أنواع متعددة من الأشكال مع منع التكرار الذكي.
             </p>
         </header>
 
-        <!-- 1. ما هو الأمر PPC -->
+        <!-- 1. ما هو أمر PPC (المحسن) -->
         <section class="section">
-            <h2 class="section-title">📌 ما هو الأمر PPC؟</h2>
+            <h2 class="section-title">📌 ما هو أمر PPC؟ (الإصدار المحسن)</h2>
             <div class="definition">
                 <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--text-light);">
-                    <strong>الأمر PPC</strong> هو أداة متخصصة في AutoCAD لوضع نقطة بدقة رياضية في 
-                    <span style="color: var(--accent); font-weight: bold;">منتصف كل خط مستقيم (LINE)</span>. 
-                    يحسب المنتصف الهندسي لمئات الخطوط دفعة واحدة مع خوارزميات متقدمة لمنع التكرار.
+                    <strong>أمر PPC</strong> هو <span style="color: var(--accent); font-weight: bold;">أداة أوتوكاد محسنة</span> تنشئ 
+                    <span style="color: var(--accent); font-weight: bold;">نقاط مركز للأشكال الهندسية المختلفة</span> بدقة رياضية. 
+                    <span style="color: var(--secondary);">هذا الإصدار يجمع وظيفة P2C القديمة ويعمل مع أنواع متعددة من الأشكال.</span>
                 </p>
 
-                <div class="visualization">
-                    <div class="line-visual">
-                        <div class="line"></div>
-                        <div class="start-point"></div>
-                        <div class="end-point"></div>
-                        <div class="midpoint"></div>
-                        <div style="position: absolute; top: 10px; right: 20%; font-size: 0.8rem; color: #2563eb;">نقطة البداية</div>
-                        <div style="position: absolute; top: 10px; left: 20%; font-size: 0.8rem; color: #2563eb;">نقطة النهاية</div>
-                        <div style="position: absolute; bottom: 10px; right: 50%; transform: translateX(50%); font-size: 0.8rem; color: #10b981; font-weight: bold;">منتصف الخط</div>
-                    </div>
-                    <p style="color: var(--text-gray); margin-top: 1rem; font-size: 0.9rem;">
-                        المعادلة: <code style="background: rgba(37, 99, 235, 0.2); padding: 2px 8px; border-radius: 4px;">Midpoint = (Start + End) / 2</code>
-                    </p>
-                </div>
-
                 <div class="definition-box">
-                    <h3>🎯 المميزات الرئيسية</h3>
+                    <h3>🎯 المميزات الرئيسية (الإصدار المحسن v81.9)</h3>
                     <ul style="color: var(--text-gray); padding-right: 1rem;">
-                        <li><strong>متخصص للخطوط المستقيمة:</strong> يعمل فقط على LINES بدقة 100%</li>
-                        <li><strong>سرعة خيالية:</strong> معالجة 10,000 خط في ثوانٍ معدودة</li>
-                        <li><strong>منع التكرار الذكي:</strong> يتجنب النقاط المكررة تلقائياً (Tolerance: 0.001)</li>
-                        <li><strong>حساب 3D كامل:</strong> يحسب المنتصف للإحداثيات الثلاثة (X, Y, Z)</li>
-                        <li><strong>شريط تقدم حي:</strong> متابعة لحظية لعدد النقاط المُنشأة</li>
-                        <li><strong>إدارة طبقات ذكية:</strong> يضع النقاط في طبقة POINT باللون الأزرق</li>
+                        <li><strong>دعم متعدد الأشكال:</strong> يعمل مع الخطوط، المتعددات، الدوائر، الأقواس، القطوع الناقصة، المنحنيات</li>
+                        <li><strong>طرق حساب مختلفة:</strong> لكل نوع شكل خوارزمية حساب مركز خاصة به</li>
+                        <li><strong>منع التكرار الذكي:</strong> يمنع تكرار النقاط تلقائياً</li>
+                        <li><strong>شريط تقدم مباشر:</strong> تتبع فوري أثناء المعالجة</li>
+                        <li><strong>إدارة طبقات ذكية:</strong> يضع النقاط في طبقة 'CENTER_POINTS' (لون سماوي)</li>
+                        <li><strong>أداء محسن:</strong> يعالج آلاف الأشكال في ثوان</li>
                     </ul>
                 </div>
 
-                <div class="definition-box" style="background: linear-gradient(135deg, rgba(239,68,68,0.1), rgba(239,68,68,0.05)); border-right-color: #ef4444;">
-                    <h3 style="color: #ef4444;">⚠️ تنبيه مهم</h3>
-                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;">
-                        الأمر <strong>PPC يعمل فقط على LINES</strong> (الخطوط المستقيمة). لن يعمل على:
-                    </p>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
-                        <div style="background: rgba(239,68,68,0.15); padding: 0.8rem; border-radius: 8px; border-right: 3px solid #ef4444;">
-                            <strong style="color: #ef4444;">Polylines</strong>
-                            <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.3rem;">استخدم PP بدلاً منه</p>
+                <!-- الشبكة المدعومة -->
+                <div class="definition-box">
+                    <h3>✅ أنواع الأشكال المدعومة</h3>
+                    <div class="object-types">
+                        <!-- خطوط -->
+                        <div class="object-card supported">
+                            <div class="object-icon">📏</div>
+                            <h5>خطوط</h5>
+                            <p style="font-size: 0.85rem; color: var(--text-gray);">منتصف المسافة بين نقطتي البداية والنهاية</p>
                         </div>
-                        <div style="background: rgba(239,68,68,0.15); padding: 0.8rem; border-radius: 8px; border-right: 3px solid #ef4444;">
-                            <strong style="color: #ef4444;">Arcs</strong>
-                            <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.3rem;">استخدم PP بدلاً منه</p>
+                        <!-- متعددات خفيفة -->
+                        <div class="object-card supported">
+                            <div class="object-icon">⬢</div>
+                            <h5>متعددات خفيفة</h5>
+                            <p style="font-size: 0.85rem; color: var(--text-gray);">منتصف المربع المحيط</p>
                         </div>
-                        <div style="background: rgba(239,68,68,0.15); padding: 0.8rem; border-radius: 8px; border-right: 3px solid #ef4444;">
-                            <strong style="color: #ef4444;">Circles</strong>
-                            <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.3rem;">استخدم PP بدلاً منه</p>
+                        <!-- متعددات -->
+                        <div class="object-card supported">
+                            <div class="object-icon">⎔</div>
+                            <h5>متعددات</h5>
+                            <p style="font-size: 0.85rem; color: var(--text-gray);">منتصف المربع المحيط</p>
                         </div>
-                        <div style="background: rgba(239,68,68,0.15); padding: 0.8rem; border-radius: 8px; border-right: 3px solid #ef4444;">
-                            <strong style="color: #ef4444;">Splines</strong>
-                            <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.3rem;">استخدم PP بدلاً منه</p>
+                        <!-- دوائر -->
+                        <div class="object-card supported">
+                            <div class="object-icon">◯</div>
+                            <h5>دوائر</h5>
+                            <p style="font-size: 0.85rem; color: var(--text-gray);">النقطة المركزية الهندسية</p>
+                        </div>
+                        <!-- أقواس -->
+                        <div class="object-card supported">
+                            <div class="object-icon">⌒</div>
+                            <h5>أقواس</h5>
+                            <p style="font-size: 0.85rem; color: var(--text-gray);">نقطة مركز القوس</p>
+                        </div>
+                        <!-- قطوع ناقصة -->
+                        <div class="object-card supported">
+                            <div class="object-icon">○</div>
+                            <h5>قطوع ناقصة</h5>
+                            <p style="font-size: 0.85rem; color: var(--text-gray);">مركز القطع الناقص</p>
+                        </div>
+                        <!-- منحنيات -->
+                        <div class="object-card supported">
+                            <div class="object-icon">⎈</div>
+                            <h5>منحنيات</h5>
+                            <p style="font-size: 0.85rem; color: var(--text-gray);">منتصف المسافة بين نقطتي البداية والنهاية</p>
                         </div>
                     </div>
-                    <p style="color: #ef4444; font-weight: bold; margin-top: 1rem;">
-                        💡 للعناصر الأخرى، استخدم الأمر PP العام!
-                    </p>
                 </div>
 
+                <!-- طرق الحساب -->
+                <div class="definition-box" style="background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(139,92,246,0.05)); border-right-color: var(--accent2);">
+                    <h3 style="color: var(--accent2);">🧮 كيف يحسب PPC المراكز</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>نوع الشكل</th>
+                                    <th>طريقة حساب المركز</th>
+                                    <th>الدقة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>خطوط</strong></td>
+                                    <td>منتصف المسافة بين نقطتي البداية والنهاية</td>
+                                    <td>100% رياضية</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>متعددات خفيفة / متعددات</strong></td>
+                                    <td>منتصف المربع المحيط</td>
+                                    <td>مركز هندسي</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>دوائر</strong></td>
+                                    <td>المركز الهندسي (خاصية المركز)</td>
+                                    <td>مركز دقيق</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>أقواس</strong></td>
+                                    <td>نقطة مركز القوس</td>
+                                    <td>مركز دقيق</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>قطوع ناقصة</strong></td>
+                                    <td>مركز القطع الناقص باستخدام vlax</td>
+                                    <td>مركز دقيق</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>منحنيات</strong></td>
+                                    <td>منتصف المسافة بين نقطتي البداية والنهاية</td>
+                                    <td>مركز تقريبي</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- متى تستخدم -->
                 <div class="definition-box">
-                    <h3>⚙️ متى تستخدمه؟</h3>
-                    <ul style="color: var(--text-gray); padding-right: 1rem;">
-                        <li>عندما تحتاج نقاط <strong>في منتصف خطوط مستقيمة فقط</strong></li>
-                        <li>لتحديد مواقع الأعمدة في منتصف الطرقات والشوارع</li>
-                        <li>لحساب مراكز الحدود المستقيمة في المخططات المساحية</li>
-                        <li>لوضع نقاط Reference في منتصف العناصر الإنشائية</li>
-                        <li>عندما تريد سرعة قصوى مع خطوط مستقيمة فقط</li>
-                        <li>لإنشاء نقاط قياس دقيقة في منتصف المسافات</li>
-                    </ul>
+                    <h3>⚙️ متى تستخدم PPC (مقارنة بـ PP)؟</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>الحالة</th>
+                                    <th>استخدم PPC لـ:</th>
+                                    <th>استخدم PP لـ:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>تحتاج نقاط مركز</strong></td>
+                                    <td>✅ نقاط مركز الأشكال</td>
+                                    <td>❌ نقاط على المحيط</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>العمل مع خطوط</strong></td>
+                                    <td>✅ منتصف الخطوط</td>
+                                    <td>✅ نقاط على الخطوط (بمسافات)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>العمل مع دوائر/أقواس</strong></td>
+                                    <td>✅ نقاط المركز</td>
+                                    <td>✅ نقاط على المحيط</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>العمل مع متعددات</strong></td>
+                                    <td>✅ المركز الهندسي</td>
+                                    <td>✅ نقاط على الرؤوس</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>العمل مع قطوع ناقصة</strong></td>
+                                    <td>✅ نقطة المركز</td>
+                                    <td>✅ نقاط على منحنى القطع الناقص</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>العمل مع منحنيات</strong></td>
+                                    <td>✅ مركز تقريبي</td>
+                                    <td>✅ نقاط على طول المنحنى</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>
@@ -494,97 +547,47 @@
             <div class="tech-features">
 
                 <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h4>سرعة خارقة</h4>
-                    <p>معالجة 10,000 خط في 5 ثوانٍ فقط - أسرع 50 مرة من الطرق التقليدية</p>
+                    <div class="feature-icon">🎯</div>
+                    <h4>دعم متعدد الأشكال</h4>
+                    <p>يعمل مع 7 أنواع مختلفة من الأشكال، لكل منها طريقة حساب خاصة</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h4>دقة رياضية 100%</h4>
-                    <p>المعادلة: (نقطة البداية + نقطة النهاية) ÷ 2 - تطبيق دقيق للإحداثيات الثلاثة X, Y, Z</p>
+                    <div class="feature-icon">⚡</div>
+                    <h4>أداء محسن</h4>
+                    <p>منع التكرار باستخدام الهاش ومعالجة جماعية للسرعة</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🧮</div>
+                    <h4>حساب ذكي</h4>
+                    <p>خوارزميات مختلفة لكل نوع شكل بأقصى دقة</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">🔍</div>
-                    <h4>Spatial Hashing</h4>
-                    <p>تجزئة مكانية ذكية للتحقق من النقاط المكررة في O(1) وقت ثابت</p>
+                    <h4>منع التكرار</h4>
+                    <p>يمنع تكرار نقاط المركز حتى عند تداخل الأشكال</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">📊</div>
-                    <h4>شريط التقدم الحي</h4>
-                    <p>عرض لحظي للنسبة المئوية وعدد النقاط المُنشأة أثناء المعالجة</p>
+                    <h4>تتبع التقدم</h4>
+                    <p>عرض تقدم مباشر مع عدد الأشكال والنقاط المنشأة</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h4>معالجة دفعات</h4>
-                    <p>معالجة متوازية لآلاف الخطوط دفعة واحدة مع حفظ الذاكرة</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h4>إدارة أخطاء ذكية</h4>
-                    <p>التعامل مع الاستثناءات دون تعطيل العملية الكلية</p>
+                    <div class="feature-icon">🎨</div>
+                    <h4>تنظيم مرئي</h4>
+                    <p>جميع النقاط توضع في طبقة 'CENTER_POINTS' بلون سماوي لتسهيل التعرف</p>
                 </div>
 
             </div>
         </section>
 
-        <!-- 3. مقارنة بين PPC و PP -->
+        <!-- 3. كيف يعمل -->
         <section class="section">
-            <h2 class="section-title">📊 مقارنة بين PPC و PP</h2>
-            <div class="definition">
-                <div class="comparison-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>المعيار</th>
-                                <th style="color: #10b981;">PPC</th>
-                                <th style="color: #f59e0b;">PP</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>نوع الكائن</strong></td>
-                                <td>LINES فقط</td>
-                                <td>جميع الكائنات (Lines, Polylines, Arcs, Circles, Splines)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>عدد النقاط</strong></td>
-                                <td>نقطة واحدة/خط</td>
-                                <td>متعدد حسب التباعد المحدد</td>
-                            </tr>
-                            <tr>
-                                <td><strong>السرعة</strong></td>
-                                <td>⚡ فائقة السرعة (10,000 خط/5 ثواني)</td>
-                                <td>سرعة عادية</td>
-                            </tr>
-                            <tr>
-                                <td><strong>التخصص</strong></td>
-                                <td>👷 متخصص للخطوط المستقيمة</td>
-                                <td>🔄 عام وشامل لجميع الأشكال</td>
-                            </tr>
-                            <tr>
-                                <td><strong>دقة الحساب</strong></td>
-                                <td>دقة رياضية 100%</td>
-                                <td>دقة تقريبية حسب التباعد</td>
-                            </tr>
-                            <tr>
-                                <td><strong>الاستخدام الأمثل</strong></td>
-                                <td>مراكز الخطوط المستقيمة</td>
-                                <td>توزيع نقاط على المحيط</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. طريقة العمل -->
-        <section class="section">
-            <h2 class="section-title">🚀 كيف يعمل الأمر PPC؟</h2>
+            <h2 class="section-title">🚀 كيف يعمل أمر PPC</h2>
             <div class="how-it-works">
                 
                 <div class="workflow">
@@ -592,309 +595,300 @@
                         <div class="work-step-number">1</div>
                         <strong>تشغيل الأمر</strong>
                         <p>اكتب <code style="background: var(--accent); color: var(--bg-dark); padding: 2px 8px; border-radius: 4px;">PPC</code></p>
-                        <small>بدء عملية إنشاء نقاط المراكز</small>
+                        <small>إنشاء نقاط مركز للأشكال المختلفة</small>
                     </div>
 
                     <div class="work-step">
                         <div class="work-step-number">2</div>
-                        <strong>اختيار الخطوط</strong>
-                        <p>حدد جميع الخطوط المستقيمة</p>
-                        <small>LINES فقط (اختيار متعدد)</small>
+                        <strong>اختر الأشكال</strong>
+                        <p>اختر أنواع متعددة من الأشكال</p>
+                        <small>خطوط، متعددات، دوائر، أقواس، قطوع ناقصة، منحنيات</small>
                     </div>
 
                     <div class="work-step">
                         <div class="work-step-number">3</div>
-                        <strong>المعالجة الذكية</strong>
-                        <p>شريط تقدم حي</p>
-                        <small>حساب + منع تكرار + إنشاء</small>
+                        <strong>معالجة ذكية</strong>
+                        <p>عرض تقدم مباشر</p>
+                        <small>كل نوع شكل يعالج بطريقة مختلفة</small>
                     </div>
 
                     <div class="work-step">
                         <div class="work-step-number">4</div>
                         <strong>النتيجة النهائية</strong>
-                        <p>نقاط جاهزة!</p>
-                        <small>في طبقة POINT باللون الأزرق</small>
+                        <p>نقاط المركز منشأة!</p>
+                        <small>في طبقة CENTER_POINTS (سماوي)</small>
                     </div>
+                </div>
+
+                <div style="background: rgba(30,41,59,0.8); border-radius: 8px; padding: var(--spacing-md); margin: 1rem 0; border-right: 4px solid var(--accent);">
+                    <h4 style="color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                        <span>⚙️</span> خوارزمية معالجة متقدمة
+                    </h4>
+                    <ol style="color: var(--text-gray); font-size: 0.95rem; padding-right: 1.5rem;">
+                        <li><strong>كشف نوع الشكل:</strong> يحدد كل نوع شكل (خط، دائرة، قوس، إلخ)</li>
+                        <li><strong>حساب المركز:</strong> يطبق الخوارزمية المناسبة لكل نوع</li>
+                        <li><strong>فحص التكرار:</strong> يستخدم جدول هاش لمنع تكرار النقاط</li>
+                        <li><strong>إنشاء النقاط:</strong> ينشئ نقاط في طبقة CENTER_POINTS بلون سماوي</li>
+                        <li><strong>تحديث التقدم:</strong> يظهر التقدم والإحصائيات مباشرة</li>
+                    </ol>
                 </div>
             </div>
         </section>
 
-        <!-- 5. التكامل مع الأوامر الأخرى -->
+        <!-- 4. التكامل مع الأوامر الأخرى -->
         <section class="section">
             <h2 class="section-title">🔄 التكامل مع الأوامر الأخرى</h2>
             <div class="integration-box">
                 
                 <div class="integration-grid">
                     <div class="integration-card integration-pe">
-                        <h4 style="color: #3b82f6; margin-bottom: 1rem;">🔗 مع الأمر PE</h4>
+                        <h4 style="color: #3b82f6; margin-bottom: 1rem;">🔗 مع أمر PE</h4>
                         <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                            <strong>PPC</strong> ينشئ نقاط في منتصف الخطوط<br>
-                            <strong>PE</strong> يصدر النقاط إلى جدول إحداثيات مع ترقيم
+                            <strong>PPC</strong> ينشئ نقاط مركز الأشكال<br>
+                            <strong>PE</strong> يصدر نقاط المركز مع الإحداثيات والأسماء
                         </p>
                         <div style="background: rgba(59,130,246,0.1); padding: 0.8rem; border-radius: 6px;">
                             <p style="color: #3b82f6; font-size: 0.9rem; margin: 0;">
-                                📌 سير العمل: PPC → نقاط منتصف → PE → تصدير إحداثيات مرقمة
+                                📌 سير العمل: PPC → نقاط المركز → PE → تصدير الإحداثيات
                             </p>
                         </div>
                     </div>
                     
                     <div class="integration-card integration-t">
-                        <h4 style="color: #10b981; margin-bottom: 1rem;">🔗 مع الأمر T</h4>
+                        <h4 style="color: #10b981; margin-bottom: 1rem;">🔗 مع أمر T</h4>
                         <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                            <strong>PPC</strong> ينشئ نقاط مراكز الخطوط<br>
-                            <strong>T</strong> يحول النقاط إلى جدول إحداثيات منظم
+                            <strong>PPC</strong> ينشئ نقاط مركز الأشكال<br>
+                            <strong>T</strong> ينشئ جدول احترافي بمراكز الأشكال
                         </p>
                         <div style="background: rgba(16,185,129,0.1); padding: 0.8rem; border-radius: 6px;">
                             <p style="color: #10b981; font-size: 0.9rem; margin: 0;">
-                                📌 سير العمل: PPC → نقاط مراكز → T → جدول إحداثيات احترافي
+                                📌 سير العمل: PPC → مراكز → T → جدول إحداثيات المراكز
                             </p>
                         </div>
                     </div>
                     
                     <div class="integration-card integration-pp">
-                        <h4 style="color: #f59e0b; margin-bottom: 1rem;">🔗 مع الأمر PP</h4>
+                        <h4 style="color: #f59e0b; margin-bottom: 1rem;">🔗 مع أمر PP</h4>
                         <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                            <strong>PPC</strong> متخصص للخطوط المستقيمة فقط<br>
-                            <strong>PP</strong> عام لجميع أنواع الكائنات
+                            <strong>PPC</strong> لنقاط المركز فقط<br>
+                            <strong>PP</strong> لنقاط على المحيط
                         </p>
                         <div style="background: rgba(245,158,11,0.1); padding: 0.8rem; border-radius: 6px;">
                             <p style="color: #f59e0b; font-size: 0.9rem; margin: 0;">
-                                📌 الاختيار: PPC للخطوط فقط، PP للكائنات الأخرى
+                                📌 الاختيار: PPC للمراكز، PP لنقاط المحيط
                             </p>
                         </div>
                     </div>
                 </div>
                 
                 <div style="background: rgba(139,92,246,0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: 1.5rem; text-align: center;">
-                    <p style="color: var(--accent2); font-weight: bold; margin-bottom: 0.5rem;">💡 نظام متكامل</p>
+                    <p style="color: var(--accent2); font-weight: bold; margin-bottom: 0.5rem;">💡 نظام نقاط المركز المتكامل</p>
                     <p style="color: var(--text-gray); font-size: 0.95rem;">
-                        الأمر PPC ليس أداة منعزلة، بل هو جزء من نظام متكامل لإدارة النقاط في Borham Tools
+                        PPC جزء من نظام إدارة نقاط المركز في أدوات برهام لأنواع الأشكال المختلفة
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- 6. الاستخدامات العملية -->
+        <!-- 5. التطبيقات العملية -->
         <section class="section">
-            <h2 class="section-title">🏗️ الاستخدامات العملية في الميدان</h2>
+            <h2 class="section-title">🏗️ التطبيقات العملية الميدانية</h2>
             <div class="tech-features">
                 
                 <div class="feature-card" style="border-top: 3px solid #3b82f6;">
-                    <div class="feature-icon">🛣️</div>
-                    <h4>تخطيط الطرق</h4>
-                    <p>تحديد مراكز الأعمدة والإنارة في منتصف الشوارع المستقيمة بدقة عالية</p>
+                    <div class="feature-icon">🏢</div>
+                    <h4>المخططات المعمارية</h4>
+                    <p>إيجاد مركز الغرف (حدود متعددات)، الأعمدة (دوائر)، الجدران (خطوط)</p>
                     <div style="background: rgba(59,130,246,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                        <span style="color: #3b82f6; font-size: 0.8rem;">🚀 مثال: 200 شارع في 3 ثوانٍ</span>
+                        <span style="color: #3b82f6; font-size: 0.8rem;">🎯 جميع أنواع الأشكال في أمر واحد</span>
                     </div>
                 </div>
 
                 <div class="feature-card" style="border-top: 3px solid #10b981;">
-                    <div class="feature-icon">📐</div>
-                    <h4>المساحة والرفع</h4>
-                    <p>إنشاء نقاط Reference في منتصف حدود الأراضي المستقيمة للرفع المساحي الدقيق</p>
+                    <div class="feature-icon">🛣️</div>
+                    <h4>الطرق والبنية التحتية</h4>
+                    <p>مركز مقاطع الطرق (متعددات)، فتحات التصريف (دوائر)، أعمدة الإنارة (أقواس)</p>
                     <div style="background: rgba(16,185,129,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                        <span style="color: #10b981; font-size: 0.8rem;">🎯 دقة: 100% رياضية</span>
+                        <span style="color: #10b981; font-size: 0.8rem;">⚡ معالجة جماعية</span>
                     </div>
                 </div>
 
                 <div class="feature-card" style="border-top: 3px solid #f59e0b;">
-                    <div class="feature-icon">🏢</div>
-                    <h4>العناصر الإنشائية</h4>
-                    <p>تحديد مراكز الجدران، الأعمدة، والكمرات المستقيمة في المخططات المعمارية</p>
+                    <div class="feature-icon">⚡</div>
+                    <h4>الشبكات الكهربائية</h4>
+                    <p>مركز لوحات التوزيع (مستطيلات)، مسارات الكابلات (منحنيات)، نقاط التوصيل</p>
                     <div style="background: rgba(245,158,11,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                        <span style="color: #f59e0b; font-size: 0.8rem;">⚡ سرعة: 50x أسرع</span>
+                        <span style="color: #f59e0b; font-size: 0.8rem;">🔧 دعم متعدد الأشكال</span>
                     </div>
                 </div>
 
                 <div class="feature-card" style="border-top: 3px solid #8b5cf6;">
-                    <div class="feature-icon">⚡</div>
-                    <h4>الشبكات الخطية</h4>
-                    <p>وضع نقاط في منتصف خطوط شبكات الكهرباء، المياه، والصرف الصحي</p>
+                    <div class="feature-icon">💧</div>
+                    <h4>المياه والصرف الصحي</h4>
+                    <p>مركز الخزانات (قطوع ناقصة)، وصلات الأنابيب (أقواس)، أغطية فتحات التصريف (دوائر)</p>
                     <div style="background: rgba(139,92,246,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                        <span style="color: #8b5cf6; font-size: 0.8rem;">🔧 جاهز للعمل الميداني</span>
+                        <span style="color: #8b5cf6; font-size: 0.8rem;">🧮 حساب مركز دقيق</span>
                     </div>
                 </div>
 
                 <div class="feature-card" style="border-top: 3px solid #ef4444;">
-                    <div class="feature-icon">🎯</div>
-                    <h4>نقاط القياس</h4>
-                    <p>إنشاء نقاط قياس دقيقة في منتصف المسافات للاستخدام في الحسابات الهندسية</p>
+                    <div class="feature-icon">📐</div>
+                    <h4>المساحة ورسم الخرائط</h4>
+                    <p>مركز حدود الممتلكات (متعددات)، المعالم (أشكال متنوعة)</p>
                     <div style="background: rgba(239,68,68,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                        <span style="color: #ef4444; font-size: 0.8rem;">📏 دقة: 0.001 وحدة</span>
+                        <span style="color: #ef4444; font-size: 0.8rem;">📏 دقة عالية</span>
                     </div>
                 </div>
 
                 <div class="feature-card" style="border-top: 3px solid #06b6d4;">
-                    <div class="feature-icon">🔄</div>
-                    <h4>سير عمل متكامل</h4>
-                    <p>إنشاء نقاط بـ PPC ثم معالجتها بـ PE أو T لإنشاء مستندات احترافية</p>
+                    <div class="feature-icon">🏭</div>
+                    <h4>التصميم الصناعي</h4>
+                    <p>مركز الأجزاء الميكانيكية (أشكال متنوعة)، نقاط التجميع، مواقع المرجع</p>
                     <div style="background: rgba(6,182,212,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                        <span style="color: #06b6d4; font-size: 0.8rem;">📊 PPC → PE/T → مستندات</span>
+                        <span style="color: #06b6d4; font-size: 0.8rem;">⚙️ تطبيقات هندسية</span>
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <!-- 7. أمثلة واقعية -->
+        <!-- 6. أمثلة حقيقية -->
         <section class="section">
-            <h2 class="section-title">💼 أمثلة واقعية من المشاريع</h2>
+            <h2 class="section-title">💼 أمثلة مشاريع حقيقية</h2>
             <div class="examples-grid">
                 
                 <div class="example-card">
-                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 1: مخطط سكني</h4>
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 1: مخطط طابق مبنى</h4>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
                     <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-                        مخطط سكني به 85 شارع مرسوم كخطوط مستقيمة. المطلوب تحديد موقع عمود كهرباء في منتصف كل شارع.
+                        مخطط طابق معماري به غرف (متعددات)، أعمدة (دوائر)، أبواب (أقواس)، وجدران (خطوط). تحتاج إلى إيجاد نقاط مركز لوضع الأثاث وحسابات التكييف.
                     </p>
-                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ PPC:</strong></p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل باستخدام PPC:</strong></p>
                     <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
-                        <li>تشغيل الأمر PPC</li>
-                        <li>اختيار جميع خطوط الشوارع (85 خط)</li>
-                        <li>Enter - تم إنشاء 85 نقطة في 2 ثانية</li>
-                        <li>استخدام PE لتصدير الإحداثيات</li>
-                        <li>تسليم جدول الإحداثيات لفريق الكهرباء</li>
+                        <li>تشغيل أمر PPC</li>
+                        <li>اختيار كل الأشكال (متعددات، دوائر، أقواس، خطوط)</li>
+                        <li>الحصول على نقاط مركز لكل نوع شكل</li>
+                        <li>استخدام PE لتصدير إحداثيات المركز</li>
+                        <li>استيراد إلى برنامج تخطيط الأثاث</li>
                     </ol>
                     <div style="background: rgba(34,197,94,0.1); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
                         <p style="color: var(--success); font-size: 0.9rem; margin: 0;">
-                            ✅ <strong>توفير الوقت:</strong> من 45 دقيقة إلى 5 ثوانٍ (توفير 99%)<br>
-                            ✅ <strong>الدقة:</strong> 100% مواقع صحيحة<br>
-                            ✅ <strong>جاهزية:</strong> ملف CSV جاهز للاستخدام
+                            ✅ <strong>متعدد الأشكال:</strong> 4 أنواع أشكال في أمر واحد<br>
+                            ✅ <strong>توفير الوقت:</strong> من ساعتين إلى دقيقتين<br>
+                            ✅ <strong>الدقة:</strong> مركز دقيق لكل نوع شكل
                         </p>
                     </div>
                 </div>
 
                 <div class="example-card">
-                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 2: مشروع طرق رئيسية</h4>
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 2: مخطط تطوير موقع</h4>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
                     <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-                        مشروع طرق رئيسية به 150 قطاع مستقيم. المطلوب نقاط لحساب منسوب منتصف كل قطاع.
+                        مخطط موقع به طرق (متعددات)، أشجار (دوائر)، مباني (قطوع ناقصة)، وخطوط مرافق (منحنيات). تحتاج نقاط مركز للمساحة وعلامات GPS.
                     </p>
-                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ PPC:</strong></p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل باستخدام PPC:</strong></p>
                     <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
-                        <li>رسم خط لكل قطاع طريق (150 خط)</li>
-                        <li>تشغيل PPC واختيار جميع الخطوط</li>
-                        <li>الحصول على 150 نقطة في المنتصف</li>
-                        <li>استخدام النقاط لحساب المناسيب</li>
-                        <li>تصدير النتائج للتقرير النهائي</li>
+                        <li>PPC على كل أشكال الموقع</li>
+                        <li>إنشاء نقاط مركز لكل ميزة</li>
+                        <li>استخدام أمر T لإنشاء جدول نقاط المركز</li>
+                        <li>تصدير إلى تنسيق GPS</li>
+                        <li>العلامات الميدانية باستخدام إحداثيات GPS</li>
                     </ol>
                     <div style="background: rgba(34,197,94,0.1); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
                         <p style="color: var(--success); font-size: 0.9rem; margin: 0;">
-                            ✅ <strong>الدقة:</strong> 100% مواقع صحيحة<br>
-                            ✅ <strong>السرعة:</strong> 150 نقطة في 4 ثوانٍ<br>
-                            ✅ <strong>التوثيق:</strong> إحداثيات دقيقة للتقرير
-                        </p>
-                    </div>
-                </div>
-
-                <div class="example-card">
-                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 3: شبكة كهرباء</h4>
-                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
-                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-                        شبكة خطوط كهرباء بـ 300 خط. المطلوب وضع نقاط صيانة في منتصف كل خط للمتابعة الميدانية.
-                    </p>
-                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل بـ PPC:</strong></p>
-                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
-                        <li>PPC على جميع الخطوط الكهربائية</li>
-                        <li>إنشاء 300 نقطة في 4 ثوانٍ</li>
-                        <li>PE لتصدير إحداثيات النقاط</li>
-                        <li>تحويل الملف إلى صيغة GPS</li>
-                        <li>استخدام الملف في أجهزة GPS الميدانية</li>
-                    </ol>
-                    <div style="background: rgba(34,197,94,0.1); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
-                        <p style="color: var(--success); font-size: 0.9rem; margin: 0;">
-                            ✅ <strong>جاهز للعمل الميداني</strong><br>
-                            ✅ <strong>التكامل:</strong> من AutoCAD إلى GPS<br>
+                            ✅ <strong>جاهز للميدان:</strong> إحداثيات GPS للعمل الميداني<br>
+                            ✅ <strong>شامل:</strong> جميع أنواع الأشكال معالجة<br>
                             ✅ <strong>الكفاءة:</strong> توفير يوم عمل كامل
                         </p>
                     </div>
                 </div>
 
-            </div>
-
-            <div style="background: rgba(245,158,11,0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
-                <h4 style="color: var(--accent); margin-bottom: 1rem; text-align: center;">📈 تحليل التوفير</h4>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md);">
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">99%</div>
-                        <div style="color: var(--text-gray); font-size: 0.9rem;">توفير الوقت</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">50x</div>
-                        <div style="color: var(--text-gray); font-size: 0.9rem;">أسرع من الطرق التقليدية</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">100%</div>
-                        <div style="color: var(--text-gray); font-size: 0.9rem;">دقة الحسابات</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">0 خطأ</div>
-                        <div style="color: var(--text-gray); font-size: 0.9rem;">أخطاء يدوية</div>
+                <div class="example-card">
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 مثال 3: تجميع ميكانيكي</h4>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الموقف:</strong></p>
+                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        رسم تجميع ميكانيكي به أجزاء (أشكال متنوعة)، فتحات (دوائر)، فتحات طولية (أقواس)، ونقاط تثبيت (خطوط). تحتاج نقاط مركز لبرمجة CNC.
+                    </p>
+                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>الحل باستخدام PPC:</strong></p>
+                    <ol style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1.5rem;">
+                        <li>PPC على كل الأشكال الميكانيكية</li>
+                        <li>الحصول على نقاط مركز للتصنيع</li>
+                        <li>تصدير الإحداثيات عبر PE</li>
+                        <li>استيراد إلى برنامج CAM</li>
+                        <li>توليد مسارات أدوات CNC</li>
+                    </ol>
+                    <div style="background: rgba(34,197,94,0.1); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
+                        <p style="color: var(--success); font-size: 0.9rem; margin: 0;">
+                            ✅ <strong>الدقة:</strong> إحداثيات جاهزة لـ CNC<br>
+                            ✅ <strong>الأتمتة:</strong> من الرسم إلى التصنيع<br>
+                            ✅ <strong>الوقت:</strong> تقليل وقت البرمجة بنسبة 80%
+                        </p>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- 8. مزايا استخدام الأمر PPC -->
+        <!-- 7. الفوائد -->
         <section class="section">
-            <h2 class="section-title">💎 مزايا استخدام الأمر PPC</h2>
+            <h2 class="section-title">💎 فوائد استخدام PPC المحسن</h2>
             <div class="definition">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md);">
                     <div style="background: rgba(37,99,235,0.1); padding: var(--spacing-md); border-radius: 10px; border-right: 3px solid var(--primary);">
-                        <h4 style="color: var(--primary); margin-bottom: 0.8rem;">⏱️ توفير الوقت</h4>
+                        <h4 style="color: var(--primary); margin-bottom: 0.8rem;">🔄 دعم متعدد الأشكال</h4>
                         <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
-                            <li>200 خط في 3 ثوانٍ</li>
-                            <li>بدلاً من 60 دقيقة يدوياً</li>
-                            <li>توفير 99% من الوقت</li>
-                            <li>سرعة 50x التقليدية</li>
+                            <li>7 أنواع مختلفة من الأشكال</li>
+                            <li>كل منها بخوارزمية محسنة</li>
+                            <li>أمر واحد لكل احتياجات المركز</li>
+                            <li>يلغي استخدام أدوات متعددة</li>
                         </ul>
                     </div>
                     
                     <div style="background: rgba(16,185,129,0.1); padding: var(--spacing-md); border-radius: 10px; border-right: 3px solid var(--secondary);">
-                        <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">🎯 تحسين الدقة</h4>
+                        <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">🎯 دقة محسنة</h4>
                         <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
-                            <li>دقة رياضية 100%</li>
-                            <li>منع كامل للأخطاء اليدوية</li>
-                            <li>Tolerance: 0.001 وحدة</li>
-                            <li>حساب 3D كامل</li>
+                            <li>خوارزميات خاصة بكل شكل</li>
+                            <li>دقة رياضية لكل نوع</li>
+                            <li>منع التكرار</li>
+                            <li>إدارة طبقات متسقة</li>
                         </ul>
                     </div>
                     
                     <div style="background: rgba(245,158,11,0.1); padding: var(--spacing-md); border-radius: 10px; border-right: 3px solid var(--accent);">
-                        <h4 style="color: var(--accent); margin-bottom: 0.8rem;">📊 تنظيم العمل</h4>
+                        <h4 style="color: var(--accent); margin-bottom: 0.8rem;">⚡ كفاءة الوقت</h4>
                         <ul style="color: var(--text-gray); font-size: 0.9rem; padding-right: 1rem;">
-                            <li>طبقات منظمة (POINT)</li>
-                            <li>تنسيق متسق للنقاط</li>
-                            <li>سهولة التصدير والاستيراد</li>
-                            <li>توثيق كامل للعملية</li>
+                            <li>معالجة جماعية</li>
+                            <li>تتبع تقدم مباشر</li>
+                            <li>فحص تكرار سريع</li>
+                            <li>إنشاء طبقات آلي</li>
                         </ul>
                     </div>
                 </div>
                 
                 <div style="background: rgba(139,92,246,0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md); text-align: center;">
-                    <p style="color: var(--accent2); font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">🚀 للمشاريع الضخمة</p>
+                    <p style="color: var(--accent2); font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">🚀 تحسينات الإصدار v81.9</p>
                     <p style="color: var(--text-gray); font-size: 0.95rem;">
-                        عند معالجة أكثر من 1000 خط، يستخدم PPC <strong>خوارزميات Spatial Hashing</strong> و<strong>معالجة متوازية</strong> 
-                        لضمان أداء فائق مع استهلاك ذاكرة مثالي، مع الحفاظ على دقة 100% في الحسابات.
+                        PPC المحسن الآن يشمل وظيفة P2C المدمجة، يدعم المزيد من أنواع الأشكال، 
+                        لديه تحسين في منع التكرار، ويوفر أداء أفضل للرسومات الكبيرة.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- زر العودة -->
+        <!-- زر الرجوع -->
         <div style="text-align: center;">
             <a href="../index.html" class="back-link">
-                <span>←</span> العودة إلى الصفحة الرئيسية
+                <span>←</span> العودة للصفحة الرئيسية
             </a>
         </div>
 
         <!-- الفوتر -->
         <footer>
             <p>📧 للاستفسارات التقنية: MahmoudBorham.codes@gmail.com</p>
-            <p>🛠️ جزء من حزمة Borham Tools المتخصصة في أتمتة الأعمال المساحية والإنشائية</p>
-            <p>🇵🇸 Free Palestine - لوجه الله تعالى</p>
+            <p>🛠️ جزء من أدوات برهام الإصدار 81.9 - نظام نقاط المركز المحسن</p>
+            <p>🇵🇸 فلسطين حرة - في سبيل الله تعالى</p>
             <div class="footer-highlight">
-                "دقة رياضية + سرعة خارقة + منع تكرار = PPC لمراكز الخطوط"
+                "دعم متعدد الأشكال + خوارزميات محسنة + منع التكرار = PPC v81.9 لكل نقاط المركز"
             </div>
         </footer>
 
