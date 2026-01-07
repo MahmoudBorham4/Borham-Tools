@@ -80,9 +80,42 @@ section {
 }
 
 /* ============ [3] الأجزاء العلوية (Header, Hero) ============ */
+/* شريط الإصدار العلوي */
+.version-top-bar {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-dark));
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0;
+    text-align: center;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 100;
+}
+
+.version-top-bar .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.version-number {
+    background: var(--accent);
+    color: var(--bg-dark);
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-weight: 800;
+    box-shadow: var(--shadow-sm);
+}
+
+.last-update {
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+/* زر اللغة */
 .lang-toggle {
     position: fixed;
-    top: 20px;
+    top: 30px;
     right: 20px;
     z-index: 1000;
 }
@@ -105,6 +138,7 @@ section {
     transform: translateY(-2px);
 }
 
+/* البسملة */
 .bismillah-header {
     background: var(--bg-dark);
     padding: var(--spacing-sm) 0;
@@ -410,6 +444,87 @@ html[dir="ltr"] .hadith-arabic {
     font-family: 'Courier New', monospace;
 }
 
+/* ============ [6] الأزرار والفوتر ============ */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--secondary);
+    color: var(--palestine-white);
+    padding: 12px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: var(--spacing-sm);
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    border: none;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    background: #059669;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* تنسيق رقم الإصدار على زر التحميل */
+.version-on-btn {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-weight: 900;
+    font-size: 1.1em;
+    margin-right: 8px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact {
+    background: var(--bg-dark);
+    text-align: center;
+}
+
+.email-btn {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 15px 40px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: var(--spacing-sm) 0;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+}
+
+.email-btn:hover {
+    background: var(--primary-dark);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+footer {
+    background: var(--bg-dark);
+    padding: var(--spacing-md) 0;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    color: var(--text-gray);
+}
+
+footer p {
+    margin: var(--spacing-xs) 0;
+}
+
+footer .hadith {
+    font-style: italic;
+    color: var(--secondary);
+    margin-top: var(--spacing-sm);
+}
+
+/* ============ [7] قسم الأوامر ============ */
 .commands {
     background: var(--bg-light);
 }
@@ -464,71 +579,7 @@ html[dir="ltr"] .hadith-arabic {
     font-weight: 700;
 }
 
-/* ============ [6] الأزرار والفوتر ============ */
-.btn-primary {
-    display: inline-block;
-    background: var(--secondary);
-    color: var(--palestine-white);
-    padding: 12px 30px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    margin-top: var(--spacing-sm);
-    transition: var(--transition);
-    box-shadow: var(--shadow-md);
-    border: none;
-}
-
-.btn-primary:hover {
-    background: #059669;
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
-}
-
-.contact {
-    background: var(--bg-dark);
-    text-align: center;
-}
-
-.email-btn {
-    display: inline-block;
-    background: var(--primary);
-    color: white;
-    padding: 15px 40px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin: var(--spacing-sm) 0;
-    transition: var(--transition);
-    box-shadow: var(--shadow-md);
-}
-
-.email-btn:hover {
-    background: var(--primary-dark);
-    transform: scale(1.05);
-    box-shadow: var(--shadow-lg);
-}
-
-footer {
-    background: var(--bg-dark);
-    padding: var(--spacing-md) 0;
-    text-align: center;
-    border-top: 1px solid var(--border);
-    color: var(--text-gray);
-}
-
-footer p {
-    margin: var(--spacing-xs) 0;
-}
-
-footer .hadith {
-    font-style: italic;
-    color: var(--secondary);
-    margin-top: var(--spacing-sm);
-}
-
-/* ============ [7] التجاوب مع الشاشات ============ */
+/* ============ [8] التجاوب مع الشاشات ============ */
 @media (max-width: 768px) {
     h2 { font-size: 2rem; }
     .hero-title { font-size: 2.5rem; }
@@ -536,8 +587,19 @@ footer .hadith {
     html[dir="rtl"] .hadith-arabic { font-size: 2.2rem; }
     html[dir="ltr"] .hadith-arabic { font-size: 1.5rem; }
     .palestine-title { font-size: 1.8rem; }
-    .lang-toggle { top: 10px; right: 10px; }
+    .lang-toggle { top: 25px; right: 10px; }
     .lang-toggle button { padding: 8px 15px; font-size: 0.9rem; }
+    .version-top-bar { font-size: 0.8rem; }
+    .version-top-bar .container { flex-direction: column; gap: 5px; }
+    .btn-primary {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    .version-on-btn {
+        padding: 1px 8px;
+        font-size: 1em;
+        margin-right: 5px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -547,46 +609,25 @@ footer .hadith {
     html[dir="ltr"] .hadith-arabic { font-size: 1.3rem; }
     .bismillah-text { font-size: 1.5rem; }
     .features-grid, .about-grid, .steps { gap: var(--spacing-sm); }
-}
-/* ============ شريط الإعلان عن الإصدار ============ */
-.version-announcement {
-    background: var(--bg-light);
-    border-bottom: 1px solid var(--border);
-    padding: 8px 0;
-    text-align: center;
-}
-
-.version-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.9rem;
-}
-
-.v-label {
-    color: var(--text-gray);
-}
-
-.v-number {
-    background: var(--accent);
-    color: var(--bg-dark);
-    padding: 2px 10px;
-    border-radius: 4px;
-    font-weight: 800;
-    box-shadow: var(--shadow-sm);
-}
-
-.v-date {
-    color: var(--secondary);
-    font-weight: 600;
-}
-
-/* تحسين بسيط لمكان زر اللغة ليكون متناسقاً مع الشريط الجديد */
-.lang-toggle {
-    top: 50px; /* تم خفضه قليلاً ليتناسب مع وجود الشريط العلوي */
-}
-
-@media (max-width: 768px) {
-    .lang-toggle { top: 45px; }
+    .commands-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .command-card {
+        min-height: 120px;
+        padding: var(--spacing-xs);
+    }
+    .command-card h3 {
+        font-size: 1.5rem;
+    }
+    .command-card p {
+        font-size: 0.8rem;
+    }
+    .btn-primary {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .version-on-btn {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
 }
