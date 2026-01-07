@@ -62,7 +62,7 @@ const translations = {
         'cmd.i.desc': 'Interactive Help',
         // Version Info (Updated as requested)
         'version.label': 'Current Version:',
-        'version.date': '| Dec 2025'
+        'version.date': '| Jan 2026'
     },
     'ar': {
         'langBtn': 'English',
@@ -125,6 +125,6 @@ const translations = {
         'cmd.i.desc': 'مساعدة تفاعلية',
         // Version Info (Updated as requested)
         'version.label': 'الإصدار الحالي:',
-        'version.date': '| ديسمبر 2025'
+        'version.date': '| يناير 2026'
     }
 };
