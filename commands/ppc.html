@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Command PPC - Line Center Points | Borham Tools</title>
+    <title>Command PPC - Center Points of Various Objects | Borham Tools v81.9</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -202,61 +202,40 @@
             color: var(--accent);
         }
 
-        /* Visualization */
-        .visualization {
-            background: rgba(37,99,235,0.1);
-            border-radius: 12px;
-            padding: var(--spacing-md);
-            margin: 1.5rem 0;
+        /* Object Type Grid */
+        .object-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--spacing-sm);
+            margin: var(--spacing-md) 0;
+        }
+        .object-card {
+            background: rgba(255,255,255,0.03);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: var(--spacing-sm);
             text-align: center;
-            border: 1px solid var(--border);
+            transition: all 0.3s ease;
         }
-        .line-visual {
-            position: relative;
-            width: 300px;
-            height: 100px;
-            margin: 0 auto;
+        .object-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            background: rgba(245,158,11,0.05);
         }
-        .line-visual .line {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: #ef4444;
-            transform: translateY(-50%);
+        .object-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
         }
-        .line-visual .start-point {
-            position: absolute;
-            top: 50%;
-            left: 20%;
-            width: 12px;
-            height: 12px;
-            background: #2563eb;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
+        .object-card.supported {
+            border-color: #10b981;
+            background: rgba(16,185,129,0.05);
         }
-        .line-visual .end-point {
-            position: absolute;
-            top: 50%;
-            right: 20%;
-            width: 12px;
-            height: 12px;
-            background: #2563eb;
-            border-radius: 50%;
-            transform: translate(50%, -50%);
+        .object-card.supported .object-icon {
+            color: #10b981;
         }
-        .line-visual .midpoint {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 18px;
-            height: 18px;
-            background: #10b981;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            border: 3px solid var(--bg-dark);
-            box-shadow: 0 0 0 2px #10b981;
+        .object-card.supported h5 {
+            color: #10b981;
         }
 
         /* Comparison Table */
@@ -374,8 +353,8 @@
             .integration-grid, .examples-grid {
                 grid-template-columns: 1fr;
             }
-            .line-visual {
-                width: 250px;
+            .object-types {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -385,89 +364,179 @@
 
         <!-- Header -->
         <header class="page-header">
-            <h1>Command PPC — Smart Line Center Points</h1>
-            <div class="tagline">Precise mathematical calculation for line midpoints in AutoCAD</div>
+            <h1>Command PPC — Center Points of Various Objects</h1>
+            <div class="tagline">Now works with ALL object types: Lines, Polylines, Circles, Arcs, Ellipses, Splines</div>
             <p>
-                A specialized system for placing points at the exact midpoint of each line with 100% mathematical accuracy. 
-                Process thousands of lines in seconds with intelligent duplicate prevention and live progress display.
+                <strong>PPC (Enhanced Version v81.9)</strong> - Creates center points from various geometric objects with mathematical precision. 
+                This version merges the old P2C functionality and now handles multiple object types with intelligent duplicate prevention.
             </p>
         </header>
 
-        <!-- 1. What is Command PPC -->
+        <!-- 1. What is Command PPC (Enhanced) -->
         <section class="section">
-            <h2 class="section-title">📌 What is Command PPC?</h2>
+            <h2 class="section-title">📌 What is Command PPC? (Enhanced Version)</h2>
             <div class="definition">
                 <p style="font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--text-light);">
-                    <strong>Command PPC</strong> is a specialized AutoCAD tool for placing a point with mathematical precision at the 
-                    <span style="color: var(--accent); font-weight: bold;">exact midpoint of each straight line (LINE)</span>. 
-                    It calculates the geometric center of hundreds of lines simultaneously with advanced algorithms to prevent duplicates.
+                    <strong>Command PPC</strong> is an <span style="color: var(--accent); font-weight: bold;">enhanced AutoCAD tool</span> that creates 
+                    <span style="color: var(--accent); font-weight: bold;">center points for various geometric objects</span> with mathematical precision. 
+                    <span style="color: var(--secondary);">This version merges old P2C functionality and works with multiple object types.</span>
                 </p>
 
-                <div class="visualization">
-                    <div class="line-visual">
-                        <div class="line"></div>
-                        <div class="start-point"></div>
-                        <div class="end-point"></div>
-                        <div class="midpoint"></div>
-                        <div style="position: absolute; top: 10px; left: 20%; font-size: 0.8rem; color: #2563eb;">Start Point</div>
-                        <div style="position: absolute; top: 10px; right: 20%; font-size: 0.8rem; color: #2563eb;">End Point</div>
-                        <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 0.8rem; color: #10b981; font-weight: bold;">Midpoint</div>
-                    </div>
-                    <p style="color: var(--text-gray); margin-top: 1rem; font-size: 0.9rem;">
-                        Formula: <code style="background: rgba(37, 99, 235, 0.2); padding: 2px 8px; border-radius: 4px;">Midpoint = (Start + End) / 2</code>
-                    </p>
-                </div>
-
                 <div class="definition-box">
-                    <h3>🎯 Key Features</h3>
+                    <h3>🎯 Key Features (Enhanced v81.9)</h3>
                     <ul style="color: var(--text-gray); padding-left: 1rem;">
-                        <li><strong>Specialized for straight lines:</strong> Works only on LINES with 100% accuracy</li>
-                        <li><strong>Extreme speed:</strong> Process 10,000 lines in seconds</li>
-                        <li><strong>Smart duplicate prevention:</strong> Automatically avoids duplicate points (Tolerance: 0.001)</li>
-                        <li><strong>Full 3D calculation:</strong> Calculates midpoint for all three coordinates (X, Y, Z)</li>
-                        <li><strong>Live progress bar:</strong> Real-time tracking of created points</li>
-                        <li><strong>Smart layer management:</strong> Places points in POINT layer with blue color</li>
+                        <li><strong>Multi-Object Support:</strong> Works with Lines, Polylines, Circles, Arcs, Ellipses, Splines</li>
+                        <li><strong>Different Calculation Methods:</strong> Each object type has its own center calculation algorithm</li>
+                        <li><strong>Intelligent Duplicate Prevention:</strong> Prevents duplicate points automatically</li>
+                        <li><strong>Live Progress Bar:</strong> Real-time tracking during processing</li>
+                        <li><strong>Smart Layer Management:</strong> Places points in 'CENTER_POINTS' layer (Cyan color)</li>
+                        <li><strong>Optimized Performance:</strong> Processes thousands of objects in seconds</li>
                     </ul>
                 </div>
 
-                <div class="definition-box" style="background: linear-gradient(135deg, rgba(239,68,68,0.1), rgba(239,68,68,0.05)); border-left-color: #ef4444;">
-                    <h3 style="color: #ef4444;">⚠️ Important Notice</h3>
-                    <p style="color: var(--text-gray); margin-bottom: 0.8rem;">
-                        Command <strong>PPC works only on LINES</strong> (straight lines). It will NOT work on:
-                    </p>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
-                        <div style="background: rgba(239,68,68,0.15); padding: 0.8rem; border-radius: 8px; border-left: 3px solid #ef4444;">
-                            <strong style="color: #ef4444;">Polylines</strong>
-                            <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.3rem;">Use PP instead</p>
+                <!-- Supported Objects Grid -->
+                <div class="definition-box">
+                    <h3>✅ Supported Object Types</h3>
+                    <div class="object-types">
+                        <!-- Lines -->
+                        <div class="object-card supported">
+                            <div class="object-icon">📏</div>
+                            <h5>LINES</h5>
+                            <p style="font-size: 0.85rem; color: var(--text-gray);">Midpoint between start and end points</p>
                         </div>
-                        <div style="background: rgba(239,68,68,0.15); padding: 0.8rem; border-radius: 8px; border-left: 3px solid #ef4444;">
-                            <strong style="color: #ef4444;">Arcs</strong>
-                            <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.3rem;">Use PP instead</p>
+                        <!-- LWPOLYLINE -->
+                        <div class="object-card supported">
+                            <div class="object-icon">⬢</div>
+                            <h5>LWPOLYLINE</h5>
+                            <p style="font-size: 0.85rem; color: var(--text-gray);">Midpoint of bounding box</p>
                         </div>
-                        <div style="background: rgba(239,68,68,0.15); padding: 0.8rem; border-radius: 8px; border-left: 3px solid #ef4444;">
-                            <strong style="color: #ef4444;">Circles</strong>
-                            <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.3rem;">Use PP instead</p>
+                        <!-- POLYLINE -->
+                        <div class="object-card supported">
+                            <div class="object-icon">⎔</div>
+                            <h5>POLYLINE</h5>
+                            <p style="font-size: 0.85rem; color: var(--text-gray);">Midpoint of bounding box</p>
                         </div>
-                        <div style="background: rgba(239,68,68,0.15); padding: 0.8rem; border-radius: 8px; border-left: 3px solid #ef4444;">
-                            <strong style="color: #ef4444;">Splines</strong>
-                            <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.3rem;">Use PP instead</p>
+                        <!-- CIRCLES -->
+                        <div class="object-card supported">
+                            <div class="object-icon">◯</div>
+                            <h5>CIRCLES</h5>
+                            <p style="font-size: 0.85rem; color: var(--text-gray);">Geometric center point</p>
+                        </div>
+                        <!-- ARCS -->
+                        <div class="object-card supported">
+                            <div class="object-icon">⌒</div>
+                            <h5>ARCS</h5>
+                            <p style="font-size: 0.85rem; color: var(--text-gray);">Center point of arc</p>
+                        </div>
+                        <!-- ELLIPSES -->
+                        <div class="object-card supported">
+                            <div class="object-icon">○</div>
+                            <h5>ELLIPSES</h5>
+                            <p style="font-size: 0.85rem; color: var(--text-gray);">Center of ellipse</p>
+                        </div>
+                        <!-- SPLINES -->
+                        <div class="object-card supported">
+                            <div class="object-icon">⎈</div>
+                            <h5>SPLINES</h5>
+                            <p style="font-size: 0.85rem; color: var(--text-gray);">Midpoint between start and end points</p>
                         </div>
                     </div>
-                    <p style="color: #ef4444; font-weight: bold; margin-top: 1rem;">
-                        💡 For other objects, use the general PP command!
-                    </p>
                 </div>
 
+                <!-- Calculation Methods -->
+                <div class="definition-box" style="background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(139,92,246,0.05)); border-left-color: var(--accent2);">
+                    <h3 style="color: var(--accent2);">🧮 How PPC Calculates Centers</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Object Type</th>
+                                    <th>Center Calculation Method</th>
+                                    <th>Accuracy</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>LINES</strong></td>
+                                    <td>Midpoint between start and end points</td>
+                                    <td>100% Mathematical</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>LWPOLYLINE / POLYLINE</strong></td>
+                                    <td>Midpoint of bounding box</td>
+                                    <td>Geometric Center</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CIRCLES</strong></td>
+                                    <td>Geometric center (Center property)</td>
+                                    <td>Exact Center</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ARCS</strong></td>
+                                    <td>Center point of arc</td>
+                                    <td>Exact Center</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ELLIPSES</strong></td>
+                                    <td>Center of ellipse using vlax</td>
+                                    <td>Exact Center</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>SPLINES</strong></td>
+                                    <td>Midpoint between start and end points</td>
+                                    <td>Approximate Center</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- When to Use -->
                 <div class="definition-box">
-                    <h3>⚙️ When to Use It?</h3>
-                    <ul style="color: var(--text-gray); padding-left: 1rem;">
-                        <li>When you need points <strong>only at the midpoint of straight lines</strong></li>
-                        <li>To determine column positions in the middle of roads and streets</li>
-                        <li>To calculate center points of straight boundaries in surveying plans</li>
-                        <li>To place Reference points in the middle of structural elements</li>
-                        <li>When you want maximum speed with straight lines only</li>
-                        <li>To create precise measurement points in the middle of distances</li>
-                    </ul>
+                    <h3>⚙️ When to Use PPC (vs PP)?</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Situation</th>
+                                    <th>Use PPC for:</th>
+                                    <th>Use PP for:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Need center points</strong></td>
+                                    <td>✅ Center points of objects</td>
+                                    <td>❌ Points along perimeter</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Working with lines</strong></td>
+                                    <td>✅ Midpoint of lines</td>
+                                    <td>✅ Points on lines (with spacing)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Working with circles/arcs</strong></td>
+                                    <td>✅ Center points</td>
+                                    <td>✅ Points on circumference</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Working with polylines</strong></td>
+                                    <td>✅ Geometric center</td>
+                                    <td>✅ Points along vertices</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Working with ellipses</strong></td>
+                                    <td>✅ Center point</td>
+                                    <td>✅ Points on ellipse curve</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Working with splines</strong></td>
+                                    <td>✅ Approximate center</td>
+                                    <td>✅ Points along spline</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>
@@ -478,95 +547,45 @@
             <div class="tech-features">
 
                 <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h4>Extreme Speed</h4>
-                    <p>Process 10,000 lines in just 5 seconds - 50x faster than traditional methods</p>
+                    <div class="feature-icon">🎯</div>
+                    <h4>Multi-Object Support</h4>
+                    <p>Works with 7 different object types, each with its own calculation method</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h4>100% Mathematical Accuracy</h4>
-                    <p>Formula: (Start Point + End Point) ÷ 2 - precise application for X, Y, Z coordinates</p>
+                    <div class="feature-icon">⚡</div>
+                    <h4>Optimized Performance</h4>
+                    <p>Hash-based duplicate prevention and batch processing for speed</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🧮</div>
+                    <h4>Smart Calculation</h4>
+                    <p>Different algorithms for each object type with maximum accuracy</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">🔍</div>
-                    <h4>Intelligent Duplicate Prevention</h4>
-                    <p>Detects and ignores duplicate points automatically - tolerance 0.001</p>
+                    <h4>Duplicate Prevention</h4>
+                    <p>Prevents duplicate center points even when objects overlap</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">📊</div>
-                    <h4>Live Progress Display</h4>
-                    <p>Real-time percentage display and point count during processing</p>
+                    <h4>Progress Tracking</h4>
+                    <p>Real-time progress display with object count and created points</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h4>Batch Processing</h4>
-                    <p>Parallel processing of thousands of lines with efficient memory usage</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h4>Smart Error Handling</h4>
-                    <p>Error management without disrupting the overall process</p>
+                    <div class="feature-icon">🎨</div>
+                    <h4>Visual Organization</h4>
+                    <p>All points placed in 'CENTER_POINTS' layer with Cyan color for easy identification</p>
                 </div>
 
             </div>
         </section>
 
-        <!-- 3. Comparison between PPC and PP -->
-        <section class="section">
-            <h2 class="section-title">📊 Comparison: PPC vs PP</h2>
-            <div class="definition">
-                <div class="comparison-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Criterion</th>
-                                <th style="color: #10b981;">PPC</th>
-                                <th style="color: #f59e0b;">PP</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Object Type</strong></td>
-                                <td>LINES only</td>
-                                <td>All objects (Lines, Polylines, Arcs, Circles, Splines)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Points per Object</strong></td>
-                                <td>One point/line</td>
-                                <td>Multiple points based on spacing</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Speed</strong></td>
-                                <td>⚡ Ultra-fast (10,000 lines/5 seconds)</td>
-                                <td>Normal speed</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Specialization</strong></td>
-                                <td>👷 Specialized for straight lines</td>
-                                <td>🔄 General purpose for all shapes</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Calculation Accuracy</strong></td>
-                                <td>100% mathematical accuracy</td>
-                                <td>Approximate accuracy based on spacing</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Optimal Use</strong></td>
-                                <td>Line center points</td>
-                                <td>Point distribution on perimeters</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. How it Works -->
+        <!-- 3. How it Works -->
         <section class="section">
             <h2 class="section-title">🚀 How Command PPC Works</h2>
             <div class="how-it-works">
@@ -576,48 +595,47 @@
                         <div class="work-step-number">1</div>
                         <strong>Run Command</strong>
                         <p>Type <code style="background: var(--accent); color: var(--bg-dark); padding: 2px 8px; border-radius: 4px;">PPC</code></p>
-                        <small>Start center point creation process</small>
+                        <small>Center points creation for various objects</small>
                     </div>
 
                     <div class="work-step">
                         <div class="work-step-number">2</div>
-                        <strong>Select Lines</strong>
-                        <p>Select all straight lines</p>
-                        <small>LINES only (multiple selection)</small>
+                        <strong>Select Objects</strong>
+                        <p>Select multiple object types</p>
+                        <small>Lines, polylines, circles, arcs, ellipses, splines</small>
                     </div>
 
                     <div class="work-step">
                         <div class="work-step-number">3</div>
                         <strong>Smart Processing</strong>
-                        <p>Live progress bar</p>
-                        <small>Calculation + duplicate prevention + creation</small>
+                        <p>Live progress display</p>
+                        <small>Each object type processed differently</small>
                     </div>
 
                     <div class="work-step">
                         <div class="work-step-number">4</div>
                         <strong>Final Result</strong>
-                        <p>Points ready!</p>
-                        <small>In POINT layer with blue color</small>
+                        <p>Center points created!</p>
+                        <small>In CENTER_POINTS layer (Cyan)</small>
                     </div>
                 </div>
 
                 <div style="background: rgba(30,41,59,0.8); border-radius: 8px; padding: var(--spacing-md); margin: 1rem 0; border-left: 4px solid var(--accent);">
                     <h4 style="color: var(--accent); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
-                        <span>⚙️</span> Working Principle
+                        <span>⚙️</span> Advanced Processing Algorithm
                     </h4>
-                    <p style="color: var(--text-gray); font-size: 0.95rem;">
-                        The command calculates the midpoint of each selected line using the mathematical formula: 
-                        <code style="background: rgba(37,99,235,0.2); padding: 2px 8px; border-radius: 4px;">Midpoint = (Start Point + End Point) / 2</code>.
-                        It then checks for existing points at the same location and creates new points only when needed.
-                    </p>
-                    <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.8rem;">
-                        <strong>Processing Method:</strong> Parallel processing + duplicate checking + real-time progress updates + efficient memory management
-                    </p>
+                    <ol style="color: var(--text-gray); font-size: 0.95rem; padding-left: 1.5rem;">
+                        <li><strong>Object Type Detection:</strong> Identifies each object type (LINE, CIRCLE, ARC, etc.)</li>
+                        <li><strong>Center Calculation:</strong> Applies appropriate algorithm for each type</li>
+                        <li><strong>Duplicate Checking:</strong> Uses hash table to prevent duplicate points</li>
+                        <li><strong>Point Creation:</strong> Creates points in CENTER_POINTS layer with Cyan color</li>
+                        <li><strong>Progress Update:</strong> Shows real-time progress and statistics</li>
+                    </ol>
                 </div>
             </div>
         </section>
 
-        <!-- 5. Integration with Other Commands -->
+        <!-- 4. Integration with Other Commands -->
         <section class="section">
             <h2 class="section-title">🔄 Integration with Other Commands</h2>
             <div class="integration-box">
@@ -626,12 +644,12 @@
                     <div class="integration-card integration-pe">
                         <h4 style="color: #3b82f6; margin-bottom: 1rem;">🔗 With Command PE</h4>
                         <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                            <strong>PPC</strong> creates points at line midpoints<br>
-                            <strong>PE</strong> exports points to coordinate table with numbering
+                            <strong>PPC</strong> creates center points of objects<br>
+                            <strong>PE</strong> exports center points with coordinates and names
                         </p>
                         <div style="background: rgba(59,130,246,0.1); padding: 0.8rem; border-radius: 6px;">
                             <p style="color: #3b82f6; font-size: 0.9rem; margin: 0;">
-                                📌 Workflow: PPC → midpoint points → PE → numbered coordinate export
+                                📌 Workflow: PPC → center points → PE → coordinate export
                             </p>
                         </div>
                     </div>
@@ -639,12 +657,12 @@
                     <div class="integration-card integration-t">
                         <h4 style="color: #10b981; margin-bottom: 1rem;">🔗 With Command T</h4>
                         <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                            <strong>PPC</strong> creates line center points<br>
-                            <strong>T</strong> converts points to organized coordinate table
+                            <strong>PPC</strong> creates object center points<br>
+                            <strong>T</strong> creates professional table with object centers
                         </p>
                         <div style="background: rgba(16,185,129,0.1); padding: 0.8rem; border-radius: 6px;">
                             <p style="color: #10b981; font-size: 0.9rem; margin: 0;">
-                                📌 Workflow: PPC → center points → T → professional coordinate table
+                                📌 Workflow: PPC → centers → T → center coordinates table
                             </p>
                         </div>
                     </div>
@@ -652,228 +670,206 @@
                     <div class="integration-card integration-pp">
                         <h4 style="color: #f59e0b; margin-bottom: 1rem;">🔗 With Command PP</h4>
                         <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                            <strong>PPC</strong> specialized for straight lines only<br>
-                            <strong>PP</strong> general purpose for all object types
+                            <strong>PPC</strong> for center points only<br>
+                            <strong>PP</strong> for points along perimeter
                         </p>
                         <div style="background: rgba(245,158,11,0.1); padding: 0.8rem; border-radius: 6px;">
                             <p style="color: #f59e0b; font-size: 0.9rem; margin: 0;">
-                                📌 Choice: PPC for lines only, PP for other objects
+                                📌 Choice: PPC for centers, PP for perimeter points
                             </p>
                         </div>
                     </div>
                 </div>
                 
                 <div style="background: rgba(139,92,246,0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: 1.5rem; text-align: center;">
-                    <p style="color: var(--accent2); font-weight: bold; margin-bottom: 0.5rem;">💡 Integrated System</p>
+                    <p style="color: var(--accent2); font-weight: bold; margin-bottom: 0.5rem;">💡 Integrated Center Point System</p>
                     <p style="color: var(--text-gray); font-size: 0.95rem;">
-                        Command PPC is not an isolated tool, but part of an integrated point management system within Borham Tools
+                        PPC is part of the Borham Tools center point management system for various object types
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- 6. Practical Applications -->
+        <!-- 5. Practical Applications -->
         <section class="section">
             <h2 class="section-title">🏗️ Practical Field Applications</h2>
             <div class="tech-features">
                 
                 <div class="feature-card" style="border-top: 3px solid #3b82f6;">
-                    <div class="feature-icon">🛣️</div>
-                    <h4>Road Planning</h4>
-                    <p>Determining column and lighting positions in the middle of straight streets with high accuracy</p>
+                    <div class="feature-icon">🏢</div>
+                    <h4>Architectural Plans</h4>
+                    <p>Finding center of rooms (polyline boundaries), columns (circles), walls (lines)</p>
                     <div style="background: rgba(59,130,246,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                        <span style="color: #3b82f6; font-size: 0.8rem;">🚀 Example: 200 streets in 3 seconds</span>
+                        <span style="color: #3b82f6; font-size: 0.8rem;">🎯 All object types in one command</span>
                     </div>
                 </div>
 
                 <div class="feature-card" style="border-top: 3px solid #10b981;">
-                    <div class="feature-icon">📐</div>
-                    <h4>Surveying & Mapping</h4>
-                    <p>Creating Reference points in the middle of straight property boundaries for precise surveying</p>
+                    <div class="feature-icon">🛣️</div>
+                    <h4>Road & Infrastructure</h4>
+                    <p>Center of road segments (polylines), manholes (circles), light poles (arcs)</p>
                     <div style="background: rgba(16,185,129,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                        <span style="color: #10b981; font-size: 0.8rem;">🎯 Accuracy: 100% mathematical</span>
+                        <span style="color: #10b981; font-size: 0.8rem;">⚡ Batch processing</span>
                     </div>
                 </div>
 
                 <div class="feature-card" style="border-top: 3px solid #f59e0b;">
-                    <div class="feature-icon">🏢</div>
-                    <h4>Structural Elements</h4>
-                    <p>Identifying centers of walls, columns, and straight beams in architectural plans</p>
+                    <div class="feature-icon">⚡</div>
+                    <h4>Electrical Networks</h4>
+                    <p>Center of electrical panels (rectangles), cable paths (splines), connection points</p>
                     <div style="background: rgba(245,158,11,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                        <span style="color: #f59e0b; font-size: 0.8rem;">⚡ Speed: 50x faster</span>
+                        <span style="color: #f59e0b; font-size: 0.8rem;">🔧 Multiple object support</span>
                     </div>
                 </div>
 
                 <div class="feature-card" style="border-top: 3px solid #8b5cf6;">
-                    <div class="feature-icon">⚡</div>
-                    <h4>Linear Networks</h4>
-                    <p>Placing points in the middle of electricity, water, and sewage network lines</p>
+                    <div class="feature-icon">💧</div>
+                    <h4>Water & Sewage</h4>
+                    <p>Center of tanks (ellipses), pipe connections (arcs), manhole covers (circles)</p>
                     <div style="background: rgba(139,92,246,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                        <span style="color: #8b5cf6; font-size: 0.8rem;">🔧 Ready for field work</span>
+                        <span style="color: #8b5cf6; font-size: 0.8rem;">🧮 Accurate center calculation</span>
                     </div>
                 </div>
 
                 <div class="feature-card" style="border-top: 3px solid #ef4444;">
-                    <div class="feature-icon">🎯</div>
-                    <h4>Measurement Points</h4>
-                    <p>Creating precise measurement points in the middle of distances for engineering calculations</p>
+                    <div class="feature-icon">📐</div>
+                    <h4>Surveying & Mapping</h4>
+                    <p>Center of property boundaries (polylines), landmarks (various shapes)</p>
                     <div style="background: rgba(239,68,68,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                        <span style="color: #ef4444; font-size: 0.8rem;">📏 Precision: 0.001 units</span>
+                        <span style="color: #ef4444; font-size: 0.8rem;">📏 High precision</span>
                     </div>
                 </div>
 
                 <div class="feature-card" style="border-top: 3px solid #06b6d4;">
-                    <div class="feature-icon">🔄</div>
-                    <h4>Integrated Workflow</h4>
-                    <p>Creating points with PPC then processing with PE or T to create professional documents</p>
+                    <div class="feature-icon">🏭</div>
+                    <h4>Industrial Design</h4>
+                    <p>Center of mechanical parts (various shapes), assembly points, reference locations</p>
                     <div style="background: rgba(6,182,212,0.1); padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
-                        <span style="color: #06b6d4; font-size: 0.8rem;">📊 PPC → PE/T → Documents</span>
+                        <span style="color: #06b6d4; font-size: 0.8rem;">⚙️ Engineering applications</span>
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <!-- 7. Real Examples -->
+        <!-- 6. Real Examples -->
         <section class="section">
             <h2 class="section-title">💼 Real Project Examples</h2>
             <div class="examples-grid">
                 
                 <div class="example-card">
-                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 Example 1: Residential Plan</h4>
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 Example 1: Building Floor Plan</h4>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Situation:</strong></p>
                     <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-                        Residential plan with 85 streets drawn as straight lines. Need to determine electricity pole locations in the middle of each street.
+                        Architectural floor plan with rooms (polylines), columns (circles), doors (arcs), and walls (lines). Need to find center points for furniture placement and HVAC calculations.
                     </p>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Solution with PPC:</strong></p>
                     <ol style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1.5rem;">
                         <li>Run PPC command</li>
-                        <li>Select all street lines (85 lines)</li>
-                        <li>Enter - 85 points created in 2 seconds</li>
-                        <li>Use PE to export coordinates</li>
-                        <li>Deliver coordinate table to electricity team</li>
+                        <li>Select all objects (polylines, circles, arcs, lines)</li>
+                        <li>Get center points for each object type</li>
+                        <li>Use PE to export center coordinates</li>
+                        <li>Import to furniture layout software</li>
                     </ol>
                     <div style="background: rgba(34,197,94,0.1); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
                         <p style="color: var(--success); font-size: 0.9rem; margin: 0;">
-                            ✅ <strong>Time Saving:</strong> From 45 minutes to 5 seconds (99% saving)<br>
-                            ✅ <strong>Accuracy:</strong> 100% correct locations<br>
-                            ✅ <strong>Readiness:</strong> CSV file ready for use
+                            ✅ <strong>Multi-Object:</strong> 4 object types in one command<br>
+                            ✅ <strong>Time Saving:</strong> From 2 hours to 2 minutes<br>
+                            ✅ <strong>Accuracy:</strong> Exact center for each object type
                         </p>
                     </div>
                 </div>
 
                 <div class="example-card">
-                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 Example 2: Main Road Project</h4>
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 Example 2: Site Development Plan</h4>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Situation:</strong></p>
                     <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-                        Main road project with 150 straight sections. Need points to calculate elevation at the middle of each section.
+                        Site plan with roads (polylines), trees (circles), buildings (ellipses), and utility lines (splines). Need center points for surveying and GPS marking.
                     </p>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Solution with PPC:</strong></p>
                     <ol style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1.5rem;">
-                        <li>Draw line for each road section (150 lines)</li>
-                        <li>Run PPC and select all lines</li>
-                        <li>Get 150 points at midpoints</li>
-                        <li>Use points for elevation calculation</li>
-                        <li>Export results for final report</li>
+                        <li>PPC on all site objects</li>
+                        <li>Create center points for each feature</li>
+                        <li>Use T command to create center point table</li>
+                        <li>Export to GPS format</li>
+                        <li>Field marking using GPS coordinates</li>
                     </ol>
                     <div style="background: rgba(34,197,94,0.1); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
                         <p style="color: var(--success); font-size: 0.9rem; margin: 0;">
-                            ✅ <strong>Accuracy:</strong> 100% correct locations<br>
-                            ✅ <strong>Speed:</strong> 150 points in 4 seconds<br>
-                            ✅ <strong>Documentation:</strong> Precise coordinates for report
+                            ✅ <strong>Field Ready:</strong> GPS coordinates for field work<br>
+                            ✅ <strong>Comprehensive:</strong> All object types handled<br>
+                            ✅ <strong>Efficiency:</strong> Save 1 full work day
                         </p>
                     </div>
                 </div>
 
                 <div class="example-card">
-                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 Example 3: Electrical Network</h4>
+                    <h4 style="color: var(--secondary); margin-bottom: 1rem;">📍 Example 3: Mechanical Assembly</h4>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Situation:</strong></p>
                     <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-                        Electrical line network with 300 lines. Need maintenance points in the middle of each line for field monitoring.
+                        Mechanical assembly drawing with parts (various shapes), holes (circles), slots (arcs), and mounting points (lines). Need center points for CNC programming.
                     </p>
                     <p style="color: var(--text-gray); margin-bottom: 0.8rem;"><strong>Solution with PPC:</strong></p>
                     <ol style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1.5rem;">
-                        <li>PPC on all electrical lines</li>
-                        <li>Create 300 points in 4 seconds</li>
-                        <li>PE to export point coordinates</li>
-                        <li>Convert file to GPS format</li>
-                        <li>Use file in field GPS devices</li>
+                        <li>PPC on all mechanical objects</li>
+                        <li>Get center points for machining</li>
+                        <li>Export coordinates via PE</li>
+                        <li>Import to CAM software</li>
+                        <li>Generate CNC toolpaths</li>
                     </ol>
                     <div style="background: rgba(34,197,94,0.1); padding: 0.8rem; border-radius: 6px; margin-top: 1rem;">
                         <p style="color: var(--success); font-size: 0.9rem; margin: 0;">
-                            ✅ <strong>Field Ready</strong><br>
-                            ✅ <strong>Integration:</strong> From AutoCAD to GPS<br>
-                            ✅ <strong>Efficiency:</strong> Save full work day
+                            ✅ <strong>Precision:</strong> CNC-ready coordinates<br>
+                            ✅ <strong>Automation:</strong> From drawing to machining<br>
+                            ✅ <strong>Time:</strong> Reduce programming time by 80%
                         </p>
                     </div>
                 </div>
 
-            </div>
-
-            <div style="background: rgba(245,158,11,0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md);">
-                <h4 style="color: var(--accent); margin-bottom: 1rem; text-align: center;">📈 Savings Analysis</h4>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md);">
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">99%</div>
-                        <div style="color: var(--text-gray); font-size: 0.9rem;">Time Saving</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">50x</div>
-                        <div style="color: var(--text-gray); font-size: 0.9rem;">Faster than traditional methods</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">100%</div>
-                        <div style="color: var(--text-gray); font-size: 0.9rem;">Calculation Accuracy</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">0 errors</div>
-                        <div style="color: var(--text-gray); font-size: 0.9rem;">Manual errors</div>
-                    </div>
-                </div>
             </div>
         </section>
 
-        <!-- 8. Benefits of Using Command PPC -->
+        <!-- 7. Benefits -->
         <section class="section">
-            <h2 class="section-title">💎 Benefits of Using Command PPC</h2>
+            <h2 class="section-title">💎 Benefits of Using Enhanced PPC</h2>
             <div class="definition">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md);">
                     <div style="background: rgba(37,99,235,0.1); padding: var(--spacing-md); border-radius: 10px; border-left: 3px solid var(--primary);">
-                        <h4 style="color: var(--primary); margin-bottom: 0.8rem;">⏱️ Time Saving</h4>
+                        <h4 style="color: var(--primary); margin-bottom: 0.8rem;">🔄 Multi-Object Support</h4>
                         <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem;">
-                            <li>200 lines in 3 seconds</li>
-                            <li>Instead of 60 minutes manually</li>
-                            <li>Saves 99% of time</li>
-                            <li>50x faster than traditional</li>
+                            <li>7 different object types</li>
+                            <li>Each with optimized algorithm</li>
+                            <li>One command for all center needs</li>
+                            <li>Eliminates multiple tool usage</li>
                         </ul>
                     </div>
                     
                     <div style="background: rgba(16,185,129,0.1); padding: var(--spacing-md); border-radius: 10px; border-left: 3px solid var(--secondary);">
-                        <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">🎯 Improved Accuracy</h4>
+                        <h4 style="color: var(--secondary); margin-bottom: 0.8rem;">🎯 Enhanced Accuracy</h4>
                         <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem;">
-                            <li>100% mathematical accuracy</li>
-                            <li>Complete elimination of manual errors</li>
-                            <li>Tolerance: 0.001 units</li>
-                            <li>Full 3D calculation</li>
+                            <li>Object-specific algorithms</li>
+                            <li>Mathematical precision for each type</li>
+                            <li>Duplicate prevention</li>
+                            <li>Consistent layer management</li>
                         </ul>
                     </div>
                     
                     <div style="background: rgba(245,158,11,0.1); padding: var(--spacing-md); border-radius: 10px; border-left: 3px solid var(--accent);">
-                        <h4 style="color: var(--accent); margin-bottom: 0.8rem;">📊 Work Organization</h4>
+                        <h4 style="color: var(--accent); margin-bottom: 0.8rem;">⚡ Time Efficiency</h4>
                         <ul style="color: var(--text-gray); font-size: 0.9rem; padding-left: 1rem;">
-                            <li>Organized layers (POINT)</li>
-                            <li>Consistent point formatting</li>
-                            <li>Easy export and import</li>
-                            <li>Complete process documentation</li>
+                            <li>Batch processing</li>
+                            <li>Live progress tracking</li>
+                            <li>Fast duplicate checking</li>
+                            <li>Automated layer creation</li>
                         </ul>
                     </div>
                 </div>
                 
                 <div style="background: rgba(139,92,246,0.1); padding: var(--spacing-md); border-radius: 10px; margin-top: var(--spacing-md); text-align: center;">
-                    <p style="color: var(--accent2); font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">🚀 For Large Projects</p>
+                    <p style="color: var(--accent2); font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem;">🚀 Version v81.9 Enhancements</p>
                     <p style="color: var(--text-gray); font-size: 0.95rem;">
-                        When processing more than 1000 lines, PPC uses optimized processing methods to ensure 
-                        maximum performance with ideal memory consumption, while maintaining 100% calculation accuracy.
+                        Enhanced PPC now includes merged P2C functionality, supports more object types, 
+                        has improved duplicate prevention, and offers better performance for large drawings.
                     </p>
                 </div>
             </div>
@@ -889,10 +885,10 @@
         <!-- Footer -->
         <footer>
             <p>📧 For technical inquiries: MahmoudBorham.codes@gmail.com</p>
-            <p>🛠️ Part of Borham Tools package specialized in surveying and engineering automation</p>
+            <p>🛠️ Part of Borham Tools v81.9 - Enhanced Center Points System</p>
             <p>🇵🇸 Free Palestine - For the sake of Allah Almighty</p>
             <div class="footer-highlight">
-                "Mathematical Accuracy + Extreme Speed + Duplicate Prevention = PPC for Line Centers"
+                "Multi-Object Support + Enhanced Algorithms + Duplicate Prevention = PPC v81.9 for All Center Points"
             </div>
         </footer>
 
