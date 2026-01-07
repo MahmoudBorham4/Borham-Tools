@@ -14,7 +14,7 @@
         <div class="container">
             <span data-key="version.current">Current Version: </span>
             <span class="version-number">v81.9</span>
-            <span class="last-update" data-key="version.date">| Updated: Jan 2026</span>
+            <span class="last-update" data-key="version.date">| January 2026</span>
         </div>
     </div>
     <div class="lang-toggle">
@@ -84,8 +84,10 @@
                     <div class="step-number">1</div>
                     <h3 data-key="step1.title">Download</h3>
                     <p data-key="step1.text">Click the download button to get the latest BorhamTools file</p>
-                    <!-- رابط التحميل تم تعديله ليتوافق مع هيكل المجلدات -->
-                    <a href="files/Borham Tools v81.9.VLX" class="btn-primary" data-key="download.btn" download>Download v81.9 Now</a>
+                    <!-- زر التحميل مع رقم الإصدار واضح -->
+                    <a href="files/Borham Tools v81.9.VLX" class="btn-primary" download>
+                        <span class="version-on-btn">v81.9</span> <span data-key="download.btn">Download Now</span>
+                    </a>
                     <p id="versionInfo" style="margin-top: 10px; color: var(--text-gray); font-size: 0.9rem;"></p>
                 </div>
                 <div class="step">
@@ -105,9 +107,8 @@
         <div class="container">
             <h2 data-key="commands.title">Available Commands</h2>
             <div class="commands-grid">
-                <!-- الروابط تم تصحيحها لتشير إلى الملفات الصحيحة -->
                 <a href="commands/pp.html" class="command-card" data-command-link="pp"><h3>1. PP</h3><p data-key="cmd.pp.desc">Points on Objects</p><span class="badge">Optimized</span></a>
-                <a href="commands/ppc.html" class="command-card" data-command-link="ppc"><h3>2. PPC</h3><p data-key="cmd.ppc.desc">Center Points (Various Objects)</p><span class="badge">Merged</span></a>
+                <a href="commands/ppc.html" class="command-card" data-command-link="ppc"><h3>2. PPC</h3><p data-key="cmd.ppc.desc">Center Points of Various Objects</p><span class="badge">Enhanced</span></a>
                 <a href="commands/ppx.html" class="command-card" data-command-link="ppx"><h3>3. PPX</h3><p data-key="cmd.ppx.desc">Intersection Points</p><span class="badge">Optimized</span></a>
                 <a href="commands/pe.html" class="command-card" data-command-link="pe"><h3>4. PE</h3><p data-key="cmd.pe.desc">Export & Label Points</p><span class="badge">With Sorting</span></a>
                 <a href="commands/p2c.html" class="command-card" data-command-link="p2c"><h3>5. P2C</h3><p data-key="cmd.p2c.desc">Polyline/Arc to Circle</p><span class="badge">New</span></a>
