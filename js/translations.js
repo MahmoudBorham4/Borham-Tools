@@ -20,7 +20,7 @@ const translations = {
         'developer.title': '👨‍💻 The Developer',
         'developer.text': 'Created by Mahmoud Borham, a Senior Surveyor dedicated to helping the surveying community through free, high-quality tools.',
         'overview.title': 'What is Borham Tools?',
-        'overview.desc': 'Borham Tools v81.9 is a collection of ultra-optimized AutoCAD LISP commands designed specifically for surveyors, civil engineers, and CAD professionals. These tools use advanced algorithms to deliver exceptional performance.',
+        'overview.desc': 'Borham Tools v82 is a collection of ultra-optimized AutoCAD LISP commands designed specifically for surveyors, civil engineers, and CAD professionals. These tools use advanced algorithms to deliver exceptional performance.',
         'feature1.title': 'Ultra Fast',
         'feature1.text': 'Advanced algorithms for 10x-50x faster performance',
         'feature2.title': 'Specialized',
